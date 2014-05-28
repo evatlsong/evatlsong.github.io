@@ -1,0 +1,7 @@
+db.json
+package.json
+public/
+scaffolds/
+scripts/
+themes/
+.deploy/
