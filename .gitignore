@@ -4,4 +4,5 @@ public/
 scaffolds/
 scripts/
 themes/
+node_modules/
 .deploy/
