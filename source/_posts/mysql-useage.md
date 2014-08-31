@@ -52,3 +52,16 @@ The 'dummy'@'localhost' account has no password. This account can be used only t
 ### import sql file
 	mysql -u root -p goods < goods_version1.2.sql;
 加上-h参数指定主机时 sql文件要用全限定名称
+
+## 配置
+my.ini
+
+	[mysql]
+	default-character-set=utf8
+	# character-set-client=utf8
+	# character-set-connection=utf8
+	[mysqld]
+	character-set-server=utf8
+
+	port = 3306
+	server_id = mysqld
