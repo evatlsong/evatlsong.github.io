@@ -3,20 +3,37 @@ date: 2014-08-29 10:02:51
 tags: apache tomat php tomcat
 ---
 
->测试时可以修改hosts
+测试时可以修改hosts
 
 	127.0.0.1 www.goutrip.com
 	127.0.0.1 goutrip.com
 
-## Windows
+## <a name="TOC">Table of Contents</a>
 
-### 版本
+*   [Windows](#windows)
+    *   [版本](#version)
+    *   [安装apache](#install-apache)
+    *   [安装tomcat](#install-tomcat)
+    *   [安装php](#install-php)
+    *   [安装mysql](#install-mysql)
+    *   [整合apache tomcat](#integrate-apache-tomcat)
+        *   [apache配置](#config-apache)
+        *   [tomcat配置](#config-tomcat)
+    *   [整合apache php](#integrate-apache-php)
+    *   [整合php mysql](#integrate-php-mysql)
+* [Linux]()
+
+
+## <a id="windows">Windows</a>
+
+### <a id="version">版本</a>
+
 	httpd-2.2.25-win32-x86-openssl-0.9.8y.msi
 	apache-tomcat-7.0.55-windows-x64.zip
 	php-5.2.13-Win32.zip
 	mysql-5.5.39-winx64.zip
 
-### 安装apache
+### <a id="install-apache">安装apache</a>
 
 httpd.conf
 
@@ -28,8 +45,8 @@ httpd.conf
 	</Directory>
 
 
-### 安装tomcat
-### 安装php
+### <a id="install-tomcat">安装tomcat</a>
+### <a id="install-php">安装php</a>
 解压到目录 设置 path 环境变量
 
 	D:\php5
@@ -44,7 +61,7 @@ httpd.conf
 
 	D:\php\ext
 
-### 安装mysql
+### <a id="install-mysql">安装mysql</a>
 解压到目录
 添加到path环境变量
 
@@ -66,7 +83,7 @@ httpd.conf
 
 进行初始配置 详见mysql-usage.md
 
-### 整合apache tomcat
+### <a id="integrate-apache-tomcat">整合apache tomcat</a>
 
 有三种方法
 
@@ -74,7 +91,7 @@ httpd.conf
 2. ajp代理
 
 以下采用ajp代理方式
-#### apache配置
+#### <a id="config-apache">apache配置</a>
 httpd.conf
 
 	LoadModule proxy_module modules/mod_proxy.so
@@ -120,7 +137,7 @@ extra/httpd-vhosts.conf
 
 以上也配置了负载均衡
 
-#### tomcat配置
+#### <a id="config-tomcat">tomcat配置</a>
 
 server.xml
 
@@ -131,7 +148,7 @@ server.xml
 	<Server port="8005" shutdown="SHUTDOWN"> 
 	<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /> 
 
-### 整合apache php
+### <a id="integrate-apache-php">整合apache php</a>
 apache httpd.conf
 
 	LoadModule php5_module "D:/php5/php5apache2_2.dll"
@@ -151,7 +168,7 @@ apache httpd.conf
 
 修改后重启apache
 
-### 整合php mysql
+### <a id="integrate-php-mysql">整合php mysql</a>
 php.ini
 
 	extension=php_mysql.dll
