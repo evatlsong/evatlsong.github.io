@@ -1,3 +1,4 @@
+*.swp
 db.json
 package.json
 debug.log
