@@ -3,6 +3,9 @@ date: 2014-09-02 22:47:43
 tags: git svn
 ---
 ## 操作方法
+* 从svn切换到git
+	> `git svn clone --no-metadata your_svn_repository_url`
+	> `git clone --bare git_repository_url git_server_url`
 * 检出一个已存在svn repository(类似于svn checkout)
 	> 我们可以通过 `git-svn clone` 命令完成这个操作： `git-svn clone your_svn_repository_url`
 
