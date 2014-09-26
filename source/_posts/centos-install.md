@@ -236,3 +236,10 @@ svnserve -d -r /home/goutrip/svndata
 可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动
 解决办法 killall svnserve
 
+# 远程桌面
+	[root@dlp ~]# yum -y install freerdp 
+	[cent@dlp ~]$ xfreerdp -g 800x600 -u administrator 10.0.0.100 
+
+# virtualbox
+	vboxmanage startvm "widnows 2008" --type headless
+	vboxmanage controlvm "windows 2008" poweroff
