@@ -241,5 +241,8 @@ svnserve -d -r /home/goutrip/svndata
 	[cent@dlp ~]$ xfreerdp -g 800x600 -u administrator 10.0.0.100 
 
 # virtualbox
-	vboxmanage startvm "widnows 2008" --type headless
-	vboxmanage controlvm "windows 2008" poweroff
+>用root用户
+
+	[root@dlp ~]# vboxmanage list vms
+	[root@dlp ~]# vboxmanage startvm "widnows 2008" --type headless
+	[root@dlp ~]# vboxmanage controlvm "windows 2008" poweroff
