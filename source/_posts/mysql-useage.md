@@ -65,3 +65,7 @@ my.ini
 
 	port = 3306
 	server_id = mysqld
+
+## 导入导出
+	mysqldump -u 用户名 -p 数据库名 > 导出的文件名
+	mysql>source /wcnc_db.sql 

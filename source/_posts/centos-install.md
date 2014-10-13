@@ -222,15 +222,15 @@ su 普通用户名
 
 
 #tomcat
-pscp -r -v tomcat.tar.gz root@192.168.1.217:/usr/local
-tar -xzf /usr/local/tomcat.tar.gz
-
-svnadmin dump Repositories\goutrip > svndata\goutrip.dump
-svnadmin load svndata/goutrip < goutrip.dump
-
-ps -aux|grep svnserve
-kill -9 id
-svnserve -d -r /home/goutrip/svndata
+	pscp -r -v tomcat.tar.gz root@192.168.1.217:/usr/local
+	tar -xzf /usr/local/tomcat.tar.gz
+	
+	svnadmin dump Repositories\goutrip > svndata\goutrip.dump
+	svnadmin load svndata/goutrip < goutrip.dump
+	
+	ps -aux|grep svnserve
+	kill -9 id
+	svnserve -d -r /home/goutrip/svndata
 最后不要加正斜杠
 
 可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动
