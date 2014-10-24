@@ -69,3 +69,14 @@ my.ini
 ## 导入导出
 	mysqldump -u 用户名 -p 数据库名 > 导出的文件名
 	mysql>source /wcnc_db.sql 
+
+## 性能测试
+	
+	shell> mysqlslap --delimiter=";" --create-schema=weixinhuictrip
+		--query="select * from wy_wxuser"
+		--concurrency=500 --iterations=100
+		-uroot -pgoutrip314;
+
+## 数据文件路径
+	centos7 mariadb
+	/var/lib/mysql/
