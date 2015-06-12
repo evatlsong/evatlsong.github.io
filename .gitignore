@@ -1,10 +1,5 @@
-*.swp
-db.json
-package.json
-debug.log
-public/
-scaffolds/
-scripts/
-themes/
-node_modules/
-.deploy/
+/*
+!/source
+!**/*.md
+!.gitignore
+!_config.xml
