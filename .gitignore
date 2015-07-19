@@ -3,3 +3,4 @@
 !**/*.md
 !.gitignore
 !_config.xml
+!/themes/next
