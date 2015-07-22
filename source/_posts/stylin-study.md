@@ -2,8 +2,8 @@ title: stylin-study
 date: 2015-06-05 07:55:00
 tags:
 ---
-文本用闭合标签 <p>test</p>
-引用内容用自闭合标签 <img src="song.jpg" />
+文本用闭合标签 `<p>test</p>`
+引用内容用自闭合标签 `<img src="song.jpg" />`
 ol ordered list
 ul unordered list
 dl definition list
@@ -16,12 +16,14 @@ alt alternative
 
 行内样式
 嵌入样式
-<style type="text/css">
-</style>
-链接样式
-<link href="style.css" rel="stylesheet" type="text/css" />
 
-@import url(css/style.css)
+    <style type="text/css">
+    </style>
+
+链接样式
+
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    @import url(css/style.css)
 
 上下文选择符
 descendant combinator selector (后代组合式选择符)
