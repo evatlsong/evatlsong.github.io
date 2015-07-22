@@ -1,4 +1,4 @@
-title: mysql-useage
+title: mysql-usage
 date: 2014-08-27 16:27:07
 tags:
 ---

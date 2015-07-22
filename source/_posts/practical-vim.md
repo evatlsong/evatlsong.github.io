@@ -1,4 +1,4 @@
-title: Practical-Vim
+title: practical-vim
 date: 2015-06-29 10:39:27
 tags:
 ---

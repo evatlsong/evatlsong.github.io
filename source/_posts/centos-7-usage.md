@@ -1,4 +1,4 @@
-title: centos-7-useage
+title: centos-7-usage
 date: 2014-09-17 18:03:32
 tags:
 ---

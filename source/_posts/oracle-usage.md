@@ -1,4 +1,4 @@
-title: oracle-useage
+title: oracle-usage
 date: 2014-09-04 11:40:08
 tags:
 ---
