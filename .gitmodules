@@ -1,0 +1,4 @@
+[submodule "themes/landscape-plus"]
+	path = themes/landscape-plus
+	url = https://github.com/evatlsong/landscape-plus.git
+	branch = evatlsong-custom
