@@ -1,0 +1,483 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>centos-install | evatlsong</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="问题安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
+
+服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；
+通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围
+
+解决方法：
+选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
+centos 下怎样从root切换到普通用户su 普通用户">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos-install">
+<meta property="og:url" content="http://evatlsong.com/2014/09/10/centos-install/index.html">
+<meta property="og:site_name" content="evatlsong">
+<meta property="og:description" content="问题安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
+
+服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；
+通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围
+
+解决方法：
+选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
+centos 下怎样从root切换到普通用户su 普通用户">
+<meta property="og:updated_time" content="2015-07-09T06:37:07.066Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos-install">
+<meta name="twitter:description" content="问题安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
+
+服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；
+通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围
+
+解决方法：
+选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
+centos 下怎样从root切换到普通用户su 普通用户">
+  
+    <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
+  
+</head>
+<body>
+<div id="container">
+  <div id="wrap">
+    <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">evatlsong</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="https://github.com/evatlsong/evatlsong.github.io">SourceCode</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="http://www.baidu.com/baidu" method="get" accept-charset="utf-8" class="search-form">
+          <input type="search" name="word" maxlength="20" class="search-form-input" placeholder="Search">
+          <input type="submit" value="" class="search-form-submit">
+          <input name=tn type=hidden value="bds">
+          <input name=cl type=hidden value="3">
+          <input name=ct type=hidden value="2097152">
+          <input type="hidden" name="si" value="evatlsong.com">
+        </form>
+      </div>
+    </div>
+  </div>
+</header>
+    <div class="outer">
+      <section id="main"><article id="post-centos-install" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/10/centos-install/" class="article-date">
+  <time datetime="2014-09-10T04:30:19.000Z" itemprop="datePublished">2014-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      centos-install
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题">问题</h1><h2 id="安装问题">安装问题</h2><p>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
+<ol>
+<li>服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；</li>
+<li>通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围</li>
+</ol>
+<p>解决方法：</p>
+<p>选择 <code>Troubleshooting</code> -&gt; <code>Install Centos 7 in basic graphics mode</code></p>
+<h2 id="centos_下怎样从root切换到普通用户">centos 下怎样从root切换到普通用户</h2><p>su 普通用户名</p>
+<h1 id="ssh设置">ssh设置</h1><h2 id="设置ssh">设置ssh</h2><pre><code>ssh-keygen <span class="comment">## 生成默认名字的公钥私钥对</span>
+ssh-keygen -f ~/.ssh/<span class="variable">&lt;filename&gt;</span> <span class="comment">## 生成指定名字的公钥私钥对</span>
+ssh-copy-id -i .ssh/<span class="variable">&lt;filename&gt;</span>.pub <span class="variable">&lt;user&gt;</span>@<span class="variable">&lt;server&gt;</span> <span class="comment">## 拷贝公钥到&lt;user&gt;用户 ~/.ssh/authorized_keys 文件中</span>
+
+ssh <span class="variable">&lt;user&gt;</span>@<span class="variable">&lt;server&gt;</span> <span class="comment">## 直接访问</span>
+</code></pre><h2 id="别名访问">别名访问</h2><pre><code>~/.ssh/config
+host bj
+  <span class="keyword">user</span> git
+  hostname bj.ossxp.com
+  <span class="keyword">port</span> <span class="number">22</span>
+  identityfile ~/.ssh/<span class="variable">&lt;filename&gt;</span>
+</code></pre><h2 id="遇到问题">遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
+<h1 id="vnc设置">vnc设置</h1><h2 id="一、安装_VNC">一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># rpm -q vnc vnc-server</span>
+</code></pre><p>　　得到：</p>
+<pre><code><span class="keyword">package</span> vnc <span class="keyword">is</span> <span class="keyword">not</span> installed
+
+<span class="keyword">package</span> vnc-server <span class="keyword">is</span> <span class="keyword">not</span> installed
+</code></pre><p>　　提示没有安装，那么就开始安装，输入：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># yum install vnc vnc-server</span>
+</code></pre><p>　　注：如果是 Ubuntu 则输入：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># apt-get install vnc vnc-server</span>
+</code></pre><p>　　在一串指令提示后，会让你确认一些选项，输入两次 “Y” 并确认，稍作等待，提示 “Complete!” 即完成安装。</p>
+<h2 id="二、设置_VNC_密码">二、设置 VNC 密码</h2><p>　　启动 VNC，输入：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vncserver</span>
+</code></pre><p>　　此时会提示你输入密码，因为是第一次配置。重复输入两次即可。</p>
+<h2 id="三、配置桌面类型_(可略过)">三、配置桌面类型 (可略过)</h2><p>　　设置一下远程桌面使用那个类型的桌面，分辨率多少等等。输入：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vi ~/.vnc/xstartup</span>
+</code></pre><p>　　得到：</p>
+<pre><code><span class="shebang">#!/bin/sh
+</span>
+vncconfig -iconic &amp;
+<span class="built_in">unset</span> SESSION_MANAGER
+<span class="built_in">unset</span> DBUS_SESSION_BUS_ADDRESS
+OS=`uname <span class="operator">-s</span>`
+<span class="keyword">if</span>
+[ <span class="variable">$OS</span> = 
+<span class="string">'Linux'</span>
+]; <span class="keyword">then</span>
+
+<span class="keyword">case</span>
+<span class="string">"<span class="variable">$WINDOWMANAGER</span>"</span>
+<span class="keyword">in</span>
+
+*gnome*)
+
+<span class="keyword">if</span>
+[ <span class="operator">-e</span> /etc/SuSE-release ]; <span class="keyword">then</span>
+
+PATH=<span class="variable">$PATH</span>:/opt/gnome/bin
+
+<span class="built_in">export</span> PATH
+
+<span class="keyword">fi</span>
+
+;;
+
+<span class="keyword">esac</span>
+<span class="keyword">fi</span>
+<span class="keyword">if</span>
+[ -x /etc/X11/xinit/xinitrc ]; <span class="keyword">then</span>
+
+<span class="built_in">exec</span> /etc/X11/xinit/xinitrc
+<span class="keyword">fi</span>
+<span class="keyword">if</span>
+[ <span class="operator">-f</span> /etc/X11/xinit/xinitrc ]; <span class="keyword">then</span>
+
+<span class="built_in">exec</span> sh /etc/X11/xinit/xinitrc
+<span class="keyword">fi</span>
+[ -r <span class="variable">$HOME</span>/.Xresources ] &amp;&amp; xrdb <span class="variable">$HOME</span>/.Xresources
+xsetroot -solid grey
+xterm -geometry <span class="number">80</span>x24+<span class="number">10</span>+<span class="number">10</span> -ls -title 
+<span class="string">"<span class="variable">$VNCDESKTOP</span> Desktop"</span>
+&amp;
+twm &amp;
+</code></pre><p>　　一般情况下，我们使用的 Linux 桌面都是 “Gnome” 桌面，故配置成这个桌面比较习惯。<br>　　按 “i” 键进入编辑状态，主要修改最后两行。改为：</p>
+<pre><code><span class="preprocessor"># xterm -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &amp;</span>
+<span class="preprocessor"># twm &amp;</span>
+gnome-session &amp;
+</code></pre><p>　　一看便知，将配置文件的最后两行注释掉，并且加入了一行代码，表明使用的是 “Gnome” 桌面。</p>
+<h2 id="四、配置登录帐号、桌面分辨率、连接方式_(可略过)">四、配置登录帐号、桌面分辨率、连接方式 (可略过)</h2><p>　　输入：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vi /etc/sysconfig/vncservers</span>
+</code></pre><p>　　出现如下提示：</p>
+<pre><code># The VNCSERVERS variable is a list of display:user pairs.
+#
+# Uncomment the lines below to <span class="operator"><span class="keyword">start</span> a VNC <span class="keyword">server</span> <span class="keyword">on</span> display :<span class="number">2</span>
+# <span class="keyword">as</span> my <span class="string">'myusername'</span> (adjust this <span class="keyword">to</span> your own).  You will also
+# need <span class="keyword">to</span> <span class="keyword">set</span> a VNC <span class="keyword">password</span>;</span> run 'man vncpasswd' to see how
+# to <span class="operator"><span class="keyword">do</span> that.
+#
+# <span class="keyword">DO</span> <span class="keyword">NOT</span> RUN THIS SERVICE <span class="keyword">if</span> your <span class="keyword">local</span> area network <span class="keyword">is</span>
+# untrusted!  <span class="keyword">For</span> a secure way <span class="keyword">of</span> <span class="keyword">using</span> VNC, see this URL:
+# http://kbase.redhat.com/faq/docs/DOC-<span class="number">7028</span>
+# <span class="keyword">Use</span> <span class="string">"-nolisten tcp"</span> <span class="keyword">to</span> prevent X connections <span class="keyword">to</span> your VNC <span class="keyword">server</span> via TCP.
+# <span class="keyword">Use</span> <span class="string">"-localhost"</span> <span class="keyword">to</span> prevent remote VNC clients connecting <span class="keyword">except</span> <span class="keyword">when</span>
+# doing so through a secure tunnel.  See the <span class="string">"-via"</span> <span class="keyword">option</span> <span class="keyword">in</span> the
+# <span class="string">`man vncviewer' manual page.
+
+# VNCSERVERS="2:myusername"
+# VNCSERVERARGS[2]="-geometry 800x600 -nolisten tcp -localhost"</span></span>
+</code></pre><p>　　重点编辑最后两行，将这两行注释去掉，得到：</p>
+<pre><code><span class="setting">VNCSERVERS=<span class="value"><span class="string">"1:root"</span></span></span>
+<span class="setting">VNCSERVERARGS[1]=<span class="value"><span class="string">"-geometry 1024x768"</span></span></span>
+</code></pre><p>　　这里是只有一个帐号登录，设置分辨率为1024*768，如果你有多个帐号，则按照下面格式配置。</p>
+<pre><code><span class="setting">VNCSERVERS=<span class="value"><span class="string">"1:user1 2:user2 3:user3"</span></span></span>
+<span class="setting">VNCSERVERARGS[1]=<span class="value"><span class="string">"-geometry 1024×768"</span></span></span>
+<span class="setting">VNCSERVERARGS[2]=<span class="value"><span class="string">"-geometry 1024×768"</span></span></span>
+<span class="setting">VNCSERVERARGS[3]=<span class="value"><span class="string">"-geometry 800×600 -depth 24 -nolisten tcp -nohttpd -localhost"</span></span></span>
+</code></pre><p>　　解释一下这个文件：</p>
+<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC <span class="keyword">server</span>，上面的例子里运行了三个 VNC <span class="keyword">server</span>，其中 user1 在 display :<span class="number">1</span>，user2 在 display :<span class="number">2</span>，user3 在 display :<span class="number">3</span>。
+
+VNCSERVERARGS 这三行，分别为 VNC <span class="keyword">server</span> <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 <span class="number">1024</span>×<span class="number">768</span>，对 user3 使用 <span class="number">800</span>×<span class="number">600</span>,<span class="number">24</span> 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
+</code></pre><p>　　注释：在启动 VNCserver 时，你也可以为 server 指定一个 display 参数。你可以把 display 理解为一个桌面，每个用户都可以有自己的桌面。VNC 客户端在连接时，可以指定连接到哪个桌面上。在系统中，display 号不能重复，也就是说，如果有用户已经建立了名为 “:1” 的 display，另外一个用户就不能再使用 “:1” 了，他可以使用 “:2”。</p>
+<p>　　指定 display 号码的启动 VNC server 的命令是:</p>
+<pre><code><span class="label">vncserver:</span><span class="number">1</span>
+</code></pre><h2 id="五、配置防火墙，允许_VNC_连接">五、配置防火墙，允许 VNC 连接</h2><p>　　VNC server 监听的端口从 5900 开始，display:1 的监听 5901，display:2 监听 5902，以此类推。CentOS 的防火墙缺省是不允许连接这些端口的，所以需要使用下面的步骤打开防火墙（需要 root 权限)：<br>　　输入编辑：</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vi /etc/sysconfig/iptables</span>
+</code></pre><p>　　得到：</p>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">ESTABLISHED</span>,<span class="constant">RELATED</span> -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -p icmp -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -i lo -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">NEW</span> -m tcp -p tcp --dport <span class="number">22</span> -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">FORWARD</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
+</span>COMMIT
+</code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
+<pre><code><span class="comment"># Firewall configuration written by system-config-firewall</span>
+<span class="comment"># Manual customization of this file is not recommended.</span>
+*filter
+:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:OUTPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+-A INPUT -m <span class="keyword">state</span> --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">22</span> -j ACCEPT
+-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">5901</span> -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre><p>　　即添加了上述代码的第 11 行。</p>
+<h2 id="六、重启防火墙">六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
+<pre><code><span class="comment">[root@localhost ~]</span># /sbin/service iptables restart
+iptables：清除防火墙规则：<span class="comment">[确定]</span>
+iptables：将链设置为政策 ACCEPT：filter <span class="comment">[确定]</span>
+iptables：正在卸载模块：<span class="comment">[确定]</span>
+iptables：应用防火墙规则：<span class="comment">[确定]</span>
+</code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
+<pre><code>192<span class="class">.168</span><span class="class">.1</span><span class="class">.2</span><span class="pseudo">:1</span>    
+</code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
+<h2 id="七、设置_VNC_自动启动">七、设置 VNC 自动启动</h2><p>　　虽然上面配置是可以使用了，但是你一旦重启服务器后，VNC 的服务又会停止，得手动来启，不方便，虽说服务器不能老是启动，但是重启的时候还是有的，为了方便，你需要将 VNC 服务设置为自动自动。<br>　　方法很多，你可以在图形化的界面下打开服务窗口，然后将 VNC 服务设为自动。既然这里都是在用终端下的命令行形式，就继续沿用这个方式吧。</p>
+<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># chkconfig vncserver on</span>
+</code></pre><h1 id="tomcat">tomcat</h1><pre><code>pscp -r -v tomcat.tar.gz root<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">217</span>:<span class="regexp">/usr/local</span>
+tar -xzf /usr/<span class="keyword">local</span>/tomcat.tar.gz
+
+svnadmin <span class="keyword">dump</span> Repositories\goutrip &gt; svndata\goutrip.<span class="keyword">dump</span>
+svnadmin load svndata/goutrip &lt; goutrip.<span class="keyword">dump</span>
+
+ps -aux|<span class="keyword">grep</span> svnserve
+<span class="keyword">kill</span> -<span class="number">9</span> id
+svnserve -d -r /home/goutrip/svndata
+</code></pre><p>最后不要加正斜杠</p>
+<p>可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动<br>解决办法 killall svnserve</p>
+<h1 id="远程桌面">远程桌面</h1><pre><code>[root<span class="variable">@dlp</span> ~]<span class="comment"># yum -y install freerdp </span>
+[cent<span class="variable">@dlp</span> ~]<span class="variable">$ </span>xfreerdp -g <span class="number">800</span>x60<span class="number">0</span> -u administrator <span class="number">10.0</span>.<span class="number">0</span>.<span class="number">100</span> 
+</code></pre><h1 id="virtualbox">virtualbox</h1><blockquote>
+<p>用root用户</p>
+</blockquote>
+<pre><code>[root<span class="annotation">@dlp</span> ~]# vboxmanage list vms
+[root<span class="annotation">@dlp</span> ~]# vboxmanage startvm <span class="string">"widnows 2008"</span> --<span class="class"><span class="keyword">type</span> <span class="title">headless</span>
+</span>[root<span class="annotation">@dlp</span> ~]# vboxmanage controlvm <span class="string">"windows 2008"</span> poweroff
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cicgxs1qr00109bxmtouhe7x0" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2014/09/11/eclipse-usage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          eclipse-usage
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2014/09/09/domain-config/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">domain-config</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+      <aside id="sidebar">
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache-tomat-php-tomcat/">apache tomat php tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">標簽雲</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/apache-tomat-php-tomcat/" style="font-size: 10px;">apache tomat php tomcat</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">歸檔</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">近期文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2015/07/23/tmux/">tmux</a>
+          </li>
+        
+          <li>
+            <a href="/2015/07/23/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/29/practical-vim/">practical-vim</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/17/maven-in-action/">maven-in-action</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/12/tdd-in-action/">tdd-in-action</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">友情鏈接</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="http://xiguabaobao.com" target="_blank">主题作者</a>
+          </li>
+        
+          <li>
+            <a href="http://reqianduan.com" target="_blank">热前端</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 evatlsong<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      .
+      Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="https://github.com/evatlsong/evatlsong.github.io" class="mobile-nav-link">SourceCode</a>
+  
+</nav>
+  <!-- totop start -->
+<div id="totop">
+<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+</div>
+
+<!-- totop end -->
+
+
+<!-- 百度分享 start -->
+
+<div id="article-share-box" class="article-share-box">
+  <div id="bdshare" class="bdsharebuttonbox article-share-links">
+    <a class="article-share-weibo" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a class="article-share-weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a class="article-share-qq" data-cmd="sqq" title="分享到QQ"></a>
+    <a class="article-share-renren" data-cmd="renren" title="分享到人人网"></a>
+    <a class="article-share-more" data-cmd="more" title="更多"></a>
+  </div>
+</div>
+<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+
+<!-- 百度分享 end -->
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+</div>
+</body>
+</html>
