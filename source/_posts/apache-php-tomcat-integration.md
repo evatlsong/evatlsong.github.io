@@ -1,6 +1,7 @@
+---
 title: apache-php-tomcat-integration
 date: 2014-08-29 10:02:51
-tags: apache tomat php tomcat
+tags: [apache,tomat,php,tomcat]
 ---
 
 测试时可以修改hosts
@@ -57,7 +58,7 @@ httpd.conf
 
 	extession_dir = "D:\PHP\ext"
 
-或者添加 path 环境变量 
+或者添加 path 环境变量
 
 	D:\php\ext
 
@@ -98,8 +99,8 @@ httpd.conf
 	LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
 	LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
 
-	# Virtual hosts 
-	Include conf/extra/httpd-vhosts.conf 
+	# Virtual hosts
+	Include conf/extra/httpd-vhosts.conf
 
 	#
 	# DirectoryIndex: sets the file that Apache will serve if a directory
@@ -141,12 +142,12 @@ extra/httpd-vhosts.conf
 
 server.xml
 
-	<Engine name="Standalone" defaultHost="localhost" jvmRoute="jvm1"> 
+	<Engine name="Standalone" defaultHost="localhost" jvmRoute="jvm1">
 
 修改端口
 
-	<Server port="8005" shutdown="SHUTDOWN"> 
-	<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /> 
+	<Server port="8005" shutdown="SHUTDOWN">
+	<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" />
 
 ### <a id="integrate-apache-php">整合apache php</a>
 apache httpd.conf

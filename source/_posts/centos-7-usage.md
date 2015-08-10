@@ -1,6 +1,7 @@
+---
 title: centos-7-usage
 date: 2014-09-17 18:03:32
-tags:
+tags: centos7
 ---
 centos7 有两个防火墙 firewalld iptables 默认firewalld 不能同时共存
 
