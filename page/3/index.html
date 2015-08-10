@@ -73,6 +73,269 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-git-svn-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/02/git-svn-usage/" class="article-date">
+  <time datetime="2014-09-02T14:47:43.000Z" itemprop="datePublished">2014-09-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/02/git-svn-usage/">git-svn-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="操作方法">操作方法</h2><ul>
+<li>从svn切换到git<blockquote>
+<p><code>git svn clone --no-metadata your_svn_repository_url</code><br><code>git clone --bare git_repository_url git_server_url</code></p>
+</blockquote>
+</li>
+<li><p>检出一个已存在svn repository(类似于svn checkout)</p>
+<blockquote>
+<p>我们可以通过 <code>git-svn clone</code> 命令完成这个操作： <code>git-svn clone your_svn_repository_url</code></p>
+</blockquote>
+</li>
+<li><p>从中心服务器的svn repository获取最新更新</p>
+<blockquote>
+<p>这个操作可以通过 <code>git-svn rebase</code> 完成。注意这里用的是rebase，而不是update。update命令对于通过git-svn检出的svn repostory的git版本库是不可用的。</p>
+</blockquote>
+</li>
+<li><p>查看提交历史日志</p>
+<blockquote>
+<p>这个简单，使用 <code>git-svn log</code> ，加上-v选项，还可以提供每次commit操作涉及的相关文件的详细信息。</p>
+</blockquote>
+</li>
+<li><p>将本地代码同步到Svn服务器</p>
+<blockquote>
+<p>完成这一操作需要通过 <code>git-svn dcommit</code> 命令。这个命令会将你在本地使用 <code>git commit</code> 提交到本地代码库的所有更改逐一提交到svn库中。加上-n选项，则该命令不会真正执行commit到svn的操作，而是会显示会有哪些本地变动将被commit到svn服务器。 <code>git-svn dcommit</code> 似乎不能单独提交某个本地版本的修改，而是一次批量提交所有与svn中心版本库的差异。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="一般使用流程：">一般使用流程：</h2><ol>
+<li><code>git-svn clone your_svn_repository</code>；</li>
+<li>修改本地代码，使用 <code>git add/commit</code> 将修改提交到本地git库；</li>
+<li>定期使用 <code>git-svn rebase</code> 获取中心svn repository的更新；</li>
+<li>使用 <code>git-svn dcommit</code> 命令将本地git库的修改同步到中心svn库。</li>
+</ol>
+<h2 id="注意事项">注意事项</h2><ol>
+<li><p>处理冲突</p>
+<ul>
+<li>假设某svn中心库上的某个项目foo中只有一个源码文件foo.c：</li>
+<li>我在使用 <code>git-svn clone</code> 检出版本时，foo.c当时只有一个commit版本信息：”svn v1”；</li>
+<li>clone出来后，我在本地git库中修改foo.c，并通过 <code>git commit</code> 提交到本地git库中，版本为”git v1”；</li>
+<li>不过与此同时另外一个同事也在修改foo.c这个文件，并已经将他的修改提交到了svn库中，版本为”svn v2”；</li>
+<li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
+<pre><code>Committing to <span class="string">svn:</span><span class="comment">//10.10.1.1:80/foo ...</span>
+M foo.c
+事务过时: 过期: ”foo<span class="regexp">/foo.c“在事务“260-1” at /</span>usr<span class="regexp">/lib/</span>git-core/git-svn line <span class="number">570</span>
+</code></pre></li>
+<li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
+</li>
+<li>打开foo.c，修改代码，解决冲突；</li>
+<li><p>执行 <code>git rebase --continue</code> ，git提示我：</p>
+<pre><code>You must edit all <span class="built_in">merge</span> conflicts <span class="operator">and</span> <span class="keyword">then</span>
+mark them <span class="keyword">as</span> resolved <span class="keyword">using</span> git <span class="built_in">add</span>
+</code></pre></li>
+<li><p>执行 <code>git add foo.c</code> ，告知git已完成冲突解决；</p>
+</li>
+<li>再次执行 <code>git rebase --continue</code> ，提示”Applying: git v1”，此时”git v1”版本又一次成功加入本地版本库，你可通过 <code>git log</code> 查看；</li>
+<li>执行 <code>git-svn dcommit</code> 将foo.c的改动同步到svn中心库，到此算是完成一次冲突解决。</li>
+</ul>
+</li>
+<li><p>分支问题</p>
+<p> git分支合并回master后要删除 因为使用 <code>git-svn rebase</code> 获取版本库更新会改变git历史</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cid5nhs44000t1nxmr0917vcx" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-svn/">git svn</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-apache-php-tomcat-integration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/08/29/apache-php-tomcat-integration/" class="article-date">
+  <time datetime="2014-08-29T02:02:51.000Z" itemprop="datePublished">2014-08-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/08/29/apache-php-tomcat-integration/">apache-php-tomcat-integration</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>测试时可以修改hosts</p>
+<pre><code>127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span> <span class="tag">www</span><span class="class">.goutrip</span><span class="class">.com</span>
+127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span> <span class="tag">goutrip</span><span class="class">.com</span>
+</code></pre><h2 id="Table_of_Contents"><a name="TOC">Table of Contents</a></h2><ul>
+<li><a href="#windows">Windows</a><ul>
+<li><a href="#version">版本</a></li>
+<li><a href="#install-apache">安装apache</a></li>
+<li><a href="#install-tomcat">安装tomcat</a></li>
+<li><a href="#install-php">安装php</a></li>
+<li><a href="#install-mysql">安装mysql</a></li>
+<li><a href="#integrate-apache-tomcat">整合apache tomcat</a><ul>
+<li><a href="#config-apache">apache配置</a></li>
+<li><a href="#config-tomcat">tomcat配置</a></li>
+</ul>
+</li>
+<li><a href="#integrate-apache-php">整合apache php</a></li>
+<li><a href="#integrate-php-mysql">整合php mysql</a></li>
+</ul>
+</li>
+<li><a href="">Linux</a></li>
+</ul>
+<h2 id="Windows"><a id="windows">Windows</a></h2><h3 id="版本"><a id="version">版本</a></h3><pre><code><span class="tag">httpd-2</span><span class="class">.2</span><span class="class">.25-win32-x86-openssl-0</span><span class="class">.9</span><span class="class">.8y</span><span class="class">.msi</span>
+<span class="tag">apache-tomcat-7</span><span class="class">.0</span><span class="class">.55-windows-x64</span><span class="class">.zip</span>
+<span class="tag">php-5</span><span class="class">.2</span><span class="class">.13-Win32</span><span class="class">.zip</span>
+<span class="tag">mysql-5</span><span class="class">.5</span><span class="class">.39-winx64</span><span class="class">.zip</span>
+</code></pre><h3 id="安装apache"><a id="install-apache">安装apache</a></h3><p>httpd.conf</p>
+<pre><code><span class="tag">&lt;Directory /&gt;</span>
+    <span class="keyword"><span class="common">Options</span></span> FollowSymLinks
+    <span class="keyword">AllowOverride</span> None
+<span class="comment">#    Order deny,allow</span>
+<span class="comment">#    Deny from all</span>
+<span class="tag">&lt;/Directory&gt;</span>
+</code></pre><h3 id="安装tomcat"><a id="install-tomcat">安装tomcat</a></h3><h3 id="安装php"><a id="install-php">安装php</a></h3><p>解压到目录 设置 path 环境变量</p>
+<pre><code><span class="label">D:</span>\php5
+</code></pre><p>加载模块报错：</p>
+<p>有时启动Apache的时候会提示“找不到指定模块”的错误，是因为没有指定这些模块文件的位置，定位关键字“extension_dir”，修改Windows下为你的PHP模块的目录。</p>
+<pre><code><span class="setting">extession_dir = <span class="value"><span class="string">"D:\PHP\ext"</span></span></span>
+</code></pre><p>或者添加 path 环境变量</p>
+<pre><code>D:<span class="command">\php</span><span class="command">\ext</span>
+</code></pre><h3 id="安装mysql"><a id="install-mysql">安装mysql</a></h3><p>解压到目录<br>添加到path环境变量</p>
+<pre><code>E:<span class="command">\Program</span><span class="command">\mysql</span>-5.5.39-winx64<span class="command">\bin</span>
+</code></pre><p>启动服务</p>
+<pre><code>mysqld <span class="comment">--console</span>
+</code></pre><p>关闭服务</p>
+<pre><code>mysqladmin -u root -<span class="tag">p</span> shutdown
+</code></pre><p>连接到数据库</p>
+<pre><code><span class="title">mysql</span> -u root -p
+</code></pre><p>进行初始配置 详见mysql-usage.md</p>
+<h3 id="整合apache_tomcat"><a id="integrate-apache-tomcat">整合apache tomcat</a></h3><p>有三种方法</p>
+<ol>
+<li>mod_jk.so</li>
+<li>ajp代理</li>
+</ol>
+<p>以下采用ajp代理方式</p>
+<h4 id="apache配置"><a id="config-apache">apache配置</a></h4><p>httpd.conf</p>
+<pre><code><span class="keyword"><span class="common">LoadModule</span></span> proxy_module modules/mod_proxy.so
+<span class="keyword"><span class="common">LoadModule</span></span> proxy_ajp_module modules/mod_proxy_ajp.so
+<span class="keyword"><span class="common">LoadModule</span></span> proxy_balancer_module modules/mod_proxy_balancer.so
+
+<span class="comment"># Virtual hosts</span>
+<span class="keyword">Include</span> conf/extra/httpd-vhosts.conf
+
+<span class="comment">#</span>
+<span class="comment"># DirectoryIndex: sets the file that Apache will serve if a directory</span>
+<span class="comment"># is requested.</span>
+<span class="comment">#</span>
+<span class="tag">&lt;IfModule dir_module&gt;</span>
+    <span class="keyword">DirectoryIndex</span> index.html index.jsp index.php
+<span class="tag">&lt;/IfModule&gt;</span>
+</code></pre><p>extra/httpd-vhosts.conf</p>
+<pre><code>&lt;VirtualHost *:<span class="number">80</span>&gt;
+    ServerName www<span class="class">.goutrip</span><span class="class">.com</span>
+    ServerAlias goutrip<span class="class">.com</span>
+    ProxyPreserveHost on
+    ProxyRequests Off
+    &lt;proxy balancer:<span class="comment">//goutrip&gt;</span>
+        BalancerMember ajp:<span class="comment">//localhost:8009 loadfactor=1 route=jvm1</span>
+        BalancerMember ajp:<span class="comment">//localhost:8010 loadfactor=1 route=jvm2</span>
+        BalancerMember ajp:<span class="comment">//localhost:8012 loadfactor=1 route=jvm3</span>
+    &lt;/proxy&gt;
+    ProxyPass / balancer:<span class="comment">//goutrip/ lbmethod=byrequests stickysession=JSESSIONID nofailover=on</span>
+    ProxyPassReverse / balancer:<span class="comment">//goutrip/</span>
+    ErrorLog <span class="string">"logs/goutrip.com-error.log"</span>
+    CustomLog <span class="string">"logs/goutrip.com-access.log"</span> common
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:<span class="number">80</span>&gt;
+    DocumentRoot <span class="string">"D:/website/g.goutrip.com"</span>
+    ServerName www<span class="class">.g</span><span class="class">.goutrip</span><span class="class">.com</span>
+    ServerAlias g<span class="class">.goutrip</span><span class="class">.com</span>
+    ErrorLog <span class="string">"logs/g.goutrip.com-error.log"</span>
+    CustomLog <span class="string">"logs/g.goutrip.com-access.log"</span> common
+&lt;/VirtualHost&gt;
+</code></pre><p>以上也配置了负载均衡</p>
+<h4 id="tomcat配置"><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
+<pre><code>&lt;Engine <span class="variable">name=</span><span class="string">"Standalone"</span> <span class="variable">defaultHost=</span><span class="string">"localhost"</span> <span class="variable">jvmRoute=</span><span class="string">"jvm1"</span>&gt;
+</code></pre><p>修改端口</p>
+<pre><code>&lt;Server <span class="variable">port=</span><span class="string">"8005"</span> <span class="variable">shutdown=</span><span class="string">"SHUTDOWN"</span>&gt;
+&lt;Connector <span class="variable">port=</span><span class="string">"8009"</span> <span class="variable">protocol=</span><span class="string">"AJP/1.3"</span> <span class="variable">redirectPort=</span><span class="string">"8443"</span> /&gt;
+</code></pre><h3 id="整合apache_php"><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
+<pre><code><span class="keyword"><span class="common">LoadModule</span></span> php5_module <span class="string">"D:/php5/php5apache2_2.dll"</span>
+<span class="keyword">phpinidir</span> <span class="string">"D:/php5"</span>
+
+<span class="tag">&lt;IfModule mime_module&gt;</span>
+<span class="keyword">AddType</span> application/x-httpd-php .php .html  #也可分多行写
+<span class="tag">&lt;/IfModule&gt;</span>
+
+<span class="comment">#</span>
+<span class="comment"># DirectoryIndex: sets the file that Apache will serve if a directory</span>
+<span class="comment"># is requested.</span>
+<span class="comment">#</span>
+<span class="tag">&lt;IfModule dir_module&gt;</span>
+    <span class="keyword">DirectoryIndex</span> index.html index.jsp index.php
+<span class="tag">&lt;/IfModule&gt;</span>
+</code></pre><p>修改后重启apache</p>
+<h3 id="整合php_mysql"><a id="integrate-php-mysql">整合php mysql</a></h3><p>php.ini</p>
+<pre><code><span class="attribute">extension</span>=<span class="string">php_mysql.dll</span>
+</code></pre><p>修改后重启apache</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cid5nhs4u00171nxmrwd25hdn" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomat/">tomat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mysql-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/27/mysql-usage/" class="article-date">
@@ -149,7 +412,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cichk7n0y000i1ixmsqufqde3" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cid5nhs33000f1nxm15k52dgs" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -192,7 +455,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cichk7mzv00041ixm7nyltjrc" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cid5nhs1c00011nxmf5nnjxxd" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -404,7 +667,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cichk7n1e000o1ixmsxjn47g5" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cid5nhs3p000l1nxm78b9fn73" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -922,7 +1185,7 @@ _   底線
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cichk7n1b000n1ixmn6uj2v65" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cid5nhs3l000k1nxm992mznr9" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1437,7 +1700,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cichk7n15000k1ixmnc16xjtj" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cid5nhs3f000h1nxm1hklkcer" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1480,7 +1743,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cichk7n0100061ixm0fhtgos2" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cid5nhs1u00031nxm96s72sfl" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1510,7 +1773,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache-tomat-php-tomcat/">apache tomat php tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1521,7 +1784,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache-tomat-php-tomcat/" style="font-size: 10px;">apache tomat php tomcat</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
     </div>
   </div>
 
@@ -1530,7 +1793,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1542,6 +1805,14 @@ _   underscore
       <ul>
         
           <li>
+            <a href="/2015/08/10/atom/">atom</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
+          </li>
+        
+          <li>
             <a href="/2015/07/23/tmux/">tmux</a>
           </li>
         
@@ -1551,14 +1822,6 @@ _   underscore
         
           <li>
             <a href="/2015/06/29/practical-vim/">practical-vim</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/17/maven-in-action/">maven-in-action</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/12/tdd-in-action/">tdd-in-action</a>
           </li>
         
       </ul>

@@ -4,27 +4,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>php-note | evatlsong</title>
+  <title>atom | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="打印调试信息error_log(“userinfo”, 3, “php_sql_err.log”);
-$where[&apos;truename&apos;] = array(&apos;like&apos;, &apos;%&apos;.trim($_POST[&apos;truename&apos;]).&apos;%&apos;);
-$count     = $card_create_db-&amp;gt;where($where)-&amp;gt;count();
-$Page      = new Pa">
+  <meta name="description">
 <meta property="og:type" content="article">
-<meta property="og:title" content="php-note">
-<meta property="og:url" content="http://evatlsong.com/2014/09/04/php-note/index.html">
+<meta property="og:title" content="atom">
+<meta property="og:url" content="http://evatlsong.com/2015/08/10/atom/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="打印调试信息error_log(“userinfo”, 3, “php_sql_err.log”);
-$where[&apos;truename&apos;] = array(&apos;like&apos;, &apos;%&apos;.trim($_POST[&apos;truename&apos;]).&apos;%&apos;);
-$count     = $card_create_db-&amp;gt;where($where)-&amp;gt;count();
-$Page      = new Pa">
-<meta property="og:updated_time" content="2015-06-02T02:56:46.692Z">
+<meta property="og:description">
+<meta property="og:updated_time" content="2015-08-10T08:16:41.356Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="php-note">
-<meta name="twitter:description" content="打印调试信息error_log(“userinfo”, 3, “php_sql_err.log”);
-$where[&apos;truename&apos;] = array(&apos;like&apos;, &apos;%&apos;.trim($_POST[&apos;truename&apos;]).&apos;%&apos;);
-$count     = $card_create_db-&amp;gt;where($where)-&amp;gt;count();
-$Page      = new Pa">
+<meta name="twitter:title" content="atom">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -81,10 +72,10 @@ $Page      = new Pa">
   </div>
 </header>
     <div class="outer">
-      <section id="main"><article id="post-php-note" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-atom" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2014/09/04/php-note/" class="article-date">
-  <time datetime="2014-09-04T05:43:45.000Z" itemprop="datePublished">2014-09-04</time>
+    <a href="/2015/08/10/atom/" class="article-date">
+  <time datetime="2015-08-10T08:11:21.000Z" itemprop="datePublished">2015-08-10</time>
 </a>
     
   </div>
@@ -95,7 +86,7 @@ $Page      = new Pa">
         
   
     <h1 class="article-title" itemprop="name">
-      php-note
+      atom
     </h1>
   
 
@@ -103,48 +94,29 @@ $Page      = new Pa">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>打印调试信息<br>error_log(“userinfo”, 3, “php_sql_err.log”);</p>
-<pre><code><span class="variable">$where</span>[<span class="string">'truename'</span>] = <span class="keyword">array</span>(<span class="string">'like'</span>, <span class="string">'%'</span>.trim(<span class="variable">$_POST</span>[<span class="string">'truename'</span>]).<span class="string">'%'</span>);
-<span class="variable">$count</span>     = <span class="variable">$card_create_db</span>-&gt;where(<span class="variable">$where</span>)-&gt;count();
-<span class="variable">$Page</span>      = <span class="keyword">new</span> Page(<span class="variable">$count</span>, <span class="number">15</span>);
-<span class="variable">$show</span>      = <span class="variable">$Page</span>-&gt;show();
-<span class="variable">$list</span>      = <span class="variable">$card_create_db</span>-&gt;where(<span class="variable">$where</span>)-&gt;limit(<span class="variable">$Page</span>-&gt;firstRow . <span class="string">','</span> . <span class="variable">$Page</span>-&gt;listRows)-&gt;select();
-
-<span class="variable">$userinfo_db</span> = M(<span class="string">'Userinfo'</span>);
-<span class="variable">$userinfo_where</span>[<span class="string">'wecha_id'</span>] = <span class="keyword">array</span>(<span class="string">'in'</span>, <span class="variable">$wecha_ids</span>);
-<span class="variable">$users</span>                      = <span class="variable">$userinfo_db</span>-&gt;where(<span class="variable">$userinfo_where</span>)-&gt;select();
-</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
-<p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
-
+        
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cid5nhs2s000d1nxmklkbp3n1" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/atom/" data-id="cid5nhs4p00141nxm5i3l6bcw" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/atom/">atom</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2014/09/09/domain-config/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">下一篇</strong>
-      <div class="article-nav-title">
-        
-          domain-config
-        
-      </div>
-    </a>
   
-  
-    <a href="/2014/09/04/oracle-usage/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/08/10/intellij-idea/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">oracle-usage</div>
+      <div class="article-nav-title">intellij-idea</div>
     </a>
   
 </nav>
