@@ -18,7 +18,7 @@ mysql&amp;gt; SET PASSWORD FOR &apos;root&apos;@&apos;l">
 Securing the Initial MySQL Accounts referenceFor Windows, do this:
 shell&amp;gt; mysql -u root
 mysql&amp;gt; SET PASSWORD FOR &apos;root&apos;@&apos;l">
-<meta property="og:updated_time" content="2015-07-22T15:47:39.874Z">
+<meta property="og:updated_time" content="2015-08-16T03:06:05.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql-usage">
 <meta name="twitter:description" content="安装免安装版下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）
@@ -84,7 +84,7 @@ mysql&amp;gt; SET PASSWORD FOR &apos;root&apos;@&apos;l">
       <section id="main"><article id="post-mysql-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/27/mysql-usage/" class="article-date">
-  <time datetime="2014-08-27T08:27:07.000Z" itemprop="datePublished">2014-08-27</time>
+  <time datetime="2014-08-27T16:27:07.000Z" itemprop="datePublished">2014-08-27</time>
 </a>
     
   </div>
@@ -117,15 +117,15 @@ mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</s
 mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
 mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'::1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
 mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'host_name'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-</code></pre><h3 id="After_connecting_to_the_server_as_root,_you_can_add_new_accounts-_The_following_statements_use_GRANT_to_set_up_four_new_accounts:">After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'monty'</span>@<span class="string">'localhost'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
-mysql<span class="subst">&gt;</span> GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="subst">*</span><span class="built_in">.</span><span class="subst">*</span> <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'localhost'</span>
+</code></pre><h3 id="After_connecting_to_the_server_as_root,_you_can_add_new_accounts-_The_following_statements_use_GRANT_to_set_up_four_new_accounts:">After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql&gt; CREATE USER <span class="string">'monty'</span>@<span class="string">'localhost'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
+mysql&gt; GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'localhost'</span>
     <span class="subst">-&gt;     </span><span class="keyword">WITH</span> GRANT OPTION;
-mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'monty'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
-mysql<span class="subst">&gt;</span> GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="subst">*</span><span class="built_in">.</span><span class="subst">*</span> <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'%'</span>
+mysql&gt; CREATE USER <span class="string">'monty'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
+mysql&gt; GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'%'</span>
     <span class="subst">-&gt;     </span><span class="keyword">WITH</span> GRANT OPTION;
-mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
-mysql<span class="subst">&gt;</span> GRANT RELOAD,PROCESS <span class="keyword">ON</span> <span class="subst">*</span><span class="built_in">.</span><span class="subst">*</span> <span class="keyword">TO</span> <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
-mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'dummy'</span>@<span class="string">'localhost'</span>;
+mysql&gt; CREATE USER <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
+mysql&gt; GRANT RELOAD,PROCESS <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
+mysql&gt; CREATE USER <span class="string">'dummy'</span>@<span class="string">'localhost'</span>;
 </code></pre><p>The accounts created by these statements have the following properties:</p>
 <p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty’@’localhost’ account can be used only when connecting from the local host. The ‘monty’@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
 <p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
@@ -137,7 +137,7 @@ mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'dummy'</s
 <h2 id="配置">配置</h2><p>my.ini</p>
 <pre><code>[mysql]
 default-character-<span class="operator"><span class="keyword">set</span>=utf8
-# <span class="built_in">character</span>-<span class="keyword">set</span>-client=utf8
+# <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">client</span>=utf8
 # <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">connection</span>=utf8
 [mysqld]
 <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">server</span>=utf8
@@ -146,10 +146,10 @@ port = <span class="number">3306</span>
 server_id = mysqld</span>
 </code></pre><h2 id="导入导出">导入导出</h2><pre><code>mysqldump -u 用户名 -<span class="tag">p</span> 数据库名 &gt; 导出的文件名
 mysql&gt;source /wcnc_db<span class="class">.sql</span> 
-</code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap <span class="variable">--delimiter=</span><span class="string">";"</span> <span class="variable">--create-schema=</span>weixinhuictrip
-    <span class="variable">--query=</span><span class="string">"select * from wy_wxuser"</span>
-    <span class="variable">--concurrency=</span><span class="number">500</span> <span class="variable">--iterations=</span><span class="number">100</span>
-    -uroot -pgoutrip314;
+</code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=";" --create-schema=weixinhuictrip
+    -<span class="ruby">-query=<span class="string">"select * from wy_wxuser"</span>
+</span>    -<span class="ruby">-concurrency=<span class="number">500</span> --iterations=<span class="number">100</span>
+</span>    -<span class="ruby">uroot -pgoutrip314;</span>
 </code></pre><h2 id="数据文件路径">数据文件路径</h2><pre><code>centos7 mariadb
 <span class="regexp">/var/</span>lib<span class="regexp">/mysql/</span>
 </code></pre>
@@ -157,7 +157,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cid5nhs33000f1nxm15k52dgs" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="ciddwv98z000nt6edc2k9x2en" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -199,7 +199,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -210,7 +210,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -219,7 +219,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -231,23 +231,23 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
       <ul>
         
           <li>
+            <a href="/2015/08/16/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/15/ruby/">ruby</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/13/windows-install/">windows-install</a>
+          </li>
+        
+          <li>
             <a href="/2015/08/10/atom/">atom</a>
           </li>
         
           <li>
             <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/tmux/">tmux</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/29/practical-vim/">practical-vim</a>
           </li>
         
       </ul>

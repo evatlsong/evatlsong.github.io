@@ -54,7 +54,7 @@ tomcat配置
 Linux
 
 Windows版">
-<meta property="og:updated_time" content="2015-08-10T08:15:23.838Z">
+<meta property="og:updated_time" content="2015-08-16T03:06:05.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache-php-tomcat-integration">
 <meta name="twitter:description" content="测试时可以修改hosts
@@ -138,7 +138,7 @@ Windows版">
       <section id="main"><article id="post-apache-php-tomcat-integration" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/29/apache-php-tomcat-integration/" class="article-date">
-  <time datetime="2014-08-29T02:02:51.000Z" itemprop="datePublished">2014-08-29</time>
+  <time datetime="2014-08-29T10:02:51.000Z" itemprop="datePublished">2014-08-29</time>
 </a>
     
   </div>
@@ -252,10 +252,10 @@ Windows版">
 &lt;/VirtualHost&gt;
 </code></pre><p>以上也配置了负载均衡</p>
 <h4 id="tomcat配置"><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
-<pre><code>&lt;Engine <span class="variable">name=</span><span class="string">"Standalone"</span> <span class="variable">defaultHost=</span><span class="string">"localhost"</span> <span class="variable">jvmRoute=</span><span class="string">"jvm1"</span>&gt;
+<pre><code>&lt;Engine <span class="property">name</span>=<span class="string">"Standalone"</span> defaultHost=<span class="string">"localhost"</span> jvmRoute=<span class="string">"jvm1"</span>&gt;
 </code></pre><p>修改端口</p>
-<pre><code>&lt;Server <span class="variable">port=</span><span class="string">"8005"</span> <span class="variable">shutdown=</span><span class="string">"SHUTDOWN"</span>&gt;
-&lt;Connector <span class="variable">port=</span><span class="string">"8009"</span> <span class="variable">protocol=</span><span class="string">"AJP/1.3"</span> <span class="variable">redirectPort=</span><span class="string">"8443"</span> /&gt;
+<pre><code><span class="tag">&lt;<span class="title">Server</span> <span class="attribute">port</span>=<span class="value">"8005"</span> <span class="attribute">shutdown</span>=<span class="value">"SHUTDOWN"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">Connector</span> <span class="attribute">port</span>=<span class="value">"8009"</span> <span class="attribute">protocol</span>=<span class="value">"AJP/1.3"</span> <span class="attribute">redirectPort</span>=<span class="value">"8443"</span> /&gt;</span>
 </code></pre><h3 id="整合apache_php"><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
 <pre><code><span class="keyword"><span class="common">LoadModule</span></span> php5_module <span class="string">"D:/php5/php5apache2_2.dll"</span>
 <span class="keyword">phpinidir</span> <span class="string">"D:/php5"</span>
@@ -280,7 +280,7 @@ Windows版">
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cid5nhs4u00171nxmrwd25hdn" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="ciddwv9a7001ft6edf1f4pvmx" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -324,7 +324,7 @@ Windows版">
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -335,7 +335,7 @@ Windows版">
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -344,7 +344,7 @@ Windows版">
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -356,23 +356,23 @@ Windows版">
       <ul>
         
           <li>
+            <a href="/2015/08/16/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/15/ruby/">ruby</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/13/windows-install/">windows-install</a>
+          </li>
+        
+          <li>
             <a href="/2015/08/10/atom/">atom</a>
           </li>
         
           <li>
             <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/tmux/">tmux</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/29/practical-vim/">practical-vim</a>
           </li>
         
       </ul>

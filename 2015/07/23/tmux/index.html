@@ -6,25 +6,34 @@
   
   <title>tmux | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
+  <meta name="description" content="#Learning The Basics
+##Installing tmux
+###Installing Via a Package Manager
+sudo apt-get install tmux
 check version
 tmux -V
-Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
+###Installing from SourceThe process of installing tmux is the same on both M">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tmux">
 <meta property="og:url" content="http://evatlsong.com/2015/07/23/tmux/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
+<meta property="og:description" content="#Learning The Basics
+##Installing tmux
+###Installing Via a Package Manager
+sudo apt-get install tmux
 check version
 tmux -V
-Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
-<meta property="og:updated_time" content="2015-07-24T05:06:21.103Z">
+###Installing from SourceThe process of installing tmux is the same on both M">
+<meta property="og:updated_time" content="2015-08-16T03:06:05.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tmux">
-<meta name="twitter:description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
+<meta name="twitter:description" content="#Learning The Basics
+##Installing tmux
+###Installing Via a Package Manager
+sudo apt-get install tmux
 check version
 tmux -V
-Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
+###Installing from SourceThe process of installing tmux is the same on both M">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -84,7 +93,7 @@ Installing from SourceThe process of installing tmux is the same on both Mac OS 
       <section id="main"><article id="post-tmux" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/07/23/tmux/" class="article-date">
-  <time datetime="2015-07-23T08:02:12.000Z" itemprop="datePublished">2015-07-23</time>
+  <time datetime="2015-07-23T16:02:12.000Z" itemprop="datePublished">2015-07-23</time>
 </a>
     
   </div>
@@ -103,55 +112,68 @@ Installing from SourceThe process of installing tmux is the same on both Mac OS 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Learning_The_Basics">Learning The Basics</h1><h2 id="Installing_tmux">Installing tmux</h2><h3 id="Installing_Via_a_Package_Manager">Installing Via a Package Manager</h3><pre><code>sudo apt-<span class="keyword">get</span> install tmux
+        <p>#Learning The Basics</p>
+<p>##Installing tmux</p>
+<p>###Installing Via a Package Manager</p>
+<pre><code>sudo apt-<span class="keyword">get</span> install tmux
 </code></pre><p>check version</p>
 <pre><code><span class="title">tmux</span> -V
-</code></pre><h3 id="Installing_from_Source">Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
-<pre><code>sudo apt-<span class="keyword">get</span> install build-essential
+</code></pre><p>###Installing from Source<br>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
+<pre><code>sudo apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">build</span>-essential</span>
 </code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
 <pre><code>sudo apt-<span class="built_in">get</span> install libevent-<span class="built_in">dev</span> libncurses5-<span class="built_in">dev</span>
 
 ./configure
 make
 sudo make install
-</code></pre><h2 id="Starting_tmux">Starting tmux</h2><p>Starting tmux</p>
+</code></pre><p>##Starting tmux<br>Starting tmux</p>
 <pre><code>tmux
 </code></pre><p>Close the tmux session</p>
 <pre><code><span class="keyword">exit</span>
-</code></pre><h3 id="Creating_Named_Sessions">Creating Named Sessions</h3><pre><code>tmux<span class="instruction"> new-session </span>-s basic
+</code></pre><p>###Creating Named Sessions</p>
+<pre><code>tmux<span class="instruction"> new-session </span>-s basic
 </code></pre><p>shorten this command</p>
 <pre><code>tmux <span class="keyword">new</span> -s basic
-</code></pre><h2 id="Detaching_and_Attaching_Sessions">Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
+</code></pre><p>##Detaching and Attaching Sessions<br>list existing tmux sessions using the command</p>
 <pre><code>tmux <span class="type">list</span>-sessions
 </code></pre><p>shorten this command</p>
 <pre><code>tmux <span class="keyword">ls</span>
 </code></pre><p>attach to the session</p>
 <pre><code>tmux <span class="keyword">attach</span>
 tmux <span class="keyword">attach</span> -t basic
-</code></pre><h3 id="Killing_Sessions">Killing Sessions</h3><pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -t basic</span>
-</code></pre><h2 id="Working_with_Windows">Working with Windows</h2><pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
-</code></pre><h3 id="Creating_and_Naming_Windows">Creating and Naming Windows</h3><p>create a window</p>
+</code></pre><p>###Killing Sessions</p>
+<pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
+</code></pre><p>##Working with Windows</p>
+<pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
+</code></pre><p>###Creating and Naming Windows<br>create a window</p>
 <pre><code><span class="title">PREFIX</span> c
 </code></pre><p>rename a window</p>
 <pre><code><span class="title">PREFIX</span> ,
-</code></pre><h3 id="Moving_Between_Windows">Moving Between Windows</h3><pre><code>PREFIX n
+</code></pre><p>###Moving Between Windows</p>
+<pre><code>PREFIX n
 PREFIX <span class="tag">p</span>
 PREFIX nubmer
 </code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
 <pre><code><span class="title">PREFIX</span> w
-</code></pre><h3 id="close_a_window">close a window</h3><pre><code><span class="keyword">exit</span>
+</code></pre><p>###close a window</p>
+<pre><code><span class="keyword">exit</span>
 <span class="keyword">or</span>
 PREFIX &amp;
-</code></pre><h2 id="Working_with_Panes">Working with Panes</h2><h3 id="split_new_pane">split new pane</h3><pre><code>PREFIX %
+</code></pre><p>##Working with Panes</p>
+<p>###split new pane</p>
+<pre><code>PREFIX %
 PREFIX <span class="string">"</span>
-</code></pre><h3 id="cycle_through_the_panes">cycle through the panes</h3><pre><code>PREFIX o
+</code></pre><p>###cycle through the panes</p>
+<pre><code>PREFIX o
 PREFIX UP, DOWN, <span class="keyword">LEFT</span>, <span class="keyword">RIGHT</span>
-</code></pre><h3 id="cycle_through_layouts">cycle through layouts</h3><pre><code><span class="title">PREFIX</span> SPACEBAR
-</code></pre><h3 id="closing_panes">closing panes</h3><pre><code><span class="keyword">exit</span>
+</code></pre><p>###cycle through layouts</p>
+<pre><code><span class="title">PREFIX</span> SPACEBAR
+</code></pre><p>###closing panes</p>
+<pre><code><span class="keyword">exit</span>
 <span class="keyword">or</span>
 PREFIX x
-</code></pre><h1 id="notebook">notebook</h1><pre><code>假定[prefix] = ctrl-b
-<span class="header">session
+</code></pre><p>#notebook<br>    假定[prefix] = ctrl-b</p>
+<pre><code><span class="header">session
 =========================</span>
 创建一个被命名的session -&gt; $ tmux new -s name
 detach当前session -&gt; [prefix] d
@@ -201,7 +223,7 @@ attach session -&gt; $ tmux attach
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cid5nhs2500081nxm48rgs6iv" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="ciddwv98d0009t6edr0wznjrw" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -223,9 +245,9 @@ attach session -&gt; $ tmux attach
     </a>
   
   
-    <a href="/2015/07/23/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/06/29/practical-vim/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">上一篇</strong>
-      <div class="article-nav-title">Hello World</div>
+      <div class="article-nav-title">practical-vim</div>
     </a>
   
 </nav>
@@ -243,7 +265,7 @@ attach session -&gt; $ tmux attach
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -254,7 +276,7 @@ attach session -&gt; $ tmux attach
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -263,7 +285,7 @@ attach session -&gt; $ tmux attach
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -275,23 +297,23 @@ attach session -&gt; $ tmux attach
       <ul>
         
           <li>
+            <a href="/2015/08/16/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/15/ruby/">ruby</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/13/windows-install/">windows-install</a>
+          </li>
+        
+          <li>
             <a href="/2015/08/10/atom/">atom</a>
           </li>
         
           <li>
             <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/tmux/">tmux</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/29/practical-vim/">practical-vim</a>
           </li>
         
       </ul>

@@ -6,19 +6,40 @@
   
   <title>practical-vim | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="text object (文本对象 aw iw it)
-. 重复上次修改a change could be anything that modifies the text in the document. That includescommands triggered from Normal, Visual, and Command-Line modes, but a change couldal">
+  <meta name="description" content="#basic operate
+##viewing different parts of the work buffer
+CONTROL-D(down)
+CONTROL-U(up)
+
+CONTROL-F(forward)
+CONTROL-B(backward)
+text object (文本对象 aw iw it)
+. 重复上次修改a change could be anything that mo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="practical-vim">
 <meta property="og:url" content="http://evatlsong.com/2015/06/29/practical-vim/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="text object (文本对象 aw iw it)
-. 重复上次修改a change could be anything that modifies the text in the document. That includescommands triggered from Normal, Visual, and Command-Line modes, but a change couldal">
-<meta property="og:updated_time" content="2015-07-22T15:37:15.382Z">
+<meta property="og:description" content="#basic operate
+##viewing different parts of the work buffer
+CONTROL-D(down)
+CONTROL-U(up)
+
+CONTROL-F(forward)
+CONTROL-B(backward)
+text object (文本对象 aw iw it)
+. 重复上次修改a change could be anything that mo">
+<meta property="og:updated_time" content="2015-08-16T03:06:05.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practical-vim">
-<meta name="twitter:description" content="text object (文本对象 aw iw it)
-. 重复上次修改a change could be anything that modifies the text in the document. That includescommands triggered from Normal, Visual, and Command-Line modes, but a change couldal">
+<meta name="twitter:description" content="#basic operate
+##viewing different parts of the work buffer
+CONTROL-D(down)
+CONTROL-U(up)
+
+CONTROL-F(forward)
+CONTROL-B(backward)
+text object (文本对象 aw iw it)
+. 重复上次修改a change could be anything that mo">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -78,7 +99,7 @@
       <section id="main"><article id="post-practical-vim" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/06/29/practical-vim/" class="article-date">
-  <time datetime="2015-06-29T02:39:27.000Z" itemprop="datePublished">2015-06-29</time>
+  <time datetime="2015-06-29T10:39:27.000Z" itemprop="datePublished">2015-06-29</time>
 </a>
     
   </div>
@@ -97,67 +118,116 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>text object (文本对象 aw iw it)</p>
+        <p>#basic operate</p>
+<p>##viewing different parts of the work buffer</p>
+<pre><code><span class="function"><span class="title">CONTROL-D</span><span class="params">(down)</span></span>
+<span class="function"><span class="title">CONTROL-U</span><span class="params">(up)</span></span>
+
+<span class="function"><span class="title">CONTROL-F</span><span class="params">(forward)</span></span>
+<span class="function"><span class="title">CONTROL-B</span><span class="params">(backward)</span></span>
+</code></pre><p>text object (文本对象 aw iw it)</p>
 <p>. 重复上次修改<br>a change could be anything that modifies the text in the document. That includes<br>commands triggered from Normal, Visual, and Command-Line modes, but a change could<br>also encompass any text entered (or deleted) in Insert mode.</p>
 <p>Moving Around in Insert Mode Resets the Change</p>
-<p>复合命令 等效的长命令<br>C        c$<br>s        cl<br>S        ^c<br>I        ^i<br>A        $a<br>o        A<cr><br>O        ko</cr></p>
-<p>Intent                               Act                     Repeat   Reverse<br>Make a change                        {edit}                  .        u<br>Scan line for next character         f{char}/t{char}         ;        ,<br>Scan line for previous character     F{char}/T{char}         ;        ,<br>Scan document for next match         /pattern<cr>            n        N<br>Scan document for previous match     ?pattern<cr>            n        N<br>Perform substitution                 :s/target/replacement   &amp;        u<br>Execute a sequence of changes        qx{changes}q            @x       u</cr></cr></p>
-<ul>
+<pre><code>复合命令 等效的长命令
+C        c$
+s        <span class="keyword">cl</span>
+S        ^c
+I        ^<span class="literal">i</span>
+A        <span class="label">$a</span>
+o        A&lt;CR&gt;
+O        ko
+
+Intent                               Act                     <span class="keyword">Repeat</span>   <span class="literal">Reverse</span>
+Make a change                        {<span class="keyword">edit</span>}                  .        <span class="keyword">u</span>
+Scan <span class="keyword">line</span> <span class="keyword">for</span> next character         f{<span class="keyword">char</span>}/t{<span class="keyword">char</span>}         ;        ,
+Scan <span class="keyword">line</span> <span class="keyword">for</span> previous character     F{<span class="keyword">char</span>}/T{<span class="keyword">char</span>}         ;        ,
+Scan document <span class="keyword">for</span> next match         /pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
+Scan document <span class="keyword">for</span> previous match     ?pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
+Perform substitution                 :s/target/replacement   &amp;        <span class="keyword">u</span>
+Execute a sequence of changes        qx{changes}q            @x       <span class="keyword">u</span>
+</code></pre><ul>
 <li>查找当前光标下的单词</li>
 </ul>
 <p>normal mode</p>
-<p>Operator + Motion = Action</p>
-<p>Vim’s grammar has just one more rule: when an operator command is invoked in<br>duplicate, it acts upon the current line. So dd deletes the current line,<br>while &gt;&gt; indents it.  The gU command is a special case. We can make it act upon<br>the current line by running either gUgU or the shorthand gUU.</p>
-<p>Vim’s Operator Commands<br>Trigger Effect<br>c       Change<br>d       Delete<br>y       Yank into register<br>g~      Swap case<br>gu      Make lowercase<br>gU      Make uppercase</p>
-<blockquote>
-<pre><code><span class="keyword">Shift</span> right
-</code></pre><p>&lt;       Shift left<br>=       Autoindent<br>!       Filter {motion} lines through an external program</p>
-</blockquote>
-<p>Insert Mode</p>
-<p>Keystrokes Effect</p>
-<p><c-h>      Delete back one character (backspace)</c-h></p>
-<p><c-w>      Delete back one word</c-w></p>
-<p><c-u>      Delete back to start of line</c-u></p>
-<p>Keystrokes Effect</p>
-<p><esc>      Switch to Normal mode</esc></p>
-<p><c-[>      Switch to Normal mode</c-[></p>
-<p><c-o>      Switch to Insert Normal mode</c-o></p>
-<p>register<br>expression register<br>Keystrokes       Buffer Contents<br>A                6 plus 35 equals</p>
-<p><c-r>=6*35<cr>   6 plus 35 equals 210</cr></c-r></p>
-<p>Insert Unusual Characters by Character Code<br>Insert Unusual Characters<br>Keystrokes             Effect</p>
-<p><c-v>{123}             Insert character by decimal code</c-v></p>
-<p><c-v>u{1234}           Insert character by hexadecimal code</c-v></p>
-<p><c-v>{nondigit}        Insert nondigit literally</c-v></p>
-<p><c-k>{char1}{char2}    Insert character represented by {char1}{char2} digraph</c-k></p>
-<p>ga command outputs a message at the bottom of the screen, revealing the character<br>code in decimal and hexadecimal notations</p>
-<p>Overwrite Tab Characters with Virtual Replace Mode<br>gR<br>gr{char}</p>
-<p>Visual Mode<br>Enabling Visual Modes<br>Command  Effect<br>v        Enable character-wise Visual mode<br>V        Enable line-wise Visual mode</p>
-<p><c-v>    Enable block-wise Visual mode<br>gv       Reselect the last visual selection</c-v></p>
-<p>o        Go to other end of highlighted text</p>
-<p>In Visual and Operator-Pending modes the i and a keys follow a different convention:<br>they form the first half of a text object.<br>If you’ve made a selection with Visual-Block mode and you wonder why you’re not<br>in Insert mode after pressing i, try using I instead.</p>
-<p>Command-Line Mode<br>a few of the symbols that can be used to create addresses and ranges for Ex commands<br>Symbol Address<br>1      First line of the file<br>$      Last line of the file<br>0      Virtual line above first line of the file<br>.      Line where the cursor is placed<br>‘m     Line containing mark m<br>‘&lt;     Start of visual selection<br>‘&gt;     End of visual selection<br>%      The entire file (shorthand for : 1,$)</p>
+<pre><code><span class="attribute">Operator + Motion </span>=<span class="string"> Action</span>
+</code></pre><p>Vim’s grammar has just one more rule: when an operator command is invoked in<br>duplicate, it acts upon the current line. So dd deletes the current line,<br>while &gt;&gt; indents it.  The gU command is a special case. We can make it act upon<br>the current line by running either gUgU or the shorthand gUU.</p>
+<p>Vim’s Operator Commands</p>
+<pre><code>Trigger Effect
+c       <span class="operator"><span class="keyword">Change</span>
+<span class="keyword">d</span>       <span class="keyword">Delete</span>
+y       Yank <span class="keyword">into</span> <span class="keyword">register</span>
+<span class="keyword">g</span>~      Swap <span class="keyword">case</span>
+gu      Make lowercase
+gU      Make uppercase
+&gt;       Shift <span class="keyword">right</span>
+&lt;       Shift <span class="keyword">left</span>
+=       Autoindent
+!       Filter {motion} <span class="keyword">lines</span> <span class="keyword">through</span> an <span class="keyword">external</span> program</span>
+</code></pre><p>Insert Mode</p>
+<pre><code>Keystrokes Effect
+&lt;<span class="keyword">C</span>-h&gt;      <span class="keyword">Delete</span> back one character (backspace)
+&lt;<span class="keyword">C</span>-w&gt;      <span class="keyword">Delete</span> back one word
+&lt;<span class="keyword">C</span>-u&gt;      <span class="keyword">Delete</span> back to start of line
 
+Keystrokes Effect
+&lt;Esc&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
+&lt;<span class="keyword">C</span>-[&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
+&lt;<span class="keyword">C</span>-o&gt;      <span class="keyword">Switch</span> to <span class="keyword">Insert</span> <span class="keyword">Normal</span> mode
+</code></pre><p>register<br>expression register </p>
+<pre><code>Keystrokes       Buffer Contents
+A                <span class="number">6</span> plus <span class="number">35</span> equals
+&lt;C-r&gt;=<span class="number">6</span>*<span class="number">35</span>&lt;CR&gt;   <span class="number">6</span> plus <span class="number">35</span> equals <span class="number">210</span>
+</code></pre><p>Insert Unusual Characters by Character Code<br>Insert Unusual Characters</p>
+<pre><code>Keystrokes             Effect
+&lt;<span class="keyword">C</span>-v&gt;<span class="list">{123}</span>             <span class="keyword">Insert</span> character by decimal code
+&lt;<span class="keyword">C</span>-v&gt;u<span class="list">{1234}</span>           <span class="keyword">Insert</span> character by hexadecimal code
+&lt;<span class="keyword">C</span>-v&gt;<span class="list">{nondigit}</span>        <span class="keyword">Insert</span> nondigit literally
+&lt;<span class="keyword">C</span>-k&gt;<span class="list">{char1}</span><span class="list">{char2}</span>    <span class="keyword">Insert</span> character represented by <span class="list">{char1}</span><span class="list">{char2}</span> digraph
+</code></pre><p>ga command outputs a message at the bottom of the screen, revealing the character<br>code in decimal and hexadecimal notations</p>
+<p>Overwrite Tab Characters with Virtual Replace Mode<br>gR<br>gr{char}</p>
+<p>Visual Mode<br>Enabling Visual Modes</p>
+<pre><code>Command  Effect
+<span class="keyword">v</span>        Enable character-wise Visual <span class="built_in">mode</span>
+V        Enable <span class="built_in">line</span>-wise Visual <span class="built_in">mode</span>
+&lt;C-<span class="keyword">v</span>&gt;    Enable block-wise Visual <span class="built_in">mode</span>
+<span class="keyword">gv</span>       Reselect the <span class="keyword">last</span> <span class="keyword">visual</span> selection
+
+<span class="keyword">o</span>        Go <span class="keyword">to</span> other end of highlighted text
+</code></pre><p>In Visual and Operator-Pending modes the i and a keys follow a different convention:<br>they form the first half of a text object.<br>If you’ve made a selection with Visual-Block mode and you wonder why you’re not<br>in Insert mode after pressing i, try using I instead.</p>
+<p>Command-Line Mode<br>a few of the symbols that can be used to create addresses and ranges for Ex commands</p>
+<pre><code>Symbol Address
+<span class="number">1</span>      First line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
+$      Last line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
+<span class="number">0</span>      Virtual line <span class="keyword">above</span> <span class="keyword">first</span> line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
+.      Line <span class="keyword">where</span> <span class="keyword">the</span> cursor <span class="keyword">is</span> placed
+'m     Line containing mark m
+'&lt;     Start <span class="keyword">of</span> visual selection
+'&gt;     End <span class="keyword">of</span> visual selection
+%      The entire <span class="type">file</span> (shorthand <span class="keyword">for</span> : <span class="number">1</span>,$)
+</code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cid5nhs2j000c1nxmmcd5ajcf" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="ciddwv98t000it6edgufb4zj0" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2015/07/23/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/07/23/tmux/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">下一篇</strong>
       <div class="article-nav-title">
         
-          Hello World
+          tmux
         
       </div>
     </a>
@@ -183,7 +253,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -194,7 +264,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -203,7 +273,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -215,23 +285,23 @@
       <ul>
         
           <li>
+            <a href="/2015/08/16/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/15/ruby/">ruby</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/13/windows-install/">windows-install</a>
+          </li>
+        
+          <li>
             <a href="/2015/08/10/atom/">atom</a>
           </li>
         
           <li>
             <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/tmux/">tmux</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/29/practical-vim/">practical-vim</a>
           </li>
         
       </ul>

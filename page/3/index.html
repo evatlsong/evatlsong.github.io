@@ -73,10 +73,131 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-php-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/04/php-note/" class="article-date">
+  <time datetime="2014-09-04T13:43:45.000Z" itemprop="datePublished">2014-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/04/php-note/">php-note</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打印调试信息<br>error_log(“userinfo”, 3, “php_sql_err.log”);</p>
+<pre><code><span class="variable">$where</span>[<span class="string">'truename'</span>] = <span class="keyword">array</span>(<span class="string">'like'</span>, <span class="string">'%'</span>.trim($_POST[<span class="string">'truename'</span>]).<span class="string">'%'</span>);
+<span class="variable">$count</span>     = <span class="variable">$card</span>_create_db-&gt;<span class="keyword">where</span>(<span class="variable">$where</span>)-&gt;count();
+<span class="variable">$Page</span>      = new Page(<span class="variable">$count</span>, <span class="number">15</span>);
+<span class="variable">$show</span>      = <span class="variable">$Page-</span>&gt;show();
+<span class="variable">$list</span>      = <span class="variable">$card</span>_create_db-&gt;<span class="keyword">where</span>(<span class="variable">$where</span>)-&gt;limit(<span class="variable">$Page-</span>&gt;firstRow . <span class="string">','</span> . <span class="variable">$Page-</span>&gt;listRows)-&gt;select();
+
+<span class="variable">$userinfo</span>_db = M(<span class="string">'Userinfo'</span>);
+<span class="variable">$userinfo</span>_<span class="keyword">where</span>[<span class="string">'wecha_id'</span>] = <span class="keyword">array</span>(<span class="string">'in'</span>, <span class="variable">$wecha</span>_ids);
+<span class="variable">$users</span>                      = <span class="variable">$userinfo</span>_db-&gt;<span class="keyword">where</span>(<span class="variable">$userinfo</span>_<span class="keyword">where</span>)-&gt;select();
+</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
+<p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="ciddwv98v000lt6ed529s50ks" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-oracle-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/04/oracle-usage/" class="article-date">
+  <time datetime="2014-09-04T11:40:08.000Z" itemprop="datePublished">2014-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/04/oracle-usage/">oracle-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="windows">windows</h2><p>sqlplus 连接<br>sqlplus username/password@database;<br>查询<br>select * from username.table t where t.id=1;</p>
+<p>表名前要加用户名</p>
+<p>查询结果保存到文本文件</p>
+<pre><code><span class="title">spool</span> abc.txt;
+<span class="title">select</span> * from wap_subscribe;
+<span class="title">spool</span> <span class="built_in">off</span>;
+</code></pre><p>保存的只是输出到屏幕的内容</p>
+<p>设置屏幕输出大小 解决显示不全问题</p>
+<pre><code><span class="built_in">set</span> <span class="keyword">long</span> <span class="number">40000</span>;
+</code></pre><p>imp userid=ltwuliu/LTWULIU@huictrip file=D:\databackup\huitrip20140813.dmp full=y<br>exp userid=sunztravelweb/huictrip@goutrip file=E:\data\goutrip20140805.dmp </p>
+<p>When making some backup tasks (import or Export) on oracle 10g, 11g (for example), you can get a message error:<br>ORA-20446: The owner of the job is not registered ORA-06512: at “SYSMAN.MGMT_JOBS”…</p>
+<p>Solution<br>Open CMD<br>C:>Set oracle_sid= SID_OF_THE_DATABASE<br>C:>sqlplus<br>username: SYSMAN<br>password: <em>**</em><br>SQL&gt;execute MGMT_USER.MAKE_EM_USER(‘USERNAME’);</p>
+<p>USERNAME – the user that you use to connect to enterprise managert<br>don’t copy/past the command, sometimes they are some hidden characters</p>
+<p>11G中有个新特性，当表无数据时，不分配segment，以节省空间<br>　　解决方法：<br>　　1、insert一行，再rollback就产生segment了。<br>　　该方法是在在空表中插入数据，再删除，则产生segment。导出时则可导出空表。<br>　　2、设置deferred_segment_creation 参数<br>show parameter deferred_segment_creation</p>
+<p>NAME                                 TYPE        VALUE</p>
+<hr>
+<p>deferred_segment_creation            boolean     TRUE<br>SQL&gt; alter system set deferred_segment_creation=false;</p>
+<p>系统已更改。</p>
+<p>SQL&gt; show parameter deferred_segment_creation</p>
+<p>NAME                                 TYPE        VALUE</p>
+<hr>
+<p>deferred_segment_creation            boolean     FALSE</p>
+<p> 3、用以下这句查找空表并分配空间<br>　　select ‘alter table ‘||table_name||’ allocate extent;’ from user_tables where num_rows=0;<br>　　把SQL查询的结果导出，然后执行导出的语句，强行为表分配空间修改segment值，然后再导出即可导出空表了。</p>
+<p>drop user sunztravelweb cascade;</p>
+<p>CREATE TEMPORARY TABLESPACE USER_TEMP<br>TEMPFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_TEMP.dbf’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
+<p>CREATE TABLESPACE USER_DATA<br>LOGGING<br>DATAFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_DATA.DBF’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
+<p>CREATE USER sunztravelweb IDENTIFIED BY huictrip<br>DEFAULT TABLESPACE USER_DATA<br>TEMPORARY TABLESPACE USER_TEMP;</p>
+<p>grant connect,resource,dba to sunztravelweb;</p>
+<p>imp userid=sunztravelweb/huictrip@localhost/goutrip file=E:\data\goutrip20140708.dmp full=y</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="ciddwv98x000mt6edz9ur5kqk" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git-svn-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/02/git-svn-usage/" class="article-date">
-  <time datetime="2014-09-02T14:47:43.000Z" itemprop="datePublished">2014-09-02</time>
+  <time datetime="2014-09-02T22:47:43.000Z" itemprop="datePublished">2014-09-02</time>
 </a>
     
   </div>
@@ -135,9 +256,9 @@
 <li>clone出来后，我在本地git库中修改foo.c，并通过 <code>git commit</code> 提交到本地git库中，版本为”git v1”；</li>
 <li>不过与此同时另外一个同事也在修改foo.c这个文件，并已经将他的修改提交到了svn库中，版本为”svn v2”；</li>
 <li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
-<pre><code>Committing to <span class="string">svn:</span><span class="comment">//10.10.1.1:80/foo ...</span>
+<pre><code>Committing to svn:<span class="comment">//10.10.1.1:80/foo ...</span>
 M foo.c
-事务过时: 过期: ”foo<span class="regexp">/foo.c“在事务“260-1” at /</span>usr<span class="regexp">/lib/</span>git-core/git-svn line <span class="number">570</span>
+事务过时: 过期: ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/lib/git-core/git-svn line <span class="number">570</span>
 </code></pre></li>
 <li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
 </li>
@@ -161,7 +282,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cid5nhs44000t1nxmr0917vcx" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="ciddwv99m0011t6edrw23zmr5" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -179,7 +300,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     <article id="post-apache-php-tomcat-integration" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/29/apache-php-tomcat-integration/" class="article-date">
-  <time datetime="2014-08-29T02:02:51.000Z" itemprop="datePublished">2014-08-29</time>
+  <time datetime="2014-08-29T10:02:51.000Z" itemprop="datePublished">2014-08-29</time>
 </a>
     
   </div>
@@ -293,10 +414,10 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
 &lt;/VirtualHost&gt;
 </code></pre><p>以上也配置了负载均衡</p>
 <h4 id="tomcat配置"><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
-<pre><code>&lt;Engine <span class="variable">name=</span><span class="string">"Standalone"</span> <span class="variable">defaultHost=</span><span class="string">"localhost"</span> <span class="variable">jvmRoute=</span><span class="string">"jvm1"</span>&gt;
+<pre><code>&lt;Engine <span class="property">name</span>=<span class="string">"Standalone"</span> defaultHost=<span class="string">"localhost"</span> jvmRoute=<span class="string">"jvm1"</span>&gt;
 </code></pre><p>修改端口</p>
-<pre><code>&lt;Server <span class="variable">port=</span><span class="string">"8005"</span> <span class="variable">shutdown=</span><span class="string">"SHUTDOWN"</span>&gt;
-&lt;Connector <span class="variable">port=</span><span class="string">"8009"</span> <span class="variable">protocol=</span><span class="string">"AJP/1.3"</span> <span class="variable">redirectPort=</span><span class="string">"8443"</span> /&gt;
+<pre><code><span class="tag">&lt;<span class="title">Server</span> <span class="attribute">port</span>=<span class="value">"8005"</span> <span class="attribute">shutdown</span>=<span class="value">"SHUTDOWN"</span>&gt;</span>
+<span class="tag">&lt;<span class="title">Connector</span> <span class="attribute">port</span>=<span class="value">"8009"</span> <span class="attribute">protocol</span>=<span class="value">"AJP/1.3"</span> <span class="attribute">redirectPort</span>=<span class="value">"8443"</span> /&gt;</span>
 </code></pre><h3 id="整合apache_php"><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
 <pre><code><span class="keyword"><span class="common">LoadModule</span></span> php5_module <span class="string">"D:/php5/php5apache2_2.dll"</span>
 <span class="keyword">phpinidir</span> <span class="string">"D:/php5"</span>
@@ -321,7 +442,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cid5nhs4u00171nxmrwd25hdn" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="ciddwv9a7001ft6edf1f4pvmx" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -339,7 +460,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     <article id="post-mysql-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/27/mysql-usage/" class="article-date">
-  <time datetime="2014-08-27T08:27:07.000Z" itemprop="datePublished">2014-08-27</time>
+  <time datetime="2014-08-27T16:27:07.000Z" itemprop="datePublished">2014-08-27</time>
 </a>
     
   </div>
@@ -372,15 +493,15 @@ mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</s
 mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
 mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'::1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
 mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'host_name'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-</code></pre><h3 id="After_connecting_to_the_server_as_root,_you_can_add_new_accounts-_The_following_statements_use_GRANT_to_set_up_four_new_accounts:">After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'monty'</span>@<span class="string">'localhost'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
-mysql<span class="subst">&gt;</span> GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="subst">*</span><span class="built_in">.</span><span class="subst">*</span> <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'localhost'</span>
+</code></pre><h3 id="After_connecting_to_the_server_as_root,_you_can_add_new_accounts-_The_following_statements_use_GRANT_to_set_up_four_new_accounts:">After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql&gt; CREATE USER <span class="string">'monty'</span>@<span class="string">'localhost'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
+mysql&gt; GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'localhost'</span>
     <span class="subst">-&gt;     </span><span class="keyword">WITH</span> GRANT OPTION;
-mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'monty'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
-mysql<span class="subst">&gt;</span> GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="subst">*</span><span class="built_in">.</span><span class="subst">*</span> <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'%'</span>
+mysql&gt; CREATE USER <span class="string">'monty'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
+mysql&gt; GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'%'</span>
     <span class="subst">-&gt;     </span><span class="keyword">WITH</span> GRANT OPTION;
-mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
-mysql<span class="subst">&gt;</span> GRANT RELOAD,PROCESS <span class="keyword">ON</span> <span class="subst">*</span><span class="built_in">.</span><span class="subst">*</span> <span class="keyword">TO</span> <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
-mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'dummy'</span>@<span class="string">'localhost'</span>;
+mysql&gt; CREATE USER <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
+mysql&gt; GRANT RELOAD,PROCESS <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
+mysql&gt; CREATE USER <span class="string">'dummy'</span>@<span class="string">'localhost'</span>;
 </code></pre><p>The accounts created by these statements have the following properties:</p>
 <p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty’@’localhost’ account can be used only when connecting from the local host. The ‘monty’@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
 <p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
@@ -392,7 +513,7 @@ mysql<span class="subst">&gt;</span> CREATE USER <span class="string">'dummy'</s
 <h2 id="配置">配置</h2><p>my.ini</p>
 <pre><code>[mysql]
 default-character-<span class="operator"><span class="keyword">set</span>=utf8
-# <span class="built_in">character</span>-<span class="keyword">set</span>-client=utf8
+# <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">client</span>=utf8
 # <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">connection</span>=utf8
 [mysqld]
 <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">server</span>=utf8
@@ -401,10 +522,10 @@ port = <span class="number">3306</span>
 server_id = mysqld</span>
 </code></pre><h2 id="导入导出">导入导出</h2><pre><code>mysqldump -u 用户名 -<span class="tag">p</span> 数据库名 &gt; 导出的文件名
 mysql&gt;source /wcnc_db<span class="class">.sql</span> 
-</code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap <span class="variable">--delimiter=</span><span class="string">";"</span> <span class="variable">--create-schema=</span>weixinhuictrip
-    <span class="variable">--query=</span><span class="string">"select * from wy_wxuser"</span>
-    <span class="variable">--concurrency=</span><span class="number">500</span> <span class="variable">--iterations=</span><span class="number">100</span>
-    -uroot -pgoutrip314;
+</code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=";" --create-schema=weixinhuictrip
+    -<span class="ruby">-query=<span class="string">"select * from wy_wxuser"</span>
+</span>    -<span class="ruby">-concurrency=<span class="number">500</span> --iterations=<span class="number">100</span>
+</span>    -<span class="ruby">uroot -pgoutrip314;</span>
 </code></pre><h2 id="数据文件路径">数据文件路径</h2><pre><code>centos7 mariadb
 <span class="regexp">/var/</span>lib<span class="regexp">/mysql/</span>
 </code></pre>
@@ -412,7 +533,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cid5nhs33000f1nxm15k52dgs" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="ciddwv98z000nt6edc2k9x2en" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -428,7 +549,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     <article id="post-work-in-windows" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/08/26/work-in-windows/" class="article-date">
-  <time datetime="2014-08-25T16:09:31.000Z" itemprop="datePublished">2014-08-26</time>
+  <time datetime="2014-08-26T00:09:31.000Z" itemprop="datePublished">2014-08-26</time>
 </a>
     
   </div>
@@ -449,13 +570,13 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
       
         <p>首先 git clone <a href="https://github.com/evatlsong/evatlsong.github.io.git" target="_blank" rel="external">https://github.com/evatlsong/evatlsong.github.io.git</a></p>
 <p>然后 git clone <a href="https://github.com/hexojs/hexo-theme-landscape.git" target="_blank" rel="external">https://github.com/hexojs/hexo-theme-landscape.git</a> themes/landscape</p>
-<p>如果不clone此theme 接下来的 hexo init 会报错 Error: Theme landscape does not exist.<br>然后hexo init<br>hexo install<br>git reset —hard HEAD</p>
+<p>如果不clone此theme 接下来的 hexo init 会报错 Error: Theme landscape does not exist.<br>然后hexo init<br>hexo install<br>git reset –hard HEAD</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cid5nhs1c00011nxmf5nnjxxd" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="ciddwv97v0001t6ed7agyrhby" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -471,7 +592,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     <article id="post-markdown-basics" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/06/25/markdown-basics/" class="article-date">
-  <time datetime="2014-06-25T08:44:25.000Z" itemprop="datePublished">2014-06-25</time>
+  <time datetime="2014-06-25T16:44:25.000Z" itemprop="datePublished">2014-06-25</time>
 </a>
     
   </div>
@@ -496,8 +617,8 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
 <h2 id="Getting_the_Gist_of_Markdown’s_Formatting_Syntax">Getting the Gist of Markdown’s Formatting Syntax</h2><p>This page offers a brief overview of what it’s like to use Markdown.<br>The <a href="/projects/markdown/syntax" title="Markdown Syntax">syntax page</a> provides complete, detailed documentation for<br>every feature, but Markdown should be very easy to pick up simply by<br>looking at a few examples of it in action. The examples on this page<br>are written in a before/after style, showing example syntax and the<br>HTML output produced by Markdown.</p>
 <p>It’s also helpful to simply try Markdown out; the <a href="/projects/markdown/dingus" title="Markdown Dingus">Dingus</a> is a<br>web application that allows you type your own Markdown-formatted text<br>and translate it to XHTML.</p>
 <p><strong>Note:</strong> This document is itself written using Markdown; you<br>can <a href="/projects/markdown/basics.text">see the source for it by adding ‘.text’ to the URL</a>.</p>
-<h2 id="Paragraphs,_Headers,_Blockquotes">Paragraphs, Headers, Blockquotes</h2><p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like<br>a blank line — a line containing nothing but spaces or tabs is<br>considered blank.) Normal paragraphs should not be indented with<br>spaces or tabs.</p>
-<p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.<br>Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by<br>“underlining” with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.<br>To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the<br>beginning of the line — the number of hashes equals the resulting<br>HTML header level.</p>
+<h2 id="Paragraphs,_Headers,_Blockquotes">Paragraphs, Headers, Blockquotes</h2><p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like<br>a blank line – a line containing nothing but spaces or tabs is<br>considered blank.) Normal paragraphs should not be indented with<br>spaces or tabs.</p>
+<p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.<br>Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by<br>“underlining” with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.<br>To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the<br>beginning of the line – the number of hashes equals the resulting<br>HTML header level.</p>
 <p>Blockquotes are indicated using email-style ‘<code>&gt;</code>‘ angle brackets.</p>
 <p>Markdown:</p>
 <pre><code>A First Level Header
@@ -573,9 +694,9 @@ Or, if you prefer, <span class="variable">&lt;strong&gt;</span>use two underscor
 <span class="tag">&lt;<span class="title">li</span>&gt;</span>Booze.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 </code></pre><p>Ordered (numbered) lists use regular numbers, followed by periods, as<br>list markers:</p>
-<pre><code><span class="bullet">1.  </span>Red
-<span class="bullet">2.  </span>Green
-<span class="bullet">3.  </span>Blue
+<pre><code><span class="number">1.</span>  Red
+<span class="number">2.</span>  Green
+<span class="number">3.</span>  Blue
 </code></pre><p>Output:</p>
 <pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
 <span class="tag">&lt;<span class="title">li</span>&gt;</span>Red<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
@@ -633,7 +754,7 @@ title=<span class="string">"MSN Search"</span>&gt;MSN&lt;/<span class="operator"
 
 [<span class="link_reference">id</span>]:<span class="link_url"> /path/to/img.jpg "Title"</span>
 </code></pre><p>Both of the above examples produce the same output:</p>
-<pre><code>&lt;img <span class="variable">src=</span><span class="string">"/path/to/img.jpg"</span> <span class="variable">alt=</span><span class="string">"alt text"</span> <span class="variable">title=</span><span class="string">"Title"</span> /&gt;
+<pre><code>&lt;<span class="tag">img</span> src=<span class="string">"/path/to/img.jpg"</span> alt=<span class="string">"alt text"</span> title=<span class="string">"Title"</span> /&gt;
 </code></pre><h3 id="Code">Code</h3><p>In a regular paragraph, you can create code span by wrapping text in<br>backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or<br><code>&gt;</code>) will automatically be translated into HTML entities. This makes<br>it easy to use Markdown to write about HTML example code:</p>
 <pre><code>I strongly recommend against <span class="keyword">using</span> any `&lt;blink&gt;` tags.
 
@@ -667,7 +788,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cid5nhs3p000l1nxm78b9fn73" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="ciddwv99b000tt6edmdegre6d" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -685,7 +806,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
     <article id="post-markdown-syntax-tw" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/06/25/markdown-syntax-tw/" class="article-date">
-  <time datetime="2014-06-25T08:19:03.000Z" itemprop="datePublished">2014-06-25</time>
+  <time datetime="2014-06-25T16:19:03.000Z" itemprop="datePublished">2014-06-25</time>
 </a>
     
   </div>
@@ -779,9 +900,9 @@ This is another regular paragraph.
 </code></pre><p>Markdown 就會將它轉為：</p>
 <pre><code>AT&amp;amp<span class="comment">;T</span>
 </code></pre><p>類似的狀況也會發生在 <code>&lt;</code> 符號上，因為 Markdown 支援 <a href="#html">行內 HTML</a> ，如果你是使用 <code>&lt;</code> 符號作為 HTML 標籤使用，那 Markdown 也不會對它做任何轉換，但是如果你是寫：</p>
-<pre><code>4 &lt; 5
+<pre><code><span class="number">4</span> &lt; <span class="number">5</span>
 </code></pre><p>Markdown 將會把它轉換為：</p>
-<pre><code>4 &amp;lt<span class="comment">; 5</span>
+<pre><code><span class="number">4</span> &amp;lt; <span class="number">5</span>
 </code></pre><p>不過需要注意的是，code 範圍內，不論是行內還是區塊， <code>&lt;</code> 和 <code>&amp;</code> 兩個符號都<em>一定</em>會被轉換成 HTML 實體，這項特性讓你可以很容易地用 Markdown 寫 HTML code （和 HTML 相對而言， HTML 語法中，你要把所有的 <code>&lt;</code> 和 <code>&amp;</code> 都轉換為 HTML 實體，才能在 HTML 文件裡面寫出 HTML code。）</p>
 <hr>
 <h2 id="block">區塊元素</h2>
@@ -863,9 +984,9 @@ id sem consectetuer libero luctus adipiscing.
 </span>-<span class="ruby">   <span class="constant">Green</span>
 </span>-<span class="ruby">   <span class="constant">Blue</span></span>
 </code></pre><p>有序清單則使用數字接著一個英文句點：</p>
-<pre><code><span class="bullet">1.  </span>Bird
-<span class="bullet">2.  </span>McHale
-<span class="bullet">3.  </span>Parish
+<pre><code><span class="number">1.</span>  Bird
+<span class="number">2.</span>  McHale
+<span class="number">3.</span>  Parish
 </code></pre><p>很重要的一點是，你在清單標記上使用的數字並不會影響輸出的 HTML 結果，上面的清單所產生的 HTML 標記為：</p>
 <pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
 <span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
@@ -873,13 +994,13 @@ id sem consectetuer libero luctus adipiscing.
 <span class="tag">&lt;<span class="title">li</span>&gt;</span>Parish<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
 </code></pre><p>如果你的清單標記寫成：</p>
-<pre><code><span class="bullet">1.  </span>Bird
-<span class="bullet">1.  </span>McHale
-<span class="bullet">1.  </span>Parish
+<pre><code><span class="number">1.</span>  Bird
+<span class="number">1.</span>  McHale
+<span class="number">1.</span>  Parish
 </code></pre><p>或甚至是：</p>
-<pre><code><span class="bullet">3. </span>Bird
-<span class="bullet">1. </span>McHale
-<span class="bullet">8. </span>Parish
+<pre><code><span class="number">3.</span> Bird
+<span class="number">1.</span> McHale
+<span class="number">8.</span> Parish
 </code></pre><p>你都會得到完全相同的 HTML 輸出。重點在於，你可以讓 Markdown 文件的清單數字和輸出的結果相同，或是你懶一點，你可以完全不用在意數字的正確性。</p>
 <p>如果你使用懶惰的寫法，建議第一個項目最好還是從 1. 開始，因為 Markdown 未來可能會支援有序清單的 start 屬性。</p>
 <p>清單項目標記通常是放在最左邊，但是其實也可以縮排，最多三個空白，項目標記後面則一定要接著至少一個空白或 tab。</p>
@@ -1185,7 +1306,7 @@ _   底線
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cid5nhs3l000k1nxm992mznr9" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="ciddwv996000st6ed8wqkd5m1" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1201,7 +1322,7 @@ _   底線
     <article id="post-markdown-syntax" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/06/25/markdown-syntax/" class="article-date">
-  <time datetime="2014-06-25T07:36:56.000Z" itemprop="datePublished">2014-06-25</time>
+  <time datetime="2014-06-25T15:36:56.000Z" itemprop="datePublished">2014-06-25</time>
 </a>
     
   </div>
@@ -1259,14 +1380,14 @@ _   底線
 <h3 id="philosophy">Philosophy</h3>
 
 <p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p>
-<p>Readability, however, is emphasized above all else. A Markdown-formatted<br>document should be publishable as-is, as plain text, without looking<br>like it’s been marked up with tags or formatting instructions. While<br>Markdown’s syntax has been influenced by several existing text-to-HTML<br>filters — including <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>, <a href="http://textism.com/tools/textile/" target="_blank" rel="external">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="external">reStructuredText</a>,<br><a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="external">Grutatext</a>, and <a href="http://ettext.taint.org/doc/" target="_blank" rel="external">EtText</a> — the single biggest source of<br>inspiration for Markdown’s syntax is the format of plain text email.</p>
+<p>Readability, however, is emphasized above all else. A Markdown-formatted<br>document should be publishable as-is, as plain text, without looking<br>like it’s been marked up with tags or formatting instructions. While<br>Markdown’s syntax has been influenced by several existing text-to-HTML<br>filters – including <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>, <a href="http://textism.com/tools/textile/" target="_blank" rel="external">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="external">reStructuredText</a>,<br><a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="external">Grutatext</a>, and <a href="http://ettext.taint.org/doc/" target="_blank" rel="external">EtText</a> – the single biggest source of<br>inspiration for Markdown’s syntax is the format of plain text email.</p>
 <p>To this end, Markdown’s syntax is comprised entirely of punctuation<br>characters, which punctuation characters have been carefully chosen so<br>as to look like what they mean. E.g., asterisks around a word actually<br>look like *emphasis*. Markdown lists look like, well, lists. Even<br>blockquotes look like quoted passages of text, assuming you’ve ever<br>used email.</p>
 <h3 id="html">Inline HTML</h3>
 
 <p>Markdown’s syntax is intended for one purpose: to be used as a<br>format for <em>writing</em> for the web.</p>
 <p>Markdown is not a replacement for HTML, or even close to it. Its<br>syntax is very small, corresponding only to a very small subset of<br>HTML tags. The idea is <em>not</em> to create a syntax that makes it easier<br>to insert HTML tags. In my opinion, HTML tags are already easy to<br>insert. The idea for Markdown is to make it easy to read, write, and<br>edit prose. HTML is a <em>publishing</em> format; Markdown is a <em>writing</em><br>format. Thus, Markdown’s formatting syntax only addresses issues that<br>can be conveyed in plain text.</p>
 <p>For any markup that is not covered by Markdown’s syntax, you simply<br>use HTML itself. There’s no need to preface it or delimit it to<br>indicate that you’re switching from Markdown to HTML; you just use<br>the tags.</p>
-<p>The only restrictions are that block-level HTML elements — e.g. <code>&lt;div&gt;</code>,<br><code>&lt;table&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;p&gt;</code>, etc. — must be separated from surrounding<br>content by blank lines, and the start and end tags of the block should<br>not be indented with tabs or spaces. Markdown is smart enough not<br>to add extra (unwanted) <code>&lt;p&gt;</code> tags around HTML block-level tags.</p>
+<p>The only restrictions are that block-level HTML elements – e.g. <code>&lt;div&gt;</code>,<br><code>&lt;table&gt;</code>, <code>&lt;pre&gt;</code>, <code>&lt;p&gt;</code>, etc. – must be separated from surrounding<br>content by blank lines, and the start and end tags of the block should<br>not be indented with tabs or spaces. Markdown is smart enough not<br>to add extra (unwanted) <code>&lt;p&gt;</code> tags around HTML block-level tags.</p>
 <p>For example, to add an HTML table to a Markdown article:</p>
 <pre><code>This is a regular paragraph.
 
@@ -1278,7 +1399,7 @@ _   底線
 
 This is another regular paragraph.
 </code></pre><p>Note that Markdown formatting syntax is not processed within block-level<br>HTML tags. E.g., you can’t use Markdown-style <code>*emphasis*</code> inside an<br>HTML block.</p>
-<p>Span-level HTML tags — e.g. <code>&lt;span&gt;</code>, <code>&lt;cite&gt;</code>, or <code>&lt;del&gt;</code> — can be<br>used anywhere in a Markdown paragraph, list item, or header. If you<br>want, you can even use HTML tags instead of Markdown formatting; e.g. if<br>you’d prefer to use HTML <code>&lt;a&gt;</code> or <code>&lt;img&gt;</code> tags instead of Markdown’s<br>link or image syntax, go right ahead.</p>
+<p>Span-level HTML tags – e.g. <code>&lt;span&gt;</code>, <code>&lt;cite&gt;</code>, or <code>&lt;del&gt;</code> – can be<br>used anywhere in a Markdown paragraph, list item, or header. If you<br>want, you can even use HTML tags instead of Markdown formatting; e.g. if<br>you’d prefer to use HTML <code>&lt;a&gt;</code> or <code>&lt;img&gt;</code> tags instead of Markdown’s<br>link or image syntax, go right ahead.</p>
 <p>Unlike block-level HTML tags, Markdown syntax <em>is</em> processed within<br>span-level tags.</p>
 <h3 id="autoescape">Automatic Escaping for Special Characters</h3>
 
@@ -1296,9 +1417,9 @@ This is another regular paragraph.
 </code></pre><p>Markdown will translate it to:</p>
 <pre><code>AT&amp;amp<span class="comment">;T</span>
 </code></pre><p>Similarly, because Markdown supports <a href="#html">inline HTML</a>, if you use<br>angle brackets as delimiters for HTML tags, Markdown will treat them as<br>such. But if you write:</p>
-<pre><code>4 &lt; 5
+<pre><code><span class="number">4</span> &lt; <span class="number">5</span>
 </code></pre><p>Markdown will translate it to:</p>
-<pre><code>4 &amp;lt<span class="comment">; 5</span>
+<pre><code><span class="number">4</span> &amp;lt; <span class="number">5</span>
 </code></pre><p>However, inside Markdown code spans and blocks, angle brackets and<br>ampersands are <em>always</em> encoded automatically. This makes it easy to use<br>Markdown to write about HTML code. (As opposed to raw HTML, which is a<br>terrible format for writing about HTML syntax, because every single <code>&lt;</code><br>and <code>&amp;</code> in your example code needs to be escaped.)</p>
 <hr>
 <h2 id="block">Block Elements</h2>
@@ -1306,10 +1427,10 @@ This is another regular paragraph.
 
 <h3 id="p">Paragraphs and Line Breaks</h3>
 
-<p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like a<br>blank line — a line containing nothing but spaces or tabs is considered<br>blank.) Normal paragraphs should not be indented with spaces or tabs.</p>
+<p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like a<br>blank line – a line containing nothing but spaces or tabs is considered<br>blank.) Normal paragraphs should not be indented with spaces or tabs.</p>
 <p>The implication of the “one or more consecutive lines of text” rule is<br>that Markdown supports “hard-wrapped” text paragraphs. This differs<br>significantly from most other text-to-HTML formatters (including Movable<br>Type’s “Convert Line Breaks” option) which translate every line break<br>character in a paragraph into a <code>&lt;br /&gt;</code> tag.</p>
 <p>When you <em>do</em> want to insert a <code>&lt;br /&gt;</code> break tag using Markdown, you<br>end a line with two or more spaces, then type return.</p>
-<p>Yes, this takes a tad more effort to create a <code>&lt;br /&gt;</code>, but a simplistic<br>“every line break is a <code>&lt;br /&gt;</code>“ rule wouldn’t work for Markdown.<br>Markdown’s email-style <a href="#blockquote">blockquoting</a> and multi-paragraph <a href="#list">list items</a><br>work best — and look better — when you format them with hard breaks.</p>
+<p>Yes, this takes a tad more effort to create a <code>&lt;br /&gt;</code>, but a simplistic<br>“every line break is a <code>&lt;br /&gt;</code>“ rule wouldn’t work for Markdown.<br>Markdown’s email-style <a href="#blockquote">blockquoting</a> and multi-paragraph <a href="#list">list items</a><br>work best – and look better – when you format them with hard breaks.</p>
 <h3 id="header">Headers</h3>
 
 <p>Markdown supports two styles of headers, <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a> and <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>.</p>
@@ -1326,7 +1447,7 @@ This is another regular paragraph.
 <span class="comment">## This is an H2</span>
 
 <span class="comment">###### This is an H6</span>
-</code></pre><p>Optionally, you may “close” atx-style headers. This is purely<br>cosmetic — you can use this if you think it looks better. The<br>closing hashes don’t even need to match the number of hashes<br>used to open the header. (The number of opening hashes<br>determines the header level.) :</p>
+</code></pre><p>Optionally, you may “close” atx-style headers. This is purely<br>cosmetic – you can use this if you think it looks better. The<br>closing hashes don’t even need to match the number of hashes<br>used to open the header. (The number of opening hashes<br>determines the header level.) :</p>
 <pre><code><span class="comment"># This is an H1 #</span>
 
 <span class="comment">## This is an H2 ##</span>
@@ -1367,7 +1488,7 @@ id sem consectetuer libero luctus adipiscing.
 <h3 id="list">Lists</h3>
 
 <p>Markdown supports ordered (numbered) and unordered (bulleted) lists.</p>
-<p>Unordered lists use asterisks, pluses, and hyphens — interchangably<br>— as list markers:</p>
+<p>Unordered lists use asterisks, pluses, and hyphens – interchangably<br>– as list markers:</p>
 <pre><code><span class="bullet">*   </span>Red
 <span class="bullet">*   </span>Green
 <span class="bullet">*   </span>Blue
@@ -1380,9 +1501,9 @@ id sem consectetuer libero luctus adipiscing.
 </span>-<span class="ruby">   <span class="constant">Green</span>
 </span>-<span class="ruby">   <span class="constant">Blue</span></span>
 </code></pre><p>Ordered lists use numbers followed by periods:</p>
-<pre><code><span class="bullet">1.  </span>Bird
-<span class="bullet">2.  </span>McHale
-<span class="bullet">3.  </span>Parish
+<pre><code><span class="number">1.</span>  Bird
+<span class="number">2.</span>  McHale
+<span class="number">3.</span>  Parish
 </code></pre><p>It’s important to note that the actual numbers you use to mark the<br>list have no effect on the HTML output Markdown produces. The HTML<br>Markdown produces from the above list is:</p>
 <pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
 <span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
@@ -1390,13 +1511,13 @@ id sem consectetuer libero luctus adipiscing.
 <span class="tag">&lt;<span class="title">li</span>&gt;</span>Parish<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
 </code></pre><p>If you instead wrote the list in Markdown like this:</p>
-<pre><code><span class="bullet">1.  </span>Bird
-<span class="bullet">1.  </span>McHale
-<span class="bullet">1.  </span>Parish
+<pre><code><span class="number">1.</span>  Bird
+<span class="number">1.</span>  McHale
+<span class="number">1.</span>  Parish
 </code></pre><p>or even:</p>
-<pre><code><span class="bullet">3. </span>Bird
-<span class="bullet">1. </span>McHale
-<span class="bullet">8. </span>Parish
+<pre><code><span class="number">3.</span> Bird
+<span class="number">1.</span> McHale
+<span class="number">8.</span> Parish
 </code></pre><p>you’d get the exact same HTML output. The point is, if you want to,<br>you can use ordinal numbers in your ordered Markdown lists, so that<br>the numbers in your source match the numbers in your published HTML.<br>But if you want to be lazy, you don’t have to.</p>
 <p>If you do use lazy list numbering, however, you should still start the<br>list with the number 1. At some point in the future, Markdown may support<br>starting ordered lists at an arbitrary number.</p>
 <p>List markers typically start at the left margin, but may be indented by<br>up to three spaces. List markers must be followed by one or more spaces<br>or a tab.</p>
@@ -1452,7 +1573,7 @@ sit amet, consectetuer adipiscing elit.
 
     &gt; This <span class="keyword">is</span> a blockquote
     &gt; <span class="keyword">inside</span> a list item.
-</code></pre><p>To put a code block within a list item, the code block needs<br>to be indented <em>twice</em> — 8 spaces or two tabs:</p>
+</code></pre><p>To put a code block within a list item, the code block needs<br>to be indented <em>twice</em> – 8 spaces or two tabs:</p>
 <pre><code>*   A list <span class="keyword">item </span>with a <span class="preprocessor">code</span> <span class="keyword">block:
 </span>
         &lt;<span class="preprocessor">code</span> goes here&gt;
@@ -1472,7 +1593,7 @@ sit amet, consectetuer adipiscing elit.
 
 <span class="variable">&lt;pre&gt;</span><span class="variable">&lt;code&gt;</span>This is a code <span class="built_in">block</span>.
 <span class="variable">&lt;/code&gt;</span><span class="variable">&lt;/pre&gt;</span>
-</code></pre><p>One level of indentation — 4 spaces or 1 tab — is removed from each<br>line of the code block. For example, this:</p>
+</code></pre><p>One level of indentation – 4 spaces or 1 tab – is removed from each<br>line of the code block. For example, this:</p>
 <pre><code>Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:
 
     <span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
@@ -1486,7 +1607,7 @@ sit amet, consectetuer adipiscing elit.
 <span class="keyword">end</span> <span class="keyword">tell</span>
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>A code block continues until it reaches a line that is not indented<br>(or the end of the article).</p>
-<p>Within a code block, ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> and <code>&gt;</code>)<br>are automatically converted into HTML entities. This makes it very<br>easy to include example HTML source code using Markdown — just paste<br>it and indent it, and Markdown will handle the hassle of encoding the<br>ampersands and angle brackets. For example, this:</p>
+<p>Within a code block, ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> and <code>&gt;</code>)<br>are automatically converted into HTML entities. This makes it very<br>easy to include example HTML source code using Markdown – just paste<br>it and indent it, and Markdown will handle the hassle of encoding the<br>ampersands and angle brackets. For example, this:</p>
 <pre><code>&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"footer"</span>&gt;
     &amp;<span class="keyword">copy</span>; <span class="number">2004</span> Foo Corporation
 &lt;/<span class="keyword">div</span>&gt;
@@ -1552,11 +1673,11 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <pre><code>[id]<span class="symbol">:</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/longish</span><span class="regexp">/path/to</span><span class="regexp">/resource/here</span>
     <span class="string">"Optional Title Here"</span>
 </code></pre><p>Link definitions are only used for creating links during Markdown<br>processing, and are stripped from your document in the HTML output.</p>
-<p>Link definition names may consist of letters, numbers, spaces, and<br>punctuation — but they are <em>not</em> case sensitive. E.g. these two<br>links:</p>
+<p>Link definition names may consist of letters, numbers, spaces, and<br>punctuation – but they are <em>not</em> case sensitive. E.g. these two<br>links:</p>
 <pre><code>[<span class="link_label">link text</span>][<span class="link_reference">a</span>]
 [<span class="link_label">link text</span>][<span class="link_reference">A</span>]
 </code></pre><p>are equivalent.</p>
-<p>The <em>implicit link name</em> shortcut allows you to omit the name of the<br>link, in which case the link text itself is used as the name.<br>Just use an empty set of square brackets — e.g., to link the word<br>“Google” to the google.com web site, you could simply write:</p>
+<p>The <em>implicit link name</em> shortcut allows you to omit the name of the<br>link, in which case the link text itself is used as the name.<br>Just use an empty set of square brackets – e.g., to link the word<br>“Google” to the google.com web site, you could simply write:</p>
 <pre><code>[<span class="link_label">Google</span>][<span class="link_reference"></span>]
 </code></pre><p>And then define the link:</p>
 <pre><code>[<span class="link_reference">Google</span>]:<span class="link_url"> http://google.com/</span>
@@ -1624,7 +1745,7 @@ __double underscores__
 <pre><code><span class="escape">``</span>There is <span class="literal">a</span> literal backtick (<span class="escape">`)</span> here.<span class="escape">``</span>
 </code></pre><p>which will produce this:</p>
 <pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>There is a literal backtick (`) here.<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-</code></pre><p>The backtick delimiters surrounding a code span may include spaces —<br>one after the opening, one before the closing. This allows you to place<br>literal backtick characters at the beginning or end of a code span:</p>
+</code></pre><p>The backtick delimiters surrounding a code span may include spaces –<br>one after the opening, one before the closing. This allows you to place<br>literal backtick characters at the beginning or end of a code span:</p>
 <pre><code>A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` ` ``
 
 A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` `foo` ``
@@ -1700,7 +1821,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cid5nhs3f000h1nxm1hklkcer" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="ciddwv994000pt6edg1ftjzdl" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1718,7 +1839,7 @@ _   underscore
     <article id="post-usehexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/05/30/usehexo/" class="article-date">
-  <time datetime="2014-05-30T14:27:14.000Z" itemprop="datePublished">2014-05-30</time>
+  <time datetime="2014-05-30T22:27:14.000Z" itemprop="datePublished">2014-05-30</time>
 </a>
     
   </div>
@@ -1737,13 +1858,13 @@ _   underscore
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="step_1">step 1</h2><p>首先检出项目<br>git clone<br>然后执行hexo项目的初始化<br>hexo init<br>npm install<br>最后恢复配置文件<br>git reset —hard HEAD<br>如有需要 将以下themes项目检出到themes文件夹<br>git@github.com:xiangming/landscape-plus.git</p>
+        <p>##step 1##<br>首先检出项目<br>git clone<br>然后执行hexo项目的初始化<br>hexo init<br>npm install<br>最后恢复配置文件<br>git reset –hard HEAD<br>如有需要 将以下themes项目检出到themes文件夹<br>git@github.com:xiangming/landscape-plus.git</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cid5nhs1u00031nxm96s72sfl" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="ciddwv9870004t6edo5jj5vlm" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -1773,7 +1894,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1784,7 +1905,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -1793,7 +1914,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1805,23 +1926,23 @@ _   underscore
       <ul>
         
           <li>
+            <a href="/2015/08/16/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/15/ruby/">ruby</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/13/windows-install/">windows-install</a>
+          </li>
+        
+          <li>
             <a href="/2015/08/10/atom/">atom</a>
           </li>
         
           <li>
             <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/tmux/">tmux</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/29/practical-vim/">practical-vim</a>
           </li>
         
       </ul>

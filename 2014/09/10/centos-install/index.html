@@ -6,37 +6,37 @@
   
   <title>centos-install | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
+  <meta name="description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
 
 服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；
 通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围
 
 解决方法：
 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
-centos 下怎样从root切换到普通用户su 普通用户">
+centos 下怎样从root切换到普通用户su 普通">
 <meta property="og:type" content="article">
 <meta property="og:title" content="centos-install">
 <meta property="og:url" content="http://evatlsong.com/2014/09/10/centos-install/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="问题安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
+<meta property="og:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
 
 服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；
 通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围
 
 解决方法：
 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
-centos 下怎样从root切换到普通用户su 普通用户">
-<meta property="og:updated_time" content="2015-07-09T06:37:07.066Z">
+centos 下怎样从root切换到普通用户su 普通">
+<meta property="og:updated_time" content="2015-08-16T03:06:05.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos-install">
-<meta name="twitter:description" content="问题安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
+<meta name="twitter:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
 
 服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；
 通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围
 
 解决方法：
 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
-centos 下怎样从root切换到普通用户su 普通用户">
+centos 下怎样从root切换到普通用户su 普通">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -96,7 +96,7 @@ centos 下怎样从root切换到普通用户su 普通用户">
       <section id="main"><article id="post-centos-install" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/10/centos-install/" class="article-date">
-  <time datetime="2014-09-10T04:30:19.000Z" itemprop="datePublished">2014-09-10</time>
+  <time datetime="2014-09-10T12:30:19.000Z" itemprop="datePublished">2014-09-10</time>
 </a>
     
   </div>
@@ -115,7 +115,7 @@ centos 下怎样从root切换到普通用户su 普通用户">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="问题">问题</h1><h2 id="安装问题">安装问题</h2><p>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
+        <h1 id="问题">问题</h1><p>##安装问题<br>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
 <ol>
 <li>服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；</li>
 <li>通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围</li>
@@ -136,21 +136,21 @@ host bj
   identityfile ~/.ssh/<span class="variable">&lt;filename&gt;</span>
 </code></pre><h2 id="遇到问题">遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
 <h1 id="vnc设置">vnc设置</h1><h2 id="一、安装_VNC">一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># rpm -q vnc vnc-server</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># rpm -q vnc vnc-server</span>
 </code></pre><p>　　得到：</p>
 <pre><code><span class="keyword">package</span> vnc <span class="keyword">is</span> <span class="keyword">not</span> installed
 
 <span class="keyword">package</span> vnc-server <span class="keyword">is</span> <span class="keyword">not</span> installed
 </code></pre><p>　　提示没有安装，那么就开始安装，输入：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># yum install vnc vnc-server</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># yum install vnc vnc-server</span>
 </code></pre><p>　　注：如果是 Ubuntu 则输入：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># apt-get install vnc vnc-server</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># apt-get install vnc vnc-server</span>
 </code></pre><p>　　在一串指令提示后，会让你确认一些选项，输入两次 “Y” 并确认，稍作等待，提示 “Complete!” 即完成安装。</p>
 <h2 id="二、设置_VNC_密码">二、设置 VNC 密码</h2><p>　　启动 VNC，输入：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vncserver</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vncserver</span>
 </code></pre><p>　　此时会提示你输入密码，因为是第一次配置。重复输入两次即可。</p>
 <h2 id="三、配置桌面类型_(可略过)">三、配置桌面类型 (可略过)</h2><p>　　设置一下远程桌面使用那个类型的桌面，分辨率多少等等。输入：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vi ~/.vnc/xstartup</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vi ~/.vnc/xstartup</span>
 </code></pre><p>　　得到：</p>
 <pre><code><span class="shebang">#!/bin/sh
 </span>
@@ -199,12 +199,12 @@ xterm -geometry <span class="number">80</span>x24+<span class="number">10</span>
 &amp;
 twm &amp;
 </code></pre><p>　　一般情况下，我们使用的 Linux 桌面都是 “Gnome” 桌面，故配置成这个桌面比较习惯。<br>　　按 “i” 键进入编辑状态，主要修改最后两行。改为：</p>
-<pre><code><span class="preprocessor"># xterm -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &amp;</span>
+<pre><code><span class="preprocessor"># xterm -geometry <span class="number">80</span>x24+<span class="number">10</span>+<span class="number">10</span> -ls -title <span class="string">"$VNCDESKTOP Desktop"</span> &amp;</span>
 <span class="preprocessor"># twm &amp;</span>
 gnome-session &amp;
 </code></pre><p>　　一看便知，将配置文件的最后两行注释掉，并且加入了一行代码，表明使用的是 “Gnome” 桌面。</p>
 <h2 id="四、配置登录帐号、桌面分辨率、连接方式_(可略过)">四、配置登录帐号、桌面分辨率、连接方式 (可略过)</h2><p>　　输入：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vi /etc/sysconfig/vncservers</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vi /etc/sysconfig/vncservers</span>
 </code></pre><p>　　出现如下提示：</p>
 <pre><code># The VNCSERVERS variable is a list of display:user pairs.
 #
@@ -214,11 +214,11 @@ gnome-session &amp;
 # to <span class="operator"><span class="keyword">do</span> that.
 #
 # <span class="keyword">DO</span> <span class="keyword">NOT</span> RUN THIS SERVICE <span class="keyword">if</span> your <span class="keyword">local</span> area network <span class="keyword">is</span>
-# untrusted!  <span class="keyword">For</span> a secure way <span class="keyword">of</span> <span class="keyword">using</span> VNC, see this URL:
-# http://kbase.redhat.com/faq/docs/DOC-<span class="number">7028</span>
+# <span class="keyword">untrusted</span>!  <span class="keyword">For</span> a secure way <span class="keyword">of</span> <span class="keyword">using</span> VNC, see this <span class="keyword">URL</span>:
+# <span class="keyword">http</span>://kbase.redhat.com/faq/docs/DOC-<span class="number">7028</span>
 # <span class="keyword">Use</span> <span class="string">"-nolisten tcp"</span> <span class="keyword">to</span> prevent X connections <span class="keyword">to</span> your VNC <span class="keyword">server</span> via TCP.
 # <span class="keyword">Use</span> <span class="string">"-localhost"</span> <span class="keyword">to</span> prevent remote VNC clients connecting <span class="keyword">except</span> <span class="keyword">when</span>
-# doing so through a secure tunnel.  See the <span class="string">"-via"</span> <span class="keyword">option</span> <span class="keyword">in</span> the
+# doing so <span class="keyword">through</span> a secure tunnel.  See the <span class="string">"-via"</span> <span class="keyword">option</span> <span class="keyword">in</span> the
 # <span class="string">`man vncviewer' manual page.
 
 # VNCSERVERS="2:myusername"
@@ -232,43 +232,43 @@ gnome-session &amp;
 <span class="setting">VNCSERVERARGS[2]=<span class="value"><span class="string">"-geometry 1024×768"</span></span></span>
 <span class="setting">VNCSERVERARGS[3]=<span class="value"><span class="string">"-geometry 800×600 -depth 24 -nolisten tcp -nohttpd -localhost"</span></span></span>
 </code></pre><p>　　解释一下这个文件：</p>
-<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC <span class="keyword">server</span>，上面的例子里运行了三个 VNC <span class="keyword">server</span>，其中 user1 在 display :<span class="number">1</span>，user2 在 display :<span class="number">2</span>，user3 在 display :<span class="number">3</span>。
+<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC server，上面的例子里运行了三个 VNC server，其中 user1 在 display :<span class="number">1</span>，user2 在 display :<span class="number">2</span>，user3 在 display :<span class="number">3</span>。
 
-VNCSERVERARGS 这三行，分别为 VNC <span class="keyword">server</span> <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 <span class="number">1024</span>×<span class="number">768</span>，对 user3 使用 <span class="number">800</span>×<span class="number">600</span>,<span class="number">24</span> 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
+VNCSERVERARGS 这三行，分别为 VNC server <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 <span class="number">1024</span>×<span class="number">768</span>，对 user3 使用 <span class="number">800</span>×<span class="number">600</span>,<span class="number">24</span> 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
 </code></pre><p>　　注释：在启动 VNCserver 时，你也可以为 server 指定一个 display 参数。你可以把 display 理解为一个桌面，每个用户都可以有自己的桌面。VNC 客户端在连接时，可以指定连接到哪个桌面上。在系统中，display 号不能重复，也就是说，如果有用户已经建立了名为 “:1” 的 display，另外一个用户就不能再使用 “:1” 了，他可以使用 “:2”。</p>
 <p>　　指定 display 号码的启动 VNC server 的命令是:</p>
 <pre><code><span class="label">vncserver:</span><span class="number">1</span>
 </code></pre><h2 id="五、配置防火墙，允许_VNC_连接">五、配置防火墙，允许 VNC 连接</h2><p>　　VNC server 监听的端口从 5900 开始，display:1 的监听 5901，display:2 监听 5902，以此类推。CentOS 的防火墙缺省是不允许连接这些端口的，所以需要使用下面的步骤打开防火墙（需要 root 权限)：<br>　　输入编辑：</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># vi /etc/sysconfig/iptables</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vi /etc/sysconfig/iptables</span>
 </code></pre><p>　　得到：</p>
 <pre><code># Firewall configuration written by system-config-firewall
 # Manual customization of this file is not recommended.
 *filter
-:INPUT ACCEPT [0:0]
-:FORWARD ACCEPT [0:0]
-:OUTPUT ACCEPT [0:0]
--<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">ESTABLISHED</span>,<span class="constant">RELATED</span> -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -p icmp -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -i lo -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">NEW</span> -m tcp -p tcp --dport <span class="number">22</span> -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">FORWARD</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
-</span>COMMIT
+:INPUT ACCEPT [<span class="operator">0:<span class="number">0</span>]
+:FORWARD <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
+:<span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
+-A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state ESTABLISHED,RELATED -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">p</span> icmp -j <span class="keyword">ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">i</span> lo -j <span class="keyword">ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
+-A FORWARD -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
+<span class="keyword">COMMIT</span></span>
 </code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
-<pre><code><span class="comment"># Firewall configuration written by system-config-firewall</span>
-<span class="comment"># Manual customization of this file is not recommended.</span>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
 *filter
-:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
-:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
-:OUTPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
--A INPUT -m <span class="keyword">state</span> --state ESTABLISHED,RELATED -j ACCEPT
--A INPUT -p icmp -j ACCEPT
--A INPUT -i lo -j ACCEPT
--A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">22</span> -j ACCEPT
--A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">5901</span> -j ACCEPT
--A INPUT -j REJECT --reject-with icmp-host-prohibited
--A FORWARD -j REJECT --reject-with icmp-host-prohibited
-COMMIT
+:INPUT ACCEPT [<span class="operator">0:<span class="number">0</span>]
+:FORWARD <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
+:<span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
+-A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state ESTABLISHED,RELATED -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">p</span> icmp -j <span class="keyword">ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">i</span> lo -j <span class="keyword">ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 5901 -j ACCEPT</span>
+-A <span class="keyword">INPUT</span> -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
+-A FORWARD -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
+<span class="keyword">COMMIT</span></span>
 </code></pre><p>　　即添加了上述代码的第 11 行。</p>
 <h2 id="六、重启防火墙">六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
 <pre><code><span class="comment">[root@localhost ~]</span># /sbin/service iptables restart
@@ -277,14 +277,12 @@ iptables：将链设置为政策 ACCEPT：filter <span class="comment">[确定]<
 iptables：正在卸载模块：<span class="comment">[确定]</span>
 iptables：应用防火墙规则：<span class="comment">[确定]</span>
 </code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
-<pre><code>192<span class="class">.168</span><span class="class">.1</span><span class="class">.2</span><span class="pseudo">:1</span>    
+<pre><code><span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>:<span class="number">1</span>    
 </code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
 <h2 id="七、设置_VNC_自动启动">七、设置 VNC 自动启动</h2><p>　　虽然上面配置是可以使用了，但是你一旦重启服务器后，VNC 的服务又会停止，得手动来启，不方便，虽说服务器不能老是启动，但是重启的时候还是有的，为了方便，你需要将 VNC 服务设置为自动自动。<br>　　方法很多，你可以在图形化的界面下打开服务窗口，然后将 VNC 服务设为自动。既然这里都是在用终端下的命令行形式，就继续沿用这个方式吧。</p>
-<pre><code>[root<span class="property">@localhost</span> ~]<span class="comment"># chkconfig vncserver on</span>
-</code></pre><h1 id="tomcat">tomcat</h1><pre><code>pscp -r -v tomcat.tar.gz root<span class="variable">@192</span>.<span class="number">168.1</span>.<span class="number">217</span>:<span class="regexp">/usr/local</span>
-tar -xzf /usr/<span class="keyword">local</span>/tomcat.tar.gz
-
-svnadmin <span class="keyword">dump</span> Repositories\goutrip &gt; svndata\goutrip.<span class="keyword">dump</span>
+<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># chkconfig vncserver on</span>
+</code></pre><p>#tomcat<br>    pscp -r -v tomcat.tar.gz root@192.168.1.217:/usr/local<br>    tar -xzf /usr/local/tomcat.tar.gz</p>
+<pre><code>svnadmin <span class="keyword">dump</span> Repositories\goutrip &gt; svndata\goutrip.<span class="keyword">dump</span>
 svnadmin load svndata/goutrip &lt; goutrip.<span class="keyword">dump</span>
 
 ps -aux|<span class="keyword">grep</span> svnserve
@@ -292,20 +290,20 @@ ps -aux|<span class="keyword">grep</span> svnserve
 svnserve -d -r /home/goutrip/svndata
 </code></pre><p>最后不要加正斜杠</p>
 <p>可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动<br>解决办法 killall svnserve</p>
-<h1 id="远程桌面">远程桌面</h1><pre><code>[root<span class="variable">@dlp</span> ~]<span class="comment"># yum -y install freerdp </span>
-[cent<span class="variable">@dlp</span> ~]<span class="variable">$ </span>xfreerdp -g <span class="number">800</span>x60<span class="number">0</span> -u administrator <span class="number">10.0</span>.<span class="number">0</span>.<span class="number">100</span> 
+<h1 id="远程桌面">远程桌面</h1><pre><code>[root@dlp ~]<span class="preprocessor"># yum -y install freerdp </span>
+[cent@dlp ~]$ xfreerdp -g <span class="number">800</span>x600 -u administrator <span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span> 
 </code></pre><h1 id="virtualbox">virtualbox</h1><blockquote>
 <p>用root用户</p>
 </blockquote>
-<pre><code>[root<span class="annotation">@dlp</span> ~]# vboxmanage list vms
-[root<span class="annotation">@dlp</span> ~]# vboxmanage startvm <span class="string">"widnows 2008"</span> --<span class="class"><span class="keyword">type</span> <span class="title">headless</span>
-</span>[root<span class="annotation">@dlp</span> ~]# vboxmanage controlvm <span class="string">"windows 2008"</span> poweroff
+<pre><code>[root<span class="constant">@dlp</span> ~]<span class="preprocessor"># vboxmanage list vms</span>
+[root<span class="constant">@dlp</span> ~]<span class="preprocessor"># vboxmanage startvm <span class="string">"widnows 2008"</span> --type headless</span>
+[root<span class="constant">@dlp</span> ~]<span class="preprocessor"># vboxmanage controlvm <span class="string">"windows 2008"</span> poweroff</span>
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cid5nhs4j00101nxmr8a6gazc" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="ciddwv99z0018t6edszqp2r7x" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -347,7 +345,7 @@ svnserve -d -r /home/goutrip/svndata
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -358,7 +356,7 @@ svnserve -d -r /home/goutrip/svndata
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a>
+      <a href="/tags/apache/" style="font-size: 10px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -367,7 +365,7 @@ svnserve -d -r /home/goutrip/svndata
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -379,23 +377,23 @@ svnserve -d -r /home/goutrip/svndata
       <ul>
         
           <li>
+            <a href="/2015/08/16/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/15/ruby/">ruby</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/13/windows-install/">windows-install</a>
+          </li>
+        
+          <li>
             <a href="/2015/08/10/atom/">atom</a>
           </li>
         
           <li>
             <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/tmux/">tmux</a>
-          </li>
-        
-          <li>
-            <a href="/2015/07/23/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2015/06/29/practical-vim/">practical-vim</a>
           </li>
         
       </ul>
