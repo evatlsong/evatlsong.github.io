@@ -3,8 +3,8 @@ title: practical-vim
 date: 2015-06-29 10:39:27
 tags: vim
 ---
-#basic operate
-##viewing different parts of the work buffer
+# basic operate
+## viewing different parts of the work buffer
 
     CONTROL-D(down)
     CONTROL-U(up)
