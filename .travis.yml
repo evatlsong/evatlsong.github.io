@@ -1,0 +1,3 @@
+before_install:
+- openssl aes-256-cbc -K $encrypted_26b4962af0e7_key -iv $encrypted_26b4962af0e7_iv
+  -in .travis/id_rsa_evatlsong.enc -out ~/.ssh/id_rsa_evatlsong -d
