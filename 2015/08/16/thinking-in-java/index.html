@@ -4,17 +4,45 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Tag: tomat | evatlsong</title>
+  <title>thinking-in-java | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="evatlsong">
-<meta property="og:url" content="http://evatlsong.com/tags/tomat/index.html">
+  <meta name="description" content="annotationBasic syntaxthree built-in annotations
+
+@Override
+@Deprecated
+@SuppressWarnings
+
+Defining annotationsimport java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retection(RetentionPolicy.RU">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thinking-in-java">
+<meta property="og:url" content="http://evatlsong.com/2015/08/16/thinking-in-java/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description">
+<meta property="og:description" content="annotationBasic syntaxthree built-in annotations
+
+@Override
+@Deprecated
+@SuppressWarnings
+
+Defining annotationsimport java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retection(RetentionPolicy.RU">
+<meta property="og:updated_time" content="2015-08-19T02:42:21.910Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="evatlsong">
-<meta name="twitter:description">
+<meta name="twitter:title" content="thinking-in-java">
+<meta name="twitter:description" content="annotationBasic syntaxthree built-in annotations
+
+@Override
+@Deprecated
+@SuppressWarnings
+
+Defining annotationsimport java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retection(RetentionPolicy.RU">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -71,39 +99,112 @@
   </div>
 </header>
     <div class="outer">
-      <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2014" class="archive-year">2014</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2014/08/29/apache-php-tomcat-integration/" class="archive-article-date">
-  <time datetime="2014-08-29T10:02:51.000Z" itemprop="datePublished">Aug 29</time>
+      <section id="main"><article id="post-thinking-in-java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/16/thinking-in-java/" class="article-date">
+  <time datetime="2015-08-16T17:51:25.000Z" itemprop="datePublished">2015-08-16</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2014/08/29/apache-php-tomcat-integration/">apache-php-tomcat-integration</a>
+    <h1 class="article-title" itemprop="name">
+      thinking-in-java
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="annotation">annotation</h1><h2 id="Basic_syntax">Basic syntax</h2><p>three built-in annotations</p>
+<ul>
+<li>@Override</li>
+<li>@Deprecated</li>
+<li>@SuppressWarnings</li>
+</ul>
+<h3 id="Defining_annotations">Defining annotations</h3><pre><code><span class="keyword">import</span> java.lang.annotation.*;
+
+<span class="annotation">@Target</span>(ElementType.METHOD)
+<span class="annotation">@Retection</span>(RetentionPolicy.RUNTIME)
+<span class="keyword">public</span> <span class="annotation">@interface</span> UseCase {
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">id</span><span class="params">()</span></span>;
+    <span class="function"><span class="keyword">public</span> String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> "no description"</span>;
+}
+
+<span class="keyword">import</span> java.util.*;
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PasswordUtils</span> </span>{
+    <span class="annotation">@UseCase</span>(id = <span class="number">48</span>, description = <span class="string">"encrypt password"</span>)
+    <span class="function"><span class="keyword">public</span> String <span class="title">encryptPassword</span><span class="params">(String password)</span> </span>{
+        <span class="keyword">return</span> <span class="keyword">new</span> StringBuilder(password).reverse().toString();
+    }
+}
+</code></pre><h3 id="Meta-annotations">Meta-annotations</h3><ul>
+<li>@Target     Where this annotation can be applied. The possible <code>ElementType</code> arguments are:<pre><code><span class="function"><span class="keyword">CONSTRUCTOR</span>:</span>
+FIELD:
+LOCAL_VARIABLE:
+<span class="function"><span class="keyword">METHOD</span>:</span>
+PACKAGE:
+PARAMETER:
+<span class="keyword">TYPE</span>:
+</code></pre></li>
+<li>@Retention  How long the annotation information is kept. The possible <code>RetentionPolicy</code> arguments are:<pre><code><span class="label">SOURCE:</span>
+<span class="label">CLASS:</span>
+<span class="label">RUNTIME:</span>
+</code></pre></li>
+<li>@Documented Include this annotation int the Javadocs.</li>
+<li>@Inherited  Allow subclasses to inherit parent annotations.</li>
+</ul>
+<h2 id="Writing_annotation_processors">Writing annotation processors</h2><p><strong>Class</strong>, <strong>Method</strong> and <strong>Field</strong> all implement the AnnotatedElement interface</p>
+<p>a list of the allowed types for annotation elements:<br>(you are not allowed to use any of the wrapper classes)</p>
+<ul>
+<li>All primitives(int, float, boolean etc.)</li>
+<li>String</li>
+<li>Class</li>
+<li>Enums</li>
+<li>Annotations</li>
+<li>Arrays of any of the above<h3 id="Default_value_constraints">Default value constraints</h3>elements must either have default values or values provided by the class that uses the annotation.<br>none of the non-primitive type elements are allowed to take <code>null</code> as a value<br>you can provide specific values, like empty strings or negative values<br>This is a typical idiom in annotation definitions.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cidi6cfr7000atbfmmwjkotvf" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/19/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">下一篇</strong>
+      <div class="article-nav-title">
+        
+          Hello World
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/15/ruby/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">上一篇</strong>
+      <div class="article-nav-title">ruby</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
       

@@ -75,8 +75,8 @@
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/08/16/hello-world/" class="article-date">
-  <time datetime="2015-08-16T03:57:19.616Z" itemprop="datePublished">2015-08-16</time>
+    <a href="/2015/08/19/hello-world/" class="article-date">
+  <time datetime="2015-08-19T02:42:21.910Z" itemprop="datePublished">2015-08-19</time>
 </a>
     
   </div>
@@ -87,7 +87,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/16/hello-world/">Hello World</a>
+      <a class="article-title" href="/2015/08/19/hello-world/">Hello World</a>
     </h1>
   
 
@@ -109,7 +109,95 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/16/hello-world/" data-id="ciddyp6tn000zt7fczlxeiy4m" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/19/hello-world/" data-id="cidi6cfsb0010tbfmotr1hrdv" class="article-share-link" data-share="baidu">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-thinking-in-java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/16/thinking-in-java/" class="article-date">
+  <time datetime="2015-08-16T17:51:25.000Z" itemprop="datePublished">2015-08-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/16/thinking-in-java/">thinking-in-java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="annotation">annotation</h1><h2 id="Basic_syntax">Basic syntax</h2><p>three built-in annotations</p>
+<ul>
+<li>@Override</li>
+<li>@Deprecated</li>
+<li>@SuppressWarnings</li>
+</ul>
+<h3 id="Defining_annotations">Defining annotations</h3><pre><code><span class="keyword">import</span> java.lang.annotation.*;
+
+<span class="annotation">@Target</span>(ElementType.METHOD)
+<span class="annotation">@Retection</span>(RetentionPolicy.RUNTIME)
+<span class="keyword">public</span> <span class="annotation">@interface</span> UseCase {
+    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">id</span><span class="params">()</span></span>;
+    <span class="function"><span class="keyword">public</span> String <span class="title">description</span><span class="params">()</span> <span class="keyword">default</span> "no description"</span>;
+}
+
+<span class="keyword">import</span> java.util.*;
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PasswordUtils</span> </span>{
+    <span class="annotation">@UseCase</span>(id = <span class="number">48</span>, description = <span class="string">"encrypt password"</span>)
+    <span class="function"><span class="keyword">public</span> String <span class="title">encryptPassword</span><span class="params">(String password)</span> </span>{
+        <span class="keyword">return</span> <span class="keyword">new</span> StringBuilder(password).reverse().toString();
+    }
+}
+</code></pre><h3 id="Meta-annotations">Meta-annotations</h3><ul>
+<li>@Target     Where this annotation can be applied. The possible <code>ElementType</code> arguments are:<pre><code><span class="function"><span class="keyword">CONSTRUCTOR</span>:</span>
+FIELD:
+LOCAL_VARIABLE:
+<span class="function"><span class="keyword">METHOD</span>:</span>
+PACKAGE:
+PARAMETER:
+<span class="keyword">TYPE</span>:
+</code></pre></li>
+<li>@Retention  How long the annotation information is kept. The possible <code>RetentionPolicy</code> arguments are:<pre><code><span class="label">SOURCE:</span>
+<span class="label">CLASS:</span>
+<span class="label">RUNTIME:</span>
+</code></pre></li>
+<li>@Documented Include this annotation int the Javadocs.</li>
+<li>@Inherited  Allow subclasses to inherit parent annotations.</li>
+</ul>
+<h2 id="Writing_annotation_processors">Writing annotation processors</h2><p><strong>Class</strong>, <strong>Method</strong> and <strong>Field</strong> all implement the AnnotatedElement interface</p>
+<p>a list of the allowed types for annotation elements:<br>(you are not allowed to use any of the wrapper classes)</p>
+<ul>
+<li>All primitives(int, float, boolean etc.)</li>
+<li>String</li>
+<li>Class</li>
+<li>Enums</li>
+<li>Annotations</li>
+<li>Arrays of any of the above<h3 id="Default_value_constraints">Default value constraints</h3>elements must either have default values or values provided by the class that uses the annotation.<br>none of the non-primitive type elements are allowed to take <code>null</code> as a value<br>you can provide specific values, like empty strings or negative values<br>This is a typical idiom in annotation definitions.</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cidi6cfr7000atbfmmwjkotvf" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -152,7 +240,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="ciddyp6su000dt7fc9pi8wemo" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="cidi6cfrk000etbfm9epqqcy0" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -195,7 +283,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/13/windows-install/" data-id="ciddyp6sa0002t7fcxlom5gj3" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/13/windows-install/" data-id="cidi6cfqt0002tbfmrmn2wlfn" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -235,7 +323,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/10/atom/" data-id="ciddyp6u9001ct7fc2x936ekl" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/atom/" data-id="cidi6cft0001dtbfm1w04twak" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -281,7 +369,7 @@ Ctrl + Alt + Left/Right Navigate back/forward
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="ciddyp6tj000wt7fcea8uq0u1" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cidi6cfs8000xtbfm51quigh2" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -429,7 +517,7 @@ attach session -&gt; $ tmux attach
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="ciddyp6sl0009t7fca50cb4tu" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cidi6cfr40009tbfmjcxzgoho" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -553,7 +641,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="ciddyp6t0000it7fcwdnwg8mc" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cidi6cfro000jtbfm6llza2ag" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -609,7 +697,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="ciddyp6t9000ot7fcdz4j1z9i" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cidi6cfrz000ptbfmtdppck7k" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -650,49 +738,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="ciddyp6so000at7fck4pp56kf" class="article-share-link" data-share="baidu">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sshkey" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/12/sshkey/" class="article-date">
-  <time datetime="2015-06-12T09:51:10.000Z" itemprop="datePublished">2015-06-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/12/sshkey/">sshkey</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC7ctY3uxMB9Ok<span class="regexp">/+Ts5tNA2kyE8+tsM6YCHchpG19mOsPKRsx5wlG6GFDRVj1HGsRp2GB94emlMjLomgcOfhuyalEUGDi1nKG11KGD21NXIsHc/</span>XfjKCsAK4oD84PFE1xCx24BE6Vi8G7PRE<span class="regexp">/byiF0DGH6lYG9i4eheCgymNuSXWyKEfUJJk4O+USbvgnmIS1R6Gjj+9jLqcNH7+RkLnJwQpQlwhXJGDGAjY6Rii4vdb8R7W6jHPj6/</span>ePmaTbrCIDYj50Qwx7dch6XD0mYSNkzpMHzhBkwcX4R634dsixVvKwg88yLrCwaKkR8oTY6ThjEqqBFbUyKZvV/ZOnZ8sIB evatlsong<span class="annotation">@evatlsong</span>-AI
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="regexp">/YiujHBtq7vmrmbcYz3yTD4GjEHFXhwlmjRILI4zFWggsjrkZoB1RjElD/</span>C2FWUuc7Lddu3zCCfKm80fzX3b3fiTmt2heHJpJd6G4gaVy2Oj61MLilUDq+RBJ8LH0fepj7dOmd9qkBy<span class="regexp">/xLdBtfx8pY+b/</span>yqrBw8RlXMtajrL2Exp6mZV6vP1ixth9RuJVU258S0VH71C5ftEJ1YQEujvF<span class="regexp">/vtSxqgwUAab4/</span>BV6u72JlzZ<span class="regexp">/Zz0pau+IARMUQkGq88Gq8CGSLQQtHCEz3y/</span><span class="number">9</span>m7jo6Uqwb0qwzNPduqMifonTOgxzCovRqM12MObzl evatlsong<span class="annotation">@evatlsong</span>-ThinkPad
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="ciddyp6ss000ct7fc7spevsj0" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cidi6cfr9000btbfmalh6pcxt" class="article-share-link" data-share="baidu">分享到</a>
       
 
       
@@ -707,7 +753,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -740,7 +786,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -752,7 +798,11 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
       <ul>
         
           <li>
-            <a href="/2015/08/16/hello-world/">Hello World</a>
+            <a href="/2015/08/19/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/08/16/thinking-in-java/">thinking-in-java</a>
           </li>
         
           <li>
@@ -765,10 +815,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
         
           <li>
             <a href="/2015/08/10/atom/">atom</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/10/intellij-idea/">intellij-idea</a>
           </li>
         
       </ul>
