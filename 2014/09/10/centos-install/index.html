@@ -26,7 +26,7 @@ centos 下怎样从root切换到普通用户su 普通">
 解决方法：
 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
 centos 下怎样从root切换到普通用户su 普通">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.594Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos-install">
 <meta name="twitter:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
@@ -305,7 +305,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cidjjzm040019t7ea02ykpvhk" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cidkcxrub0019t8ghjd7ch25n" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -469,7 +469,20 @@ svnserve -d -r /home/goutrip/svndata
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

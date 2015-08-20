@@ -103,7 +103,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cidjjzlye0004t7eawfio92sh" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cidkcxrse0004t8gh7yby3uww" class="article-share-link" data-share="baidu" data-title="useHexo">分享到</a>
       
 
       
@@ -255,7 +255,20 @@
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

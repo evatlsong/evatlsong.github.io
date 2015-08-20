@@ -14,7 +14,7 @@ Quick">
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
 Quick">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub.
@@ -80,7 +80,7 @@ Quick">
       <section id="main"><article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/08/20/hello-world/" class="article-date">
-  <time datetime="2015-08-20T01:52:08.598Z" itemprop="datePublished">2015-08-20</time>
+  <time datetime="2015-08-20T15:22:31.254Z" itemprop="datePublished">2015-08-20</time>
 </a>
     
   </div>
@@ -113,7 +113,7 @@ Quick">
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/20/hello-world/" data-id="cidjjzlzq0010t7eak6ibiwme" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/20/hello-world/" data-id="cidkcxrtq0010t8ghbe03qde3" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
@@ -268,7 +268,20 @@ Quick">
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

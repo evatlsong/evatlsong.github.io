@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://evatlsong.com/2014/05/30/usehexo/index.html">
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="##step 1##首先检出项目git clone然后执行hexo项目的初始化hexo initnpm install最后恢复配置文件git reset –hard HEAD如有需要 将以下themes项目检出到themes文件夹git@github.com:xiangming/landscape-plus.git">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="useHexo">
 <meta name="twitter:description" content="##step 1##首先检出项目git clone然后执行hexo项目的初始化hexo initnpm install最后恢复配置文件git reset –hard HEAD如有需要 将以下themes项目检出到themes文件夹git@github.com:xiangming/landscape-plus.git">
@@ -102,7 +102,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cidjjzlye0004t7eawfio92sh" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cidkcxrse0004t8gh7yby3uww" class="article-share-link" data-share="baidu" data-title="useHexo">分享到</a>
       
 
       
@@ -263,7 +263,20 @@
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

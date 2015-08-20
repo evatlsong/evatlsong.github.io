@@ -38,7 +38,7 @@ Block Elements
 Paragraphs and Line Breaks
 Headers
 Block">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="markdown-syntax">
 <meta name="twitter:description" content="Markdown: Syntax    Main    Basics    Syntax    License    Dingus
@@ -615,7 +615,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cidjjzlzc000qt7eayfzpb4di" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cidkcxrtg000qt8ghqbbrxk8q" class="article-share-link" data-share="baidu" data-title="markdown-syntax">分享到</a>
       
 
       
@@ -781,7 +781,20 @@ _   underscore
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

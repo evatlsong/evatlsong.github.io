@@ -24,7 +24,7 @@ CONTROL-F(forward)
 CONTROL-B(backward)
 text object (文本对象 aw iw it)
 . 重复上次修改a change could be anything that modifie">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practical-vim">
 <meta name="twitter:description" content="basic operateviewing different parts of the work bufferCONTROL-D(down)
@@ -203,7 +203,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cidjjzlz1000jt7eafdqdi6ge" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cidkcxrt0000jt8ghd3cnw32l" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
       
 
       
@@ -369,7 +369,20 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

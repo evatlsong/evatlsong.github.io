@@ -24,7 +24,7 @@ sudo apt-get install tmux
 check version
 tmux -V
 ###Installing from SourceThe process of installing tmux is the same on both M">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tmux">
 <meta name="twitter:description" content="#Learning The Basics
@@ -225,7 +225,7 @@ attach session -&gt; $ tmux attach
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cidjjzlyk0009t7eadl1vgnjs" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cidkcxrsk0009t8ghs5qa7rq0" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
       
 
       
@@ -389,7 +389,20 @@ attach session -&gt; $ tmux attach
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

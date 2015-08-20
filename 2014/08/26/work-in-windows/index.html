@@ -16,7 +16,7 @@
 <meta property="og:description" content="首先 git clone https://github.com/evatlsong/evatlsong.github.io.git
 然后 git clone https://github.com/hexojs/hexo-theme-landscape.git themes/landscape
 如果不clone此theme 接下来的 hexo init 会报错 Error: Theme landsc">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="work-in-windows">
 <meta name="twitter:description" content="首先 git clone https://github.com/evatlsong/evatlsong.github.io.git
@@ -110,7 +110,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cidjjzly20001t7earbqzh32r" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cidkcxrs10001t8gh4eyiczi7" class="article-share-link" data-share="baidu" data-title="work-in-windows">分享到</a>
       
 
       
@@ -274,7 +274,20 @@
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

@@ -22,7 +22,7 @@ git clone https://github.com/evatlsong/system.git
 git clone https://github.com/gmarik/vundle.git &quot;C:\Users\evasong10\.vim\bundle\vundle&quot;
 以管理员权限运行ms-dos
 mklink &quot;C:\Users\ev">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.258Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="windows-config">
 <meta name="twitter:description" content="配置VIM安装Msysgit
@@ -124,7 +124,7 @@ git clone http<span class="variable">s:</span>//github.<span class="keyword">com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cidjjzlyc0003t7eakqki6ecm" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cidkcxrsb0003t8ghhfbw2593" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
       
 
       
@@ -288,7 +288,20 @@ git clone http<span class="variable">s:</span>//github.<span class="keyword">com
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

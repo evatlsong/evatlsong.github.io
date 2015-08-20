@@ -14,7 +14,7 @@ Maven坐标的元素包括groupId,artifactId,version,packagi">
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="使用Archetype生成项目骨架mvn archetype:generatemvn org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-5:generateformat:    groupId:artifactId:version:goal
 Maven坐标的元素包括groupId,artifactId,version,packagi">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="maven-in-action">
 <meta name="twitter:description" content="使用Archetype生成项目骨架mvn archetype:generatemvn org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-5:generateformat:    groupId:artifactId:version:goal
@@ -118,7 +118,7 @@ Maven坐标的元素包括groupId,artifactId,version,packagi">
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cidjjzlza000pt7eafu5ts09e" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cidkcxrte000pt8gh4039jxyf" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
       
 
       
@@ -282,7 +282,20 @@ Maven坐标的元素包括groupId,artifactId,version,packagi">
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

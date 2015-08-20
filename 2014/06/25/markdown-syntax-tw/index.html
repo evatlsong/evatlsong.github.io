@@ -25,7 +25,7 @@ Markdown: Syntax
 行內 HTML
 特殊字元自">
 <meta property="og:image" content="http://markdown.tw/images/208x128.png">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="markdown-syntax-tw">
 <meta name="twitter:description" content="Markdown 文件
@@ -596,7 +596,7 @@ _   底線
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cidjjzlzi000tt7eaftp3m83i" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cidkcxrti000tt8ghyzs0eloq" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">分享到</a>
       
 
       
@@ -760,7 +760,20 @@ _   底線
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 

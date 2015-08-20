@@ -18,7 +18,7 @@ Getting the Gist of Markdown’s Formatting SyntaxThis page offers a brief overv
 
 
 Getting the Gist of Markdown’s Formatting SyntaxThis page offers a brief overview of what it’s like to use Markdown.The syntax page">
-<meta property="og:updated_time" content="2015-08-20T01:52:08.598Z">
+<meta property="og:updated_time" content="2015-08-20T15:22:31.254Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="markdown-basics">
 <meta name="twitter:description" content="Markdown: Basics    Main    Basics    Syntax    License    Dingus
@@ -282,7 +282,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cidjjzlzk000ut7ea21mv8eem" class="article-share-link" data-share="baidu">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cidkcxrtk000ut8ghystg5tos" class="article-share-link" data-share="baidu" data-title="markdown-basics">分享到</a>
       
 
       
@@ -448,7 +448,20 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
     <a class="article-share-more" data-cmd="more" title="更多"></a>
   </div>
 </div>
-<script>window._bd_share_config={"common":{},"share":{"bdCustomStyle":"/css/bdshare.css"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];</script>
+<script>
+  function SetShareData(cmd, config) {
+    if (shareDataTitle && shareDataUrl) {
+      config.bdText = shareDataTitle;
+      config.bdUrl = shareDataUrl;
+    }
+    return config;
+  }
+  window._bd_share_config={
+    "common":{onBeforeClick: SetShareData},
+    "share":{"bdCustomStyle":"/css/bdshare.css"}
+  };
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
 
 <!-- 百度分享 end -->
 
