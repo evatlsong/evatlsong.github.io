@@ -2,7 +2,6 @@ title: mysql-usage
 date: 2014-08-27 16:27:07
 tags:
 ---
-
 ## 安装
 ### 免安装版
 下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）
@@ -65,6 +64,11 @@ my.ini
 
 	port = 3306
 	server_id = mysqld
+
+## 運行
+/lib/systemd/system/mysql.service
+
+    systemctl start mysql.service
 
 ## 导入导出
 	mysqldump -u 用户名 -p 数据库名 > 导出的文件名
