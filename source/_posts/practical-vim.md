@@ -6,11 +6,20 @@ tags: vim
 # basic operate
 ## viewing different parts of the work buffer
 
-    CONTROL-D(down)
+    CONTROL-E (default: 1 line)
+    CONTROL-Y 
+
+    CONTROL-D(down) (default: 1/2 window)
     CONTROL-U(up)
 
-    CONTROL-F(forward)
+    CONTROL-F(forward) (default: 1 window)
     CONTROL-B(backward)
+
+    zz: scroll cursor to top
+    zb: bottom
+    zz: center
+
+    G: go to line
 
 text object (文本对象 aw iw it)
 
