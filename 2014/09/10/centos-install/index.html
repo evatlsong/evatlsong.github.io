@@ -26,7 +26,7 @@ centos 下怎样从root切换到普通用户su 普通">
 解决方法：
 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
 centos 下怎样从root切换到普通用户su 普通">
-<meta property="og:updated_time" content="2015-08-27T06:44:16.225Z">
+<meta property="og:updated_time" content="2015-09-15T03:37:05.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos-install">
 <meta name="twitter:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
@@ -247,38 +247,38 @@ VNCSERVERARGS 这三行，分别为 VNC server <span class="number">1</span>, <s
 <pre><code># Firewall configuration written by system-config-firewall
 # Manual customization of this file is not recommended.
 *filter
-:INPUT ACCEPT [<span class="operator">0:<span class="number">0</span>]
-:FORWARD <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
-:<span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state ESTABLISHED,RELATED -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">p</span> icmp -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">i</span> lo -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
--A FORWARD -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
-<span class="keyword">COMMIT</span></span>
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">ESTABLISHED</span>,<span class="constant">RELATED</span> -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -p icmp -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -i lo -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">NEW</span> -m tcp -p tcp --dport <span class="number">22</span> -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">FORWARD</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
+</span>COMMIT
 </code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
-<pre><code># Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
+<pre><code><span class="comment"># Firewall configuration written by system-config-firewall</span>
+<span class="comment"># Manual customization of this file is not recommended.</span>
 *filter
-:INPUT ACCEPT [<span class="operator">0:<span class="number">0</span>]
-:FORWARD <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
-:<span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state ESTABLISHED,RELATED -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">p</span> icmp -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">i</span> lo -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 5901 -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
--A FORWARD -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
-<span class="keyword">COMMIT</span></span>
+:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:OUTPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+-A INPUT -m <span class="keyword">state</span> --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">22</span> -j ACCEPT
+-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">5901</span> -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
 </code></pre><p>　　即添加了上述代码的第 11 行。</p>
 <h2 id="六、重启防火墙">六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
-<pre><code><span class="comment">[root@localhost ~]</span># /sbin/service iptables restart
-iptables：清除防火墙规则：<span class="comment">[确定]</span>
-iptables：将链设置为政策 ACCEPT：filter <span class="comment">[确定]</span>
-iptables：正在卸载模块：<span class="comment">[确定]</span>
-iptables：应用防火墙规则：<span class="comment">[确定]</span>
+<pre><code><span class="string">[root@localhost ~]</span># /sbin/service iptables restart
+iptables：清除防火墙规则：<span class="string">[确定]</span>
+iptables：将链设置为政策 ACCEPT：filter <span class="string">[确定]</span>
+iptables：正在卸载模块：<span class="string">[确定]</span>
+iptables：应用防火墙规则：<span class="string">[确定]</span>
 </code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
 <pre><code><span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>:<span class="number">1</span>    
 </code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
@@ -306,7 +306,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cidtuiky4001gtkeb9lw7z49d" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="ciekt6sky001jtbcuy6umf1xw" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -348,7 +348,7 @@ svnserve -d -r /home/goutrip/svndata
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -359,7 +359,7 @@ svnserve -d -r /home/goutrip/svndata
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -368,7 +368,7 @@ svnserve -d -r /home/goutrip/svndata
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -380,7 +380,15 @@ svnserve -d -r /home/goutrip/svndata
       <ul>
         
           <li>
-            <a href="/2015/08/27/hello-world/">Hello World</a>
+            <a href="/2015/09/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/enterprise-web-development/">enterprise-web-development</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/10/vim/">vim</a>
           </li>
         
           <li>
@@ -389,14 +397,6 @@ svnserve -d -r /home/goutrip/svndata
         
           <li>
             <a href="/2015/08/26/systemd-usage/">systemd-usage</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/16/thinking-in-java/">thinking-in-java</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/15/ruby/">ruby</a>
           </li>
         
       </ul>

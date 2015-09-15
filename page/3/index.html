@@ -76,6 +76,189 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-centos-7-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/17/centos-7-usage/" class="article-date">
+  <time datetime="2014-09-17T18:03:32.000Z" itemprop="datePublished">2014-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/17/centos-7-usage/">centos-7-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>centos7 有两个防火墙 firewalld iptables 默认firewalld 不能同时共存</p>
+<pre><code>systemctl status iptables<span class="class">.service</span>
+systemctl stop firewalld<span class="class">.service</span>
+systemctl disable firewalld<span class="class">.service</span>
+systemctl enable iptables<span class="class">.service</span>
+systemctl start iptables.service
+</code></pre><p>centos7 网络管理从network.service 换成了NetworkManager.service</p>
+<p>管理服务用systemctl</p>
+<p>/usr/sbin/setenforce 0 立刻关闭 SELINUX</p>
+<p>/usr/sbin/setenforce 1 立刻启用 SELINUX</p>
+<p>1 永久方法 – 需要重启服务器</p>
+<p>修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="ciekt6sl1001ktbcu5j5nvf52" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-git-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/15/git-usage/" class="article-date">
+  <time datetime="2014-09-15T16:35:26.000Z" itemprop="datePublished">2014-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/15/git-usage/">git-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="配置">配置</h2><pre><code>$ git config --global user<span class="class">.name</span> <span class="string">"Your Name Comes Here"</span>
+$ git config --global user<span class="class">.email</span> you@yourdomain<span class="class">.example</span><span class="class">.com</span>
+$ git config --list 查看相关信息
+</code></pre><h2 id="初始化">初始化</h2><pre><code><span class="variable">$ </span>mkdir gitdata
+<span class="variable">$ </span>cd gitdata
+<span class="variable">$ </span>git init
+<span class="keyword">or</span> <span class="constant">Server</span>
+<span class="variable">$ </span>git --bare init
+</code></pre><p>##在~/.gitconfig设置别名<br>    [alias]<br>    st = status<br>    ci = commit -a<br>    co = checkout  </p>
+<h2 id="文件操作">文件操作</h2><pre><code><span class="char">$ </span>git add .
+<span class="char">$ </span>git add file1 file2 file3
+<span class="char">$ </span>git add -u
+<span class="char">$ </span>git add -p // 为你做的每次修改，<span class="class">Git</span>将为你展示变动的代码，并询问该变动是否应是下一次提交的一部分。回答“y”或者“n”。也有其他选项，比如延迟决定：键入“？”来学习更多。
+<span class="char">$ </span>git rm file1 file2 file3
+<span class="char">$ </span>git mv file1 file2
+</code></pre><h2 id="提交更改">提交更改</h2><pre><code><span class="char">$ </span>git commit -a -m <span class="string">' '</span>
+<span class="char">$ </span>git commit --amend -a -m <span class="string">' '</span> // 修改上一次的信息，不作为新的提交
+<span class="char">$ </span>git stash // 保存当前草稿，便于切换分支
+<span class="char">$ </span>git stash pop
+<span class="char">$ </span>git stash apply
+<span class="char">$ </span>git stash list
+<span class="char">$ </span>git stash apply stash@{<span class="number">1</span>}
+<span class="char">$ </span>git stash clear
+</code></pre><h2 id="撤销更改">撤销更改</h2><pre><code><span class="char">$ </span>git reset <span class="class">HEAD</span> file1 // 取消暂存区的文件快照(即恢复成最后一个提交版本)，这不会影响工作目录的文件修改。
+<span class="char">$ </span>git reset --hard <span class="class">HEAD</span>^ // 将整个项目回溯到以前的某个版本，可以使用 <span class="comment">"git reset"</span>。可以选择的参数包括默认的 <span class="comment">"--mixed"</span> 和 <span class="comment">"--hard"</span>，前者不会取消工作目录的修改，而后者则放弃全部的修改。该操作会丢失其后的日志
+<span class="char">$ </span>git checkout -- file1 // 使用暂存区快照恢复工作目录文件，工作目录的文件修改被抛弃。
+<span class="char">$ </span>git checkout <span class="class">HEAD</span>^ file1 // 直接 <span class="comment">"签出"</span> 代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
+<span class="char">$ </span>git checkout <span class="comment">"@{10 minutes ago}"</span> // 直接 <span class="comment">"签出"</span> <span class="number">10</span>分钟之前代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
+<span class="char">$ </span>git checkout <span class="comment">"@{5}"</span> // 直接 <span class="comment">"签出"</span> 倒数第五次保存的某个文件版本到工作目录，该操作同时会取消暂存区快照。
+<span class="char">$ </span>git revert <span class="class">SHA1_HASH</span> // 还原特定哈希值对应的提交。该还原记录作为一个新的提交。
+</code></pre><h2 id="查看历史纪录或者当前状态">查看历史纪录或者当前状态</h2><pre><code>$ git <span class="keyword">log</span>
+$ git <span class="keyword">log</span> -p
+$ git <span class="keyword">log</span> --stat --summary
+$ git <span class="keyword">log</span> V3..V7 <span class="comment">//显示V3之后直至V7的所有历史记录</span>
+$ git <span class="keyword">log</span> V3.. <span class="comment">//显示所有V3之后的历史记录。注意&lt;since&gt;..&lt;until&gt;中任何一个被省略都将被默认设置为HEAD。所以如果使用..&lt;until&gt;的话，git log在大部分情况下会输出空的。</span>
+$ git <span class="keyword">log</span> –since=”<span class="number">2</span> weeks ago” <span class="comment">//显示2周前到现在的所有历史记录。具体语法可查询git-ref-parse命令的帮助文件。</span>
+$ git <span class="keyword">log</span> stable..experimental <span class="comment">//将显示在experimental分支但不在stable分支的历史记录</span>
+$ git <span class="keyword">log</span> experimental..stable <span class="comment">//将显示在stable分支但不在experimental分支的历史记录</span>
+$ git <span class="keyword">log</span> -S<span class="string">'你要找的内容'</span>，就可以从全部的历史纪录，瞬間找到你要找的东西
+$ git blame FILE <span class="comment">// 标注出一个指定的文件里每一行内容的最后修改者，和最后修改时间。</span>
+$ git diff <span class="comment">// 这个命令只在git add之前使用有效。如果已经add了，那么此命令输出为空</span>
+$ git diff –cached <span class="comment">// 这个命令在git add之后在git commit之前有效。</span>
+$ git diff <span class="string">"@{yesterday}"</span> <span class="comment">// 比较当前和昨天的内容</span>
+$ git status <span class="comment">// 这个命令在git commit之前有效，表示都有哪些文件发生了改动</span>
+$ git show <span class="number">5</span>b888 <span class="comment">// 使用git show再加上述的commit名称来显式更详细的commit信息</span>
+$ git show master <span class="comment">// 显示分支信息</span>
+$ git show HEAD <span class="comment">// 使用HEAD字段可以代表当前分支的头（也就是最近一次commit)</span>
+$ git show HEAD^ <span class="comment">//查看HEAD的父母的信息, 可以使用^表示parent</span>
+$ git show HEAD^^ <span class="comment">//查看HEAD的父母的父母的信息</span>
+$ git show HEAD~<span class="number">4</span> <span class="comment">//查看HEAD上溯4代的信息</span>
+$ git tag V3 <span class="number">5</span>b888 <span class="comment">//以后可以用V3来代替复杂的名称(5b888…)</span>
+$ git show V3
+$ git branch stable V3 <span class="comment">//建立一个基于V3的分支</span>
+$ git grep “<span class="keyword">print</span>” V3 <span class="comment">//在V3中搜索所有的包含print的行</span>
+$ git grep “<span class="keyword">print</span>” <span class="comment">//在所有的历史记录中搜索包含print的行</span>
+</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git clone <span class="string">git:</span><span class="comment">//server/path/to/files // Git deamon</span>
+$ git clone your.<span class="string">computer:</span><span class="regexp">/path/</span>to<span class="regexp">/script  or git clone ssh:/</span><span class="regexp">/car.colorado.edu/</span>home<span class="regexp">/xxx ./</span>xxxxx <span class="comment">// SSH</span>
+$ git pull
+$ git push <span class="comment">// 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(master)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。</span>
+</code></pre><p>如果想在merge前先查看更改：</p>
+<pre><code>$ git fetch /home/bob/myrepo master:bobworks <span class="comment">//此命令意思是提取出bob修改的代码内容，然后放到我（rocrocket）工作目录下的bobworks分支中。之所以要放到分支中，而不是master中，就是要我先仔仔细细看看bob的开发成果，如果我觉得满意，我再merge到master中，如果不满意，我完全可以直接git branch -D掉。</span>
+$ git whatchanged -<span class="tag">p</span> master.<span class="class">.bobworks</span> <span class="comment">//用来查看bob都做了什么</span>
+$ git checkout master <span class="comment">//切换到master分区</span>
+$ git pull . bobworks <span class="comment">//如果我检查了bob的工作后很满意，就可以用pull来将bobworks分支合并到我的项目中了</span>
+</code></pre><h2 id="分支管理">分支管理</h2><pre><code><span class="variable">$ </span>git <span class="symbol">branch:</span> 查看当前分支
+<span class="variable">$ </span>git checkout -b/branch experimental： 创建新分支
+<span class="variable">$ </span>git checkout experimental： 切换到另一分支
+<span class="variable">$ </span>git merge experimental：合并分支
+<span class="variable">$ </span>git branch -d experimental：删除分支, 使用的是小写的-d，表示“在分支已经合并到主干后删除分支”。
+<span class="variable">$ </span>git branch -<span class="constant">D</span> experimental：删除分支, 表示“不论如何都删除分支”，-<span class="constant">D</span>使用在“分支被证明失败”
+</code></pre><h2 id="补丁工作">补丁工作</h2><p>git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的’format-patch’命令良好的支持了这个功能。<br>第一，利用branch命令 创建一个分支；<br>第二，修改你的代码；<br>第三，在该分支上提交你的修改；<br>第四，使用’git format-patch’命令来生成一个patch文件，例如：’git format-patch master –stdout &gt; ~/Desktop/tmp.patch’就是将工作分支与master主干的不同，存放在’~/Desktop’文件夹下，生成一个叫做 tmp.patch的文件（另一种简单的版本是利用diff命令，例如’git diff ..master &gt; ~/Desktop/tmp.patch’），这样就生成了patch文件。那么别人就可以使用’git apply’命令来应用patch，例如’git apply ~/Desktop/tmp.patch’就是将patch打在当前的工作分支上</p>
+<h2 id="仓库维护">仓库维护</h2><pre><code>$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。
+$ git count-objects: 统计有多少松散的对象，没有 repack 的对象消耗了多少硬盘空间。
+$ git gc: 在本地仓库进行 repack，并进行其他日常维护工作。
+$ git <span class="attribute">filter</span>-branch --tree-<span class="attribute">filter</span> `rm <span class="attribute">top</span>/secret/file` HEAD <span class="comment">//在所有记录中永久删除某个文件</span>
+$ git rebase -<span class="tag">i</span> HEAD~<span class="number">10</span> <span class="comment">// 后10个提交会出现在你喜爱的$EDITOR。通过删除行来移去提交。通过为行重新排序来为提交重新排序。用“edit”来替换“pick”来标志一个提交可修改。用“squash”来替换“pick”来将一个提交和前一个合并。</span>
+</code></pre><h2 id="错误查询">错误查询</h2><p>刚刚发现程序里有一个功能出错了，即使你过去经常提交变更，Git还是可以精确的找出问题所在：</p>
+<pre><code>$ git <span class="keyword">bisect </span>start
+$ git <span class="keyword">bisect </span><span class="keyword">bad </span>SHA1_OF_BAD_VERSION
+$ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
+</code></pre><p>Git从历史记录中检出一个中间的状态，在这个状态上测试功能，如果还是错误的：</p>
+<pre><code>$ git <span class="keyword">bisect </span><span class="keyword">bad</span>
+</code></pre><p>如果可以工作了，则把”bad”替换成”good”。 Git会再次帮你找到一个以确定的好版本和坏版本之间的状态，经过一系列的迭代，这种二进制查询会帮你找到导致这个错误的那次提交。一旦完成了问题定位的调查，你可以返回到原始状态，键入：</p>
+<pre><code>$ git <span class="keyword">bisect </span>reset
+</code></pre><p>不需要手工测试每一次改动，执行如下命令可以自动的完成上面的搜索：</p>
+<pre><code>$ git bisect <span class="command">run</span> COMMAND
+</code></pre><p>Git使用指定命令（通常是一个一次性的脚本）的返回值来决定一次改动是否是正确的：命令退出时的代码0代表改动是正确的，125代表要跳过对这次改动的检查，1到127之间的其他数值代表改动是错误的。返回负数将会中断整个bisect的检查。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="ciekt6ski0018tbcuusxxleak" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-eclipse-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/11/eclipse-usage/" class="article-date">
@@ -105,7 +288,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cidtuikxu001dtkebxieltx59" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="ciekt6skq001gtbcu2ddrx1pa" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
       
 
       
@@ -269,38 +452,38 @@ VNCSERVERARGS 这三行，分别为 VNC server <span class="number">1</span>, <s
 <pre><code># Firewall configuration written by system-config-firewall
 # Manual customization of this file is not recommended.
 *filter
-:INPUT ACCEPT [<span class="operator">0:<span class="number">0</span>]
-:FORWARD <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
-:<span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state ESTABLISHED,RELATED -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">p</span> icmp -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">i</span> lo -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
--A FORWARD -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
-<span class="keyword">COMMIT</span></span>
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">ESTABLISHED</span>,<span class="constant">RELATED</span> -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -p icmp -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -i lo -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">NEW</span> -m tcp -p tcp --dport <span class="number">22</span> -j <span class="constant">ACCEPT</span>
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
+</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">FORWARD</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
+</span>COMMIT
 </code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
-<pre><code># Firewall configuration written by system-config-firewall
-# Manual customization of this file is not recommended.
+<pre><code><span class="comment"># Firewall configuration written by system-config-firewall</span>
+<span class="comment"># Manual customization of this file is not recommended.</span>
 *filter
-:INPUT ACCEPT [<span class="operator">0:<span class="number">0</span>]
-:FORWARD <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
-:<span class="keyword">OUTPUT</span> <span class="keyword">ACCEPT</span> [<span class="number">0</span>:<span class="number">0</span>]
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state ESTABLISHED,RELATED -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">p</span> icmp -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">i</span> lo -j <span class="keyword">ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 22 -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -<span class="keyword">m</span> state <span class="comment">--state NEW -m tcp -p tcp --dport 5901 -j ACCEPT</span>
--A <span class="keyword">INPUT</span> -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
--A FORWARD -j <span class="keyword">REJECT</span> <span class="comment">--reject-with icmp-host-prohibited</span>
-<span class="keyword">COMMIT</span></span>
+:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+:OUTPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
+-A INPUT -m <span class="keyword">state</span> --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">22</span> -j ACCEPT
+-A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">5901</span> -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
 </code></pre><p>　　即添加了上述代码的第 11 行。</p>
 <h2 id="六、重启防火墙">六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
-<pre><code><span class="comment">[root@localhost ~]</span># /sbin/service iptables restart
-iptables：清除防火墙规则：<span class="comment">[确定]</span>
-iptables：将链设置为政策 ACCEPT：filter <span class="comment">[确定]</span>
-iptables：正在卸载模块：<span class="comment">[确定]</span>
-iptables：应用防火墙规则：<span class="comment">[确定]</span>
+<pre><code><span class="string">[root@localhost ~]</span># /sbin/service iptables restart
+iptables：清除防火墙规则：<span class="string">[确定]</span>
+iptables：将链设置为政策 ACCEPT：filter <span class="string">[确定]</span>
+iptables：正在卸载模块：<span class="string">[确定]</span>
+iptables：应用防火墙规则：<span class="string">[确定]</span>
 </code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
 <pre><code><span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>:<span class="number">1</span>    
 </code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
@@ -328,7 +511,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cidtuiky4001gtkeb9lw7z49d" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="ciekt6sky001jtbcuy6umf1xw" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -417,7 +600,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cidtuikxx001etkebikotdqez" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="ciekt6sks001htbcu27h8ukbl" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
       
 
       
@@ -469,7 +652,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cidtuikwd000rtkebvj7q2odm" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="ciekt6sjv000ttbcu2vydq3ri" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
       
 
       
@@ -538,7 +721,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cidtuikwi000stkebyax6qf2s" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="ciekt6sjx000utbcu0dt3tkbo" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
       
 
       
@@ -613,9 +796,9 @@ MX        @        默认     mxbiz2.qq.com
 <li>clone出来后，我在本地git库中修改foo.c，并通过 <code>git commit</code> 提交到本地git库中，版本为”git v1”；</li>
 <li>不过与此同时另外一个同事也在修改foo.c这个文件，并已经将他的修改提交到了svn库中，版本为”svn v2”；</li>
 <li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
-<pre><code>Committing to svn:<span class="comment">//10.10.1.1:80/foo ...</span>
-M foo.c
-事务过时: 过期: ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/lib/git-core/git-svn line <span class="number">570</span>
+<pre><code><span class="constant">Committing</span> to <span class="symbol">svn:</span>/<span class="regexp">/10.10.1.1:80/foo</span> ...
+<span class="constant">M</span> foo.c
+事务过时<span class="symbol">:</span> 过期<span class="symbol">:</span> ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
 </code></pre></li>
 <li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
 </li>
@@ -639,7 +822,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cidtuikxm0019tkebhc3vik35" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="ciekt6skk001btbcuwllv85cd" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
       
 
       
@@ -799,7 +982,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cidtuikyw001stkebtz4t8w1e" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="ciekt6sld001vtbcuzdn9vqb7" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
       
 
       
@@ -886,275 +1069,18 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
 </span>    -<span class="ruby">-concurrency=<span class="number">500</span> --iterations=<span class="number">100</span>
 </span>    -<span class="ruby">uroot -pgoutrip314;</span>
 </code></pre><h2 id="数据文件路径">数据文件路径</h2><pre><code>centos7 mariadb
-<span class="regexp">/var/</span>lib<span class="regexp">/mysql/</span>
+/var/<span class="class"><span class="keyword">lib</span>/<span class="title">mysql</span>/</span>
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cidtuikwm000ttkebqomkcoaj" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="ciekt6sjz000vtbcuawb8jbds" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
       
 
       
 
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-work-in-windows" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/08/26/work-in-windows/" class="article-date">
-  <time datetime="2014-08-26T00:09:31.000Z" itemprop="datePublished">2014-08-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/26/work-in-windows/">work-in-windows</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先 git clone <a href="https://github.com/evatlsong/evatlsong.github.io.git" target="_blank" rel="external">https://github.com/evatlsong/evatlsong.github.io.git</a></p>
-<p>然后 git clone <a href="https://github.com/hexojs/hexo-theme-landscape.git" target="_blank" rel="external">https://github.com/hexojs/hexo-theme-landscape.git</a> themes/landscape</p>
-<p>如果不clone此theme 接下来的 hexo init 会报错 Error: Theme landscape does not exist.<br>然后hexo init<br>hexo install<br>git reset –hard HEAD</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cidtuikuq0001tkebu02kinym" class="article-share-link" data-share="baidu" data-title="work-in-windows">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-markdown-basics" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/06/25/markdown-basics/" class="article-date">
-  <time datetime="2014-06-25T16:44:25.000Z" itemprop="datePublished">2014-06-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/06/25/markdown-basics/">markdown-basics</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Markdown:_Basics">Markdown: Basics</h1><ul id="ProjectSubmenu"><br>    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li><br>    <li><a class="selected" title="Markdown Basics">Basics</a></li><br>    <li><a href="/projects/markdown/syntax" title="Markdown Syntax Documentation">Syntax</a></li><br>    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li><br>    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li><br></ul>
-
-
-<h2 id="Getting_the_Gist_of_Markdown’s_Formatting_Syntax">Getting the Gist of Markdown’s Formatting Syntax</h2><p>This page offers a brief overview of what it’s like to use Markdown.<br>The <a href="/projects/markdown/syntax" title="Markdown Syntax">syntax page</a> provides complete, detailed documentation for<br>every feature, but Markdown should be very easy to pick up simply by<br>looking at a few examples of it in action. The examples on this page<br>are written in a before/after style, showing example syntax and the<br>HTML output produced by Markdown.</p>
-<p>It’s also helpful to simply try Markdown out; the <a href="/projects/markdown/dingus" title="Markdown Dingus">Dingus</a> is a<br>web application that allows you type your own Markdown-formatted text<br>and translate it to XHTML.</p>
-<p><strong>Note:</strong> This document is itself written using Markdown; you<br>can <a href="/projects/markdown/basics.text">see the source for it by adding ‘.text’ to the URL</a>.</p>
-<h2 id="Paragraphs,_Headers,_Blockquotes">Paragraphs, Headers, Blockquotes</h2><p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like<br>a blank line – a line containing nothing but spaces or tabs is<br>considered blank.) Normal paragraphs should not be indented with<br>spaces or tabs.</p>
-<p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.<br>Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by<br>“underlining” with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.<br>To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the<br>beginning of the line – the number of hashes equals the resulting<br>HTML header level.</p>
-<p>Blockquotes are indicated using email-style ‘<code>&gt;</code>‘ angle brackets.</p>
-<p>Markdown:</p>
-<pre><code>A First Level Header
-====================
-
-A Second Level Header
-<span class="comment">---------------------</span>
-
-Now <span class="keyword">is</span> <span class="keyword">the</span> <span class="property">time</span> <span class="keyword">for</span> all good men <span class="keyword">to</span> come <span class="keyword">to</span>
-<span class="keyword">the</span> aid <span class="keyword">of</span> their country. This <span class="keyword">is</span> just a
-regular <span class="property">paragraph</span>.
-
-The quick brown fox jumped <span class="keyword">over</span> <span class="keyword">the</span> lazy
-dog's <span class="keyword">back</span>.
-
-<span class="comment">### Header 3</span>
-
-&gt; This <span class="keyword">is</span> a blockquote.
-&gt; 
-&gt; This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="property">paragraph</span> <span class="keyword">in</span> <span class="keyword">the</span> blockquote.
-&gt;
-&gt; <span class="comment">## This is an H2 in a blockquote</span>
-</code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;h1&gt;</span>A First Level Header<span class="variable">&lt;/h1&gt;</span>
-
-<span class="variable">&lt;h2&gt;</span>A Second Level Header<span class="variable">&lt;/h2&gt;</span>
-
-<span class="variable">&lt;p&gt;</span>Now is the time <span class="keyword">for</span> <span class="literal">all</span> good men <span class="keyword">to</span> come <span class="keyword">to</span>
-the aid of their country. This is just a
-regular paragraph.<span class="variable">&lt;/p&gt;</span>
-
-<span class="variable">&lt;p&gt;</span>The <span class="keyword">quick</span> brown fox jumped over the lazy
-dog's back.<span class="variable">&lt;/p&gt;</span>
-
-<span class="variable">&lt;h3&gt;</span>Header <span class="number">3</span><span class="variable">&lt;/h3&gt;</span>
-
-<span class="variable">&lt;blockquote&gt;</span>
-    <span class="variable">&lt;p&gt;</span>This is a blockquote.<span class="variable">&lt;/p&gt;</span>
-
-    <span class="variable">&lt;p&gt;</span>This is the second paragraph <span class="keyword">in</span> the blockquote.<span class="variable">&lt;/p&gt;</span>
-
-    <span class="variable">&lt;h2&gt;</span>This is an H2 <span class="keyword">in</span> a blockquote<span class="variable">&lt;/h2&gt;</span>
-<span class="variable">&lt;/blockquote&gt;</span>
-</code></pre><h3 id="Phrase_Emphasis">Phrase Emphasis</h3><p>Markdown uses asterisks and underscores to indicate spans of emphasis.</p>
-<p>Markdown:</p>
-<pre><code>Some <span class="operator">of</span> these <span class="keyword">words</span> *are emphasized*.
-Some <span class="operator">of</span> these <span class="keyword">words</span> <span class="title">_are</span> emphasized also_.
-
-Use <span class="constant">two</span> asterisks <span class="keyword">for</span> **strong emphasis**.
-Or, <span class="keyword">if</span> you prefer, __use <span class="constant">two</span> underscores instead__.
-</code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;p&gt;</span>Some of these words <span class="variable">&lt;em&gt;</span>are emphasized<span class="variable">&lt;/em&gt;</span>.
-Some of these words <span class="variable">&lt;em&gt;</span>are emphasized also<span class="variable">&lt;/em&gt;</span>.<span class="variable">&lt;/p&gt;</span>
-
-<span class="variable">&lt;p&gt;</span>Use two asterisks <span class="keyword">for</span> <span class="variable">&lt;strong&gt;</span>strong emphasis<span class="variable">&lt;/strong&gt;</span>.
-Or, if you prefer, <span class="variable">&lt;strong&gt;</span>use two underscores instead<span class="variable">&lt;/strong&gt;</span>.<span class="variable">&lt;/p&gt;</span>
-</code></pre><h2 id="Lists">Lists</h2><p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,<br><code>+</code>, and <code>-</code>) as list markers. These three markers are<br>interchangable; this:</p>
-<pre><code><span class="bullet">*   </span>Candy.
-<span class="bullet">*   </span>Gum.
-<span class="bullet">*   </span>Booze.
-</code></pre><p>this:</p>
-<pre><code><span class="bullet">+   </span>Candy.
-<span class="bullet">+   </span>Gum.
-<span class="bullet">+   </span>Booze.
-</code></pre><p>and this:</p>
-<pre><code>-<span class="ruby">   <span class="constant">Candy</span>.
-</span>-<span class="ruby">   <span class="constant">Gum</span>.
-</span>-<span class="ruby">   <span class="constant">Booze</span>.</span>
-</code></pre><p>all produce the same output:</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Candy.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Gum.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Booze.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-</code></pre><p>Ordered (numbered) lists use regular numbers, followed by periods, as<br>list markers:</p>
-<pre><code><span class="number">1.</span>  Red
-<span class="number">2.</span>  Green
-<span class="number">3.</span>  Blue
-</code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Red<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Green<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Blue<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
-</code></pre><p>If you put blank lines between items, you’ll get <code>&lt;p&gt;</code> tags for the<br>list item text. You can create multi-paragraph list items by indenting<br>the paragraphs by 4 spaces or 1 tab:</p>
-<pre><code>*   A <span class="type">list</span> <span class="property">item</span>.
-
-    With multiple <span class="property">paragraphs</span>.
-
-*   Another <span class="property">item</span> <span class="keyword">in</span> <span class="keyword">the</span> <span class="type">list</span>.
-</code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;ul&gt;</span>
-<span class="variable">&lt;li&gt;</span><span class="variable">&lt;p&gt;</span>A list item.<span class="variable">&lt;/p&gt;</span>
-<span class="variable">&lt;p&gt;</span>With multiple paragraphs.<span class="variable">&lt;/p&gt;</span><span class="variable">&lt;/li&gt;</span>
-<span class="variable">&lt;li&gt;</span><span class="variable">&lt;p&gt;</span>Another item <span class="keyword">in</span> the list.<span class="variable">&lt;/p&gt;</span><span class="variable">&lt;/li&gt;</span>
-<span class="variable">&lt;/ul&gt;</span>
-</code></pre><h3 id="Links">Links</h3><p>Markdown supports two styles for creating links: <em>inline</em> and<br><em>reference</em>. With both styles, you use square brackets to delimit the<br>text you want to turn into a link.</p>
-<p>Inline-style links use parentheses immediately after the link text.<br>For example:</p>
-<pre><code>This is an [<span class="link_label">example link</span>](<span class="link_url">http://example.com/</span>).
-</code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is an <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span>&gt;</span>
-example link<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-</code></pre><p>Optionally, you may include a title attribute in the parentheses:</p>
-<pre><code>This is an [<span class="link_label">example link</span>](<span class="link_url">http://example.com/ "With a Title"</span>).
-</code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is an <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span> <span class="attribute">title</span>=<span class="value">"With a Title"</span>&gt;</span>
-example link<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-</code></pre><p>Reference-style links allow you to refer to your links by names, which<br>you define elsewhere in your document:</p>
-<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>][<span class="link_reference">1</span>] than from
-[<span class="link_label">Yahoo</span>][<span class="link_reference">2</span>] or [<span class="link_label">MSN</span>][<span class="link_reference">3</span>].
-
-[<span class="link_reference">1</span>]:<span class="link_url"> http://google.com/        "Google"</span>
-[<span class="link_reference">2</span>]:<span class="link_url"> http://search.yahoo.com/  "Yahoo Search"</span>
-[<span class="link_reference">3</span>]:<span class="link_url"> http://search.msn.com/    "MSN Search"</span>
-</code></pre><p>Output:</p>
-<pre><code>&lt;p&gt;I <span class="built_in">get</span> <span class="number">10</span> times more traffic <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://google.com/"</span>
-title=<span class="string">"Google"</span>&gt;Google&lt;/<span class="operator">a</span>&gt; than <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.yahoo.com/"</span>
-title=<span class="string">"Yahoo Search"</span>&gt;Yahoo&lt;/<span class="operator">a</span>&gt; <span class="operator">or</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.msn.com/"</span>
-title=<span class="string">"MSN Search"</span>&gt;MSN&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
-</code></pre><p>The title attribute is optional. Link names may contain letters,<br>numbers and spaces, but are <em>not</em> case sensitive:</p>
-<pre><code>I start my morning with a cup of coffee and
-[<span class="link_label">The New York Times</span>][<span class="link_reference">NY Times</span>].
-
-[<span class="link_reference">ny times</span>]:<span class="link_url"> http://www.nytimes.com/</span>
-</code></pre><p>Output:</p>
-<pre><code>&lt;p&gt;I <span class="built_in">start</span> my morning <span class="operator">with</span> <span class="operator">a</span> cup <span class="operator">of</span> coffee <span class="operator">and</span>
-&lt;<span class="operator">a</span> href=<span class="string">"http://www.nytimes.com/"</span>&gt;The New York Times&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
-</code></pre><h3 id="Images">Images</h3><p>Image syntax is very much like link syntax.</p>
-<p>Inline (titles are optional):</p>
-<pre><code>![<span class="link_label">alt text</span>](<span class="link_url">/path/to/img.jpg "Title"</span>)
-</code></pre><p>Reference-style:</p>
-<pre><code>![<span class="link_label">alt text</span>][<span class="link_reference">id</span>]
-
-[<span class="link_reference">id</span>]:<span class="link_url"> /path/to/img.jpg "Title"</span>
-</code></pre><p>Both of the above examples produce the same output:</p>
-<pre><code>&lt;<span class="tag">img</span> src=<span class="string">"/path/to/img.jpg"</span> alt=<span class="string">"alt text"</span> title=<span class="string">"Title"</span> /&gt;
-</code></pre><h3 id="Code">Code</h3><p>In a regular paragraph, you can create code span by wrapping text in<br>backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or<br><code>&gt;</code>) will automatically be translated into HTML entities. This makes<br>it easy to use Markdown to write about HTML example code:</p>
-<pre><code>I strongly recommend against <span class="keyword">using</span> any `&lt;blink&gt;` tags.
-
-I wish SmartyPants used named entities <span class="keyword">like</span> `&amp;mdash;`
-instead <span class="keyword">of</span> <span class="built_in">decimal</span>-encoded entites <span class="keyword">like</span> `&amp;<span class="preprocessor">#8212;`.</span>
-</code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>I strongly recommend against using any
-<span class="tag">&lt;<span class="title">code</span>&gt;</span>&amp;lt;blink&amp;gt;<span class="tag">&lt;/<span class="title">code</span>&gt;</span> tags.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-
-<span class="tag">&lt;<span class="title">p</span>&gt;</span>I wish SmartyPants used named entities like
-<span class="tag">&lt;<span class="title">code</span>&gt;</span>&amp;amp;mdash;<span class="tag">&lt;/<span class="title">code</span>&gt;</span> instead of decimal-encoded
-entites like <span class="tag">&lt;<span class="title">code</span>&gt;</span>&amp;amp;#8212;<span class="tag">&lt;/<span class="title">code</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
-</code></pre><p>To specify an entire block of pre-formatted code, indent every line of<br>the block by 4 spaces or 1 tab. Just like with code spans, <code>&amp;</code>, <code>&lt;</code>,<br>and <code>&gt;</code> characters will be escaped automatically.</p>
-<p>Markdown:</p>
-<pre><code>If you want your page <span class="keyword">to</span> validate under XHTML <span class="number">1.0</span> Strict,
-you've got <span class="keyword">to</span> put paragraph tags <span class="keyword">in</span> your blockquotes:
-
-    <span class="variable">&lt;blockquote&gt;</span>
-        <span class="variable">&lt;p&gt;</span>For example.<span class="variable">&lt;/p&gt;</span>
-    <span class="variable">&lt;/blockquote&gt;</span>
-</code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;p&gt;</span>If you want your page <span class="keyword">to</span> validate under XHTML <span class="number">1.0</span> Strict,
-you've got <span class="keyword">to</span> put paragraph tags <span class="keyword">in</span> your blockquotes:<span class="variable">&lt;/p&gt;</span>
-
-<span class="variable">&lt;pre&gt;</span><span class="variable">&lt;code&gt;</span>&amp;lt;blockquote&amp;gt;
-    &amp;lt;p&amp;gt;For example.&amp;lt;/p&amp;gt;
-&amp;lt;/blockquote&amp;gt;
-<span class="variable">&lt;/code&gt;</span><span class="variable">&lt;/pre&gt;</span>
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cidtuikx5000ztkeb0azltt70" class="article-share-link" data-share="baidu" data-title="markdown-basics">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
-
     </footer>
   </div>
   
@@ -1177,7 +1103,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1188,7 +1114,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -1197,7 +1123,7 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1209,7 +1135,15 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
       <ul>
         
           <li>
-            <a href="/2015/08/27/hello-world/">Hello World</a>
+            <a href="/2015/09/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/enterprise-web-development/">enterprise-web-development</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/10/vim/">vim</a>
           </li>
         
           <li>
@@ -1218,14 +1152,6 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
         
           <li>
             <a href="/2015/08/26/systemd-usage/">systemd-usage</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/16/thinking-in-java/">thinking-in-java</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/15/ruby/">ruby</a>
           </li>
         
       </ul>

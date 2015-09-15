@@ -76,6 +76,287 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-tmux" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/07/23/tmux/" class="article-date">
+  <time datetime="2015-07-23T16:02:12.000Z" itemprop="datePublished">2015-07-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/tmux/">tmux</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Learning The Basics</p>
+<p>##Installing tmux</p>
+<p>###Installing Via a Package Manager</p>
+<pre><code>sudo apt-<span class="keyword">get</span> install tmux
+</code></pre><p>check version</p>
+<pre><code><span class="title">tmux</span> -V
+</code></pre><p>###Installing from Source<br>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
+<pre><code>sudo apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">build</span>-essential</span>
+</code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
+<pre><code>sudo apt-<span class="built_in">get</span> install libevent-<span class="built_in">dev</span> libncurses5-<span class="built_in">dev</span>
+
+./configure
+make
+sudo make install
+</code></pre><p>##Starting tmux<br>Starting tmux</p>
+<pre><code>tmux
+</code></pre><p>Close the tmux session</p>
+<pre><code><span class="keyword">exit</span>
+</code></pre><p>###Creating Named Sessions</p>
+<pre><code>tmux<span class="instruction"> new-session </span>-s basic
+</code></pre><p>shorten this command</p>
+<pre><code>tmux <span class="keyword">new</span> -s basic
+</code></pre><p>##Detaching and Attaching Sessions<br>list existing tmux sessions using the command</p>
+<pre><code>tmux <span class="type">list</span>-sessions
+</code></pre><p>shorten this command</p>
+<pre><code>tmux <span class="keyword">ls</span>
+</code></pre><p>attach to the session</p>
+<pre><code>tmux <span class="keyword">attach</span>
+tmux <span class="keyword">attach</span> -t basic
+</code></pre><p>###Killing Sessions</p>
+<pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
+</code></pre><p>##Working with Windows</p>
+<pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
+</code></pre><p>###Creating and Naming Windows<br>create a window</p>
+<pre><code><span class="title">PREFIX</span> c
+</code></pre><p>rename a window</p>
+<pre><code><span class="title">PREFIX</span> ,
+</code></pre><p>###Moving Between Windows</p>
+<pre><code>PREFIX n
+PREFIX <span class="tag">p</span>
+PREFIX nubmer
+</code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
+<pre><code><span class="title">PREFIX</span> w
+</code></pre><p>###close a window</p>
+<pre><code><span class="keyword">exit</span>
+<span class="keyword">or</span>
+PREFIX &amp;
+</code></pre><p>##Working with Panes</p>
+<p>###split new pane</p>
+<pre><code>PREFIX %
+PREFIX <span class="string">"</span>
+</code></pre><p>###cycle through the panes</p>
+<pre><code>PREFIX o
+PREFIX UP, DOWN, <span class="keyword">LEFT</span>, <span class="keyword">RIGHT</span>
+</code></pre><p>###cycle through layouts</p>
+<pre><code><span class="title">PREFIX</span> SPACEBAR
+</code></pre><p>###closing panes</p>
+<pre><code><span class="keyword">exit</span>
+<span class="keyword">or</span>
+PREFIX x
+</code></pre><p>#notebook<br>    假定[prefix] = ctrl-b</p>
+<pre><code><span class="header">session
+=========================</span>
+创建一个被命名的session -&gt; $ tmux new -s name
+detach当前session -&gt; [prefix] d
+查看仍然存在的session列表 -&gt; $ tmux ls
+attach session -&gt; $ tmux attach
+创建一个后台session -d -&gt; $ tmux new -s second<span class="emphasis">_session -d
+选择一个session进行attach -t -&gt; $ tmux attach -t second_</span>session
+关闭一个session -&gt; $ tmux kill-session -t basic
+<span class="header">window
+========================</span>
+创建一个session并为默认window命名 -&gt; $ tmux new -s basic -n shell
+创建一个window在当前的session -&gt; [prefix] c
+重命名window -&gt; [prefix] ,
+下一个window -&gt; [prefix] n
+上一个window -&gt; [prefix] p
+快速跳至$num编号的window -&gt; [prefix] $num
+按名字打开window -&gt; [prefix] $filename
+现实window列表并选择 -&gt; [prefix] w
+关闭window -&gt; [prefix] &amp; 或 输入exit
+<span class="header">pane
+==================</span>
+竖直切pane -&gt; [prefix] %
+水平切pane -&gt; [prefix] "
+循环选pane -&gt; [prefix] o
+选pane可以[prefix] 加 上下左右箭头进行选择
+循环显示5种默认样式 -&gt; [prefix] space
+关闭pane -&gt; [prefix] x 或 输入exit
+<span class="header">命令模式
+===============</span>
+进入命令模式 -&gt; [prefix] :
+<span class="header">在buffer中操作
+==============</span>
+进入选择模式 -&gt; [prefix] [
+退出 -&gt; enter
+移动 -&gt; 默认上下左右，可以在配置文件中选择vim模式(setw -g mode-keys vi)
+涂蓝选择 -&gt; space
+搜索 -&gt; ?向上搜索 /向下搜索 下一个结果n 反方向N
+复制 -&gt; 涂蓝状态下按enter
+粘贴 -&gt; [prefix] ]
+复制当前pane的全部可见buffer -&gt; [prefix] : capture-pane
+<span class="header">其他
+=============</span>
+把pane转化成window -&gt; [prefix] !
+把[session]:[window].[pane]转化成当前window中的pane -&gt; [prefix] : join-pane -s [session<span class="emphasis">_name]:[window].[pane]</span>
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="ciekt6sj4000ctbcu4af35zvg" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-practical-vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/29/practical-vim/" class="article-date">
+  <time datetime="2015-06-29T10:39:27.000Z" itemprop="datePublished">2015-06-29</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/29/practical-vim/">practical-vim</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="basic_operate">basic operate</h1><h2 id="viewing_different_parts_of_the_work_buffer">viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: <span class="number">1</span> line)
+CONTROL-Y 
+
+<span class="function"><span class="title">CONTROL-D</span><span class="params">(down)</span></span> (default: <span class="number">1</span>/<span class="number">2</span> window)
+<span class="function"><span class="title">CONTROL-U</span><span class="params">(up)</span></span>
+
+<span class="function"><span class="title">CONTROL-F</span><span class="params">(forward)</span></span> (default: <span class="number">1</span> window)
+<span class="function"><span class="title">CONTROL-B</span><span class="params">(backward)</span></span>
+
+zz: scroll <span class="attribute">cursor</span> to <span class="attribute">top</span>
+zb: <span class="attribute">bottom</span>
+zz: center
+
+G: go to line
+</code></pre><p>text object (文本对象 aw iw it)</p>
+<p>. 重复上次修改<br>a change could be anything that modifies the text in the document. That includes<br>commands triggered from Normal, Visual, and Command-Line modes, but a change could<br>also encompass any text entered (or deleted) in Insert mode.</p>
+<p>Moving Around in Insert Mode Resets the Change</p>
+<pre><code>复合命令 等效的长命令
+C        c$
+s        <span class="keyword">cl</span>
+S        ^c
+I        ^<span class="literal">i</span>
+A        <span class="label">$a</span>
+o        A&lt;CR&gt;
+O        ko
+
+Intent                               Act                     <span class="keyword">Repeat</span>   <span class="literal">Reverse</span>
+Make a change                        {<span class="keyword">edit</span>}                  .        <span class="keyword">u</span>
+Scan <span class="keyword">line</span> <span class="keyword">for</span> next character         f{<span class="keyword">char</span>}/t{<span class="keyword">char</span>}         ;        ,
+Scan <span class="keyword">line</span> <span class="keyword">for</span> previous character     F{<span class="keyword">char</span>}/T{<span class="keyword">char</span>}         ;        ,
+Scan document <span class="keyword">for</span> next match         /pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
+Scan document <span class="keyword">for</span> previous match     ?pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
+Perform substitution                 :s/target/replacement   &amp;        <span class="keyword">u</span>
+Execute a sequence of changes        qx{changes}q            @x       <span class="keyword">u</span>
+</code></pre><ul>
+<li>查找当前光标下的单词</li>
+</ul>
+<p>normal mode</p>
+<pre><code><span class="attribute">Operator + Motion </span>=<span class="string"> Action</span>
+</code></pre><p>Vim’s grammar has just one more rule: when an operator command is invoked in<br>duplicate, it acts upon the current line. So dd deletes the current line,<br>while &gt;&gt; indents it.  The gU command is a special case. We can make it act upon<br>the current line by running either gUgU or the shorthand gUU.</p>
+<p>Vim’s Operator Commands</p>
+<pre><code>Trigger Effect
+c       <span class="operator"><span class="keyword">Change</span>
+<span class="keyword">d</span>       <span class="keyword">Delete</span>
+y       Yank <span class="keyword">into</span> <span class="keyword">register</span>
+<span class="keyword">g</span>~      Swap <span class="keyword">case</span>
+gu      Make lowercase
+gU      Make uppercase
+&gt;       Shift <span class="keyword">right</span>
+&lt;       Shift <span class="keyword">left</span>
+=       Autoindent
+!       Filter {motion} <span class="keyword">lines</span> <span class="keyword">through</span> an <span class="keyword">external</span> program</span>
+</code></pre><p>Insert Mode</p>
+<pre><code>Keystrokes Effect
+&lt;<span class="keyword">C</span>-h&gt;      <span class="keyword">Delete</span> back one character (backspace)
+&lt;<span class="keyword">C</span>-w&gt;      <span class="keyword">Delete</span> back one word
+&lt;<span class="keyword">C</span>-u&gt;      <span class="keyword">Delete</span> back to start of line
+
+Keystrokes Effect
+&lt;Esc&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
+&lt;<span class="keyword">C</span>-[&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
+&lt;<span class="keyword">C</span>-o&gt;      <span class="keyword">Switch</span> to <span class="keyword">Insert</span> <span class="keyword">Normal</span> mode
+</code></pre><p>register<br>expression register </p>
+<pre><code>Keystrokes       Buffer Contents
+A                <span class="number">6</span> plus <span class="number">35</span> equals
+&lt;C-r&gt;=<span class="number">6</span>*<span class="number">35</span>&lt;CR&gt;   <span class="number">6</span> plus <span class="number">35</span> equals <span class="number">210</span>
+</code></pre><p>Insert Unusual Characters by Character Code<br>Insert Unusual Characters</p>
+<pre><code>Keystrokes             Effect
+&lt;<span class="keyword">C</span>-v&gt;<span class="list">{123}</span>             <span class="keyword">Insert</span> character by decimal code
+&lt;<span class="keyword">C</span>-v&gt;u<span class="list">{1234}</span>           <span class="keyword">Insert</span> character by hexadecimal code
+&lt;<span class="keyword">C</span>-v&gt;<span class="list">{nondigit}</span>        <span class="keyword">Insert</span> nondigit literally
+&lt;<span class="keyword">C</span>-k&gt;<span class="list">{char1}</span><span class="list">{char2}</span>    <span class="keyword">Insert</span> character represented by <span class="list">{char1}</span><span class="list">{char2}</span> digraph
+</code></pre><p>ga command outputs a message at the bottom of the screen, revealing the character<br>code in decimal and hexadecimal notations</p>
+<p>Overwrite Tab Characters with Virtual Replace Mode<br>gR<br>gr{char}</p>
+<p>Visual Mode<br>Enabling Visual Modes</p>
+<pre><code>Command  Effect
+<span class="keyword">v</span>        Enable character-wise Visual <span class="built_in">mode</span>
+V        Enable <span class="built_in">line</span>-wise Visual <span class="built_in">mode</span>
+&lt;C-<span class="keyword">v</span>&gt;    Enable block-wise Visual <span class="built_in">mode</span>
+<span class="keyword">gv</span>       Reselect the <span class="keyword">last</span> <span class="keyword">visual</span> selection
+
+<span class="keyword">o</span>        Go <span class="keyword">to</span> other end of highlighted text
+</code></pre><p>In Visual and Operator-Pending modes the i and a keys follow a different convention:<br>they form the first half of a text object.<br>If you’ve made a selection with Visual-Block mode and you wonder why you’re not<br>in Insert mode after pressing i, try using I instead.</p>
+<p>Command-Line Mode<br>a few of the symbols that can be used to create addresses and ranges for Ex commands</p>
+<pre><code>Symbol Address
+<span class="number">1</span>      First line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
+$      Last line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
+<span class="number">0</span>      Virtual line <span class="keyword">above</span> <span class="keyword">first</span> line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
+.      Line <span class="keyword">where</span> <span class="keyword">the</span> cursor <span class="keyword">is</span> placed
+'m     Line containing mark m
+'&lt;     Start <span class="keyword">of</span> visual selection
+'&gt;     End <span class="keyword">of</span> visual selection
+%      The entire <span class="type">file</span> (shorthand <span class="keyword">for</span> : <span class="number">1</span>,$)
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="ciekt6sjt000rtbcudi4o5hbj" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-maven-in-action" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/06/17/maven-in-action/" class="article-date">
@@ -117,7 +398,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cidtuikwr000utkebic7jmrp8" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="ciekt6sk2000wtbcun9odukj2" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
       
 
       
@@ -158,7 +439,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cidtuikvg000btkeb534v1od1" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="ciekt6sj9000etbcus79gllyr" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
       
 
       
@@ -200,7 +481,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cidtuikvy000itkeb8mqs99a9" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="ciekt6sjk000ltbcu0y3sylcz" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
       
 
       
@@ -240,7 +521,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cidtuiky1001ftkeb0omy8pqe" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="ciekt6sku001itbcu1zdsifkk" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
       
 
       
@@ -303,7 +584,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cidtuikvp000htkeb5e0acncy" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="ciekt6sjh000ktbcu5638yohk" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
       
 
       
@@ -344,7 +625,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cidtuikx90011tkebutqvstuy" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="ciekt6ska0013tbcuxrofgqi1" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
       
 
       
@@ -385,7 +666,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cidtuikxr001ctkeb1af3ni28" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="ciekt6skn001etbcudewop3qg" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
       
 
       
@@ -433,195 +714,12 @@ git clone http<span class="variable">s:</span>//github.<span class="keyword">com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cidtuikv20003tkebtjctw4am" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="ciekt6siu0003tbcuadbowgy3" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
       
 
       
 
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-centos-7-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/17/centos-7-usage/" class="article-date">
-  <time datetime="2014-09-17T18:03:32.000Z" itemprop="datePublished">2014-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/17/centos-7-usage/">centos-7-usage</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>centos7 有两个防火墙 firewalld iptables 默认firewalld 不能同时共存</p>
-<pre><code>systemctl status iptables<span class="class">.service</span>
-systemctl stop firewalld<span class="class">.service</span>
-systemctl disable firewalld<span class="class">.service</span>
-systemctl enable iptables<span class="class">.service</span>
-systemctl start iptables.service
-</code></pre><p>centos7 网络管理从network.service 换成了NetworkManager.service</p>
-<p>管理服务用systemctl</p>
-<p>/usr/sbin/setenforce 0 立刻关闭 SELINUX</p>
-<p>/usr/sbin/setenforce 1 立刻启用 SELINUX</p>
-<p>1 永久方法 – 需要重启服务器</p>
-<p>修改/etc/selinux/config文件中设置SELINUX=disabled ，然后重启服务器</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cidtuiky8001htkeba75zwyo2" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos7/">centos7</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/15/git-usage/" class="article-date">
-  <time datetime="2014-09-15T16:35:26.000Z" itemprop="datePublished">2014-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/15/git-usage/">git-usage</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="配置">配置</h2><pre><code>$ git config --global user<span class="class">.name</span> <span class="string">"Your Name Comes Here"</span>
-$ git config --global user<span class="class">.email</span> you@yourdomain<span class="class">.example</span><span class="class">.com</span>
-$ git config --list 查看相关信息
-</code></pre><h2 id="初始化">初始化</h2><pre><code><span class="variable">$ </span>mkdir gitdata
-<span class="variable">$ </span>cd gitdata
-<span class="variable">$ </span>git init
-<span class="keyword">or</span> <span class="constant">Server</span>
-<span class="variable">$ </span>git --bare init
-</code></pre><p>##在~/.gitconfig设置别名<br>    [alias]<br>    st = status<br>    ci = commit -a<br>    co = checkout  </p>
-<h2 id="文件操作">文件操作</h2><pre><code><span class="char">$ </span>git add .
-<span class="char">$ </span>git add file1 file2 file3
-<span class="char">$ </span>git add -u
-<span class="char">$ </span>git add -p // 为你做的每次修改，<span class="class">Git</span>将为你展示变动的代码，并询问该变动是否应是下一次提交的一部分。回答“y”或者“n”。也有其他选项，比如延迟决定：键入“？”来学习更多。
-<span class="char">$ </span>git rm file1 file2 file3
-<span class="char">$ </span>git mv file1 file2
-</code></pre><h2 id="提交更改">提交更改</h2><pre><code><span class="char">$ </span>git commit -a -m <span class="string">' '</span>
-<span class="char">$ </span>git commit --amend -a -m <span class="string">' '</span> // 修改上一次的信息，不作为新的提交
-<span class="char">$ </span>git stash // 保存当前草稿，便于切换分支
-<span class="char">$ </span>git stash pop
-<span class="char">$ </span>git stash apply
-<span class="char">$ </span>git stash list
-<span class="char">$ </span>git stash apply stash@{<span class="number">1</span>}
-<span class="char">$ </span>git stash clear
-</code></pre><h2 id="撤销更改">撤销更改</h2><pre><code><span class="char">$ </span>git reset <span class="class">HEAD</span> file1 // 取消暂存区的文件快照(即恢复成最后一个提交版本)，这不会影响工作目录的文件修改。
-<span class="char">$ </span>git reset --hard <span class="class">HEAD</span>^ // 将整个项目回溯到以前的某个版本，可以使用 <span class="comment">"git reset"</span>。可以选择的参数包括默认的 <span class="comment">"--mixed"</span> 和 <span class="comment">"--hard"</span>，前者不会取消工作目录的修改，而后者则放弃全部的修改。该操作会丢失其后的日志
-<span class="char">$ </span>git checkout -- file1 // 使用暂存区快照恢复工作目录文件，工作目录的文件修改被抛弃。
-<span class="char">$ </span>git checkout <span class="class">HEAD</span>^ file1 // 直接 <span class="comment">"签出"</span> 代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
-<span class="char">$ </span>git checkout <span class="comment">"@{10 minutes ago}"</span> // 直接 <span class="comment">"签出"</span> <span class="number">10</span>分钟之前代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
-<span class="char">$ </span>git checkout <span class="comment">"@{5}"</span> // 直接 <span class="comment">"签出"</span> 倒数第五次保存的某个文件版本到工作目录，该操作同时会取消暂存区快照。
-<span class="char">$ </span>git revert <span class="class">SHA1_HASH</span> // 还原特定哈希值对应的提交。该还原记录作为一个新的提交。
-</code></pre><h2 id="查看历史纪录或者当前状态">查看历史纪录或者当前状态</h2><pre><code>$ git <span class="keyword">log</span>
-$ git <span class="keyword">log</span> -p
-$ git <span class="keyword">log</span> --stat --summary
-$ git <span class="keyword">log</span> V3..V7 <span class="comment">//显示V3之后直至V7的所有历史记录</span>
-$ git <span class="keyword">log</span> V3.. <span class="comment">//显示所有V3之后的历史记录。注意&lt;since&gt;..&lt;until&gt;中任何一个被省略都将被默认设置为HEAD。所以如果使用..&lt;until&gt;的话，git log在大部分情况下会输出空的。</span>
-$ git <span class="keyword">log</span> –since=”<span class="number">2</span> weeks ago” <span class="comment">//显示2周前到现在的所有历史记录。具体语法可查询git-ref-parse命令的帮助文件。</span>
-$ git <span class="keyword">log</span> stable..experimental <span class="comment">//将显示在experimental分支但不在stable分支的历史记录</span>
-$ git <span class="keyword">log</span> experimental..stable <span class="comment">//将显示在stable分支但不在experimental分支的历史记录</span>
-$ git <span class="keyword">log</span> -S<span class="string">'你要找的内容'</span>，就可以从全部的历史纪录，瞬間找到你要找的东西
-$ git blame FILE <span class="comment">// 标注出一个指定的文件里每一行内容的最后修改者，和最后修改时间。</span>
-$ git diff <span class="comment">// 这个命令只在git add之前使用有效。如果已经add了，那么此命令输出为空</span>
-$ git diff –cached <span class="comment">// 这个命令在git add之后在git commit之前有效。</span>
-$ git diff <span class="string">"@{yesterday}"</span> <span class="comment">// 比较当前和昨天的内容</span>
-$ git status <span class="comment">// 这个命令在git commit之前有效，表示都有哪些文件发生了改动</span>
-$ git show <span class="number">5</span>b888 <span class="comment">// 使用git show再加上述的commit名称来显式更详细的commit信息</span>
-$ git show master <span class="comment">// 显示分支信息</span>
-$ git show HEAD <span class="comment">// 使用HEAD字段可以代表当前分支的头（也就是最近一次commit)</span>
-$ git show HEAD^ <span class="comment">//查看HEAD的父母的信息, 可以使用^表示parent</span>
-$ git show HEAD^^ <span class="comment">//查看HEAD的父母的父母的信息</span>
-$ git show HEAD~<span class="number">4</span> <span class="comment">//查看HEAD上溯4代的信息</span>
-$ git tag V3 <span class="number">5</span>b888 <span class="comment">//以后可以用V3来代替复杂的名称(5b888…)</span>
-$ git show V3
-$ git branch stable V3 <span class="comment">//建立一个基于V3的分支</span>
-$ git grep “<span class="keyword">print</span>” V3 <span class="comment">//在V3中搜索所有的包含print的行</span>
-$ git grep “<span class="keyword">print</span>” <span class="comment">//在所有的历史记录中搜索包含print的行</span>
-</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git clone <span class="string">git:</span><span class="comment">//server/path/to/files // Git deamon</span>
-$ git clone your.<span class="string">computer:</span><span class="regexp">/path/</span>to<span class="regexp">/script  or git clone ssh:/</span><span class="regexp">/car.colorado.edu/</span>home<span class="regexp">/xxx ./</span>xxxxx <span class="comment">// SSH</span>
-$ git pull
-$ git push <span class="comment">// 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(master)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。</span>
-</code></pre><p>如果想在merge前先查看更改：</p>
-<pre><code>$ git fetch /home/bob/myrepo master:bobworks <span class="comment">//此命令意思是提取出bob修改的代码内容，然后放到我（rocrocket）工作目录下的bobworks分支中。之所以要放到分支中，而不是master中，就是要我先仔仔细细看看bob的开发成果，如果我觉得满意，我再merge到master中，如果不满意，我完全可以直接git branch -D掉。</span>
-$ git whatchanged -<span class="tag">p</span> master.<span class="class">.bobworks</span> <span class="comment">//用来查看bob都做了什么</span>
-$ git checkout master <span class="comment">//切换到master分区</span>
-$ git pull . bobworks <span class="comment">//如果我检查了bob的工作后很满意，就可以用pull来将bobworks分支合并到我的项目中了</span>
-</code></pre><h2 id="分支管理">分支管理</h2><pre><code><span class="variable">$ </span>git <span class="symbol">branch:</span> 查看当前分支
-<span class="variable">$ </span>git checkout -b/branch experimental： 创建新分支
-<span class="variable">$ </span>git checkout experimental： 切换到另一分支
-<span class="variable">$ </span>git merge experimental：合并分支
-<span class="variable">$ </span>git branch -d experimental：删除分支, 使用的是小写的-d，表示“在分支已经合并到主干后删除分支”。
-<span class="variable">$ </span>git branch -<span class="constant">D </span>experimental：删除分支, 表示“不论如何都删除分支”，-<span class="constant">D使</span>用在“分支被证明失败”
-</code></pre><h2 id="补丁工作">补丁工作</h2><p>git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的’format-patch’命令良好的支持了这个功能。<br>第一，利用branch命令 创建一个分支；<br>第二，修改你的代码；<br>第三，在该分支上提交你的修改；<br>第四，使用’git format-patch’命令来生成一个patch文件，例如：’git format-patch master –stdout &gt; ~/Desktop/tmp.patch’就是将工作分支与master主干的不同，存放在’~/Desktop’文件夹下，生成一个叫做 tmp.patch的文件（另一种简单的版本是利用diff命令，例如’git diff ..master &gt; ~/Desktop/tmp.patch’），这样就生成了patch文件。那么别人就可以使用’git apply’命令来应用patch，例如’git apply ~/Desktop/tmp.patch’就是将patch打在当前的工作分支上</p>
-<h2 id="仓库维护">仓库维护</h2><pre><code>$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。
-$ git count-objects: 统计有多少松散的对象，没有 repack 的对象消耗了多少硬盘空间。
-$ git gc: 在本地仓库进行 repack，并进行其他日常维护工作。
-$ git <span class="attribute">filter</span>-branch --tree-<span class="attribute">filter</span> `rm <span class="attribute">top</span>/secret/file` HEAD <span class="comment">//在所有记录中永久删除某个文件</span>
-$ git rebase -<span class="tag">i</span> HEAD~<span class="number">10</span> <span class="comment">// 后10个提交会出现在你喜爱的$EDITOR。通过删除行来移去提交。通过为行重新排序来为提交重新排序。用“edit”来替换“pick”来标志一个提交可修改。用“squash”来替换“pick”来将一个提交和前一个合并。</span>
-</code></pre><h2 id="错误查询">错误查询</h2><p>刚刚发现程序里有一个功能出错了，即使你过去经常提交变更，Git还是可以精确的找出问题所在：</p>
-<pre><code>$ git <span class="keyword">bisect </span>start
-$ git <span class="keyword">bisect </span><span class="keyword">bad </span>SHA1_OF_BAD_VERSION
-$ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
-</code></pre><p>Git从历史记录中检出一个中间的状态，在这个状态上测试功能，如果还是错误的：</p>
-<pre><code>$ git <span class="keyword">bisect </span><span class="keyword">bad</span>
-</code></pre><p>如果可以工作了，则把”bad”替换成”good”。 Git会再次帮你找到一个以确定的好版本和坏版本之间的状态，经过一系列的迭代，这种二进制查询会帮你找到导致这个错误的那次提交。一旦完成了问题定位的调查，你可以返回到原始状态，键入：</p>
-<pre><code>$ git <span class="keyword">bisect </span>reset
-</code></pre><p>不需要手工测试每一次改动，执行如下命令可以自动的完成上面的搜索：</p>
-<pre><code>$ git bisect <span class="command">run</span> COMMAND
-</code></pre><p>Git使用指定命令（通常是一个一次性的脚本）的返回值来决定一次改动是否是正确的：命令退出时的代码0代表改动是正确的，125代表要跳过对这次改动的检查，1到127之间的其他数值代表改动是错误的。返回负数将会中断整个bisect的检查。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cidtuikxj0016tkebrd8fgchj" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
-
     </footer>
   </div>
   
@@ -644,7 +742,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -655,7 +753,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -664,7 +762,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -676,7 +774,15 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
       <ul>
         
           <li>
-            <a href="/2015/08/27/hello-world/">Hello World</a>
+            <a href="/2015/09/15/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/12/enterprise-web-development/">enterprise-web-development</a>
+          </li>
+        
+          <li>
+            <a href="/2015/09/10/vim/">vim</a>
           </li>
         
           <li>
@@ -685,14 +791,6 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
         
           <li>
             <a href="/2015/08/26/systemd-usage/">systemd-usage</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/16/thinking-in-java/">thinking-in-java</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/15/ruby/">ruby</a>
           </li>
         
       </ul>
