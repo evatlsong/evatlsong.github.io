@@ -143,3 +143,42 @@ display a visual menu of our windows so we can select the one we'd like
     =============
     把pane转化成window -> [prefix] !
     把[session]:[window].[pane]转化成当前window中的pane -> [prefix] : join-pane -s [session_name]:[window].[pane]
+
+
+    Tmux – terminal multiplexer
+     
+    Managing tmux server
+    tmux    #start tmux server
+    tmux at  #attach running sesseion to terminal
+    tmux ls  #list running tmux sessions
+    exit     #close tmux session
+     
+    Sharing session between terminals
+    tmux new –s session_name  #make new named session
+    tmux at –t session_name    #attach to exists session(s)
+    tmux kil-session –t session_name #killnamed session
+     
+    所有的命令以ctrl+b组合
+     
+    c       create new window
+    n/p    move to next/previous windows
+    f      find window  by name
+    w     menu with all windows
+    &     kill current window
+    ,      rename window
+     
+    %     split window. Add vertical pane to right
+    “      split window add horizontal pane below
+    ←/ →   move focus to left/right pane
+    ↑/↓      move focus to upper/lower pane
+     
+    !        break current pane into new window
+    x        kill the current pane
+     
+    [        enter copy mode
+    CTRL-SPACE or CTRL+@  开始选择
+    移动光标到选择区域
+    Alt+w 复制选择区域
+    ]       粘贴选则的区域
+
+    ?       show tmux key bindings 
