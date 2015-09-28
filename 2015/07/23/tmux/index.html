@@ -6,34 +6,25 @@
   
   <title>tmux | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#Learning The Basics
-##Installing tmux
-###Installing Via a Package Manager
-sudo apt-get install tmux
+  <meta name="description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
 check version
 tmux -V
-###Installing from SourceThe process of installing tmux is the same on both M">
+Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
 <meta property="og:type" content="article">
 <meta property="og:title" content="tmux">
 <meta property="og:url" content="http://evatlsong.com/2015/07/23/tmux/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="#Learning The Basics
-##Installing tmux
-###Installing Via a Package Manager
-sudo apt-get install tmux
+<meta property="og:description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
 check version
 tmux -V
-###Installing from SourceThe process of installing tmux is the same on both M">
-<meta property="og:updated_time" content="2015-09-19T04:22:26.498Z">
+Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
+<meta property="og:updated_time" content="2015-09-28T03:37:47.108Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tmux">
-<meta name="twitter:description" content="#Learning The Basics
-##Installing tmux
-###Installing Via a Package Manager
-sudo apt-get install tmux
+<meta name="twitter:description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
 check version
 tmux -V
-###Installing from SourceThe process of installing tmux is the same on both M">
+Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -115,13 +106,10 @@ tmux -V
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#Learning The Basics</p>
-<p>##Installing tmux</p>
-<p>###Installing Via a Package Manager</p>
-<pre><code>sudo apt-<span class="keyword">get</span> install tmux
+        <h1 id="Learning_The_Basics">Learning The Basics</h1><h2 id="Installing_tmux">Installing tmux</h2><h3 id="Installing_Via_a_Package_Manager">Installing Via a Package Manager</h3><pre><code>sudo apt-<span class="keyword">get</span> install tmux
 </code></pre><p>check version</p>
 <pre><code><span class="title">tmux</span> -V
-</code></pre><p>###Installing from Source<br>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
+</code></pre><h3 id="Installing_from_Source">Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
 <pre><code>sudo apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">build</span>-essential</span>
 </code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
 <pre><code>sudo apt-<span class="built_in">get</span> install libevent-<span class="built_in">dev</span> libncurses5-<span class="built_in">dev</span>
@@ -129,54 +117,44 @@ tmux -V
 ./configure
 make
 sudo make install
-</code></pre><p>##Starting tmux<br>Starting tmux</p>
+</code></pre><h2 id="Starting_tmux">Starting tmux</h2><p>Starting tmux</p>
 <pre><code>tmux
 </code></pre><p>Close the tmux session</p>
 <pre><code><span class="keyword">exit</span>
-</code></pre><p>###Creating Named Sessions</p>
-<pre><code>tmux<span class="instruction"> new-session </span>-s basic
+</code></pre><h3 id="Creating_Named_Sessions">Creating Named Sessions</h3><pre><code>tmux<span class="instruction"> new-session </span>-s basic
 </code></pre><p>shorten this command</p>
 <pre><code>tmux <span class="keyword">new</span> -s basic
-</code></pre><p>##Detaching and Attaching Sessions<br>list existing tmux sessions using the command</p>
+</code></pre><h2 id="Detaching_and_Attaching_Sessions">Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
 <pre><code>tmux <span class="type">list</span>-sessions
 </code></pre><p>shorten this command</p>
 <pre><code>tmux <span class="keyword">ls</span>
 </code></pre><p>attach to the session</p>
 <pre><code>tmux <span class="keyword">attach</span>
 tmux <span class="keyword">attach</span> -t basic
-</code></pre><p>###Killing Sessions</p>
-<pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
-</code></pre><p>##Working with Windows</p>
-<pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
-</code></pre><p>###Creating and Naming Windows<br>create a window</p>
+</code></pre><h3 id="Killing_Sessions">Killing Sessions</h3><pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
+</code></pre><h2 id="Working_with_Windows">Working with Windows</h2><pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
+</code></pre><h3 id="Creating_and_Naming_Windows">Creating and Naming Windows</h3><p>create a window</p>
 <pre><code><span class="title">PREFIX</span> c
 </code></pre><p>rename a window</p>
 <pre><code><span class="title">PREFIX</span> ,
-</code></pre><p>###Moving Between Windows</p>
-<pre><code>PREFIX n
+</code></pre><h3 id="Moving_Between_Windows">Moving Between Windows</h3><pre><code>PREFIX n
 PREFIX <span class="tag">p</span>
 PREFIX nubmer
 </code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
 <pre><code><span class="title">PREFIX</span> w
-</code></pre><p>###close a window</p>
-<pre><code><span class="keyword">exit</span>
+</code></pre><h3 id="close_a_window">close a window</h3><pre><code><span class="keyword">exit</span>
 <span class="keyword">or</span>
 PREFIX &amp;
-</code></pre><p>##Working with Panes</p>
-<p>###split new pane</p>
-<pre><code>PREFIX %
+</code></pre><h2 id="Working_with_Panes">Working with Panes</h2><h3 id="split_new_pane">split new pane</h3><pre><code>PREFIX %
 PREFIX <span class="string">"</span>
-</code></pre><p>###cycle through the panes</p>
-<pre><code>PREFIX o
+</code></pre><h3 id="cycle_through_the_panes">cycle through the panes</h3><pre><code>PREFIX o
 PREFIX UP, DOWN, <span class="keyword">LEFT</span>, <span class="keyword">RIGHT</span>
-</code></pre><p>###cycle through layouts</p>
-<pre><code><span class="title">PREFIX</span> SPACEBAR
-</code></pre><p>###closing panes</p>
-<pre><code><span class="keyword">exit</span>
+</code></pre><h3 id="cycle_through_layouts">cycle through layouts</h3><pre><code><span class="title">PREFIX</span> SPACEBAR
+</code></pre><h3 id="closing_panes">closing panes</h3><pre><code><span class="keyword">exit</span>
 <span class="keyword">or</span>
 PREFIX x
-</code></pre><p>#notebook<br>    假定[prefix] = ctrl-b</p>
-<pre><code><span class="header">session
+</code></pre><h1 id="notebook">notebook</h1><pre><code>假定[prefix] = ctrl-b
+<span class="header">session
 =========================</span>
 创建一个被命名的session -&gt; $ tmux new -s name
 detach当前session -&gt; [prefix] d
@@ -265,12 +243,14 @@ Alt+w 复制选择区域
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cieqkkjzu000ct9am86iibomq" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cif3dxs81000ctgcyli1tvjd5" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
+
     </footer>
   </div>
   
@@ -307,7 +287,7 @@ Alt+w 复制选择区域
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -318,7 +298,7 @@ Alt+w 复制选择区域
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -339,7 +319,7 @@ Alt+w 复制选择区域
       <ul>
         
           <li>
-            <a href="/2015/09/19/hello-world/">Hello World</a>
+            <a href="/2015/09/28/hello-world/">Hello World</a>
           </li>
         
           <li>

@@ -107,7 +107,7 @@ Ctrl + Alt + Left/Right Navigate back/forward
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cieqkkk100014t9amzcacfz9q" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cif3dxs950018tgcy6dfp59em" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
       
 
       
@@ -144,13 +144,10 @@ Ctrl + Alt + Left/Right Navigate back/forward
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#Learning The Basics</p>
-<p>##Installing tmux</p>
-<p>###Installing Via a Package Manager</p>
-<pre><code>sudo apt-<span class="keyword">get</span> install tmux
+        <h1 id="Learning_The_Basics">Learning The Basics</h1><h2 id="Installing_tmux">Installing tmux</h2><h3 id="Installing_Via_a_Package_Manager">Installing Via a Package Manager</h3><pre><code>sudo apt-<span class="keyword">get</span> install tmux
 </code></pre><p>check version</p>
 <pre><code><span class="title">tmux</span> -V
-</code></pre><p>###Installing from Source<br>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
+</code></pre><h3 id="Installing_from_Source">Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
 <pre><code>sudo apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">build</span>-essential</span>
 </code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
 <pre><code>sudo apt-<span class="built_in">get</span> install libevent-<span class="built_in">dev</span> libncurses5-<span class="built_in">dev</span>
@@ -158,54 +155,44 @@ Ctrl + Alt + Left/Right Navigate back/forward
 ./configure
 make
 sudo make install
-</code></pre><p>##Starting tmux<br>Starting tmux</p>
+</code></pre><h2 id="Starting_tmux">Starting tmux</h2><p>Starting tmux</p>
 <pre><code>tmux
 </code></pre><p>Close the tmux session</p>
 <pre><code><span class="keyword">exit</span>
-</code></pre><p>###Creating Named Sessions</p>
-<pre><code>tmux<span class="instruction"> new-session </span>-s basic
+</code></pre><h3 id="Creating_Named_Sessions">Creating Named Sessions</h3><pre><code>tmux<span class="instruction"> new-session </span>-s basic
 </code></pre><p>shorten this command</p>
 <pre><code>tmux <span class="keyword">new</span> -s basic
-</code></pre><p>##Detaching and Attaching Sessions<br>list existing tmux sessions using the command</p>
+</code></pre><h2 id="Detaching_and_Attaching_Sessions">Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
 <pre><code>tmux <span class="type">list</span>-sessions
 </code></pre><p>shorten this command</p>
 <pre><code>tmux <span class="keyword">ls</span>
 </code></pre><p>attach to the session</p>
 <pre><code>tmux <span class="keyword">attach</span>
 tmux <span class="keyword">attach</span> -t basic
-</code></pre><p>###Killing Sessions</p>
-<pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
-</code></pre><p>##Working with Windows</p>
-<pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
-</code></pre><p>###Creating and Naming Windows<br>create a window</p>
+</code></pre><h3 id="Killing_Sessions">Killing Sessions</h3><pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
+</code></pre><h2 id="Working_with_Windows">Working with Windows</h2><pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
+</code></pre><h3 id="Creating_and_Naming_Windows">Creating and Naming Windows</h3><p>create a window</p>
 <pre><code><span class="title">PREFIX</span> c
 </code></pre><p>rename a window</p>
 <pre><code><span class="title">PREFIX</span> ,
-</code></pre><p>###Moving Between Windows</p>
-<pre><code>PREFIX n
+</code></pre><h3 id="Moving_Between_Windows">Moving Between Windows</h3><pre><code>PREFIX n
 PREFIX <span class="tag">p</span>
 PREFIX nubmer
 </code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
 <pre><code><span class="title">PREFIX</span> w
-</code></pre><p>###close a window</p>
-<pre><code><span class="keyword">exit</span>
+</code></pre><h3 id="close_a_window">close a window</h3><pre><code><span class="keyword">exit</span>
 <span class="keyword">or</span>
 PREFIX &amp;
-</code></pre><p>##Working with Panes</p>
-<p>###split new pane</p>
-<pre><code>PREFIX %
+</code></pre><h2 id="Working_with_Panes">Working with Panes</h2><h3 id="split_new_pane">split new pane</h3><pre><code>PREFIX %
 PREFIX <span class="string">"</span>
-</code></pre><p>###cycle through the panes</p>
-<pre><code>PREFIX o
+</code></pre><h3 id="cycle_through_the_panes">cycle through the panes</h3><pre><code>PREFIX o
 PREFIX UP, DOWN, <span class="keyword">LEFT</span>, <span class="keyword">RIGHT</span>
-</code></pre><p>###cycle through layouts</p>
-<pre><code><span class="title">PREFIX</span> SPACEBAR
-</code></pre><p>###closing panes</p>
-<pre><code><span class="keyword">exit</span>
+</code></pre><h3 id="cycle_through_layouts">cycle through layouts</h3><pre><code><span class="title">PREFIX</span> SPACEBAR
+</code></pre><h3 id="closing_panes">closing panes</h3><pre><code><span class="keyword">exit</span>
 <span class="keyword">or</span>
 PREFIX x
-</code></pre><p>#notebook<br>    假定[prefix] = ctrl-b</p>
-<pre><code><span class="header">session
+</code></pre><h1 id="notebook">notebook</h1><pre><code>假定[prefix] = ctrl-b
+<span class="header">session
 =========================</span>
 创建一个被命名的session -&gt; $ tmux new -s name
 detach当前session -&gt; [prefix] d
@@ -294,12 +281,14 @@ Alt+w 复制选择区域
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cieqkkjzu000ct9am86iibomq" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cif3dxs81000ctgcyli1tvjd5" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
+
     </footer>
   </div>
   
@@ -427,7 +416,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cieqkkk0h000rt9am5aygcptw" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cif3dxs8n000vtgcyxph5858s" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
       
 
       
@@ -483,7 +472,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cieqkkk0p000wt9amjijffj51" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cif3dxs8v0010tgcy9dom0wdk" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
       
 
       
@@ -524,7 +513,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cieqkkjzy000et9amni3cj9ix" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cif3dxs86000gtgcy7uirc6j9" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
       
 
       
@@ -566,7 +555,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cieqkkk0a000lt9amlor9h6e0" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cif3dxs8h000ptgcympp9b2eu" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
       
 
       
@@ -606,7 +595,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cieqkkk1p001lt9amw3vqeiyb" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cif3dxs9w001ptgcy7t19hc40" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
       
 
       
@@ -641,18 +630,46 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>文本用闭合标签 <code>&lt;p&gt;test&lt;/p&gt;</code><br>引用内容用自闭合标签 <code>&lt;img src=&quot;song.jpg&quot; /&gt;</code><br>ol ordered list<br>ul unordered list<br>dl definition list<br>src source<br>href hyperlink reference<br>img 是行内元素<br><a> anchor 锚<br>alt alternative<br>根据CSS标准，默认情况下，多个空白会被浏览器叠加为一个</a></p>
+        <p>文本用闭合标签 <code>&lt;p&gt;test&lt;/p&gt;</code><br>引用内容用自闭合标签 <code>&lt;img src=&quot;song.jpg&quot; /&gt;</code><br>ol ordered list<br>ul unordered list<br>dl definition list<br>src source<br>href hyperlink reference<br>img 是行内元素<br><code>&lt;a&gt;</code> anchor 锚<br>alt alternative<br>根据CSS标准，默认情况下，多个空白会被浏览器叠加为一个</p>
 <p>行内样式<br>嵌入样式</p>
 <pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
 </code></pre><p>链接样式</p>
 <pre><code>&lt;link href=<span class="string">"style.css"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> /&gt;
 <span class="at_rule">@import</span> <span class="function"><span class="title">url</span><span class="params">(css/style.css)</span></span>
-</code></pre><p>上下文选择符<br>descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>子选择符 &gt;<br>标签1 &gt; 标签2<br>标签2必须是标签1的子元素<br>紧邻同胞选择符 +<br>标签1 + 标签2<br>h2 + p {font-variant: small-caps;}<br>一般同胞选择符 ~<br>标签1 ~ 标签2<br>h2 ~ a {color:red;}<br>通用选择符 <em><br>section </em> a {font-size: 1.3em;}<br>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块<br>p.specialtext {color: red;}<br>多类选择符<br>.specialtext.featured {font-size: 120%;}<br>属性选择符<br>标签名[属性名]<br>属性值选择符<br>标签名[属性名=”属性值”] (引号可加可不加)</p>
-<p>伪类<br>UI伪类<br>链接伪类<br>a:link<br>a:visited<br>a:hover<br>a:active<br>css3用双冒号代替单冒号 表示伪类<br>:focus伪类<br>:target伪类</p>
-<p>结构化伪类<br>:first-child  :last-child<br>ol.results li:first-child {color: blue;}<br>:nth-child<br>e:nth-child(n)<br>e表示元素名，n表示一个数值（也可以使用odd或even）</p>
-<p>伪元素<br>伪元素就是你的文档中若有实无的元素<br>::first-letter<br>p::first-letter {font-size:300%;}<br>::first-line<br>p::first-line {font-variant: small-caps;}<br>::before ::after<br>用于在特定元素前面或后面添加特殊内容<br>p.age::before {content: “Age: “;}</p>
-<p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
+</code></pre><p>上下文选择符<br>descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>子选择符 &gt;<br>标签1 &gt; 标签2<br>标签2必须是标签1的子元素<br>紧邻同胞选择符 +<br>标签1 + 标签2</p>
+<pre><code><span class="tag">h2</span> + <span class="tag">p</span> <span class="rules">{<span class="rule"><span class="attribute">font-variant</span>:<span class="value"> small-caps</span></span>;}</span>
+</code></pre><p>一般同胞选择符 ~<br>标签1 ~ 标签2</p>
+<pre><code><span class="tag">h2</span> ~ <span class="tag">a</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value">red</span></span>;}</span>
+</code></pre><p>通用选择符 *</p>
+<pre><code><span class="tag">section</span> * <span class="tag">a</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">1.3em</span></span></span>;}</span>
+</code></pre><p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
+<pre><code><span class="tag">p</span><span class="class">.specialtext</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;}</span>
+</code></pre><p>多类选择符</p>
+<pre><code><span class="class">.specialtext</span><span class="class">.featured</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">120%</span></span></span>;}</span>
+</code></pre><p>属性选择符<br>标签名[属性名]<br>属性值选择符<br>标签名[属性名=”属性值”] (引号可加可不加)</p>
+<p>伪类<br>UI伪类<br>链接伪类</p>
+<pre><code><span class="tag">a</span><span class="pseudo">:link
+</span><span class="tag">a</span><span class="pseudo">:visited
+</span><span class="tag">a</span><span class="pseudo">:hover
+</span><span class="tag">a</span>:active
+</code></pre><p>css3用双冒号代替单冒号 表示伪类</p>
+<p>:focus伪类<br>:target伪类</p>
+<p>结构化伪类</p>
+<pre><code><span class="attribute">:first-child  :last-child</span>
+ol.results li:first-child {color: blue;}
+:nth-child
+e:nth-child(n)
+</code></pre><p>e表示元素名，n表示一个数值（也可以使用odd或even）</p>
+<p>伪元素<br>伪元素就是你的文档中若有实无的元素</p>
+<pre><code><span class="symbol">:</span><span class="symbol">:first-letter</span>
+<span class="symbol">p:</span><span class="symbol">:first-letter</span> {font-<span class="symbol">size:</span><span class="number">300</span>%;}
+<span class="symbol">:</span><span class="symbol">:first-line</span>
+<span class="symbol">p:</span><span class="symbol">:first-line</span> {font-<span class="symbol">variant:</span> small-caps;}
+<span class="symbol">:</span><span class="symbol">:before</span> <span class="symbol">:</span><span class="symbol">:after</span>
+</code></pre><p>用于在特定元素前面或后面添加特殊内容</p>
+<pre><code><span class="tag">p</span><span class="class">.age</span><span class="pseudo">::before</span> {<span class="attribute">content</span>: <span class="string">"Age: "</span>;}
+</code></pre><p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
 <p>4.顺序决定权重</p>
 <p>定位元素<br>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
 <p>盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度</p>
@@ -669,12 +686,14 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cieqkkk07000kt9am99wju1ak" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cif3dxs8f000mtgcy9tvqs96b" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
     </footer>
   </div>
   
@@ -710,7 +729,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cieqkkk0y0013t9amr37s474m" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cif3dxs930017tgcy27fdtxfn" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
       
 
       
@@ -751,7 +770,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cieqkkk1f001ht9amv8upv1mm" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cif3dxs9k001ltgcyjuzlwnif" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
       
 
       
@@ -779,7 +798,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -790,7 +809,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -811,7 +830,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
       <ul>
         
           <li>
-            <a href="/2015/09/19/hello-world/">Hello World</a>
+            <a href="/2015/09/28/hello-world/">Hello World</a>
           </li>
         
           <li>
