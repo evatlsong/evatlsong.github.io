@@ -1,7 +1,7 @@
 ---
 title: stylin-study
 date: 2015-06-05 07:55:00
-tags:
+tags: [css]
 ---
 文本用闭合标签 `<p>test</p>`
 引用内容用自闭合标签 `<img src="song.jpg" />`
@@ -11,7 +11,7 @@ dl definition list
 src source
 href hyperlink reference
 img 是行内元素
-<a> anchor 锚
+`<a>` anchor 锚
 alt alternative
 根据CSS标准，默认情况下，多个空白会被浏览器叠加为一个
 
@@ -34,18 +34,28 @@ descendant combinator selector (后代组合式选择符)
 标签2必须是标签1的子元素
 紧邻同胞选择符 +
 标签1 + 标签2
-h2 + p {font-variant: small-caps;}
+
+    h2 + p {font-variant: small-caps;}
+
 一般同胞选择符 ~
 标签1 ~ 标签2
-h2 ~ a {color:red;}
+
+    h2 ~ a {color:red;}
+
 通用选择符 *
-section * a {font-size: 1.3em;}
+
+    section * a {font-size: 1.3em;}
+
 ID和类选择符
 标签带类选择符
 把标签名和类选择符写在一块
-p.specialtext {color: red;}
+
+    p.specialtext {color: red;}
+
 多类选择符
-.specialtext.featured {font-size: 120%;}
+
+    .specialtext.featured {font-size: 120%;}
+
 属性选择符
 标签名[属性名]
 属性值选择符
@@ -54,30 +64,38 @@ p.specialtext {color: red;}
 伪类
 UI伪类
 链接伪类
-a:link
-a:visited
-a:hover
-a:active
+
+    a:link
+    a:visited
+    a:hover
+    a:active
+
 css3用双冒号代替单冒号 表示伪类
+
 :focus伪类
 :target伪类
 
 结构化伪类
-:first-child  :last-child
-ol.results li:first-child {color: blue;}
-:nth-child
-e:nth-child(n)
+
+    :first-child  :last-child
+    ol.results li:first-child {color: blue;}
+    :nth-child
+    e:nth-child(n)
+
 e表示元素名，n表示一个数值（也可以使用odd或even）
 
 伪元素
 伪元素就是你的文档中若有实无的元素
-::first-letter
-p::first-letter {font-size:300%;}
-::first-line
-p::first-line {font-variant: small-caps;}
-::before ::after
+
+    ::first-letter
+    p::first-letter {font-size:300%;}
+    ::first-line
+    p::first-line {font-variant: small-caps;}
+    ::before ::after
+
 用于在特定元素前面或后面添加特殊内容
-p.age::before {content: "Age: ";}
+
+    p.age::before {content: "Age: ";}
 
 层叠
 浏览器默认样式表

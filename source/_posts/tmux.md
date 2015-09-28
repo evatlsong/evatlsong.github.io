@@ -1,16 +1,16 @@
 title: tmux
 date: 2015-07-23 16:02:12
-tags:
+tags: [tmux]
 ---
-#Learning The Basics
-##Installing tmux
-###Installing Via a Package Manager
+# Learning The Basics
+## Installing tmux
+### Installing Via a Package Manager
 
     sudo apt-get install tmux
 check version
 
     tmux -V
-###Installing from Source
+### Installing from Source
 The process of installing tmux is the same on both Mac OS X and Linux
 You'll need the GCC compiler in either case.
 For Linux users, the package management tools usually have the GCC compilers.
@@ -26,20 +26,20 @@ like this:
     ./configure
     make
     sudo make install
-##Starting tmux
+## Starting tmux
 Starting tmux
 
     tmux
 Close the tmux session
 
     exit
-###Creating Named Sessions
+### Creating Named Sessions
 
     tmux new-session -s basic
 shorten this command
 
     tmux new -s basic
-##Detaching and Attaching Sessions
+## Detaching and Attaching Sessions
 list existing tmux sessions using the command
 
     tmux list-sessions
@@ -50,20 +50,20 @@ attach to the session
 
     tmux attach
     tmux attach -t basic
-###Killing Sessions
+### Killing Sessions
 
     tmux kill-session -t basic
-##Working with Windows
+## Working with Windows
 
     tmux new -s windows -n shell
-###Creating and Naming Windows
+### Creating and Naming Windows
 create a window
 
     PREFIX c
 rename a window
 
     PREFIX ,
-###Moving Between Windows
+### Moving Between Windows
 
     PREFIX n
     PREFIX p
@@ -72,31 +72,31 @@ rename a window
 display a visual menu of our windows so we can select the one we'd like
 
     PREFIX w
-###close a window
+### close a window
 
     exit
     or
     PREFIX &
-##Working with Panes
+## Working with Panes
 
-###split new pane
+### split new pane
 
     PREFIX %
     PREFIX "
-###cycle through the panes
+### cycle through the panes
 
     PREFIX o
     PREFIX UP, DOWN, LEFT, RIGHT
-###cycle through layouts
+### cycle through layouts
 
     PREFIX SPACEBAR
-###closing panes
+### closing panes
 
     exit
     or
     PREFIX x
 
-#notebook
+# notebook
     假定[prefix] = ctrl-b
     session
     =========================
