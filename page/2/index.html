@@ -107,7 +107,7 @@ Ctrl + Alt + Left/Right Navigate back/forward
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cif3dxs950018tgcy6dfp59em" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cifm19wjn0018tledpthkjbgh" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
       
 
       
@@ -281,7 +281,7 @@ Alt+w 复制选择区域
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cif3dxs81000ctgcyli1tvjd5" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cifm19wi8000ctled0diniwt5" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
       
 
       
@@ -318,7 +318,8 @@ Alt+w 复制选择区域
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="basic_operate">basic operate</h1><h2 id="viewing_different_parts_of_the_work_buffer">viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: <span class="number">1</span> line)
+        <p>:version</p>
+<h1 id="basic_operate">basic operate</h1><h2 id="viewing_different_parts_of_the_work_buffer">viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: <span class="number">1</span> line)
 CONTROL-Y 
 
 <span class="function"><span class="title">CONTROL-D</span><span class="params">(down)</span></span> (default: <span class="number">1</span>/<span class="number">2</span> window)
@@ -332,6 +333,39 @@ zb: <span class="attribute">bottom</span>
 zz: center
 
 G: go to line
+</code></pre><h2 id="search">search</h2><pre><code>n     Jump <span class="built_in">to</span> next match, preserving direction <span class="operator">and</span> <span class="built_in">offset</span>
+N     Jump <span class="built_in">to</span> previous match, preserving direction <span class="operator">and</span> <span class="built_in">offset</span>
+/&lt;<span class="constant">CR</span>&gt; Jump forward <span class="built_in">to</span> next match <span class="operator">of</span> same pattern
+?&lt;<span class="constant">CR</span>&gt; Jump backward <span class="built_in">to</span> previous match <span class="operator">of</span> same pattern
+
+%
+
+:noh&lt;<span class="constant">CR</span>&gt; <span class="built_in">to</span> mute search highlighting
+</code></pre><h2 id="replace">replace</h2><pre><code><span class="literal">r</span>
+<span class="literal">R</span>
+</code></pre><h2 id="interact_with_the_System_clipboard">interact with the System clipboard</h2><pre><code>:<span class="keyword">set</span> paste
+:<span class="keyword">set</span> paste!
+</code></pre><h2 id="folding_and_outlining">folding and outlining</h2><pre><code>zA Toggle <span class="operator">the</span> state <span class="operator">of</span> folds, recursively
+zC Close folds, recursively
+zD Delete folds, recursively
+zE Eliminate all folds
+zf Create <span class="operator">a</span> fold <span class="built_in">from</span> <span class="operator">the</span> current <span class="built_in">line</span> <span class="built_in">to</span> <span class="operator">the</span> <span class="constant">one</span> where <span class="operator">the</span> following motion
+   <span class="command"><span class="keyword">command</span> <span class="title">takes</span> <span class="title">the</span> <span class="title">cursor</span></span>
+countzF Create <span class="operator">a</span> fold covering count <span class="keyword">lines</span>, starting <span class="operator">with</span> <span class="operator">the</span> current <span class="built_in">line</span>
+zM Set option foldlevel <span class="built_in">to</span> <span class="number">0</span>
+zN, zn Set (zN) <span class="operator">or</span> reset (zn) <span class="operator">the</span> foldenable option
+zO Open folds, recursively
+za Toggle <span class="operator">the</span> state <span class="operator">of</span> <span class="constant">one</span> fold
+zc Close <span class="constant">one</span> fold
+zd Delete <span class="constant">one</span> fold
+zi Toggle <span class="operator">the</span> <span class="built_in">value</span> <span class="operator">of</span> <span class="operator">the</span> foldenable option
+zj, zk Move cursor <span class="built_in">to</span> <span class="operator">the</span> <span class="built_in">start</span> (zj) <span class="operator">of</span> <span class="operator">the</span> next fold <span class="operator">or</span> <span class="built_in">to</span> <span class="operator">the</span> <span class="function"><span class="keyword">end</span> (<span class="title">zk</span>) <span class="title">of</span> <span class="title">the</span></span>
+       previous fold
+zm, zr Decrement (zm) <span class="operator">or</span> increment (zr) <span class="operator">the</span> <span class="built_in">value</span> <span class="operator">of</span> <span class="operator">the</span> foldlevel option <span class="keyword">by</span> <span class="constant">one</span>
+zo Open <span class="constant">one</span> fold
+
+zA, zC, zD <span class="operator">and</span> zO are called recursive because they operate <span class="command"><span class="keyword">on</span> <span class="title">all</span> <span class="title">folds</span> <span class="title">nested</span> </span>
+<span class="operator">within</span> <span class="operator">the</span> <span class="constant">one</span> where you issue <span class="operator">the</span> commands
 </code></pre><p>text object (文本对象 aw iw it)</p>
 <p>. 重复上次修改<br>a change could be anything that modifies the text in the document. That includes<br>commands triggered from Normal, Visual, and Command-Line modes, but a change could<br>also encompass any text entered (or deleted) in Insert mode.</p>
 <p>Moving Around in Insert Mode Resets the Change</p>
@@ -416,7 +450,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cif3dxs8n000vtgcyxph5858s" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cifm19wj1000vtledxvn3duag" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
       
 
       
@@ -472,7 +506,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cif3dxs8v0010tgcy9dom0wdk" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cifm19wjc0010tledo688p97w" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
       
 
       
@@ -513,7 +547,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cif3dxs86000gtgcy7uirc6j9" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cifm19wie000gtledna8epemh" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
       
 
       
@@ -555,7 +589,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cif3dxs8h000ptgcympp9b2eu" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cifm19wis000ptled3klubmhh" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
       
 
       
@@ -595,7 +629,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cif3dxs9w001ptgcy7t19hc40" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cifm19wkq001ptledluhczohq" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
       
 
       
@@ -637,13 +671,12 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
 </code></pre><p>链接样式</p>
 <pre><code>&lt;link href=<span class="string">"style.css"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> /&gt;
 <span class="at_rule">@import</span> <span class="function"><span class="title">url</span><span class="params">(css/style.css)</span></span>
-</code></pre><p>上下文选择符<br>descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>子选择符 &gt;<br>标签1 &gt; 标签2<br>标签2必须是标签1的子元素<br>紧邻同胞选择符 +<br>标签1 + 标签2</p>
-<pre><code><span class="tag">h2</span> + <span class="tag">p</span> <span class="rules">{<span class="rule"><span class="attribute">font-variant</span>:<span class="value"> small-caps</span></span>;}</span>
-</code></pre><p>一般同胞选择符 ~<br>标签1 ~ 标签2</p>
-<pre><code><span class="tag">h2</span> ~ <span class="tag">a</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value">red</span></span>;}</span>
-</code></pre><p>通用选择符 *</p>
-<pre><code><span class="tag">section</span> * <span class="tag">a</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">1.3em</span></span></span>;}</span>
-</code></pre><p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
+</code></pre><p>上下文选择符 descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>example: <code>article p {font-weight: bold;}</code></p>
+<p>子选择符 <code>&gt;</code> 标签2必须是标签1的子元素<br>标签1 &gt; 标签2<br>example: <code>section &gt; h2 {font-style: italic;}</code></p>
+<p>紧邻同胞选择符 <code>+</code><br>标签1 + 标签2<br>example: <code>h2 + p {font-variant: small-caps;}</code></p>
+<p>一般同胞选择符 ~<br>标签1 ~ 标签2<br>example: <code>h2 ~ a {color:red;}</code></p>
+<p>通用选择符 <em><br>example: `section </em> a {font-size: 1.3em;}`</p>
+<p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
 <pre><code><span class="tag">p</span><span class="class">.specialtext</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;}</span>
 </code></pre><p>多类选择符</p>
 <pre><code><span class="class">.specialtext</span><span class="class">.featured</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">120%</span></span></span>;}</span>
@@ -671,7 +704,8 @@ e:nth-child(n)
 <pre><code><span class="tag">p</span><span class="class">.age</span><span class="pseudo">::before</span> {<span class="attribute">content</span>: <span class="string">"Age: "</span>;}
 </code></pre><p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
 <p>4.顺序决定权重</p>
-<p>定位元素<br>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
+<p>定位元素<br>盒模型<br>border padding margin</p>
+<p>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
 <p>盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度</p>
 <p>强迫父元素包围其浮动的子元素有三种方式<br>1.为父元素应用overflow:hidden<br>2.浮动父元素<br>3.在父元素内容的末尾添加非浮动元素，可以直接在标记中加，也可以通过给父元素添加clearfix类来加</p>
 <p>不能在下拉菜单的顶级元素上应用overflow:hidden,否则作为其子元素的下拉菜单就不会显示了<br>不能对已经靠自动外边距居中的元素使用“浮动父元素”技术，否则他就不会再居中，而是根据浮动值浮动到左边或右边了。</p>
@@ -686,7 +720,7 @@ e:nth-child(n)
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cif3dxs8f000mtgcy9tvqs96b" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cifm19wip000mtledljnyi8d8" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
       
 
       
@@ -729,7 +763,7 @@ e:nth-child(n)
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cif3dxs930017tgcy27fdtxfn" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cifm19wjk0017tledwi3oxaqi" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
       
 
       
@@ -770,7 +804,7 @@ e:nth-child(n)
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cif3dxs9k001ltgcyjuzlwnif" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cifm19wk5001ltleda8zwq96d" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
       
 
       
@@ -818,7 +852,7 @@ e:nth-child(n)
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -830,7 +864,7 @@ e:nth-child(n)
       <ul>
         
           <li>
-            <a href="/2015/09/28/hello-world/">Hello World</a>
+            <a href="/2015/10/11/hello-world/">Hello World</a>
           </li>
         
           <li>

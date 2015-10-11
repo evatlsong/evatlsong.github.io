@@ -12,7 +12,7 @@
 <meta property="og:url" content="http://evatlsong.com/2015/06/05/stylin-study/index.html">
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="文本用闭合标签 &amp;lt;p&amp;gt;test&amp;lt;/p&amp;gt;引用内容用自闭合标签 &amp;lt;img src=&amp;quot;song.jpg&amp;quot; /&amp;gt;ol ordered listul unordered listdl definition listsrc sourcehref hyperlink referenceimg 是行内元素&amp;lt;a&amp;gt; anchor 锚alt alter">
-<meta property="og:updated_time" content="2015-09-28T03:37:47.108Z">
+<meta property="og:updated_time" content="2015-10-11T04:50:50.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="stylin-study">
 <meta name="twitter:description" content="文本用闭合标签 &amp;lt;p&amp;gt;test&amp;lt;/p&amp;gt;引用内容用自闭合标签 &amp;lt;img src=&amp;quot;song.jpg&amp;quot; /&amp;gt;ol ordered listul unordered listdl definition listsrc sourcehref hyperlink referenceimg 是行内元素&amp;lt;a&amp;gt; anchor 锚alt alter">
@@ -104,13 +104,12 @@
 </code></pre><p>链接样式</p>
 <pre><code>&lt;link href=<span class="string">"style.css"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> /&gt;
 <span class="at_rule">@import</span> <span class="function"><span class="title">url</span><span class="params">(css/style.css)</span></span>
-</code></pre><p>上下文选择符<br>descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>子选择符 &gt;<br>标签1 &gt; 标签2<br>标签2必须是标签1的子元素<br>紧邻同胞选择符 +<br>标签1 + 标签2</p>
-<pre><code><span class="tag">h2</span> + <span class="tag">p</span> <span class="rules">{<span class="rule"><span class="attribute">font-variant</span>:<span class="value"> small-caps</span></span>;}</span>
-</code></pre><p>一般同胞选择符 ~<br>标签1 ~ 标签2</p>
-<pre><code><span class="tag">h2</span> ~ <span class="tag">a</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value">red</span></span>;}</span>
-</code></pre><p>通用选择符 *</p>
-<pre><code><span class="tag">section</span> * <span class="tag">a</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">1.3em</span></span></span>;}</span>
-</code></pre><p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
+</code></pre><p>上下文选择符 descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>example: <code>article p {font-weight: bold;}</code></p>
+<p>子选择符 <code>&gt;</code> 标签2必须是标签1的子元素<br>标签1 &gt; 标签2<br>example: <code>section &gt; h2 {font-style: italic;}</code></p>
+<p>紧邻同胞选择符 <code>+</code><br>标签1 + 标签2<br>example: <code>h2 + p {font-variant: small-caps;}</code></p>
+<p>一般同胞选择符 ~<br>标签1 ~ 标签2<br>example: <code>h2 ~ a {color:red;}</code></p>
+<p>通用选择符 <em><br>example: `section </em> a {font-size: 1.3em;}`</p>
+<p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
 <pre><code><span class="tag">p</span><span class="class">.specialtext</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;}</span>
 </code></pre><p>多类选择符</p>
 <pre><code><span class="class">.specialtext</span><span class="class">.featured</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">120%</span></span></span>;}</span>
@@ -138,7 +137,8 @@ e:nth-child(n)
 <pre><code><span class="tag">p</span><span class="class">.age</span><span class="pseudo">::before</span> {<span class="attribute">content</span>: <span class="string">"Age: "</span>;}
 </code></pre><p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
 <p>4.顺序决定权重</p>
-<p>定位元素<br>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
+<p>定位元素<br>盒模型<br>border padding margin</p>
+<p>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
 <p>盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度</p>
 <p>强迫父元素包围其浮动的子元素有三种方式<br>1.为父元素应用overflow:hidden<br>2.浮动父元素<br>3.在父元素内容的末尾添加非浮动元素，可以直接在标记中加，也可以通过给父元素添加clearfix类来加</p>
 <p>不能在下拉菜单的顶级元素上应用overflow:hidden,否则作为其子元素的下拉菜单就不会显示了<br>不能对已经靠自动外边距居中的元素使用“浮动父元素”技术，否则他就不会再居中，而是根据浮动值浮动到左边或右边了。</p>
@@ -153,7 +153,7 @@ e:nth-child(n)
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cif3dxs8f000mtgcy9tvqs96b" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cifm19wip000mtledljnyi8d8" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
       
 
       
@@ -217,7 +217,7 @@ e:nth-child(n)
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -229,7 +229,7 @@ e:nth-child(n)
       <ul>
         
           <li>
-            <a href="/2015/09/28/hello-world/">Hello World</a>
+            <a href="/2015/10/11/hello-world/">Hello World</a>
           </li>
         
           <li>
