@@ -3,6 +3,9 @@ title: practical-vim
 date: 2015-06-29 10:39:27
 tags: vim
 ---
+
+:version
+
 # basic operate
 ## viewing different parts of the work buffer
 
@@ -20,6 +23,51 @@ tags: vim
     zz: center
 
     G: go to line
+
+## search
+
+    n     Jump to next match, preserving direction and offset
+    N     Jump to previous match, preserving direction and offset
+    /<CR> Jump forward to next match of same pattern
+    ?<CR> Jump backward to previous match of same pattern
+
+    %
+
+    :noh<CR> to mute search highlighting
+
+## replace
+
+    r
+    R
+
+## interact with the System clipboard
+
+    :set paste
+    :set paste!
+
+## folding and outlining
+
+    zA Toggle the state of folds, recursively
+    zC Close folds, recursively
+    zD Delete folds, recursively
+    zE Eliminate all folds
+    zf Create a fold from the current line to the one where the following motion
+       command takes the cursor
+    countzF Create a fold covering count lines, starting with the current line
+    zM Set option foldlevel to 0
+    zN, zn Set (zN) or reset (zn) the foldenable option
+    zO Open folds, recursively
+    za Toggle the state of one fold
+    zc Close one fold
+    zd Delete one fold
+    zi Toggle the value of the foldenable option
+    zj, zk Move cursor to the start (zj) of the next fold or to the end (zk) of the
+           previous fold
+    zm, zr Decrement (zm) or increment (zr) the value of the foldlevel option by one
+    zo Open one fold
+
+    zA, zC, zD and zO are called recursive because they operate on all folds nested 
+    within the one where you issue the commands
 
 text object (文本对象 aw iw it)
 

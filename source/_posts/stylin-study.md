@@ -3,6 +3,7 @@ title: stylin-study
 date: 2015-06-05 07:55:00
 tags: [css]
 ---
+
 文本用闭合标签 `<p>test</p>`
 引用内容用自闭合标签 `<img src="song.jpg" />`
 ol ordered list
@@ -26,25 +27,24 @@ alt alternative
     <link href="style.css" rel="stylesheet" type="text/css" />
     @import url(css/style.css)
 
-上下文选择符
-descendant combinator selector (后代组合式选择符)
+上下文选择符 descendant combinator selector (后代组合式选择符)
 标签1 标签2 {声明}
-子选择符 >
-标签1 > 标签2
-标签2必须是标签1的子元素
-紧邻同胞选择符 +
-标签1 + 标签2
+example: `article p {font-weight: bold;}`
 
-    h2 + p {font-variant: small-caps;}
+子选择符 `>` 标签2必须是标签1的子元素
+标签1 > 标签2
+example: `section > h2 {font-style: italic;}`
+
+紧邻同胞选择符 `+`
+标签1 + 标签2
+example: `h2 + p {font-variant: small-caps;}`
 
 一般同胞选择符 ~
 标签1 ~ 标签2
-
-    h2 ~ a {color:red;}
+example: `h2 ~ a {color:red;}`
 
 通用选择符 *
-
-    section * a {font-size: 1.3em;}
+example: `section * a {font-size: 1.3em;}`
 
 ID和类选择符
 标签带类选择符
@@ -117,6 +117,9 @@ I-C-E
 4.顺序决定权重
 
 定位元素
+盒模型
+border padding margin
+
 position display float
 简写属性
 {margin:5px 10px 12px 8px;}
