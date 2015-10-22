@@ -184,3 +184,19 @@ vertical-align
 
 
 VSP (Vendor Specific Prefixes) 厂商前缀 自动添加VPS，可以使用prefix-free腻子脚本
+
+
+## note
+
+    box-sizing: border-box
+
+IE6 IE7不支持box-sizing属性
+polyfill borderBoxModel.js
+
+    <!--[if lt IE 8]>
+    <script src="borderBoxModel.js"></script>
+    <![endif]-->
+
+    inner img {max-width: 100%;}
+    div {overflow: hidden;} //真正用途是防止包含元素被超大内容撑大 还能可靠得迫使父元素包含其浮动的子元素
+    div {word-wrap: break-word;}
