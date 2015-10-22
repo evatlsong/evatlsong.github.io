@@ -100,8 +100,8 @@
       
         <h2 id="配置VIM">配置VIM</h2><p>安装Msysgit</p>
 <p>git bash下执行命令</p>
-<pre><code>git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/evatlsong/<span class="built_in">system</span>.git
-git clone http<span class="variable">s:</span>//github.<span class="keyword">com</span>/gmarik/vundle.git <span class="string">"C:\Users\evasong10\.vim\bundle\vundle"</span>
+<pre><code>git <span class="keyword">clone</span> <span class="title">https</span>://github.com/evatlsong/system.git
+git <span class="keyword">clone</span> <span class="title">https</span>://github.com/gmarik/vundle.git <span class="string">"C:\Users\evasong10\.vim\bundle\vundle"</span>
 </code></pre><p>以管理员权限运行ms-dos</p>
 <pre><code>mklink "C:<span class="command">\Users</span><span class="command">\evasong</span>10<span class="command">\.</span>vimrc" "E:<span class="command">\system</span><span class="command">\config</span><span class="command">\.</span>win_vimrc"
 </code></pre><p>git bash下执行命令</p>
@@ -111,7 +111,7 @@ git clone http<span class="variable">s:</span>//github.<span class="keyword">com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cifm19whw0003tled2w6kzqph" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cig1yy6xs0003tdf86t8uyzvw" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
       
 
       
@@ -163,7 +163,7 @@ systemctl start iptables.service
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cifm19wku001rtled6rcvhcx9" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cig1yy719001rtdf8bovfyweh" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
       
 
       
@@ -255,10 +255,10 @@ $ git show V3
 $ git branch stable V3 <span class="comment">//建立一个基于V3的分支</span>
 $ git grep “<span class="keyword">print</span>” V3 <span class="comment">//在V3中搜索所有的包含print的行</span>
 $ git grep “<span class="keyword">print</span>” <span class="comment">//在所有的历史记录中搜索包含print的行</span>
-</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git clone <span class="string">git:</span><span class="comment">//server/path/to/files // Git deamon</span>
-$ git clone your.<span class="string">computer:</span><span class="regexp">/path/</span>to<span class="regexp">/script  or git clone ssh:/</span><span class="regexp">/car.colorado.edu/</span>home<span class="regexp">/xxx ./</span>xxxxx <span class="comment">// SSH</span>
+</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git <span class="keyword">clone</span> <span class="title">git</span>://server/path/to/files // Git deamon
+$ git <span class="keyword">clone</span> <span class="title">your</span>.computer:/path/to/script  <span class="operator">or</span> git <span class="keyword">clone</span> <span class="title">ssh</span>://car.colorado.edu/home/xxx ./xxxxx // SSH
 $ git pull
-$ git push <span class="comment">// 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(master)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。</span>
+$ git push // 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(<span class="literal">master</span>)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。
 </code></pre><p>如果想在merge前先查看更改：</p>
 <pre><code>$ git fetch /home/bob/myrepo master:bobworks <span class="comment">//此命令意思是提取出bob修改的代码内容，然后放到我（rocrocket）工作目录下的bobworks分支中。之所以要放到分支中，而不是master中，就是要我先仔仔细细看看bob的开发成果，如果我觉得满意，我再merge到master中，如果不满意，我完全可以直接git branch -D掉。</span>
 $ git whatchanged -<span class="tag">p</span> master.<span class="class">.bobworks</span> <span class="comment">//用来查看bob都做了什么</span>
@@ -292,7 +292,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cifm19wju001ctled4y1b045u" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cig1yy70h001ctdf82xyuxxgl" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
       
 
       
@@ -336,7 +336,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cifm19wkf001ntledjbouwwxc" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cig1yy70z001ntdf8bwr6c45x" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
       
 
       
@@ -386,10 +386,10 @@ ssh-copy-id -i .ssh/<span class="variable">&lt;filename&gt;</span>.pub <span cla
 ssh <span class="variable">&lt;user&gt;</span>@<span class="variable">&lt;server&gt;</span> <span class="comment">## 直接访问</span>
 </code></pre><h2 id="别名访问">别名访问</h2><pre><code>~/.ssh/config
 host bj
-  <span class="keyword">user</span> git
+  <span class="keyword">user</span> <span class="title">git</span>
   hostname bj.ossxp.com
-  <span class="keyword">port</span> <span class="number">22</span>
-  identityfile ~/.ssh/<span class="variable">&lt;filename&gt;</span>
+  port <span class="number">22</span>
+  identityfile ~/.ssh/<span class="tag">&lt;filename&gt;</span>
 </code></pre><h2 id="遇到问题">遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
 <h1 id="vnc设置">vnc设置</h1><h2 id="一、安装_VNC">一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
 <pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># rpm -q vnc vnc-server</span>
@@ -559,7 +559,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cifm19wkr001qtledw690zm8k" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cig1yy717001qtdf8kq2356wm" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -648,7 +648,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cifm19wkl001otledzux7lhyg" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cig1yy712001otdf8jvt5egzl" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
       
 
       
@@ -700,7 +700,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cifm19wj4000xtled8bshox35" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cig1yy6z4000xtdf85hmwsbps" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
       
 
       
@@ -769,7 +769,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cifm19wj7000ytledcmrzazgl" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cig1yy6z6000ytdf8bd2xywlu" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
       
 
       
@@ -846,7 +846,7 @@ MX        @        默认     mxbiz2.qq.com
 <li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
 <pre><code><span class="constant">Committing</span> to <span class="symbol">svn:</span>/<span class="regexp">/10.10.1.1:80/foo</span> ...
 <span class="constant">M</span> foo.c
-事务过时<span class="symbol">:</span> 过期<span class="symbol">:</span> ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
+事务过时: 过期: ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
 </code></pre></li>
 <li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
 </li>
@@ -870,7 +870,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cifm19wjz001ftled2cvgp4b7" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cig1yy70m001ftdf8bxb10zs2" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
       
 
       
@@ -1030,7 +1030,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cifm19wld0022tled199z8pwy" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cig1yy71j0022tdf870mfxk23" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
       
 
       
@@ -1092,7 +1092,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
       <ul>
         
           <li>
-            <a href="/2015/10/11/hello-world/">Hello World</a>
+            <a href="/2015/10/22/hello-world/">Hello World</a>
           </li>
         
           <li>

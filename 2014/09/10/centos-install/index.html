@@ -26,7 +26,7 @@ centos 下怎样从root切换到普通用户su 普通">
 解决方法：
 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode
 centos 下怎样从root切换到普通用户su 普通">
-<meta property="og:updated_time" content="2015-10-11T04:50:50.598Z">
+<meta property="og:updated_time" content="2015-10-22T08:30:07.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="centos-install">
 <meta name="twitter:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：
@@ -133,10 +133,10 @@ ssh-copy-id -i .ssh/<span class="variable">&lt;filename&gt;</span>.pub <span cla
 ssh <span class="variable">&lt;user&gt;</span>@<span class="variable">&lt;server&gt;</span> <span class="comment">## 直接访问</span>
 </code></pre><h2 id="别名访问">别名访问</h2><pre><code>~/.ssh/config
 host bj
-  <span class="keyword">user</span> git
+  <span class="keyword">user</span> <span class="title">git</span>
   hostname bj.ossxp.com
-  <span class="keyword">port</span> <span class="number">22</span>
-  identityfile ~/.ssh/<span class="variable">&lt;filename&gt;</span>
+  port <span class="number">22</span>
+  identityfile ~/.ssh/<span class="tag">&lt;filename&gt;</span>
 </code></pre><h2 id="遇到问题">遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
 <h1 id="vnc设置">vnc设置</h1><h2 id="一、安装_VNC">一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
 <pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># rpm -q vnc vnc-server</span>
@@ -306,7 +306,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cifm19wkr001qtledw690zm8k" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cig1yy717001qtdf8kq2356wm" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -380,7 +380,7 @@ svnserve -d -r /home/goutrip/svndata
       <ul>
         
           <li>
-            <a href="/2015/10/11/hello-world/">Hello World</a>
+            <a href="/2015/10/22/hello-world/">Hello World</a>
           </li>
         
           <li>

@@ -26,7 +26,7 @@ $ cd gitdata
 $ git init
 or Server
 $ g">
-<meta property="og:updated_time" content="2015-10-11T04:50:50.598Z">
+<meta property="og:updated_time" content="2015-10-22T08:30:07.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git-usage">
 <meta name="twitter:description" content="配置$ git config --global user.name &quot;Your Name Comes Here&quot;
@@ -173,10 +173,10 @@ $ git show V3
 $ git branch stable V3 <span class="comment">//建立一个基于V3的分支</span>
 $ git grep “<span class="keyword">print</span>” V3 <span class="comment">//在V3中搜索所有的包含print的行</span>
 $ git grep “<span class="keyword">print</span>” <span class="comment">//在所有的历史记录中搜索包含print的行</span>
-</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git clone <span class="string">git:</span><span class="comment">//server/path/to/files // Git deamon</span>
-$ git clone your.<span class="string">computer:</span><span class="regexp">/path/</span>to<span class="regexp">/script  or git clone ssh:/</span><span class="regexp">/car.colorado.edu/</span>home<span class="regexp">/xxx ./</span>xxxxx <span class="comment">// SSH</span>
+</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git <span class="keyword">clone</span> <span class="title">git</span>://server/path/to/files // Git deamon
+$ git <span class="keyword">clone</span> <span class="title">your</span>.computer:/path/to/script  <span class="operator">or</span> git <span class="keyword">clone</span> <span class="title">ssh</span>://car.colorado.edu/home/xxx ./xxxxx // SSH
 $ git pull
-$ git push <span class="comment">// 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(master)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。</span>
+$ git push // 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(<span class="literal">master</span>)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。
 </code></pre><p>如果想在merge前先查看更改：</p>
 <pre><code>$ git fetch /home/bob/myrepo master:bobworks <span class="comment">//此命令意思是提取出bob修改的代码内容，然后放到我（rocrocket）工作目录下的bobworks分支中。之所以要放到分支中，而不是master中，就是要我先仔仔细细看看bob的开发成果，如果我觉得满意，我再merge到master中，如果不满意，我完全可以直接git branch -D掉。</span>
 $ git whatchanged -<span class="tag">p</span> master.<span class="class">.bobworks</span> <span class="comment">//用来查看bob都做了什么</span>
@@ -210,7 +210,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cifm19wju001ctled4y1b045u" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cig1yy70h001ctdf82xyuxxgl" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
       
 
       
@@ -286,7 +286,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
       <ul>
         
           <li>
-            <a href="/2015/10/11/hello-world/">Hello World</a>
+            <a href="/2015/10/22/hello-world/">Hello World</a>
           </li>
         
           <li>

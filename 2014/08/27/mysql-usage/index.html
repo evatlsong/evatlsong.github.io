@@ -18,7 +18,7 @@ mysql&amp;gt; SET PASSWORD FOR &apos;root&apos;@&apos;l">
 Securing the Initial MySQL Accounts referenceFor Windows, do this:
 shell&amp;gt; mysql -u root
 mysql&amp;gt; SET PASSWORD FOR &apos;root&apos;@&apos;l">
-<meta property="og:updated_time" content="2015-10-11T04:50:50.598Z">
+<meta property="og:updated_time" content="2015-10-22T08:30:07.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql-usage">
 <meta name="twitter:description" content="安装免安装版下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）
@@ -148,7 +148,7 @@ default-character-<span class="operator"><span class="keyword">set</span>=utf8
 port = <span class="number">3306</span>
 server_id = mysqld</span>
 </code></pre><h2 id="運行">運行</h2><p>/lib/systemd/system/mysql.service</p>
-<pre><code><span class="tag">systemctl</span> <span class="tag">start</span> <span class="tag">mysql</span><span class="class">.service</span>
+<pre><code>systemctl <span class="literal">start</span> mysql.service
 </code></pre><h2 id="导入导出">导入导出</h2><pre><code>mysqldump -u 用户名 -<span class="tag">p</span> 数据库名 &gt; 导出的文件名
 mysql&gt;source /wcnc_db<span class="class">.sql</span> 
 </code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=";" --create-schema=weixinhuictrip
@@ -162,7 +162,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cifm19wj9000ztledql057h9g" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cig1yy6z8000ztdf8e44idc2d" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
       
 
       
@@ -236,7 +236,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
       <ul>
         
           <li>
-            <a href="/2015/10/11/hello-world/">Hello World</a>
+            <a href="/2015/10/22/hello-world/">Hello World</a>
           </li>
         
           <li>

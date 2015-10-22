@@ -140,7 +140,7 @@ default-character-<span class="operator"><span class="keyword">set</span>=utf8
 port = <span class="number">3306</span>
 server_id = mysqld</span>
 </code></pre><h2 id="運行">運行</h2><p>/lib/systemd/system/mysql.service</p>
-<pre><code><span class="tag">systemctl</span> <span class="tag">start</span> <span class="tag">mysql</span><span class="class">.service</span>
+<pre><code>systemctl <span class="literal">start</span> mysql.service
 </code></pre><h2 id="导入导出">导入导出</h2><pre><code>mysqldump -u 用户名 -<span class="tag">p</span> 数据库名 &gt; 导出的文件名
 mysql&gt;source /wcnc_db<span class="class">.sql</span> 
 </code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=";" --create-schema=weixinhuictrip
@@ -154,7 +154,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cifm19wj9000ztledql057h9g" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cig1yy6z8000ztdf8e44idc2d" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
       
 
       
@@ -197,7 +197,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cifm19whl0001tledapb1ov6a" class="article-share-link" data-share="baidu" data-title="work-in-windows">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cig1yy6x40001tdf8sfaz56v5" class="article-share-link" data-share="baidu" data-title="work-in-windows">分享到</a>
       
 
       
@@ -397,19 +397,19 @@ you've got <span class="keyword">to</span> put paragraph tags <span class="keywo
         <span class="variable">&lt;p&gt;</span>For example.<span class="variable">&lt;/p&gt;</span>
     <span class="variable">&lt;/blockquote&gt;</span>
 </code></pre><p>Output:</p>
-<pre><code>&lt;p&gt;<span class="keyword">If</span> you want your page to validate under XHTML <span class="number">1.0</span> Strict,
-you've got to put paragraph tags in your blockquotes:&lt;/p&gt;
+<pre><code><span class="tag">&lt;p&gt;</span>If you want your page to validate under XHTML <span class="number">1.0</span> Strict,
+you've got to put paragraph tags <span class="operator">in</span> your blockquotes:<span class="tag">&lt;/p&gt;</span>
 
-&lt;pre&gt;&lt;code&gt;&amp;<span class="keyword">lt</span>;blockquote&amp;<span class="keyword">gt</span>;
-    &amp;<span class="keyword">lt</span>;p&amp;<span class="keyword">gt</span>;For example.&amp;<span class="keyword">lt</span>;/p&amp;<span class="keyword">gt</span>;
-&amp;<span class="keyword">lt</span>;/blockquote&amp;<span class="keyword">gt</span>;
-&lt;/code&gt;&lt;/pre&gt;
+<span class="tag">&lt;pre&gt;</span><span class="tag">&lt;code&gt;</span>&amp;<span class="operator">lt</span>;blockquote&amp;<span class="operator">gt</span>;
+    &amp;<span class="operator">lt</span>;p&amp;<span class="operator">gt</span>;For example.&amp;<span class="operator">lt</span>;/p&amp;<span class="operator">gt</span>;
+&amp;<span class="operator">lt</span>;/blockquote&amp;<span class="operator">gt</span>;
+<span class="tag">&lt;/code&gt;</span><span class="tag">&lt;/pre&gt;</span>
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cifm19wji0015tledsf909032" class="article-share-link" data-share="baidu" data-title="markdown-basics">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cig1yy6zh0015tdf8wq1zxgvo" class="article-share-link" data-share="baidu" data-title="markdown-basics">分享到</a>
       
 
       
@@ -757,7 +757,7 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 </code></pre><p>你也可以選擇性地在兩個方括號中間加上空白：</p>
 <pre><code>This <span class="keyword">is</span> [an example] [<span class="property">id</span>] <span class="keyword">reference</span>-style link.
 </code></pre><p>接著，在文件的任意處，你可以把這個標籤的連結內容定義出來：</p>
-<pre><code><span class="attr_selector">[id]</span>: <span class="rule"><span class="attribute">http</span>:<span class="value">//example.com/  <span class="string">"Optional Title Here"</span></span></span>
+<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
 </code></pre><p>連結定義的形式為：</p>
 <ul>
 <li>方括號，裡面輸入連結的辨識用標籤</li>
@@ -772,7 +772,7 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 [<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  (Optional Title Here)</span>
 </code></pre><p><strong>請注意：</strong>有一個已知的問題是 Markdown.pl 1.0.1 會忽略單引號包起來的連結 title。</p>
 <p>連結網址也可以用方括號包起來：</p>
-<pre><code><span class="attr_selector">[id]</span>: &lt;<span class="rule"><span class="attribute">http</span>:<span class="value">//example.com/&gt;  <span class="string">"Optional Title Here"</span></span></span>
+<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> &lt;http://example.com/&gt;  "Optional Title Here"</span>
 </code></pre><p>你也可以把 title 屬性放到下一行，也可以加一些縮排，網址太長的話，這樣會比較好看：</p>
 <pre><code>[id]<span class="symbol">:</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/longish</span><span class="regexp">/path/to</span><span class="regexp">/resource/here</span>
     <span class="string">"Optional Title Here"</span>
@@ -927,7 +927,7 @@ _   底線
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cifm19wjg0014tledpxqo8pm1" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cig1yy6zf0014tdf8s56repso" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">分享到</a>
       
 
       
@@ -1274,7 +1274,7 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 </code></pre><p>You can optionally use a space to separate the sets of brackets:</p>
 <pre><code>This <span class="keyword">is</span> [an example] [<span class="property">id</span>] <span class="keyword">reference</span>-style link.
 </code></pre><p>Then, anywhere in the document, you define your link label like this,<br>on a line by itself:</p>
-<pre><code><span class="attr_selector">[id]</span>: <span class="rule"><span class="attribute">http</span>:<span class="value">//example.com/  <span class="string">"Optional Title Here"</span></span></span>
+<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
 </code></pre><p>That is:</p>
 <ul>
 <li>Square brackets containing the link identifier (optionally<br>indented from the left margin using up to three spaces);</li>
@@ -1289,7 +1289,7 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 [<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  (Optional Title Here)</span>
 </code></pre><p><strong>Note:</strong> There is a known bug in Markdown.pl 1.0.1 which prevents<br>single quotes from being used to delimit link titles.</p>
 <p>The link URL may, optionally, be surrounded by angle brackets:</p>
-<pre><code><span class="attr_selector">[id]</span>: &lt;<span class="rule"><span class="attribute">http</span>:<span class="value">//example.com/&gt;  <span class="string">"Optional Title Here"</span></span></span>
+<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> &lt;http://example.com/&gt;  "Optional Title Here"</span>
 </code></pre><p>You can put the title attribute on the next line and use extra spaces<br>or tabs for padding, which tends to look better with longer URLs:</p>
 <pre><code>[id]<span class="symbol">:</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/longish</span><span class="regexp">/path/to</span><span class="regexp">/resource/here</span>
     <span class="string">"Optional Title Here"</span>
@@ -1442,7 +1442,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cifm19wje0011tledo68z490q" class="article-share-link" data-share="baidu" data-title="markdown-syntax">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cig1yy6zd0011tdf8x95mb8ea" class="article-share-link" data-share="baidu" data-title="markdown-syntax">分享到</a>
       
 
       
@@ -1485,7 +1485,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cifm19wi50007tledp3mnqwd3" class="article-share-link" data-share="baidu" data-title="useHexo">分享到</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cig1yy6y30007tdf8jgmtj5z0" class="article-share-link" data-share="baidu" data-title="useHexo">分享到</a>
       
 
       
@@ -1547,7 +1547,7 @@ _   underscore
       <ul>
         
           <li>
-            <a href="/2015/10/11/hello-world/">Hello World</a>
+            <a href="/2015/10/22/hello-world/">Hello World</a>
           </li>
         
           <li>

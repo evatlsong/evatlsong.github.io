@@ -26,7 +26,7 @@ git svn clone --no-metadata your_svn_repository_urlgit clone --bare git_reposito
 检出一个已存在svn repository(类似于svn checkout)
 
 我们可以通过 git-svn clone 命令完成这个操作： git-svn c">
-<meta property="og:updated_time" content="2015-10-11T04:50:50.598Z">
+<meta property="og:updated_time" content="2015-10-22T08:30:07.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git-svn-usage">
 <meta name="twitter:description" content="操作方法
@@ -160,7 +160,7 @@ git svn clone --no-metadata your_svn_repository_urlgit clone --bare git_reposito
 <li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
 <pre><code><span class="constant">Committing</span> to <span class="symbol">svn:</span>/<span class="regexp">/10.10.1.1:80/foo</span> ...
 <span class="constant">M</span> foo.c
-事务过时<span class="symbol">:</span> 过期<span class="symbol">:</span> ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
+事务过时: 过期: ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
 </code></pre></li>
 <li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
 </li>
@@ -184,7 +184,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cifm19wjz001ftled2cvgp4b7" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cig1yy70m001ftdf8bxb10zs2" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
       
 
       
@@ -260,7 +260,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
       <ul>
         
           <li>
-            <a href="/2015/10/11/hello-world/">Hello World</a>
+            <a href="/2015/10/22/hello-world/">Hello World</a>
           </li>
         
           <li>
