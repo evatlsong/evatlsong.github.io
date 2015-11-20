@@ -26,7 +26,7 @@ $ cd gitdata
 $ git init
 or Server
 $ g">
-<meta property="og:updated_time" content="2015-11-20T08:50:53.186Z">
+<meta property="og:updated_time" content="2015-11-20T11:13:03.094Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git-usage">
 <meta name="twitter:description" content="配置$ git config --global user.name &quot;Your Name Comes Here&quot;
@@ -126,10 +126,13 @@ $ git config --list 查看相关信息
 <span class="variable">$ </span>git init
 <span class="keyword">or</span> <span class="constant">Server</span>
 <span class="variable">$ </span>git --bare init
-</code></pre><h2 id="在~/-gitconfig设置别名">在~/.gitconfig设置别名</h2><pre><code><span class="title">[alias]</span>
-<span class="setting">st = <span class="value">status</span></span>
-<span class="setting">ci = <span class="value">commit -a</span></span>
-<span class="setting">co = <span class="value">checkout  </span></span>
+</code></pre><h2 id="在~/-gitconfig设置别名">在~/.gitconfig设置别名</h2><pre><code>### <span class="keyword">command</span>
+git config --<span class="keyword">global</span> alias.<span class="keyword">lg</span> <span class="string">"log --oneline --all --graph --decorate --color"</span>
+### <span class="keyword">file</span>
+[alias]
+<span class="keyword">st</span> = status
+ci = commit -<span class="keyword">a</span>
+<span class="keyword">co</span> = checkout  
 </code></pre><h2 id="文件操作">文件操作</h2><pre><code><span class="char">$ </span>git add .
 <span class="char">$ </span>git add file1 file2 file3
 <span class="char">$ </span>git add -u
@@ -220,7 +223,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cih7fgqlp001ktie3bfikadar" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cih7kje4b001ktfebgjfm5ue0" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
       
 
       
