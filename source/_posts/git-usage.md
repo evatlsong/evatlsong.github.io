@@ -15,7 +15,7 @@ tags: [git]
 	or Server
 	$ git --bare init
 
-##在~/.gitconfig设置别名
+## 在~/.gitconfig设置别名
 	[alias]
 	st = status
 	ci = commit -a
@@ -95,10 +95,14 @@ tags: [git]
 	$ git branch -D experimental：删除分支, 表示“不论如何都删除分支”，-D使用在“分支被证明失败”
 ## 补丁工作
 git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的'format-patch'命令良好的支持了这个功能。
-第一，利用branch命令 创建一个分支；
-第二，修改你的代码；
-第三，在该分支上提交你的修改；
-第四，使用'git format-patch'命令来生成一个patch文件，例如：'git format-patch master --stdout > ~/Desktop/tmp.patch'就是将工作分支与master主干的不同，存放在'~/Desktop'文件夹下，生成一个叫做 tmp.patch的文件（另一种简单的版本是利用diff命令，例如'git diff ..master > ~/Desktop/tmp.patch'），这样就生成了patch文件。那么别人就可以使用'git apply'命令来应用patch，例如'git apply ~/Desktop/tmp.patch'就是将patch打在当前的工作分支上
+    1. 利用branch命令 创建一个分支；
+    2. 修改你的代码；
+    3. 在该分支上提交你的修改；
+    4. 使用`git format-patch`命令来生成一个patch文件，
+       例如：`git format-patch master --stdout > ~/Desktop/tmp.patch`就是将工作分支与master主干的不同，
+       存放在`~/Desktop`文件夹下，生成一个叫做 tmp.patch的文件
+       （另一种简单的版本是利用diff命令，例如`git diff ..master > ~/Desktop/tmp.patch`），
+       这样就生成了patch文件。那么别人就可以使用`git apply`命令来应用patch，例如`git apply ~/Desktop/tmp.patch`就是将patch打在当前的工作分支上
 
 ## 仓库维护
 	$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。

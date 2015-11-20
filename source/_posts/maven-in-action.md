@@ -1,6 +1,6 @@
 title: maven-in-action
 date: 2015-06-17 15:01:48
-tags:
+tags: [maven]
 ---
 使用Archetype生成项目骨架
 mvn archetype:generate
