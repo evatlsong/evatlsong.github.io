@@ -48,6 +48,7 @@ tags: [git]
 	$ git revert SHA1_HASH // 还原特定哈希值对应的提交。该还原记录作为一个新的提交。
 
 ## 查看历史纪录或者当前状态
+    $ git log --all --graph --oneline --decorate
 	$ git log
 	$ git log -p
 	$ git log --stat --summary
