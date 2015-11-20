@@ -16,6 +16,9 @@ tags: [git]
 	$ git --bare init
 
 ## 在~/.gitconfig设置别名
+    ### command
+    git config --global alias.lg "log --oneline --all --graph --decorate --color"
+    ### file
 	[alias]
 	st = status
 	ci = commit -a
