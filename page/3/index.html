@@ -76,6 +76,190 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-stylin-study" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/05/stylin-study/" class="article-date">
+  <time datetime="2015-06-05T07:55:00.000Z" itemprop="datePublished">2015-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/05/stylin-study/">stylin-study</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>文本用闭合标签 <code>&lt;p&gt;test&lt;/p&gt;</code><br>引用内容用自闭合标签 <code>&lt;img src=&quot;song.jpg&quot; /&gt;</code><br>ol ordered list<br>ul unordered list<br>dl definition list<br>src source<br>href hyperlink reference<br>img 是行内元素<br><code>&lt;a&gt;</code> anchor 锚<br>alt alternative<br>根据CSS标准，默认情况下，多个空白会被浏览器叠加为一个</p>
+<p>行内样式<br>嵌入样式</p>
+<pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+</code></pre><p>链接样式</p>
+<pre><code>&lt;link href=<span class="string">"style.css"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> /&gt;
+<span class="at_rule">@import</span> <span class="function"><span class="title">url</span><span class="params">(css/style.css)</span></span>
+</code></pre><p>上下文选择符 descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>example: <code>article p {font-weight: bold;}</code></p>
+<p>子选择符 <code>&gt;</code> 标签2必须是标签1的子元素<br>标签1 &gt; 标签2<br>example: <code>section &gt; h2 {font-style: italic;}</code></p>
+<p>紧邻同胞选择符 <code>+</code><br>标签1 + 标签2<br>example: <code>h2 + p {font-variant: small-caps;}</code></p>
+<p>一般同胞选择符 ~<br>标签1 ~ 标签2<br>example: <code>h2 ~ a {color:red;}</code></p>
+<p>通用选择符 <em><br>example: `section </em> a {font-size: 1.3em;}`</p>
+<p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
+<pre><code><span class="tag">p</span><span class="class">.specialtext</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;}</span>
+</code></pre><p>多类选择符</p>
+<pre><code><span class="class">.specialtext</span><span class="class">.featured</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">120%</span></span></span>;}</span>
+</code></pre><p>属性选择符<br>标签名[属性名]<br>属性值选择符<br>标签名[属性名=”属性值”] (引号可加可不加)</p>
+<p>伪类<br>UI伪类<br>链接伪类</p>
+<pre><code><span class="tag">a</span><span class="pseudo">:link
+</span><span class="tag">a</span><span class="pseudo">:visited
+</span><span class="tag">a</span><span class="pseudo">:hover
+</span><span class="tag">a</span>:active
+</code></pre><p>css3用双冒号代替单冒号 表示伪类</p>
+<p>:focus伪类<br>:target伪类</p>
+<p>结构化伪类</p>
+<pre><code><span class="attribute">:first-child  :last-child</span>
+ol.results li:first-child {color: blue;}
+:nth-child
+e:nth-child(n)
+</code></pre><p>e表示元素名，n表示一个数值（也可以使用odd或even）</p>
+<p>伪元素<br>伪元素就是你的文档中若有实无的元素</p>
+<pre><code><span class="pseudo">::first-letter</span>
+<span class="tag">p</span><span class="pseudo">::first-letter</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">300%</span></span></span>;}</span>
+<span class="pseudo">::first-line</span>
+<span class="tag">p</span><span class="pseudo">::first-line</span> <span class="rules">{<span class="rule"><span class="attribute">font-variant</span>:<span class="value"> small-caps</span></span>;}</span>
+<span class="pseudo">::before</span> <span class="pseudo">::after</span>
+</code></pre><p>用于在特定元素前面或后面添加特殊内容</p>
+<pre><code><span class="tag">p</span><span class="class">.age</span><span class="pseudo">::before</span> <span class="rules">{<span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">"Age: "</span></span></span>;}</span>
+</code></pre><p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
+<p>4.顺序决定权重</p>
+<p>定位元素<br>盒模型<br>border padding margin</p>
+<p>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
+<p>盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度</p>
+<p>强迫父元素包围其浮动的子元素有三种方式<br>1.为父元素应用overflow:hidden<br>2.浮动父元素<br>3.在父元素内容的末尾添加非浮动元素，可以直接在标记中加，也可以通过给父元素添加clearfix类来加</p>
+<p>不能在下拉菜单的顶级元素上应用overflow:hidden,否则作为其子元素的下拉菜单就不会显示了<br>不能对已经靠自动外边距居中的元素使用“浮动父元素”技术，否则他就不会再居中，而是根据浮动值浮动到左边或右边了。</p>
+<p>font and text</p>
+<p>font:<br>font-family<br>font-size<br>font-style<br>font-weight<br>font-variant<br>font(简写属性)<br>    1.必须声明font-size和font-family的值<br>    2.声明顺序<br>        1 font-weight, font-style, font-variant不分先后<br>        2 然后是font-size<br>        3 最后是font-family<br>        example p {font: bold italic small-caps .9em helvetica, arial, sans-serif;}<br>                p {font: 1.2em/1.4 helvetica, arial, sans-serif;}</p>
+<p>font collection<br>    serif(衬线字体), sans-serif(无衬线字体), monospace(等宽字体), cursive(手写体), fantasy<br>    font family<br>        Times, Helvetica<br>        font face<br>        Times Roman, Times Bold, Helvetica Condensed, bodoni italic</p>
+<p>font-size是可以继承的<br>1em = 16像素<br>h1 2em h2 1.5em p 1em<br>修改body元素的字体大小，不会影响页面中以绝对单位控制的元素，但没有设定字体大小的元素则会与body的字体大小成比例变化。</p>
+<p>text:<br>text-indent<br>letter-spacing<br>word-spacing<br>text-decoration<br>text-align<br>line-height<br>text-transform<br>vertical-align</p>
+<p>VSP (Vendor Specific Prefixes) 厂商前缀 自动添加VPS，可以使用prefix-free腻子脚本</p>
+<h2 id="note">note</h2><pre><code><span class="attribute">box-sizing</span>: <span class="string">border-box</span>
+</code></pre><p>IE6 IE7不支持box-sizing属性<br>polyfill borderBoxModel.js</p>
+<pre><code><span class="comment">&lt;!--[if lt IE 8]&gt;
+&lt;script src="borderBoxModel.js"&gt;&lt;/script&gt;
+&lt;![endif]--&gt;</span>
+
+inner img {max-width: 100%;}
+div {overflow: hidden;} //真正用途是防止包含元素被超大内容撑大 还能可靠得迫使父元素包含其浮动的子元素
+div {word-wrap: break-word;}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cih7e910b000mtqegd0hzoqpr" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/09/linux-usage/" class="article-date">
+  <time datetime="2014-10-09T11:07:52.000Z" itemprop="datePublished">2014-10-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/09/linux-usage/">linux-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>查看进程<br>ps -aux </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cih7e9118001ctqege0hr7frq" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fonts" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/10/08/fonts/" class="article-date">
+  <time datetime="2014-10-08T00:21:23.000Z" itemprop="datePublished">2014-10-08</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/10/08/fonts/">fonts</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>查看字体列表<br>fc-list</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cih7e911r001ttqeggs065su1" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-windows-config" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/20/windows-config/" class="article-date">
@@ -111,7 +295,7 @@ git <span class="keyword">clone</span> <span class="title">https</span>://github
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cig1yy6xs0003tdf86t8uyzvw" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cih7e90zo0003tqegyll72t54" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
       
 
       
@@ -163,7 +347,7 @@ systemctl start iptables.service
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cig1yy719001rtdf8bovfyweh" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cih7e9128001ztqegthwqfsrx" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
       
 
       
@@ -208,8 +392,11 @@ $ git config --list 查看相关信息
 <span class="variable">$ </span>git init
 <span class="keyword">or</span> <span class="constant">Server</span>
 <span class="variable">$ </span>git --bare init
-</code></pre><p>##在~/.gitconfig设置别名<br>    [alias]<br>    st = status<br>    ci = commit -a<br>    co = checkout  </p>
-<h2 id="文件操作">文件操作</h2><pre><code><span class="char">$ </span>git add .
+</code></pre><h2 id="在~/-gitconfig设置别名">在~/.gitconfig设置别名</h2><pre><code><span class="title">[alias]</span>
+<span class="setting">st = <span class="value">status</span></span>
+<span class="setting">ci = <span class="value">commit -a</span></span>
+<span class="setting">co = <span class="value">checkout  </span></span>
+</code></pre><h2 id="文件操作">文件操作</h2><pre><code><span class="char">$ </span>git add .
 <span class="char">$ </span>git add file1 file2 file3
 <span class="char">$ </span>git add -u
 <span class="char">$ </span>git add -p // 为你做的每次修改，<span class="class">Git</span>将为你展示变动的代码，并询问该变动是否应是下一次提交的一部分。回答“y”或者“n”。也有其他选项，比如延迟决定：键入“？”来学习更多。
@@ -270,8 +457,16 @@ $ git pull . bobworks <span class="comment">//如果我检查了bob的工作后�
 <span class="variable">$ </span>git merge experimental：合并分支
 <span class="variable">$ </span>git branch -d experimental：删除分支, 使用的是小写的-d，表示“在分支已经合并到主干后删除分支”。
 <span class="variable">$ </span>git branch -<span class="constant">D</span> experimental：删除分支, 表示“不论如何都删除分支”，-<span class="constant">D</span>使用在“分支被证明失败”
-</code></pre><h2 id="补丁工作">补丁工作</h2><p>git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的’format-patch’命令良好的支持了这个功能。<br>第一，利用branch命令 创建一个分支；<br>第二，修改你的代码；<br>第三，在该分支上提交你的修改；<br>第四，使用’git format-patch’命令来生成一个patch文件，例如：’git format-patch master –stdout &gt; ~/Desktop/tmp.patch’就是将工作分支与master主干的不同，存放在’~/Desktop’文件夹下，生成一个叫做 tmp.patch的文件（另一种简单的版本是利用diff命令，例如’git diff ..master &gt; ~/Desktop/tmp.patch’），这样就生成了patch文件。那么别人就可以使用’git apply’命令来应用patch，例如’git apply ~/Desktop/tmp.patch’就是将patch打在当前的工作分支上</p>
-<h2 id="仓库维护">仓库维护</h2><pre><code>$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。
+</code></pre><h2 id="补丁工作">补丁工作</h2><p>git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的’format-patch’命令良好的支持了这个功能。</p>
+<pre><code><span class="number">1</span>. 利用branch命令 创建一个分支；
+<span class="number">2</span>. 修改你的代码；
+<span class="number">3</span>. 在该分支上提交你的修改；
+<span class="number">4</span>. 使用<span class="escape">`g</span>it format-patch<span class="escape">`命</span>令来生成一个patch文件，
+   例如：<span class="escape">`g</span>it format-patch master --stdout &gt; ~/Desktop/tmp.patch<span class="escape">`就</span>是将工作分支与master主干的不同，
+   存放在<span class="escape">`~</span>/Desktop<span class="escape">`文</span>件夹下，生成一个叫做 tmp.patch的文件
+   （另一种简单的版本是利用diff命令，例如<span class="escape">`g</span>it diff ..master &gt; ~/Desktop/tmp.patch<span class="escape">`）</span>，
+   这样就生成了patch文件。那么别人就可以使用<span class="escape">`g</span>it apply<span class="escape">`命</span>令来应用patch，例如<span class="escape">`g</span>it apply ~/Desktop/tmp.patch<span class="escape">`就</span>是将patch打在当前的工作分支上
+</code></pre><h2 id="仓库维护">仓库维护</h2><pre><code>$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。
 $ git count-objects: 统计有多少松散的对象，没有 repack 的对象消耗了多少硬盘空间。
 $ git gc: 在本地仓库进行 repack，并进行其他日常维护工作。
 $ git <span class="attribute">filter</span>-branch --tree-<span class="attribute">filter</span> `rm <span class="attribute">top</span>/secret/file` HEAD <span class="comment">//在所有记录中永久删除某个文件</span>
@@ -292,7 +487,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cig1yy70h001ctdf82xyuxxgl" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cih7e911i001ktqegjumfr3zd" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
       
 
       
@@ -336,7 +531,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cig1yy70z001ntdf8bwr6c45x" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cih7e911y001vtqeg6dvx2tnw" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
       
 
       
@@ -559,7 +754,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cig1yy717001qtdf8kq2356wm" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cih7e9126001ytqegl6f0k3es" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -648,7 +843,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cig1yy712001otdf8jvt5egzl" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cih7e9121001wtqeg7cgtqear" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
       
 
       
@@ -700,344 +895,12 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cig1yy6z4000xtdf85hmwsbps" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cih7e910p000ytqegz70thlwr" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
       
 
       
 
       
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-oracle-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/04/oracle-usage/" class="article-date">
-  <time datetime="2014-09-04T11:40:08.000Z" itemprop="datePublished">2014-09-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/04/oracle-usage/">oracle-usage</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="windows">windows</h2><p>sqlplus 连接<br>sqlplus username/password@database;<br>查询<br>select * from username.table t where t.id=1;</p>
-<p>表名前要加用户名</p>
-<p>查询结果保存到文本文件</p>
-<pre><code><span class="title">spool</span> abc.txt;
-<span class="title">select</span> * from wap_subscribe;
-<span class="title">spool</span> <span class="built_in">off</span>;
-</code></pre><p>保存的只是输出到屏幕的内容</p>
-<p>设置屏幕输出大小 解决显示不全问题</p>
-<pre><code><span class="built_in">set</span> <span class="keyword">long</span> <span class="number">40000</span>;
-</code></pre><p>imp userid=ltwuliu/LTWULIU@huictrip file=D:\databackup\huitrip20140813.dmp full=y<br>exp userid=sunztravelweb/huictrip@goutrip file=E:\data\goutrip20140805.dmp </p>
-<p>When making some backup tasks (import or Export) on oracle 10g, 11g (for example), you can get a message error:<br>ORA-20446: The owner of the job is not registered ORA-06512: at “SYSMAN.MGMT_JOBS”…</p>
-<p>Solution<br>Open CMD<br>C:>Set oracle_sid= SID_OF_THE_DATABASE<br>C:>sqlplus<br>username: SYSMAN<br>password: <em>**</em><br>SQL&gt;execute MGMT_USER.MAKE_EM_USER(‘USERNAME’);</p>
-<p>USERNAME – the user that you use to connect to enterprise managert<br>don’t copy/past the command, sometimes they are some hidden characters</p>
-<p>11G中有个新特性，当表无数据时，不分配segment，以节省空间<br>　　解决方法：<br>　　1、insert一行，再rollback就产生segment了。<br>　　该方法是在在空表中插入数据，再删除，则产生segment。导出时则可导出空表。<br>　　2、设置deferred_segment_creation 参数<br>show parameter deferred_segment_creation</p>
-<p>NAME                                 TYPE        VALUE</p>
-<hr>
-<p>deferred_segment_creation            boolean     TRUE<br>SQL&gt; alter system set deferred_segment_creation=false;</p>
-<p>系统已更改。</p>
-<p>SQL&gt; show parameter deferred_segment_creation</p>
-<p>NAME                                 TYPE        VALUE</p>
-<hr>
-<p>deferred_segment_creation            boolean     FALSE</p>
-<p> 3、用以下这句查找空表并分配空间<br>　　select ‘alter table ‘||table_name||’ allocate extent;’ from user_tables where num_rows=0;<br>　　把SQL查询的结果导出，然后执行导出的语句，强行为表分配空间修改segment值，然后再导出即可导出空表了。</p>
-<p>drop user sunztravelweb cascade;</p>
-<p>CREATE TEMPORARY TABLESPACE USER_TEMP<br>TEMPFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_TEMP.dbf’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
-<p>CREATE TABLESPACE USER_DATA<br>LOGGING<br>DATAFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_DATA.DBF’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
-<p>CREATE USER sunztravelweb IDENTIFIED BY huictrip<br>DEFAULT TABLESPACE USER_DATA<br>TEMPORARY TABLESPACE USER_TEMP;</p>
-<p>grant connect,resource,dba to sunztravelweb;</p>
-<p>imp userid=sunztravelweb/huictrip@localhost/goutrip file=E:\data\goutrip20140708.dmp full=y</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cig1yy6z6000ytdf8bd2xywlu" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-git-svn-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/02/git-svn-usage/" class="article-date">
-  <time datetime="2014-09-02T22:47:43.000Z" itemprop="datePublished">2014-09-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/02/git-svn-usage/">git-svn-usage</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="操作方法">操作方法</h2><ul>
-<li>从svn切换到git<blockquote>
-<p><code>git svn clone --no-metadata your_svn_repository_url</code><br><code>git clone --bare git_repository_url git_server_url</code></p>
-</blockquote>
-</li>
-<li><p>检出一个已存在svn repository(类似于svn checkout)</p>
-<blockquote>
-<p>我们可以通过 <code>git-svn clone</code> 命令完成这个操作： <code>git-svn clone your_svn_repository_url</code></p>
-</blockquote>
-</li>
-<li><p>从中心服务器的svn repository获取最新更新</p>
-<blockquote>
-<p>这个操作可以通过 <code>git-svn rebase</code> 完成。注意这里用的是rebase，而不是update。update命令对于通过git-svn检出的svn repostory的git版本库是不可用的。</p>
-</blockquote>
-</li>
-<li><p>查看提交历史日志</p>
-<blockquote>
-<p>这个简单，使用 <code>git-svn log</code> ，加上-v选项，还可以提供每次commit操作涉及的相关文件的详细信息。</p>
-</blockquote>
-</li>
-<li><p>将本地代码同步到Svn服务器</p>
-<blockquote>
-<p>完成这一操作需要通过 <code>git-svn dcommit</code> 命令。这个命令会将你在本地使用 <code>git commit</code> 提交到本地代码库的所有更改逐一提交到svn库中。加上-n选项，则该命令不会真正执行commit到svn的操作，而是会显示会有哪些本地变动将被commit到svn服务器。 <code>git-svn dcommit</code> 似乎不能单独提交某个本地版本的修改，而是一次批量提交所有与svn中心版本库的差异。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="一般使用流程：">一般使用流程：</h2><ol>
-<li><code>git-svn clone your_svn_repository</code>；</li>
-<li>修改本地代码，使用 <code>git add/commit</code> 将修改提交到本地git库；</li>
-<li>定期使用 <code>git-svn rebase</code> 获取中心svn repository的更新；</li>
-<li>使用 <code>git-svn dcommit</code> 命令将本地git库的修改同步到中心svn库。</li>
-</ol>
-<h2 id="注意事项">注意事项</h2><ol>
-<li><p>处理冲突</p>
-<ul>
-<li>假设某svn中心库上的某个项目foo中只有一个源码文件foo.c：</li>
-<li>我在使用 <code>git-svn clone</code> 检出版本时，foo.c当时只有一个commit版本信息：”svn v1”；</li>
-<li>clone出来后，我在本地git库中修改foo.c，并通过 <code>git commit</code> 提交到本地git库中，版本为”git v1”；</li>
-<li>不过与此同时另外一个同事也在修改foo.c这个文件，并已经将他的修改提交到了svn库中，版本为”svn v2”；</li>
-<li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
-<pre><code><span class="constant">Committing</span> to <span class="symbol">svn:</span>/<span class="regexp">/10.10.1.1:80/foo</span> ...
-<span class="constant">M</span> foo.c
-事务过时: 过期: ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
-</code></pre></li>
-<li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
-</li>
-<li>打开foo.c，修改代码，解决冲突；</li>
-<li><p>执行 <code>git rebase --continue</code> ，git提示我：</p>
-<pre><code>You must edit all <span class="built_in">merge</span> conflicts <span class="operator">and</span> <span class="keyword">then</span>
-mark them <span class="keyword">as</span> resolved <span class="keyword">using</span> git <span class="built_in">add</span>
-</code></pre></li>
-<li><p>执行 <code>git add foo.c</code> ，告知git已完成冲突解决；</p>
-</li>
-<li>再次执行 <code>git rebase --continue</code> ，提示”Applying: git v1”，此时”git v1”版本又一次成功加入本地版本库，你可通过 <code>git log</code> 查看；</li>
-<li>执行 <code>git-svn dcommit</code> 将foo.c的改动同步到svn中心库，到此算是完成一次冲突解决。</li>
-</ul>
-</li>
-<li><p>分支问题</p>
-<p> git分支合并回master后要删除 因为使用 <code>git-svn rebase</code> 获取版本库更新会改变git历史</p>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cig1yy70m001ftdf8bxb10zs2" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git-svn/">git svn</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-apache-php-tomcat-integration" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/08/29/apache-php-tomcat-integration/" class="article-date">
-  <time datetime="2014-08-29T10:02:51.000Z" itemprop="datePublished">2014-08-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/08/29/apache-php-tomcat-integration/">apache-php-tomcat-integration</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>测试时可以修改hosts</p>
-<pre><code>127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span> <span class="tag">www</span><span class="class">.goutrip</span><span class="class">.com</span>
-127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span> <span class="tag">goutrip</span><span class="class">.com</span>
-</code></pre><h2 id="Table_of_Contents"><a name="TOC">Table of Contents</a></h2><ul>
-<li><a href="#windows">Windows</a><ul>
-<li><a href="#version">版本</a></li>
-<li><a href="#install-apache">安装apache</a></li>
-<li><a href="#install-tomcat">安装tomcat</a></li>
-<li><a href="#install-php">安装php</a></li>
-<li><a href="#install-mysql">安装mysql</a></li>
-<li><a href="#integrate-apache-tomcat">整合apache tomcat</a><ul>
-<li><a href="#config-apache">apache配置</a></li>
-<li><a href="#config-tomcat">tomcat配置</a></li>
-</ul>
-</li>
-<li><a href="#integrate-apache-php">整合apache php</a></li>
-<li><a href="#integrate-php-mysql">整合php mysql</a></li>
-</ul>
-</li>
-<li><a href="">Linux</a></li>
-</ul>
-<h2 id="Windows"><a id="windows">Windows</a></h2><h3 id="版本"><a id="version">版本</a></h3><pre><code><span class="tag">httpd-2</span><span class="class">.2</span><span class="class">.25-win32-x86-openssl-0</span><span class="class">.9</span><span class="class">.8y</span><span class="class">.msi</span>
-<span class="tag">apache-tomcat-7</span><span class="class">.0</span><span class="class">.55-windows-x64</span><span class="class">.zip</span>
-<span class="tag">php-5</span><span class="class">.2</span><span class="class">.13-Win32</span><span class="class">.zip</span>
-<span class="tag">mysql-5</span><span class="class">.5</span><span class="class">.39-winx64</span><span class="class">.zip</span>
-</code></pre><h3 id="安装apache"><a id="install-apache">安装apache</a></h3><p>httpd.conf</p>
-<pre><code><span class="tag">&lt;Directory /&gt;</span>
-    <span class="keyword"><span class="common">Options</span></span> FollowSymLinks
-    <span class="keyword">AllowOverride</span> None
-<span class="comment">#    Order deny,allow</span>
-<span class="comment">#    Deny from all</span>
-<span class="tag">&lt;/Directory&gt;</span>
-</code></pre><h3 id="安装tomcat"><a id="install-tomcat">安装tomcat</a></h3><h3 id="安装php"><a id="install-php">安装php</a></h3><p>解压到目录 设置 path 环境变量</p>
-<pre><code><span class="label">D:</span>\php5
-</code></pre><p>加载模块报错：</p>
-<p>有时启动Apache的时候会提示“找不到指定模块”的错误，是因为没有指定这些模块文件的位置，定位关键字“extension_dir”，修改Windows下为你的PHP模块的目录。</p>
-<pre><code><span class="setting">extession_dir = <span class="value"><span class="string">"D:\PHP\ext"</span></span></span>
-</code></pre><p>或者添加 path 环境变量</p>
-<pre><code>D:<span class="command">\php</span><span class="command">\ext</span>
-</code></pre><h3 id="安装mysql"><a id="install-mysql">安装mysql</a></h3><p>解压到目录<br>添加到path环境变量</p>
-<pre><code>E:<span class="command">\Program</span><span class="command">\mysql</span>-5.5.39-winx64<span class="command">\bin</span>
-</code></pre><p>启动服务</p>
-<pre><code>mysqld <span class="comment">--console</span>
-</code></pre><p>关闭服务</p>
-<pre><code>mysqladmin -u root -<span class="tag">p</span> shutdown
-</code></pre><p>连接到数据库</p>
-<pre><code><span class="title">mysql</span> -u root -p
-</code></pre><p>进行初始配置 详见mysql-usage.md</p>
-<h3 id="整合apache_tomcat"><a id="integrate-apache-tomcat">整合apache tomcat</a></h3><p>有三种方法</p>
-<ol>
-<li>mod_jk.so</li>
-<li>ajp代理</li>
-</ol>
-<p>以下采用ajp代理方式</p>
-<h4 id="apache配置"><a id="config-apache">apache配置</a></h4><p>httpd.conf</p>
-<pre><code><span class="keyword"><span class="common">LoadModule</span></span> proxy_module modules/mod_proxy.so
-<span class="keyword"><span class="common">LoadModule</span></span> proxy_ajp_module modules/mod_proxy_ajp.so
-<span class="keyword"><span class="common">LoadModule</span></span> proxy_balancer_module modules/mod_proxy_balancer.so
-
-<span class="comment"># Virtual hosts</span>
-<span class="keyword">Include</span> conf/extra/httpd-vhosts.conf
-
-<span class="comment">#</span>
-<span class="comment"># DirectoryIndex: sets the file that Apache will serve if a directory</span>
-<span class="comment"># is requested.</span>
-<span class="comment">#</span>
-<span class="tag">&lt;IfModule dir_module&gt;</span>
-    <span class="keyword">DirectoryIndex</span> index.html index.jsp index.php
-<span class="tag">&lt;/IfModule&gt;</span>
-</code></pre><p>extra/httpd-vhosts.conf</p>
-<pre><code>&lt;VirtualHost *:<span class="number">80</span>&gt;
-    ServerName www<span class="class">.goutrip</span><span class="class">.com</span>
-    ServerAlias goutrip<span class="class">.com</span>
-    ProxyPreserveHost on
-    ProxyRequests Off
-    &lt;proxy balancer:<span class="comment">//goutrip&gt;</span>
-        BalancerMember ajp:<span class="comment">//localhost:8009 loadfactor=1 route=jvm1</span>
-        BalancerMember ajp:<span class="comment">//localhost:8010 loadfactor=1 route=jvm2</span>
-        BalancerMember ajp:<span class="comment">//localhost:8012 loadfactor=1 route=jvm3</span>
-    &lt;/proxy&gt;
-    ProxyPass / balancer:<span class="comment">//goutrip/ lbmethod=byrequests stickysession=JSESSIONID nofailover=on</span>
-    ProxyPassReverse / balancer:<span class="comment">//goutrip/</span>
-    ErrorLog <span class="string">"logs/goutrip.com-error.log"</span>
-    CustomLog <span class="string">"logs/goutrip.com-access.log"</span> common
-&lt;/VirtualHost&gt;
-
-&lt;VirtualHost *:<span class="number">80</span>&gt;
-    DocumentRoot <span class="string">"D:/website/g.goutrip.com"</span>
-    ServerName www<span class="class">.g</span><span class="class">.goutrip</span><span class="class">.com</span>
-    ServerAlias g<span class="class">.goutrip</span><span class="class">.com</span>
-    ErrorLog <span class="string">"logs/g.goutrip.com-error.log"</span>
-    CustomLog <span class="string">"logs/g.goutrip.com-access.log"</span> common
-&lt;/VirtualHost&gt;
-</code></pre><p>以上也配置了负载均衡</p>
-<h4 id="tomcat配置"><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
-<pre><code>&lt;Engine <span class="property">name</span>=<span class="string">"Standalone"</span> defaultHost=<span class="string">"localhost"</span> jvmRoute=<span class="string">"jvm1"</span>&gt;
-</code></pre><p>修改端口</p>
-<pre><code><span class="tag">&lt;<span class="title">Server</span> <span class="attribute">port</span>=<span class="value">"8005"</span> <span class="attribute">shutdown</span>=<span class="value">"SHUTDOWN"</span>&gt;</span>
-<span class="tag">&lt;<span class="title">Connector</span> <span class="attribute">port</span>=<span class="value">"8009"</span> <span class="attribute">protocol</span>=<span class="value">"AJP/1.3"</span> <span class="attribute">redirectPort</span>=<span class="value">"8443"</span> /&gt;</span>
-</code></pre><h3 id="整合apache_php"><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
-<pre><code><span class="keyword"><span class="common">LoadModule</span></span> php5_module <span class="string">"D:/php5/php5apache2_2.dll"</span>
-<span class="keyword">phpinidir</span> <span class="string">"D:/php5"</span>
-
-<span class="tag">&lt;IfModule mime_module&gt;</span>
-<span class="keyword">AddType</span> application/x-httpd-php .php .html  #也可分多行写
-<span class="tag">&lt;/IfModule&gt;</span>
-
-<span class="comment">#</span>
-<span class="comment"># DirectoryIndex: sets the file that Apache will serve if a directory</span>
-<span class="comment"># is requested.</span>
-<span class="comment">#</span>
-<span class="tag">&lt;IfModule dir_module&gt;</span>
-    <span class="keyword">DirectoryIndex</span> index.html index.jsp index.php
-<span class="tag">&lt;/IfModule&gt;</span>
-</code></pre><p>修改后重启apache</p>
-<h3 id="整合php_mysql"><a id="integrate-php-mysql">整合php mysql</a></h3><p>php.ini</p>
-<pre><code><span class="attribute">extension</span>=<span class="string">php_mysql.dll</span>
-</code></pre><p>修改后重启apache</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cig1yy71j0022tdf870mfxk23" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php/">php</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomat/">tomat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tomcat/">tomcat</a></li></ul>
-
     </footer>
   </div>
   
@@ -1060,7 +923,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1071,7 +934,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -1080,7 +943,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">October 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1092,23 +955,23 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
       <ul>
         
           <li>
-            <a href="/2015/10/22/hello-world/">Hello World</a>
+            <a href="/2015/11/20/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/maven-usage/">maven-usage</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/06/java-persistence-with-hibernate/">java-persistence-with-hibernate</a>
+          </li>
+        
+          <li>
+            <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
           </li>
         
           <li>
             <a href="/2015/09/15/front-end/">front-end</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/12/enterprise-web-development/">enterprise-web-development</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/10/vim/">vim</a>
-          </li>
-        
-          <li>
-            <a href="/2015/08/26/apache2-web-server/">apache2-web-server</a>
           </li>
         
       </ul>
