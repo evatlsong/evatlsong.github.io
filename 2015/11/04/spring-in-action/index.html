@@ -6,16 +6,31 @@
   
   <title>spring-in-action | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="java basedAbstractAnnotationConfigDispatcherServletInitializer exposedIn a Servlet 3.0 environment, the container looks for any classes in the classpath thatimplement the javax.servlet.ServletContaine">
+  <meta name="description" content="Core Springworking with an application context
+AnnotationConfigApplicationContext
+AnnotationConfigWebApplicationContext
+ClassPathXmlApplicationContext
+FileSystemXmlApplicationContext
+XmlWebApplication">
 <meta property="og:type" content="article">
 <meta property="og:title" content="spring-in-action">
 <meta property="og:url" content="http://evatlsong.com/2015/11/04/spring-in-action/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="java basedAbstractAnnotationConfigDispatcherServletInitializer exposedIn a Servlet 3.0 environment, the container looks for any classes in the classpath thatimplement the javax.servlet.ServletContaine">
-<meta property="og:updated_time" content="2015-11-20T11:13:03.094Z">
+<meta property="og:description" content="Core Springworking with an application context
+AnnotationConfigApplicationContext
+AnnotationConfigWebApplicationContext
+ClassPathXmlApplicationContext
+FileSystemXmlApplicationContext
+XmlWebApplication">
+<meta property="og:updated_time" content="2015-11-26T19:41:09.424Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="spring-in-action">
-<meta name="twitter:description" content="java basedAbstractAnnotationConfigDispatcherServletInitializer exposedIn a Servlet 3.0 environment, the container looks for any classes in the classpath thatimplement the javax.servlet.ServletContaine">
+<meta name="twitter:description" content="Core Springworking with an application context
+AnnotationConfigApplicationContext
+AnnotationConfigWebApplicationContext
+ClassPathXmlApplicationContext
+FileSystemXmlApplicationContext
+XmlWebApplication">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -97,7 +112,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="java_based">java based</h1><h2 id="AbstractAnnotationConfigDispatcherServletInitializer_exposed">AbstractAnnotationConfigDispatcherServletInitializer exposed</h2><p>In a Servlet 3.0 environment, the container looks for any classes in the classpath that<br>implement the <code>javax.servlet.ServletContainerInitializer</code> interface; if any are found,<br>they’re used to configure the servlet container.</p>
+        <h1 id="Core_Spring">Core Spring</h1><h2 id="working_with_an_application_context">working with an application context</h2><ul>
+<li>AnnotationConfigApplicationContext</li>
+<li>AnnotationConfigWebApplicationContext</li>
+<li>ClassPathXmlApplicationContext</li>
+<li>FileSystemXmlApplicationContext</li>
+<li>XmlWebApplicationContext<h1 id="java_based">java based</h1><h2 id="AbstractAnnotationConfigDispatcherServletInitializer_exposed">AbstractAnnotationConfigDispatcherServletInitializer exposed</h2></li>
+</ul>
+<p>In a Servlet 3.0 environment, the container looks for any classes in the classpath that<br>implement the <code>javax.servlet.ServletContainerInitializer</code> interface; if any are found,<br>they’re used to configure the servlet container.</p>
 <p>Spring supplies an implementation of that interface called <code>SpringServletContainerInitializer</code><br>that, in turn, seeks out any classes that implement <code>WebApplicationInitializer</code> and delegates<br>to them for configuration. Spring 3.2 introduced a convenient base implementation of<br><code>WebApplicationInitializer</code> called <code>AbstractAnnotationConfigDispatcherServletInitializer</code>.</p>
 <h2 id="Adding_additional_servlets_and_filters">Adding additional servlets and filters</h2><pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServletInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> <span class="title">throws</span> <span class="title">ServletException</span> {</span>
     <span class="annotation">@Override</span>
@@ -125,12 +147,14 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="cih7kje3b000qtfebupmvz1pm" class="article-share-link" data-share="baidu" data-title="spring-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="cihgnbxnw000qt9dxpl8guhqa" class="article-share-link" data-share="baidu" data-title="spring-in-action">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
     </footer>
   </div>
   
@@ -167,7 +191,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -178,7 +202,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -199,7 +223,7 @@
       <ul>
         
           <li>
-            <a href="/2015/11/20/hello-world/">Hello World</a>
+            <a href="/2015/11/26/hello-world/">Hello World</a>
           </li>
         
           <li>

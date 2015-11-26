@@ -78,8 +78,8 @@
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/20/hello-world/" class="article-date">
-  <time datetime="2015-11-20T11:13:03.094Z" itemprop="datePublished">2015-11-20</time>
+    <a href="/2015/11/26/hello-world/" class="article-date">
+  <time datetime="2015-11-26T19:41:09.424Z" itemprop="datePublished">2015-11-26</time>
 </a>
     
   </div>
@@ -90,7 +90,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/20/hello-world/">Hello World</a>
+      <a class="article-title" href="/2015/11/26/hello-world/">Hello World</a>
     </h1>
   
 
@@ -112,7 +112,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/20/hello-world/" data-id="cih7kje48001jtfebm0q373fp" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://evatlsong.com/2015/11/26/hello-world/" data-id="cihgnbxow001nt9dxripupq5j" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
       
 
       
@@ -164,7 +164,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/06/maven-usage/" data-id="cih7kje3p0011tfeb0sq0zofa" class="article-share-link" data-share="baidu" data-title="maven-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2015/11/06/maven-usage/" data-id="cihgnbxob0013t9dx8q5de1je" class="article-share-link" data-share="baidu" data-title="maven-usage">分享到</a>
       
 
       
@@ -221,18 +221,314 @@
 <li>How do we efficiently retrieve data with associations</li>
 </ul>
 <h3 id="Hibernate_configuration_and_startup">Hibernate configuration and startup</h3><p><code>hibernate.generate_statistics</code> 启用统计集合</p>
+<h1 id="Mapping_concepts_and_strategies">Mapping concepts and strategies</h1><h2 id="Mapping_persistent_classes">Mapping persistent classes</h2><p>Whether field or perperty access is enabled for an entity depends on the position of mandatory <code>@Id</code> annotation.<br>If it’s present on a field, so all attributes of the class are accessed by Hibernate through fields.</p>
+<h2 id="Fine-grained_models_and_mappings">Fine-grained models and mappings</h2><h3 id="Mapping_basic_properties">Mapping basic properties</h3><p>Using derived properties</p>
+<pre><code><span class="annotation">@org</span>.hibernate.annotations.Formula(<span class="string">"TOTAL + TAX_RATE * TOTAL"</span>)
+<span class="keyword">public</span> <span class="function">BigDecimal <span class="title">getTotalIncludingTax</span><span class="params">()</span> </span>{
+    <span class="keyword">return</span> totalIncludingTax;
+}
+</code></pre><p>The given SQL formula is evaluated every time the entity is retrieved from the database<br>(and not at any other time, so the result may be outdated if other properties are modified).</p>
+<p>Generated and default property values<br>Properties marked as database-generated must additionally be nininsertable and nonupdateable,<br>which you control with the insert and update attributes. If both are set to false, the property’s<br>columns never appear in the INSERT or UPDATE statements– the property value is read-only. Alse,<br>you usually don’t add a public setter method in your class for immutable property(and switch to field access).</p>
+<pre><code><span class="variable">@Column</span>(updatable = false, insertable = false)
+<span class="variable">@org</span>.hibernate.annotations.<span class="function">Generated</span>(
+    org.hibernate.annotations.GenerationTime.ALWAYS
+)
+private Date lastModified;
+</code></pre><p>A special case of database-generated property values are default values.<br>you have to enable dynamic insertion and update statement generation, so that the column with the default<br>value isn’t included in every statement if its value is null (otherwise a NULL would be inserted instead<br>of the default value). Furthermore, an instance of Item that has been made persistent but not yet flushed<br>to the database and not refreshed again won’t have the default value set on the object property. In other<br>words, you need to execute an explicit flush;</p>
+<pre><code>Item newItem = <span class="keyword">new</span> Item(...);
+session.save(newItem);
 
+newItem.getInitialPrice();   <span class="comment">// is null</span>
+
+session.flush();             <span class="comment">// Trigger an INSERT</span>
+<span class="comment">// Hibernate does a SELECT automatically</span>
+
+newItem.getInitialPrice();   <span class="comment">// is $1</span>
+
+<span class="annotation">@Column</span>(name = <span class="string">"INITIAL_PRICE"</span>,
+        columnDefinition = <span class="string">"number(10, 2) default '1'"</span>)
+<span class="annotation">@org</span>.hibernate.annotations.Generated(
+    org.hibernate.annotations.GenerationTime.INSERT
+)
+<span class="annotation">@org</span>.hibernate.annotations.DynamicInsert
+<span class="annotation">@org</span>.hibernate.annotations.DynamicUpdate
+<span class="keyword">private</span> BigDecimal initalPrice;
+</code></pre><h3 id="Mapping_components">Mapping components</h3><pre><code>&lt;&lt;Table&gt;&gt; 
+USERS
+---------------
+FIRSTNAME
+LASTNAME
+USERNAME
+PASSWORD
+EMAIL
+---------------
+HOME_STREET
+HOME_ZIPCODE
+HOME_CITY
+---------------
+BILLING_STREET
+BILLING_ZIPCODE
+BILLING_CITY
+
+<span class="annotation">@Entity</span>
+<span class="annotation">@Table</span>(name = <span class="string">"USERS"</span>)
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> {</span>
+    <span class="annotation">@Embedded</span>
+    <span class="keyword">private</span> Address homeAddress;
+}
+
+<span class="annotation">@Embeddable</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> {</span>
+    <span class="annotation">@Column</span>(name = <span class="string">"ADDRESS_STREET"</span>, nullable = <span class="literal">false</span>)
+    <span class="keyword">private</span> String street;
+
+    <span class="annotation">@Column</span>(name = <span class="string">"ADDRESS_ZIPCODE"</span>, nullable = <span class="literal">false</span>)
+    <span class="keyword">private</span> String zipcode;
+
+    <span class="annotation">@Column</span>(name = <span class="string">"ADDRESS_CITY"</span>, nullable = <span class="literal">false</span>)
+    <span class="keyword">private</span> String city;
+}
+
+<span class="comment">//=================================================================</span>
+
+<span class="annotation">@Entity</span>
+<span class="annotation">@Table</span>(name = <span class="string">"USERS"</span>)
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> {</span>
+    <span class="annotation">@Embedded</span>
+    <span class="annotation">@AttributeOverrides</span>({
+        <span class="annotation">@AttributeOverride</span>(name = <span class="string">"street"</span>,
+                            column = <span class="annotation">@Column</span>(name = <span class="string">"HOME_STREET"</span>)),
+    <span class="annotation">@AttributeOverrides</span>({
+        <span class="annotation">@AttributeOverride</span>(name = <span class="string">"zipcode"</span>,
+                            column = <span class="annotation">@Column</span>(name = <span class="string">"HOME_ZIPCODE"</span>)),
+    <span class="annotation">@AttributeOverrides</span>({
+        <span class="annotation">@AttributeOverride</span>(name = <span class="string">"city"</span>,
+                            column = <span class="annotation">@Column</span>(name = <span class="string">"HOME_CITY"</span>))
+    })
+    <span class="keyword">private</span> Address homeAddress;
+}
+</code></pre><h2 id="Inheritance_and_custom_types">Inheritance and custom types</h2><h3 id="Mapping_class_inheritance">Mapping class inheritance</h3><ol>
+<li><p>Table per concrete class with implicit polymorphism</p>
+<p> &lt;<table>&gt;                   &lt;<table>&gt;<br> CREDIT_CARD                 BANK_ACCOUNT</table></table></p>
+<hr>
+<p> CREDIT_CARD_ID              BANK_ACCOUNT_ID<br> OWNER                       OWNER<br> NUMBER                      ACCOUNT<br> EXP_MONTH                   BANKNAME<br> EXP_YEAR                    SWIFT</p>
+<p> @MappedSuperclass<br> public abstract class BillingDetails {</p>
+<pre><code><span class="annotation">@Column</span>(name = <span class="string">"OWNER"</span>, nullable = <span class="keyword">false</span>)
+<span class="keyword">private</span> String owner;
+</code></pre><p> }</p>
+<p> @Entity<br> @AttributeOverride(name = “owner”, column =</p>
+<pre><code>@<span class="function"><span class="title">Column</span><span class="params">(name = <span class="string">"CC_OWNER"</span>, nullable = false)</span></span>
+</code></pre><p> )<br> public class CreditCard extends BillingDetails {</p>
+<pre><code><span class="variable">@Id</span>
+<span class="variable">@GeneratedValue</span>
+<span class="variable">@Column</span>(name = <span class="string">"CREDIT_CARD_ID"</span>)
+private Long id = null;
+
+<span class="variable">@Column</span>(name = <span class="string">"NUMBER"</span>, nullable = false)
+private String number;
+</code></pre><p> }</p>
+</li>
+</ol>
+<ol>
+<li><p>Table per concrete class with unions(与1 表结构相同)</p>
+<p> @Entity<br> @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)<br> public abstract class BillingDetails {</p>
+<pre><code><span class="variable">@Id</span>
+<span class="variable">@GeneratedValue</span>
+<span class="variable">@Column</span>(name = <span class="string">"BILLING_DETAILS_ID"</span>)
+private Long id = null;
+
+<span class="variable">@column</span>(name = <span class="string">"OWNER"</span>, nullable = false)
+private String owner;
+</code></pre><p> }</p>
+<p> @Entity<br> @Table(name = “CREDIT_CARD”)<br> public class CreditCard extends BillingDetails {</p>
+<pre><code><span class="constant">@Column</span>(name = <span class="string">"NUMBER"</span>, nullable = <span class="literal">false</span>)
+private <span class="built_in">String</span> <span class="built_in">number</span><span class="comment">;</span>
+</code></pre><p> }</p>
+</li>
+<li><p>Table per class hierarchy</p>
+<p> &lt;<table>&gt;</table></p>
+<h2 id="BILLING_DETAILS"> BILLING_DETAILS</h2><p> BILLING_DETAILS_ID<br> BILLING_DETAILS_TYPE&lt;<discriminator>&gt;<br> OWNER<br> CC_NUMBER<br> CC_EXP_MONTH<br> CC_EXP_YEAR<br> BA_ACCOUNT<br> BA_BANKNAME<br> BA_SWIFT</discriminator></p>
+<p> @Entity<br> @Inheritance(strategy = InheritanceType.SINGLE_TABLE)<br> @DiscriminatorColumn(</p>
+<pre><code><span class="setting">name = <span class="value"><span class="string">"BILLING_DETAILS_TYPE"</span>,</span></span>
+<span class="setting">discriminatorType = <span class="value">DiscriminatorType.STRING</span></span>
+</code></pre><p> )<br> public abstract class BillingDetails {</p>
+<pre><code><span class="variable">@Id</span>
+<span class="variable">@GeneratedValue</span>
+<span class="variable">@Column</span>(name = <span class="string">"BILLING_DETAILS_ID"</span>)
+private Long id = null;
+
+<span class="variable">@Column</span>(name = <span class="string">"OWNER"</span>, nullable = false)
+private String owner;
+</code></pre><p> }</p>
+<p> @Entity<br> @DiscriminatorValue(“CC”)<br> public class CreditCard extends BillingDetails {</p>
+<pre><code><span class="constant">@Column</span>(name = <span class="string">"CC_NUMBER"</span>)
+private <span class="built_in">String</span> <span class="built_in">number</span><span class="comment">;</span>
+</code></pre><p> }</p>
+</li>
+<li><p>Table per subclass</p>
+<p> &lt;<table>&gt;</table></p>
+<h2 id="BILLING_DETAILS-1"> BILLING_DETAILS</h2><p> OWNER</p>
+<p> &lt;<table>&gt;</table></p>
+<h2 id="CREDIT_CARD"> CREDIT_CARD</h2><p> CREDIT_CARD_ID&lt;<pk>&gt;&lt;<fk>&gt;<br> NUMBER<br> EXP_MONTH<br> EXP_YEAR</fk></pk></p>
+<p> &lt;<table>&gt;</table></p>
+<h2 id="BANK_ACCOUNT"> BANK_ACCOUNT</h2><p> BANK_ACCOUNT_ID&lt;<pk>&gt;&lt;<fk>&gt;<br> ACCOUNT<br> BANKNAME<br> SWIFT</fk></pk></p>
+<p> @Entity<br> @Inheritance(strategy = InheritanceType.JOINED)<br> public abstract class BillingDetails {</p>
+<pre><code><span class="variable">@Id</span>
+<span class="variable">@GeneratedValue</span>
+<span class="variable">@Column</span>(name = <span class="string">"BILLING_DETAILS_ID"</span>)
+private Long id = nulll;
+</code></pre><p> }</p>
+<p> @Entity<br> @PrimaryKeyJoinColumn(name = “CREDIT_CARD_ID”)<br> public class CreditCard extends BillingDetails {<br> }</p>
+</li>
+<li><p>Mixing inheritance strategies</p>
+<p> &lt;<table>&gt;</table></p>
+<h2 id="BILLING_DETAILS-2"> BILLING_DETAILS</h2><p> BILLING_DETAILS_ID<br> BILLING_DETAILS_TYPE&lt;<discriminator>&gt;<br> OWNER<br> BA_ACCOUNT<br> BA_BANKNAME<br> BA_SWIFT</discriminator></p>
+<p> &lt;<table>&gt;</table></p>
+<h2 id="CREDIT_CARD-1"> CREDIT_CARD</h2><p> CREDIT_CARD_ID&lt;<pk>&gt;<br> CC_NUMBER<br> CC_EXP_MONTH<br> CC_EXP_YEAR</pk></p>
+<p> @Entity<br> @Inheritance(strategy = InheritanceType.SINGLE_TABLE)<br> @DiscriminatorColumn(</p>
+<pre><code><span class="setting">name = <span class="value"><span class="string">"BILLING_DETAILS_TYPE"</span>,</span></span>
+<span class="setting">discriminatorType = <span class="value">DiscriminatorType.STRING</span></span>
+</code></pre><p> )<br> public abstract class BillingDetails {</p>
+<pre><code><span class="variable">@Id</span>
+<span class="variable">@GeneratedValue</span>
+<span class="variable">@Column</span>(name = <span class="string">"BILLING_DETAILS_ID"</span>)
+private Long id = null;
+
+<span class="variable">@Column</span>(name = <span class="string">"OWNER"</span>, nullable = false)
+private String owner;
+</code></pre><p> }</p>
+<p> @Entity<br> @DiscriminatorValue(“CC”)<br> @SecondaryTable(</p>
+<pre><code>name = <span class="string">"CREDIT_CARD"</span>
+pkJoinColumns = @<span class="function"><span class="title">PrimaryKeyJoinColumn</span><span class="params">(name = <span class="string">"CREDIT_CARD_ID"</span>)</span></span>
+</code></pre><p> )<br> public class CreditCard extends BillingDetails {</p>
+<pre><code><span class="constant">@Column</span>(table = <span class="string">"credit_card"</span>,
+        name = <span class="string">"CC_NUMBER"</span>,
+        nullable = <span class="literal">false</span>)
+private <span class="built_in">String</span> <span class="built_in">number</span><span class="comment">;</span>
+</code></pre><p> }</p>
+</li>
+</ol>
+<h2 id="Mapping_collections_with_annotations">Mapping collections with annotations</h2><pre><code><span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@Column</span>(name = <span class="string">"FILENAME"</span>, nullable = false)
+private Set&lt;String&gt; images = new HashSet&lt;String&gt;();
+
+
+<span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@OrderColumn</span>(name = <span class="string">"POSITION"</span>)
+<span class="variable">@org</span>.hibernate.annotations.<span class="function">ListIndexBase</span>(<span class="number">1</span>)
+<span class="variable">@Column</span>(name = <span class="string">"FILENAME"</span>)
+private List&lt;String&gt; images = new ArrayList&lt;String&gt;();
+
+
+<span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@org</span>.hibernate.annotations.<span class="function">MapKey</span>(
+    columns = <span class="variable">@Column</span>(name = <span class="string">"IMAGENAME"</span>)
+)
+<span class="variable">@Column</span>(name = <span class="string">"FILENAME"</span>, nullable = false)
+private Map&lt;String, String&gt; images = new HashMap&lt;String, String&gt;();
+
+
+<span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@Column</span>(name = <span class="string">"FILENAME"</span>, nullable = false)
+<span class="variable">@org</span>.hibernate.annotations.Sortnatural
+private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
+
+
+<span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@Column</span>(name = <span class="string">"FILENAME"</span>, nullable = false)
+<span class="variable">@org</span>.hibernate.annotations.<span class="function">OrderBy</span>(
+    clause = <span class="string">"FILENAME asc"</span>
+)
+private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
+</code></pre><h3 id="Mapping_a_collection_of_embedded_objects">Mapping a collection of embedded objects</h3><pre><code><span class="variable">@Embeddable</span>
+public class Image {
+    <span class="variable">@org</span>.hibernate.annotations.Parent
+    Item item;
+
+    <span class="variable">@Column</span>(length = <span class="number">255</span>, nullable = false)
+    private String name;
+    <span class="variable">@Column</span>(length = <span class="number">255</span>, nullable = false)
+    private String filename;
+
+    <span class="variable">@Column</span>(nullable = false)
+    private int sizeX;
+
+    <span class="variable">@Column</span>(nullable = false)
+    private int sizeY;
+}
+
+
+<span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@AttributeOverride</span>(
+    name = <span class="string">"element.name"</span>,
+    column = <span class="variable">@Column</span>(name = <span class="string">"IMAGENAME"</span>,
+                    length = <span class="number">255</span>,
+                    nullable = false)
+)
+private Set&lt;Image&gt; images = new HashSet&lt;Image&gt;();
+
+
+<span class="variable">@ElementCollection</span>
+<span class="variable">@JoinTable</span>(
+    name = <span class="string">"ITEM_IMAGE"</span>
+    joinColumns = <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>)
+)
+<span class="variable">@org</span>.hibernate.annotations.<span class="function">CollectionId</span>(
+    columns = <span class="variable">@Column</span>(name = <span class="string">"ITEM_IMAGE_ID"</span>),
+    type = <span class="variable">@org</span>.hibernate.annotations.<span class="function">Type</span>(type = <span class="string">"long"</span>),
+    generator = <span class="string">"sequence"</span>
+)
+private Collection&lt;Image&gt; images = new ArrayList&lt;Image&gt;();
+</code></pre><h2 id="Mapping_a_parent/children_relationship">Mapping a parent/children relationship</h2><pre><code><span class="tag">public</span> <span class="tag">class</span> <span class="tag">Bid</span> {
+    <span class="variable">@ManyToOne</span>
+    <span class="variable">@JoinColumn</span>(name = <span class="string">"ITEM_ID"</span>, nullable = false)
+    private Item item;
+}
+
+<span class="tag">public</span> <span class="tag">class</span> <span class="tag">Item</span> {
+    <span class="variable">@OneToMany</span>(cascade = { CascadeType.PERSIST,
+                           CascadeType.MERGE,
+                           CascadeType.REMOVE },
+               orphanRemoval = true,
+               mappedBy = <span class="string">"item"</span>)
+    private Set&lt;Bid&gt; bids = new HashSet&lt;Bid&gt;();
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/" data-id="cih7kje42001dtfebah7jayjw" class="article-share-link" data-share="baidu" data-title="java-persistence-with-hibernate">分享到</a>
+        <a data-url="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/" data-id="cihgnbxop001ft9dx63uspbi7" class="article-share-link" data-share="baidu" data-title="java-persistence-with-hibernate">分享到</a>
       
 
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jpa/">jpa</a></li></ul>
 
     </footer>
   </div>
@@ -263,7 +559,14 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="java_based">java based</h1><h2 id="AbstractAnnotationConfigDispatcherServletInitializer_exposed">AbstractAnnotationConfigDispatcherServletInitializer exposed</h2><p>In a Servlet 3.0 environment, the container looks for any classes in the classpath that<br>implement the <code>javax.servlet.ServletContainerInitializer</code> interface; if any are found,<br>they’re used to configure the servlet container.</p>
+        <h1 id="Core_Spring">Core Spring</h1><h2 id="working_with_an_application_context">working with an application context</h2><ul>
+<li>AnnotationConfigApplicationContext</li>
+<li>AnnotationConfigWebApplicationContext</li>
+<li>ClassPathXmlApplicationContext</li>
+<li>FileSystemXmlApplicationContext</li>
+<li>XmlWebApplicationContext<h1 id="java_based">java based</h1><h2 id="AbstractAnnotationConfigDispatcherServletInitializer_exposed">AbstractAnnotationConfigDispatcherServletInitializer exposed</h2></li>
+</ul>
+<p>In a Servlet 3.0 environment, the container looks for any classes in the classpath that<br>implement the <code>javax.servlet.ServletContainerInitializer</code> interface; if any are found,<br>they’re used to configure the servlet container.</p>
 <p>Spring supplies an implementation of that interface called <code>SpringServletContainerInitializer</code><br>that, in turn, seeks out any classes that implement <code>WebApplicationInitializer</code> and delegates<br>to them for configuration. Spring 3.2 introduced a convenient base implementation of<br><code>WebApplicationInitializer</code> called <code>AbstractAnnotationConfigDispatcherServletInitializer</code>.</p>
 <h2 id="Adding_additional_servlets_and_filters">Adding additional servlets and filters</h2><pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyServletInitializer</span> <span class="keyword">implements</span> <span class="title">WebApplicationInitializer</span> <span class="title">throws</span> <span class="title">ServletException</span> {</span>
     <span class="annotation">@Override</span>
@@ -291,12 +594,14 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="cih7kje3b000qtfebupmvz1pm" class="article-share-link" data-share="baidu" data-title="spring-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="cihgnbxnw000qt9dxpl8guhqa" class="article-share-link" data-share="baidu" data-title="spring-in-action">分享到</a>
       
 
       
 
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
     </footer>
   </div>
   
@@ -336,7 +641,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/09/15/front-end/" data-id="cih7kje4i001qtfebr0681sch" class="article-share-link" data-share="baidu" data-title="front-end">分享到</a>
+        <a data-url="http://evatlsong.com/2015/09/15/front-end/" data-id="cihgnbxp5001ut9dxpzhp0fnk" class="article-share-link" data-share="baidu" data-title="front-end">分享到</a>
       
 
       
@@ -378,7 +683,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/09/12/enterprise-web-development/" data-id="cih7kje4o001utfebxekhmrt6" class="article-share-link" data-share="baidu" data-title="enterprise-web-development">分享到</a>
+        <a data-url="http://evatlsong.com/2015/09/12/enterprise-web-development/" data-id="cihgnbxpc001yt9dxyqn4mnxw" class="article-share-link" data-share="baidu" data-title="enterprise-web-development">分享到</a>
       
 
       
@@ -419,7 +724,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/09/10/vim/" data-id="cih7kje2m0004tfeb85vkkyrb" class="article-share-link" data-share="baidu" data-title="vim">分享到</a>
+        <a data-url="http://evatlsong.com/2015/09/10/vim/" data-id="cihgnbxn80004t9dx3zpv8dp2" class="article-share-link" data-share="baidu" data-title="vim">分享到</a>
       
 
       
@@ -462,7 +767,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="cih7kje540025tfeb8pbcjc9r" class="article-share-link" data-share="baidu" data-title="apache2-web-server">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="cihgnbxpt0029t9dxbv468f9y" class="article-share-link" data-share="baidu" data-title="apache2-web-server">分享到</a>
       
 
       
@@ -505,7 +810,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/26/systemd-usage/" data-id="cih7kje33000htfebdn3scf7b" class="article-share-link" data-share="baidu" data-title="systemd-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/26/systemd-usage/" data-id="cihgnbxnp000ht9dxcw4u2m1i" class="article-share-link" data-share="baidu" data-title="systemd-usage">分享到</a>
       
 
       
@@ -595,7 +900,7 @@ PARAMETER:
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cih7kje2z000ftfeb8iecyr2i" class="article-share-link" data-share="baidu" data-title="thinking-in-java">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cihgnbxnl000ft9dxq72yvha5" class="article-share-link" data-share="baidu" data-title="thinking-in-java">分享到</a>
       
 
       
@@ -623,7 +928,7 @@ PARAMETER:
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -634,7 +939,7 @@ PARAMETER:
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -655,7 +960,7 @@ PARAMETER:
       <ul>
         
           <li>
-            <a href="/2015/11/20/hello-world/">Hello World</a>
+            <a href="/2015/11/26/hello-world/">Hello World</a>
           </li>
         
           <li>
