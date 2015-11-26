@@ -78,6 +78,8 @@ tags: [git]
 	$ git grep “print” V3 //在V3中搜索所有的包含print的行
 	$ git grep “print” //在所有的历史记录中搜索包含print的行
 
+    $ git show branch:filepath
+
 ## 协作操作
 	$ git clone git://server/path/to/files // Git deamon
 	$ git clone your.computer:/path/to/script  or git clone ssh://car.colorado.edu/home/xxx ./xxxxx // SSH

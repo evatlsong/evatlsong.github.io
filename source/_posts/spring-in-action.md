@@ -1,8 +1,15 @@
 ---
 title: spring-in-action
 date: 2015-11-04 16:14:54
-tags:
+tags: [spring]
 ---
+# Core Spring
+## working with an application context
+* AnnotationConfigApplicationContext
+* AnnotationConfigWebApplicationContext
+* ClassPathXmlApplicationContext
+* FileSystemXmlApplicationContext
+* XmlWebApplicationContext
 # java based
 ## AbstractAnnotationConfigDispatcherServletInitializer exposed
 
