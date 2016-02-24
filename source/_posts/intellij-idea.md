@@ -26,6 +26,7 @@ tags: intellij-idea
     Ctrl + Shift + B Go to type declaration
     Esc Go to editor (from tool window)
     Shift + Esc Hide active or last active window
+    Ctrl + ]/[ Move to code block end/start
 
 ## General
 

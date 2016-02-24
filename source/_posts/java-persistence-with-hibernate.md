@@ -3,11 +3,13 @@ title: java-persistence-with-hibernate
 date: 2015-11-06 11:49:34
 tags: [hibernate, jpa]
 ---
-### the problem of granularity
+# Understand object/relational persistence
+the problem of granularity
 粒度问题 4.4节描述了这个问题的解决方案
-### the problem of subtypes
+the problem of subtypes
 5.1节将讨论ORM解决方案如何解决把一个类层次结构持久化到一个或者多个数据库表的问题
 第5章介绍的继承映射解决方案中，有3种被设计为适应多态关联的表示法和多态查询的有效执行
+## ORM
 ### What is ORM?
 An ORM solution consists of the following four pieces:
 * An API for performing basic CRUD operations on objects of persistent classes
@@ -29,8 +31,7 @@ An ORM solution consists of the following four pieces:
 ### Hibernate configuration and startup
 `hibernate.generate_statistics` 启用统计集合
 
-# Mapping concepts and strategies
-## Mapping persistent classes
+# Mapping persistent classes
 Whether field or perperty access is enabled for an entity depends on the position of mandatory `@Id` annotation.
 If it's present on a field, so all attributes of the class are accessed by Hibernate through fields.
 ## Fine-grained models and mappings
@@ -139,9 +140,15 @@ words, you need to execute an explicit flush;
         private Address homeAddress;
     }
 
-## Inheritance and custom types
-### Mapping class inheritance
+# Inheritance and custom types
+## Mapping class inheritance
 1. Table per concrete class with implicit polymorphism
+2. Table per concrete class with unions(与1 表结构相同)
+3. Table per class hierarchy
+4. Table per subclass
+5. Mixing inheritance strategies
+
+### Table per concrete class with implicit polymorphism
 
     <<Table>>                   <<Table>>             
     CREDIT_CARD                 BANK_ACCOUNT
@@ -172,8 +179,7 @@ words, you need to execute an explicit flush;
         private String number;
     }
 
-
-2. Table per concrete class with unions(与1 表结构相同)
+### Table per concrete class with unions(与1 表结构相同)
 
     @Entity
     @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -193,7 +199,8 @@ words, you need to execute an explicit flush;
         @Column(name = "NUMBER", nullable = false)
         private String number;
     }
-3. Table per class hierarchy
+
+### Table per class hierarchy
 
     <<Table>>
     BILLING_DETAILS
@@ -230,7 +237,8 @@ words, you need to execute an explicit flush;
         @Column(name = "CC_NUMBER")
         private String number;
     }
-4. Table per subclass
+
+### Table per subclass
 
     <<Table>>
     BILLING_DETAILS
@@ -267,7 +275,7 @@ words, you need to execute an explicit flush;
     public class CreditCard extends BillingDetails {
     }
 
-5. Mixing inheritance strategies
+### Mixing inheritance strategies
     
     <<Table>>
     BILLING_DETAILS
@@ -316,6 +324,7 @@ words, you need to execute an explicit flush;
         private String number;
     }
 
+# Mapping collections and entity associations
 ## Mapping collections with annotations
 
     @ElementCollection
@@ -420,6 +429,11 @@ words, you need to execute an explicit flush;
 
 
 ## Mapping a parent/children relationship
+在操作两个实例之间的链接时，如果没有inverse属性，Hibernate会试图执行两个不同的SQL语句，这两者更新同一个
+外键列。通过指定inverse="true"，显式地告诉Hibernate链接的哪一端不应该与数据库同步。
+JPA注解的mappedBy属性相当于XML映射中的inverse属性
+
+cascade和inverse都不出现在值类型的集合或者任何其他值类型映射中。这些规则隐含在值类型的特性中。
 
     public class Bid {
         @ManyToOne
@@ -434,4 +448,66 @@ words, you need to execute an explicit flush;
                    orphanRemoval = true,
                    mappedBy = "item")
         private Set<Bid> bids = new HashSet<Bid>();
+    }
+
+# Advanced entity association mappings
+## single-valued entity associations
+### Shared primary key associations
+
+    @OneToOne
+    @PrimaryKeyJoinColumn
+    private Address shippingAddress;
+
+
+    @Entity
+    @Table(name = "ADDRESS")
+    public class Address {
+        @Id
+        @GeneratedValue(generator = "myForeignGenerator")
+        @org.hibernate.annotations.GenericGenerator(
+            name = "myForeignGenerator",
+            strategy = "foreign",
+            parameters = @Parameter(name = "property", value = "user")
+        )
+        @Column(name = "ADDRESS_ID")
+        private Long id;
+
+        private User user;
+    }
+
+### One-to-one foreign key asociations
+
+    public class User {
+        @OneToOne
+        @JoinColumn(name = "SHIPPING_ADDRESS_ID")
+        private Address shippingAddress;
+    }
+
+
+    public class Address {
+        @OneToOne(mappedBy = "shippingAddress")
+        private User user;
+    }
+
+### Mapping with a join table
+
+    public class Shipment {
+        @OneToOne
+        @JoinTable(
+            name = "ITEM_SHIPMENT",
+            joinColumns = @JoinColumn(name = "SHIPMENT_ID"),
+            inverseJoinColumns = @JoinColumn(name = "ITEM_ID")
+        )
+        private Item auction;
+    }
+
+
+    @Entity
+    @Table(name = "SHIPMENT")
+    @SecondaryTable(name = "ITEM_SHIPMENT")
+    public class Shipment {
+        @Id
+        @GeneratedValue
+        @Column(name = "SHIPMENT_ID")
+        private Long id;
     }
