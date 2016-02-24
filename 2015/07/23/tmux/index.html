@@ -18,7 +18,7 @@ Installing from SourceThe process of installing tmux is the same on both Mac OS 
 check version
 tmux -V
 Installing from SourceThe process of installing tmux is the same on both Mac OS X and">
-<meta property="og:updated_time" content="2015-11-26T19:41:09.424Z">
+<meta property="og:updated_time" content="2016-02-24T12:19:36.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="tmux">
 <meta name="twitter:description" content="Learning The BasicsInstalling tmuxInstalling Via a Package Managersudo apt-get install tmux
@@ -106,65 +106,65 @@ Installing from SourceThe process of installing tmux is the same on both Mac OS 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Learning_The_Basics">Learning The Basics</h1><h2 id="Installing_tmux">Installing tmux</h2><h3 id="Installing_Via_a_Package_Manager">Installing Via a Package Manager</h3><pre><code>sudo apt-<span class="keyword">get</span> install tmux
+        <h1 id="Learning-The-Basics"><a href="#Learning-The-Basics" class="headerlink" title="Learning The Basics"></a>Learning The Basics</h1><h2 id="Installing-tmux"><a href="#Installing-tmux" class="headerlink" title="Installing tmux"></a>Installing tmux</h2><h3 id="Installing-Via-a-Package-Manager"><a href="#Installing-Via-a-Package-Manager" class="headerlink" title="Installing Via a Package Manager"></a>Installing Via a Package Manager</h3><pre><code>sudo apt-get install tmux
 </code></pre><p>check version</p>
-<pre><code><span class="title">tmux</span> -V
-</code></pre><h3 id="Installing_from_Source">Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
-<pre><code>sudo apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">build</span>-essential</span>
+<pre><code>tmux -V
+</code></pre><h3 id="Installing-from-Source"><a href="#Installing-from-Source" class="headerlink" title="Installing from Source"></a>Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
+<pre><code>sudo apt-get install build-essential
 </code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
-<pre><code>sudo apt-<span class="built_in">get</span> install libevent-<span class="built_in">dev</span> libncurses5-<span class="built_in">dev</span>
+<pre><code>sudo apt-get install libevent-dev libncurses5-dev
 
 ./configure
 make
 sudo make install
-</code></pre><h2 id="Starting_tmux">Starting tmux</h2><p>Starting tmux</p>
+</code></pre><h2 id="Starting-tmux"><a href="#Starting-tmux" class="headerlink" title="Starting tmux"></a>Starting tmux</h2><p>Starting tmux</p>
 <pre><code>tmux
 </code></pre><p>Close the tmux session</p>
-<pre><code><span class="keyword">exit</span>
-</code></pre><h3 id="Creating_Named_Sessions">Creating Named Sessions</h3><pre><code>tmux<span class="instruction"> new-session </span>-s basic
+<pre><code>exit
+</code></pre><h3 id="Creating-Named-Sessions"><a href="#Creating-Named-Sessions" class="headerlink" title="Creating Named Sessions"></a>Creating Named Sessions</h3><pre><code>tmux new-session -s basic
 </code></pre><p>shorten this command</p>
-<pre><code>tmux <span class="keyword">new</span> -s basic
-</code></pre><h2 id="Detaching_and_Attaching_Sessions">Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
-<pre><code>tmux <span class="type">list</span>-sessions
+<pre><code>tmux new -s basic
+</code></pre><h2 id="Detaching-and-Attaching-Sessions"><a href="#Detaching-and-Attaching-Sessions" class="headerlink" title="Detaching and Attaching Sessions"></a>Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
+<pre><code>tmux list-sessions
 </code></pre><p>shorten this command</p>
-<pre><code>tmux <span class="keyword">ls</span>
+<pre><code>tmux ls
 </code></pre><p>attach to the session</p>
-<pre><code>tmux <span class="keyword">attach</span>
-tmux <span class="keyword">attach</span> -t basic
-</code></pre><h3 id="Killing_Sessions">Killing Sessions</h3><pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
-</code></pre><h2 id="Working_with_Windows">Working with Windows</h2><pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
-</code></pre><h3 id="Creating_and_Naming_Windows">Creating and Naming Windows</h3><p>create a window</p>
-<pre><code><span class="title">PREFIX</span> c
+<pre><code>tmux attach
+tmux attach -t basic
+</code></pre><h3 id="Killing-Sessions"><a href="#Killing-Sessions" class="headerlink" title="Killing Sessions"></a>Killing Sessions</h3><pre><code>tmux kill-session -t basic
+</code></pre><h2 id="Working-with-Windows"><a href="#Working-with-Windows" class="headerlink" title="Working with Windows"></a>Working with Windows</h2><pre><code>tmux new -s windows -n shell
+</code></pre><h3 id="Creating-and-Naming-Windows"><a href="#Creating-and-Naming-Windows" class="headerlink" title="Creating and Naming Windows"></a>Creating and Naming Windows</h3><p>create a window</p>
+<pre><code>PREFIX c
 </code></pre><p>rename a window</p>
-<pre><code><span class="title">PREFIX</span> ,
-</code></pre><h3 id="Moving_Between_Windows">Moving Between Windows</h3><pre><code>PREFIX n
-PREFIX <span class="tag">p</span>
+<pre><code>PREFIX ,
+</code></pre><h3 id="Moving-Between-Windows"><a href="#Moving-Between-Windows" class="headerlink" title="Moving Between Windows"></a>Moving Between Windows</h3><pre><code>PREFIX n
+PREFIX p
 PREFIX nubmer
 </code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
-<pre><code><span class="title">PREFIX</span> w
-</code></pre><h3 id="close_a_window">close a window</h3><pre><code><span class="keyword">exit</span>
-<span class="keyword">or</span>
+<pre><code>PREFIX w
+</code></pre><h3 id="close-a-window"><a href="#close-a-window" class="headerlink" title="close a window"></a>close a window</h3><pre><code>exit
+or
 PREFIX &amp;
-</code></pre><h2 id="Working_with_Panes">Working with Panes</h2><h3 id="split_new_pane">split new pane</h3><pre><code>PREFIX %
-PREFIX <span class="string">"</span>
-</code></pre><h3 id="cycle_through_the_panes">cycle through the panes</h3><pre><code>PREFIX o
-PREFIX UP, DOWN, <span class="keyword">LEFT</span>, <span class="keyword">RIGHT</span>
-</code></pre><h3 id="cycle_through_layouts">cycle through layouts</h3><pre><code><span class="title">PREFIX</span> SPACEBAR
-</code></pre><h3 id="closing_panes">closing panes</h3><pre><code><span class="keyword">exit</span>
-<span class="keyword">or</span>
+</code></pre><h2 id="Working-with-Panes"><a href="#Working-with-Panes" class="headerlink" title="Working with Panes"></a>Working with Panes</h2><h3 id="split-new-pane"><a href="#split-new-pane" class="headerlink" title="split new pane"></a>split new pane</h3><pre><code>PREFIX %
+PREFIX &quot;
+</code></pre><h3 id="cycle-through-the-panes"><a href="#cycle-through-the-panes" class="headerlink" title="cycle through the panes"></a>cycle through the panes</h3><pre><code>PREFIX o
+PREFIX UP, DOWN, LEFT, RIGHT
+</code></pre><h3 id="cycle-through-layouts"><a href="#cycle-through-layouts" class="headerlink" title="cycle through layouts"></a>cycle through layouts</h3><pre><code>PREFIX SPACEBAR
+</code></pre><h3 id="closing-panes"><a href="#closing-panes" class="headerlink" title="closing panes"></a>closing panes</h3><pre><code>exit
+or
 PREFIX x
-</code></pre><h1 id="notebook">notebook</h1><pre><code>假定[prefix] = ctrl-b
-<span class="header">session
-=========================</span>
+</code></pre><h1 id="notebook"><a href="#notebook" class="headerlink" title="notebook"></a>notebook</h1><pre><code>假定[prefix] = ctrl-b
+session
+=========================
 创建一个被命名的session -&gt; $ tmux new -s name
 detach当前session -&gt; [prefix] d
 查看仍然存在的session列表 -&gt; $ tmux ls
 attach session -&gt; $ tmux attach
-创建一个后台session -d -&gt; $ tmux new -s second<span class="emphasis">_session -d
-选择一个session进行attach -t -&gt; $ tmux attach -t second_</span>session
+创建一个后台session -d -&gt; $ tmux new -s second_session -d
+选择一个session进行attach -t -&gt; $ tmux attach -t second_session
 关闭一个session -&gt; $ tmux kill-session -t basic
-<span class="header">window
-========================</span>
+window
+========================
 创建一个session并为默认window命名 -&gt; $ tmux new -s basic -n shell
 创建一个window在当前的session -&gt; [prefix] c
 重命名window -&gt; [prefix] ,
@@ -174,19 +174,19 @@ attach session -&gt; $ tmux attach
 按名字打开window -&gt; [prefix] $filename
 现实window列表并选择 -&gt; [prefix] w
 关闭window -&gt; [prefix] &amp; 或 输入exit
-<span class="header">pane
-==================</span>
+pane
+==================
 竖直切pane -&gt; [prefix] %
-水平切pane -&gt; [prefix] "
+水平切pane -&gt; [prefix] &quot;
 循环选pane -&gt; [prefix] o
 选pane可以[prefix] 加 上下左右箭头进行选择
 循环显示5种默认样式 -&gt; [prefix] space
 关闭pane -&gt; [prefix] x 或 输入exit
-<span class="header">命令模式
-===============</span>
+命令模式
+===============
 进入命令模式 -&gt; [prefix] :
-<span class="header">在buffer中操作
-==============</span>
+在buffer中操作
+==============
 进入选择模式 -&gt; [prefix] [
 退出 -&gt; enter
 移动 -&gt; 默认上下左右，可以在配置文件中选择vim模式(setw -g mode-keys vi)
@@ -195,12 +195,12 @@ attach session -&gt; $ tmux attach
 复制 -&gt; 涂蓝状态下按enter
 粘贴 -&gt; [prefix] ]
 复制当前pane的全部可见buffer -&gt; [prefix] : capture-pane
-<span class="header">其他
-=============</span>
+其他
+=============
 把pane转化成window -&gt; [prefix] !
-把[session]:[window].[pane]转化成当前window中的pane -&gt; [prefix] : join-pane -s [session<span class="emphasis">_name]:[window].[pane]
+把[session]:[window].[pane]转化成当前window中的pane -&gt; [prefix] : join-pane -s [session_name]:[window].[pane]
 
-</span>
+
 Tmux – terminal multiplexer
 
 Managing tmux server
@@ -210,11 +210,11 @@ tmux ls  #list running tmux sessions
 exit     #close tmux session
 
 Sharing session between terminals
-tmux new –s session<span class="emphasis">_name  #make new named session
-tmux at –t session_</span>name    #attach to exists session(s)
-tmux kil-session –t session<span class="emphasis">_name #killnamed session
+tmux new –s session_name  #make new named session
+tmux at –t session_name    #attach to exists session(s)
+tmux kil-session –t session_name #killnamed session
 
-</span>所有的命令以ctrl+b组合
+所有的命令以ctrl+b组合
 
 c       create new window
 n/p    move to next/previous windows
@@ -243,7 +243,7 @@ Alt+w 复制选择区域
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cihgnbxni000ct9dx58mofyyd" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cil0t73hi000c9ze5ok4st2qd" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
       
 
       
@@ -287,7 +287,7 @@ Alt+w 复制选择区域
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -298,7 +298,7 @@ Alt+w 复制选择区域
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -307,7 +307,7 @@ Alt+w 复制选择区域
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -319,7 +319,11 @@ Alt+w 复制选择区域
       <ul>
         
           <li>
-            <a href="/2015/11/26/hello-world/">Hello World</a>
+            <a href="/2016/02/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/15/h2/">h2</a>
           </li>
         
           <li>
@@ -332,10 +336,6 @@ Alt+w 复制选择区域
         
           <li>
             <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/15/front-end/">front-end</a>
           </li>
         
       </ul>
@@ -369,7 +369,7 @@ Alt+w 复制选择区域
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 evatlsong<br>
+      &copy; 2016 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

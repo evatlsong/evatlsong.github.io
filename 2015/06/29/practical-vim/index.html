@@ -28,7 +28,7 @@ CONTROL-U(up)
 
 CONTROL-F(forward) (default: 1 window)
 CONT">
-<meta property="og:updated_time" content="2015-11-26T19:41:09.424Z">
+<meta property="og:updated_time" content="2016-02-24T12:19:36.871Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="practical-vim">
 <meta name="twitter:description" content=":version
@@ -122,138 +122,138 @@ CONT">
     <div class="article-entry" itemprop="articleBody">
       
         <p>:version</p>
-<h1 id="basic_operate">basic operate</h1><h2 id="viewing_different_parts_of_the_work_buffer">viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: <span class="number">1</span> line)
+<h1 id="basic-operate"><a href="#basic-operate" class="headerlink" title="basic operate"></a>basic operate</h1><h2 id="viewing-different-parts-of-the-work-buffer"><a href="#viewing-different-parts-of-the-work-buffer" class="headerlink" title="viewing different parts of the work buffer"></a>viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: 1 line)
 CONTROL-Y 
 
-<span class="function"><span class="title">CONTROL-D</span><span class="params">(down)</span></span> (default: <span class="number">1</span>/<span class="number">2</span> window)
-<span class="function"><span class="title">CONTROL-U</span><span class="params">(up)</span></span>
+CONTROL-D(down) (default: 1/2 window)
+CONTROL-U(up)
 
-<span class="function"><span class="title">CONTROL-F</span><span class="params">(forward)</span></span> (default: <span class="number">1</span> window)
-<span class="function"><span class="title">CONTROL-B</span><span class="params">(backward)</span></span>
+CONTROL-F(forward) (default: 1 window)
+CONTROL-B(backward)
 
-zz: scroll <span class="attribute">cursor</span> to <span class="attribute">top</span>
-zb: <span class="attribute">bottom</span>
+zz: scroll cursor to top
+zb: bottom
 zz: center
 
 G: go to line
-</code></pre><h2 id="search">search</h2><pre><code>n     Jump <span class="built_in">to</span> next match, preserving direction <span class="operator">and</span> <span class="built_in">offset</span>
-N     Jump <span class="built_in">to</span> previous match, preserving direction <span class="operator">and</span> <span class="built_in">offset</span>
-/&lt;<span class="constant">CR</span>&gt; Jump forward <span class="built_in">to</span> next match <span class="operator">of</span> same pattern
-?&lt;<span class="constant">CR</span>&gt; Jump backward <span class="built_in">to</span> previous match <span class="operator">of</span> same pattern
+</code></pre><h2 id="search"><a href="#search" class="headerlink" title="search"></a>search</h2><pre><code>n     Jump to next match, preserving direction and offset
+N     Jump to previous match, preserving direction and offset
+/&lt;CR&gt; Jump forward to next match of same pattern
+?&lt;CR&gt; Jump backward to previous match of same pattern
 
 %
 
-:noh&lt;<span class="constant">CR</span>&gt; <span class="built_in">to</span> mute search highlighting
-</code></pre><h2 id="replace">replace</h2><pre><code><span class="literal">r</span>
-<span class="literal">R</span>
-</code></pre><h2 id="interact_with_the_System_clipboard">interact with the System clipboard</h2><pre><code>:<span class="keyword">set</span> paste
-:<span class="keyword">set</span> paste!
-</code></pre><h2 id="folding_and_outlining">folding and outlining</h2><pre><code>zA Toggle <span class="operator">the</span> state <span class="operator">of</span> folds, recursively
+:noh&lt;CR&gt; to mute search highlighting
+</code></pre><h2 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h2><pre><code>r
+R
+</code></pre><h2 id="interact-with-the-System-clipboard"><a href="#interact-with-the-System-clipboard" class="headerlink" title="interact with the System clipboard"></a>interact with the System clipboard</h2><pre><code>:set paste
+:set paste!
+</code></pre><h2 id="folding-and-outlining"><a href="#folding-and-outlining" class="headerlink" title="folding and outlining"></a>folding and outlining</h2><pre><code>zA Toggle the state of folds, recursively
 zC Close folds, recursively
 zD Delete folds, recursively
 zE Eliminate all folds
-zf Create <span class="operator">a</span> fold <span class="built_in">from</span> <span class="operator">the</span> current <span class="built_in">line</span> <span class="built_in">to</span> <span class="operator">the</span> <span class="constant">one</span> where <span class="operator">the</span> following motion
-   <span class="command"><span class="keyword">command</span> <span class="title">takes</span> <span class="title">the</span> <span class="title">cursor</span></span>
-countzF Create <span class="operator">a</span> fold covering count <span class="keyword">lines</span>, starting <span class="operator">with</span> <span class="operator">the</span> current <span class="built_in">line</span>
-zM Set option foldlevel <span class="built_in">to</span> <span class="number">0</span>
-zN, zn Set (zN) <span class="operator">or</span> reset (zn) <span class="operator">the</span> foldenable option
+zf Create a fold from the current line to the one where the following motion
+   command takes the cursor
+countzF Create a fold covering count lines, starting with the current line
+zM Set option foldlevel to 0
+zN, zn Set (zN) or reset (zn) the foldenable option
 zO Open folds, recursively
-za Toggle <span class="operator">the</span> state <span class="operator">of</span> <span class="constant">one</span> fold
-zc Close <span class="constant">one</span> fold
-zd Delete <span class="constant">one</span> fold
-zi Toggle <span class="operator">the</span> <span class="built_in">value</span> <span class="operator">of</span> <span class="operator">the</span> foldenable option
-zj, zk Move cursor <span class="built_in">to</span> <span class="operator">the</span> <span class="built_in">start</span> (zj) <span class="operator">of</span> <span class="operator">the</span> next fold <span class="operator">or</span> <span class="built_in">to</span> <span class="operator">the</span> <span class="function"><span class="keyword">end</span> (<span class="title">zk</span>) <span class="title">of</span> <span class="title">the</span></span>
+za Toggle the state of one fold
+zc Close one fold
+zd Delete one fold
+zi Toggle the value of the foldenable option
+zj, zk Move cursor to the start (zj) of the next fold or to the end (zk) of the
        previous fold
-zm, zr Decrement (zm) <span class="operator">or</span> increment (zr) <span class="operator">the</span> <span class="built_in">value</span> <span class="operator">of</span> <span class="operator">the</span> foldlevel option <span class="keyword">by</span> <span class="constant">one</span>
-zo Open <span class="constant">one</span> fold
+zm, zr Decrement (zm) or increment (zr) the value of the foldlevel option by one
+zo Open one fold
 
-zA, zC, zD <span class="operator">and</span> zO are called recursive because they operate <span class="command"><span class="keyword">on</span> <span class="title">all</span> <span class="title">folds</span> <span class="title">nested</span> </span>
-<span class="operator">within</span> <span class="operator">the</span> <span class="constant">one</span> where you issue <span class="operator">the</span> commands
+zA, zC, zD and zO are called recursive because they operate on all folds nested 
+within the one where you issue the commands
 </code></pre><p>text object (文本对象 aw iw it)</p>
 <p>. 重复上次修改<br>a change could be anything that modifies the text in the document. That includes<br>commands triggered from Normal, Visual, and Command-Line modes, but a change could<br>also encompass any text entered (or deleted) in Insert mode.</p>
 <p>Moving Around in Insert Mode Resets the Change</p>
 <pre><code>复合命令 等效的长命令
 C        c$
-s        <span class="keyword">cl</span>
+s        cl
 S        ^c
-I        ^<span class="literal">i</span>
-A        <span class="label">$a</span>
+I        ^i
+A        $a
 o        A&lt;CR&gt;
 O        ko
 
-Intent                               Act                     <span class="keyword">Repeat</span>   <span class="literal">Reverse</span>
-Make a change                        {<span class="keyword">edit</span>}                  .        <span class="keyword">u</span>
-Scan <span class="keyword">line</span> <span class="keyword">for</span> next character         f{<span class="keyword">char</span>}/t{<span class="keyword">char</span>}         ;        ,
-Scan <span class="keyword">line</span> <span class="keyword">for</span> previous character     F{<span class="keyword">char</span>}/T{<span class="keyword">char</span>}         ;        ,
-Scan document <span class="keyword">for</span> next match         /pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
-Scan document <span class="keyword">for</span> previous match     ?pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
-Perform substitution                 :s/target/replacement   &amp;        <span class="keyword">u</span>
-Execute a sequence of changes        qx{changes}q            @x       <span class="keyword">u</span>
+Intent                               Act                     Repeat   Reverse
+Make a change                        {edit}                  .        u
+Scan line for next character         f{char}/t{char}         ;        ,
+Scan line for previous character     F{char}/T{char}         ;        ,
+Scan document for next match         /pattern&lt;CR&gt;            n        N
+Scan document for previous match     ?pattern&lt;CR&gt;            n        N
+Perform substitution                 :s/target/replacement   &amp;        u
+Execute a sequence of changes        qx{changes}q            @x       u
 </code></pre><ul>
 <li>查找当前光标下的单词</li>
 </ul>
 <p>normal mode</p>
-<pre><code><span class="attribute">Operator + Motion </span>=<span class="string"> Action</span>
+<pre><code>Operator + Motion = Action
 </code></pre><p>Vim’s grammar has just one more rule: when an operator command is invoked in<br>duplicate, it acts upon the current line. So dd deletes the current line,<br>while &gt;&gt; indents it.  The gU command is a special case. We can make it act upon<br>the current line by running either gUgU or the shorthand gUU.</p>
 <p>Vim’s Operator Commands</p>
 <pre><code>Trigger Effect
-c       <span class="operator"><span class="keyword">Change</span>
-<span class="keyword">d</span>       <span class="keyword">Delete</span>
-y       Yank <span class="keyword">into</span> <span class="keyword">register</span>
-<span class="keyword">g</span>~      Swap <span class="keyword">case</span>
+c       Change
+d       Delete
+y       Yank into register
+g~      Swap case
 gu      Make lowercase
 gU      Make uppercase
-&gt;       Shift <span class="keyword">right</span>
-&lt;       Shift <span class="keyword">left</span>
+&gt;       Shift right
+&lt;       Shift left
 =       Autoindent
-!       Filter {motion} <span class="keyword">lines</span> <span class="keyword">through</span> an <span class="keyword">external</span> program</span>
+!       Filter {motion} lines through an external program
 </code></pre><p>Insert Mode</p>
 <pre><code>Keystrokes Effect
-&lt;<span class="keyword">C</span>-h&gt;      <span class="keyword">Delete</span> back one character (backspace)
-&lt;<span class="keyword">C</span>-w&gt;      <span class="keyword">Delete</span> back one word
-&lt;<span class="keyword">C</span>-u&gt;      <span class="keyword">Delete</span> back to start of line
+&lt;C-h&gt;      Delete back one character (backspace)
+&lt;C-w&gt;      Delete back one word
+&lt;C-u&gt;      Delete back to start of line
 
 Keystrokes Effect
-&lt;Esc&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
-&lt;<span class="keyword">C</span>-[&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
-&lt;<span class="keyword">C</span>-o&gt;      <span class="keyword">Switch</span> to <span class="keyword">Insert</span> <span class="keyword">Normal</span> mode
+&lt;Esc&gt;      Switch to Normal mode
+&lt;C-[&gt;      Switch to Normal mode
+&lt;C-o&gt;      Switch to Insert Normal mode
 </code></pre><p>register<br>expression register </p>
 <pre><code>Keystrokes       Buffer Contents
-A                <span class="number">6</span> plus <span class="number">35</span> equals
-&lt;C-r&gt;=<span class="number">6</span>*<span class="number">35</span>&lt;CR&gt;   <span class="number">6</span> plus <span class="number">35</span> equals <span class="number">210</span>
+A                6 plus 35 equals
+&lt;C-r&gt;=6*35&lt;CR&gt;   6 plus 35 equals 210
 </code></pre><p>Insert Unusual Characters by Character Code<br>Insert Unusual Characters</p>
 <pre><code>Keystrokes             Effect
-&lt;<span class="keyword">C</span>-v&gt;<span class="list">{123}</span>             <span class="keyword">Insert</span> character by decimal code
-&lt;<span class="keyword">C</span>-v&gt;u<span class="list">{1234}</span>           <span class="keyword">Insert</span> character by hexadecimal code
-&lt;<span class="keyword">C</span>-v&gt;<span class="list">{nondigit}</span>        <span class="keyword">Insert</span> nondigit literally
-&lt;<span class="keyword">C</span>-k&gt;<span class="list">{char1}</span><span class="list">{char2}</span>    <span class="keyword">Insert</span> character represented by <span class="list">{char1}</span><span class="list">{char2}</span> digraph
+&lt;C-v&gt;{123}             Insert character by decimal code
+&lt;C-v&gt;u{1234}           Insert character by hexadecimal code
+&lt;C-v&gt;{nondigit}        Insert nondigit literally
+&lt;C-k&gt;{char1}{char2}    Insert character represented by {char1}{char2} digraph
 </code></pre><p>ga command outputs a message at the bottom of the screen, revealing the character<br>code in decimal and hexadecimal notations</p>
 <p>Overwrite Tab Characters with Virtual Replace Mode<br>gR<br>gr{char}</p>
 <p>Visual Mode<br>Enabling Visual Modes</p>
 <pre><code>Command  Effect
-<span class="keyword">v</span>        Enable character-wise Visual <span class="built_in">mode</span>
-V        Enable <span class="built_in">line</span>-wise Visual <span class="built_in">mode</span>
-&lt;C-<span class="keyword">v</span>&gt;    Enable block-wise Visual <span class="built_in">mode</span>
-<span class="keyword">gv</span>       Reselect the <span class="keyword">last</span> <span class="keyword">visual</span> selection
+v        Enable character-wise Visual mode
+V        Enable line-wise Visual mode
+&lt;C-v&gt;    Enable block-wise Visual mode
+gv       Reselect the last visual selection
 
-<span class="keyword">o</span>        Go <span class="keyword">to</span> other end of highlighted text
+o        Go to other end of highlighted text
 </code></pre><p>In Visual and Operator-Pending modes the i and a keys follow a different convention:<br>they form the first half of a text object.<br>If you’ve made a selection with Visual-Block mode and you wonder why you’re not<br>in Insert mode after pressing i, try using I instead.</p>
 <p>Command-Line Mode<br>a few of the symbols that can be used to create addresses and ranges for Ex commands</p>
 <pre><code>Symbol Address
-<span class="number">1</span>      First line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
-$      Last line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
-<span class="number">0</span>      Virtual line <span class="keyword">above</span> <span class="keyword">first</span> line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
-.      Line <span class="keyword">where</span> <span class="keyword">the</span> cursor <span class="keyword">is</span> placed
-'m     Line containing mark m
-'&lt;     Start <span class="keyword">of</span> visual selection
-'&gt;     End <span class="keyword">of</span> visual selection
-%      The entire <span class="type">file</span> (shorthand <span class="keyword">for</span> : <span class="number">1</span>,$)
+1      First line of the file
+$      Last line of the file
+0      Virtual line above first line of the file
+.      Line where the cursor is placed
+&apos;m     Line containing mark m
+&apos;&lt;     Start of visual selection
+&apos;&gt;     End of visual selection
+%      The entire file (shorthand for : 1,$)
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cihgnbxo3000yt9dxbp7fpn4o" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cil0t73i500109ze52903bz4y" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
       
 
       
@@ -297,7 +297,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -308,7 +308,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -317,7 +317,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -329,7 +329,11 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
       <ul>
         
           <li>
-            <a href="/2015/11/26/hello-world/">Hello World</a>
+            <a href="/2016/02/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/15/h2/">h2</a>
           </li>
         
           <li>
@@ -342,10 +346,6 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
         
           <li>
             <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/15/front-end/">front-end</a>
           </li>
         
       </ul>
@@ -379,7 +379,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 evatlsong<br>
+      &copy; 2016 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

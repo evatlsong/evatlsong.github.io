@@ -76,6 +76,46 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-devops" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/07/devops/" class="article-date">
+  <time datetime="2015-06-07T08:37:36.000Z" itemprop="datePublished">2015-06-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/07/devops/">devops</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cil0t73ju00249ze56olyp6fa" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-stylin-study" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/06/05/stylin-study/" class="article-date">
@@ -100,42 +140,42 @@
       
         <p>文本用闭合标签 <code>&lt;p&gt;test&lt;/p&gt;</code><br>引用内容用自闭合标签 <code>&lt;img src=&quot;song.jpg&quot; /&gt;</code><br>ol ordered list<br>ul unordered list<br>dl definition list<br>src source<br>href hyperlink reference<br>img 是行内元素<br><code>&lt;a&gt;</code> anchor 锚<br>alt alternative<br>根据CSS标准，默认情况下，多个空白会被浏览器叠加为一个</p>
 <p>行内样式<br>嵌入样式</p>
-<pre><code><span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
-</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;
 </code></pre><p>链接样式</p>
-<pre><code>&lt;link href=<span class="string">"style.css"</span> rel=<span class="string">"stylesheet"</span> type=<span class="string">"text/css"</span> /&gt;
-<span class="at_rule">@import</span> <span class="function"><span class="title">url</span><span class="params">(css/style.css)</span></span>
+<pre><code>&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+@import url(css/style.css)
 </code></pre><p>上下文选择符 descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>example: <code>article p {font-weight: bold;}</code></p>
 <p>子选择符 <code>&gt;</code> 标签2必须是标签1的子元素<br>标签1 &gt; 标签2<br>example: <code>section &gt; h2 {font-style: italic;}</code></p>
 <p>紧邻同胞选择符 <code>+</code><br>标签1 + 标签2<br>example: <code>h2 + p {font-variant: small-caps;}</code></p>
 <p>一般同胞选择符 ~<br>标签1 ~ 标签2<br>example: <code>h2 ~ a {color:red;}</code></p>
 <p>通用选择符 <em><br>example: `section </em> a {font-size: 1.3em;}`</p>
 <p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
-<pre><code><span class="tag">p</span><span class="class">.specialtext</span> <span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"> red</span></span>;}</span>
+<pre><code>p.specialtext {color: red;}
 </code></pre><p>多类选择符</p>
-<pre><code><span class="class">.specialtext</span><span class="class">.featured</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">120%</span></span></span>;}</span>
+<pre><code>.specialtext.featured {font-size: 120%;}
 </code></pre><p>属性选择符<br>标签名[属性名]<br>属性值选择符<br>标签名[属性名=”属性值”] (引号可加可不加)</p>
 <p>伪类<br>UI伪类<br>链接伪类</p>
-<pre><code><span class="tag">a</span><span class="pseudo">:link
-</span><span class="tag">a</span><span class="pseudo">:visited
-</span><span class="tag">a</span><span class="pseudo">:hover
-</span><span class="tag">a</span>:active
+<pre><code>a:link
+a:visited
+a:hover
+a:active
 </code></pre><p>css3用双冒号代替单冒号 表示伪类</p>
 <p>:focus伪类<br>:target伪类</p>
 <p>结构化伪类</p>
-<pre><code><span class="attribute">:first-child  :last-child</span>
+<pre><code>:first-child  :last-child
 ol.results li:first-child {color: blue;}
 :nth-child
 e:nth-child(n)
 </code></pre><p>e表示元素名，n表示一个数值（也可以使用odd或even）</p>
 <p>伪元素<br>伪元素就是你的文档中若有实无的元素</p>
-<pre><code><span class="pseudo">::first-letter</span>
-<span class="tag">p</span><span class="pseudo">::first-letter</span> <span class="rules">{<span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">300%</span></span></span>;}</span>
-<span class="pseudo">::first-line</span>
-<span class="tag">p</span><span class="pseudo">::first-line</span> <span class="rules">{<span class="rule"><span class="attribute">font-variant</span>:<span class="value"> small-caps</span></span>;}</span>
-<span class="pseudo">::before</span> <span class="pseudo">::after</span>
+<pre><code>::first-letter
+p::first-letter {font-size:300%;}
+::first-line
+p::first-line {font-variant: small-caps;}
+::before ::after
 </code></pre><p>用于在特定元素前面或后面添加特殊内容</p>
-<pre><code><span class="tag">p</span><span class="class">.age</span><span class="pseudo">::before</span> <span class="rules">{<span class="rule"><span class="attribute">content</span>:<span class="value"> <span class="string">"Age: "</span></span></span>;}</span>
+<pre><code>p.age::before {content: &quot;Age: &quot;;}
 </code></pre><p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
 <p>4.顺序决定权重</p>
 <p>定位元素<br>盒模型<br>border padding margin</p>
@@ -149,11 +189,11 @@ e:nth-child(n)
 <p>font-size是可以继承的<br>1em = 16像素<br>h1 2em h2 1.5em p 1em<br>修改body元素的字体大小，不会影响页面中以绝对单位控制的元素，但没有设定字体大小的元素则会与body的字体大小成比例变化。</p>
 <p>text:<br>text-indent<br>letter-spacing<br>word-spacing<br>text-decoration<br>text-align<br>line-height<br>text-transform<br>vertical-align</p>
 <p>VSP (Vendor Specific Prefixes) 厂商前缀 自动添加VPS，可以使用prefix-free腻子脚本</p>
-<h2 id="note">note</h2><pre><code><span class="attribute">box-sizing</span>: <span class="string">border-box</span>
+<h2 id="note"><a href="#note" class="headerlink" title="note"></a>note</h2><pre><code>box-sizing: border-box
 </code></pre><p>IE6 IE7不支持box-sizing属性<br>polyfill borderBoxModel.js</p>
-<pre><code><span class="comment">&lt;!--[if lt IE 8]&gt;
-&lt;script src="borderBoxModel.js"&gt;&lt;/script&gt;
-&lt;![endif]--&gt;</span>
+<pre><code>&lt;!--[if lt IE 8]&gt;
+&lt;script src=&quot;borderBoxModel.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
 
 inner img {max-width: 100%;}
 div {overflow: hidden;} //真正用途是防止包含元素被超大内容撑大 还能可靠得迫使父元素包含其浮动的子元素
@@ -163,7 +203,7 @@ div {word-wrap: break-word;}
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cihgnbxns000mt9dx7h8704ik" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cil0t73hs000o9ze5d23k60xl" class="article-share-link" data-share="baidu" data-title="stylin-study">分享到</a>
       
 
       
@@ -201,12 +241,16 @@ div {word-wrap: break-word;}
     <div class="article-entry" itemprop="articleBody">
       
         <p>查看进程<br>ps -aux </p>
+<p>chown -R evatlsong:evatlsong /dir</p>
+<p>ubuntu 防火墙<br>ufw disable</p>
+<p>修改文件名编码<br>convmv -f cp950 -t utf8 –notest filename</p>
+<p>解决解压乱码<br>export LANG=zh_CN.gb18030<br>7z x filename</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cihgnbxon001et9dx74za2e6r" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cil0t73iv001g9ze5ziogu7kc" class="article-share-link" data-share="baidu" data-title="linux-usage">分享到</a>
       
 
       
@@ -247,7 +291,7 @@ div {word-wrap: break-word;}
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cihgnbxp8001xt9dx1tqowh1s" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
+        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cil0t73jk00209ze5ocxkfk00" class="article-share-link" data-share="baidu" data-title="fonts">分享到</a>
       
 
       
@@ -282,20 +326,20 @@ div {word-wrap: break-word;}
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="配置VIM">配置VIM</h2><p>安装Msysgit</p>
+        <h2 id="配置VIM"><a href="#配置VIM" class="headerlink" title="配置VIM"></a>配置VIM</h2><p>安装Msysgit</p>
 <p>git bash下执行命令</p>
-<pre><code>git <span class="keyword">clone</span> <span class="title">https</span>://github.com/evatlsong/system.git
-git <span class="keyword">clone</span> <span class="title">https</span>://github.com/gmarik/vundle.git <span class="string">"C:\Users\evasong10\.vim\bundle\vundle"</span>
+<pre><code>git clone https://github.com/evatlsong/system.git
+git clone https://github.com/gmarik/vundle.git &quot;C:\Users\evasong10\.vim\bundle\vundle&quot;
 </code></pre><p>以管理员权限运行ms-dos</p>
-<pre><code>mklink "C:<span class="command">\Users</span><span class="command">\evasong</span>10<span class="command">\.</span>vimrc" "E:<span class="command">\system</span><span class="command">\config</span><span class="command">\.</span>win_vimrc"
+<pre><code>mklink &quot;C:\Users\evasong10\.vimrc&quot; &quot;E:\system\config\.win_vimrc&quot;
 </code></pre><p>git bash下执行命令</p>
-<pre><code><span class="keyword">vim</span> +BundleInstall +<span class="keyword">qall</span>
+<pre><code>vim +BundleInstall +qall
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cihgnbxn60003t9dxfc5t2kac" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cil0t73h700039ze5c7pxuz2x" class="article-share-link" data-share="baidu" data-title="windows-config">分享到</a>
       
 
       
@@ -331,10 +375,10 @@ git <span class="keyword">clone</span> <span class="title">https</span>://github
     <div class="article-entry" itemprop="articleBody">
       
         <p>centos7 有两个防火墙 firewalld iptables 默认firewalld 不能同时共存</p>
-<pre><code>systemctl status iptables<span class="class">.service</span>
-systemctl stop firewalld<span class="class">.service</span>
-systemctl disable firewalld<span class="class">.service</span>
-systemctl enable iptables<span class="class">.service</span>
+<pre><code>systemctl status iptables.service
+systemctl stop firewalld.service
+systemctl disable firewalld.service
+systemctl enable iptables.service
 systemctl start iptables.service
 </code></pre><p>centos7 网络管理从network.service 换成了NetworkManager.service</p>
 <p>管理服务用systemctl</p>
@@ -347,7 +391,7 @@ systemctl start iptables.service
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cihgnbxpp0023t9dxttuhyk1p" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cil0t73jy00269ze53dsi2unn" class="article-share-link" data-share="baidu" data-title="centos-7-usage">分享到</a>
       
 
       
@@ -384,114 +428,114 @@ systemctl start iptables.service
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="配置">配置</h2><pre><code>$ git config --global user<span class="class">.name</span> <span class="string">"Your Name Comes Here"</span>
-$ git config --global user<span class="class">.email</span> you@yourdomain<span class="class">.example</span><span class="class">.com</span>
+        <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><pre><code>$ git config --global user.name &quot;Your Name Comes Here&quot;
+$ git config --global user.email you@yourdomain.example.com
 $ git config --list 查看相关信息
-</code></pre><h2 id="初始化">初始化</h2><pre><code><span class="variable">$ </span>mkdir gitdata
-<span class="variable">$ </span>cd gitdata
-<span class="variable">$ </span>git init
-<span class="keyword">or</span> <span class="constant">Server</span>
-<span class="variable">$ </span>git --bare init
-</code></pre><h2 id="在~/-gitconfig设置别名">在~/.gitconfig设置别名</h2><pre><code>### <span class="keyword">command</span>
-git config --<span class="keyword">global</span> alias.<span class="keyword">lg</span> <span class="string">"log --oneline --all --graph --decorate --color"</span>
-### <span class="keyword">file</span>
+</code></pre><h2 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h2><pre><code>$ mkdir gitdata
+$ cd gitdata
+$ git init
+or Server
+$ git --bare init
+</code></pre><h2 id="在-gitconfig设置别名"><a href="#在-gitconfig设置别名" class="headerlink" title="在~/.gitconfig设置别名"></a>在~/.gitconfig设置别名</h2><pre><code>### command
+git config --global alias.lg &quot;log --oneline --all --graph --decorate --color&quot;
+### file
 [alias]
-<span class="keyword">st</span> = status
-ci = commit -<span class="keyword">a</span>
-<span class="keyword">co</span> = checkout  
-</code></pre><h2 id="文件操作">文件操作</h2><pre><code><span class="char">$ </span>git add .
-<span class="char">$ </span>git add file1 file2 file3
-<span class="char">$ </span>git add -u
-<span class="char">$ </span>git add -p // 为你做的每次修改，<span class="class">Git</span>将为你展示变动的代码，并询问该变动是否应是下一次提交的一部分。回答“y”或者“n”。也有其他选项，比如延迟决定：键入“？”来学习更多。
-<span class="char">$ </span>git rm file1 file2 file3
-<span class="char">$ </span>git mv file1 file2
-</code></pre><h2 id="提交更改">提交更改</h2><pre><code><span class="char">$ </span>git commit -a -m <span class="string">' '</span>
-<span class="char">$ </span>git commit --amend -a -m <span class="string">' '</span> // 修改上一次的信息，不作为新的提交
-<span class="char">$ </span>git stash // 保存当前草稿，便于切换分支
-<span class="char">$ </span>git stash pop
-<span class="char">$ </span>git stash apply
-<span class="char">$ </span>git stash list
-<span class="char">$ </span>git stash apply stash@{<span class="number">1</span>}
-<span class="char">$ </span>git stash clear
-</code></pre><h2 id="撤销更改">撤销更改</h2><pre><code><span class="char">$ </span>git reset <span class="class">HEAD</span> file1 // 取消暂存区的文件快照(即恢复成最后一个提交版本)，这不会影响工作目录的文件修改。
-<span class="char">$ </span>git reset --hard <span class="class">HEAD</span>^ // 将整个项目回溯到以前的某个版本，可以使用 <span class="comment">"git reset"</span>。可以选择的参数包括默认的 <span class="comment">"--mixed"</span> 和 <span class="comment">"--hard"</span>，前者不会取消工作目录的修改，而后者则放弃全部的修改。该操作会丢失其后的日志
-<span class="char">$ </span>git checkout -- file1 // 使用暂存区快照恢复工作目录文件，工作目录的文件修改被抛弃。
-<span class="char">$ </span>git checkout <span class="class">HEAD</span>^ file1 // 直接 <span class="comment">"签出"</span> 代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
-<span class="char">$ </span>git checkout <span class="comment">"@{10 minutes ago}"</span> // 直接 <span class="comment">"签出"</span> <span class="number">10</span>分钟之前代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
-<span class="char">$ </span>git checkout <span class="comment">"@{5}"</span> // 直接 <span class="comment">"签出"</span> 倒数第五次保存的某个文件版本到工作目录，该操作同时会取消暂存区快照。
-<span class="char">$ </span>git revert <span class="class">SHA1_HASH</span> // 还原特定哈希值对应的提交。该还原记录作为一个新的提交。
-</code></pre><h2 id="查看历史纪录或者当前状态">查看历史纪录或者当前状态</h2><pre><code>$ git <span class="keyword">log</span> --all --<span class="keyword">graph</span> --oneline --decorate
-$ git <span class="literal">log</span>
-$ git <span class="keyword">log</span> -p
-$ git <span class="keyword">log</span> --stat --summary
-$ git <span class="keyword">log</span> V3..V7 <span class="comment">//显示V3之后直至V7的所有历史记录</span>
-$ git <span class="keyword">log</span> V3.. <span class="comment">//显示所有V3之后的历史记录。注意&lt;since&gt;..&lt;until&gt;中任何一个被省略都将被默认设置为HEAD。所以如果使用..&lt;until&gt;的话，git log在大部分情况下会输出空的。</span>
-$ git <span class="keyword">log</span> –since=”2 weeks ago” <span class="comment">//显示2周前到现在的所有历史记录。具体语法可查询git-ref-parse命令的帮助文件。</span>
-$ git <span class="keyword">log</span> stable..experimental <span class="comment">//将显示在experimental分支但不在stable分支的历史记录</span>
-$ git <span class="keyword">log</span> experimental..stable <span class="comment">//将显示在stable分支但不在experimental分支的历史记录</span>
-$ git <span class="keyword">log</span> -S'你要找的内容'，就可以从全部的历史纪录，瞬間找到你要找的东西
-$ git blame <span class="keyword">FILE</span> <span class="comment">// 标注出一个指定的文件里每一行内容的最后修改者，和最后修改时间。</span>
-$ git diff <span class="comment">// 这个命令只在git add之前使用有效。如果已经add了，那么此命令输出为空</span>
-$ git diff –cached <span class="comment">// 这个命令在git add之后在git commit之前有效。</span>
-$ git diff <span class="string">"@{yesterday}"</span> <span class="comment">// 比较当前和昨天的内容</span>
-$ git status <span class="comment">// 这个命令在git commit之前有效，表示都有哪些文件发生了改动</span>
-$ git show 5b888 <span class="comment">// 使用git show再加上述的commit名称来显式更详细的commit信息</span>
-$ git show master <span class="comment">// 显示分支信息</span>
-$ git show HEAD <span class="comment">// 使用HEAD字段可以代表当前分支的头（也就是最近一次commit)</span>
-$ git show HEAD^ <span class="comment">//查看HEAD的父母的信息, 可以使用^表示parent</span>
-$ git show HEAD^^ <span class="comment">//查看HEAD的父母的父母的信息</span>
-$ git show HEAD~4 <span class="comment">//查看HEAD上溯4代的信息</span>
-$ git tag V3 5b888 <span class="comment">//以后可以用V3来代替复杂的名称(5b888…)</span>
+st = status
+ci = commit -a
+co = checkout  
+</code></pre><h2 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h2><pre><code>$ git add .
+$ git add file1 file2 file3
+$ git add -u
+$ git add -p // 为你做的每次修改，Git将为你展示变动的代码，并询问该变动是否应是下一次提交的一部分。回答“y”或者“n”。也有其他选项，比如延迟决定：键入“？”来学习更多。
+$ git rm file1 file2 file3
+$ git mv file1 file2
+</code></pre><h2 id="提交更改"><a href="#提交更改" class="headerlink" title="提交更改"></a>提交更改</h2><pre><code>$ git commit -a -m &apos; &apos;
+$ git commit --amend -a -m &apos; &apos; // 修改上一次的信息，不作为新的提交
+$ git stash // 保存当前草稿，便于切换分支
+$ git stash pop
+$ git stash apply
+$ git stash list
+$ git stash apply stash@{1}
+$ git stash clear
+</code></pre><h2 id="撤销更改"><a href="#撤销更改" class="headerlink" title="撤销更改"></a>撤销更改</h2><pre><code>$ git reset HEAD file1 // 取消暂存区的文件快照(即恢复成最后一个提交版本)，这不会影响工作目录的文件修改。
+$ git reset --hard HEAD^ // 将整个项目回溯到以前的某个版本，可以使用 &quot;git reset&quot;。可以选择的参数包括默认的 &quot;--mixed&quot; 和 &quot;--hard&quot;，前者不会取消工作目录的修改，而后者则放弃全部的修改。该操作会丢失其后的日志
+$ git checkout -- file1 // 使用暂存区快照恢复工作目录文件，工作目录的文件修改被抛弃。
+$ git checkout HEAD^ file1 // 直接 &quot;签出&quot; 代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
+$ git checkout &quot;@{10 minutes ago}&quot; // 直接 &quot;签出&quot; 10分钟之前代码仓库中的某个文件版本到工作目录，该操作同时会取消暂存区快照。
+$ git checkout &quot;@{5}&quot; // 直接 &quot;签出&quot; 倒数第五次保存的某个文件版本到工作目录，该操作同时会取消暂存区快照。
+$ git revert SHA1_HASH // 还原特定哈希值对应的提交。该还原记录作为一个新的提交。
+</code></pre><h2 id="查看历史纪录或者当前状态"><a href="#查看历史纪录或者当前状态" class="headerlink" title="查看历史纪录或者当前状态"></a>查看历史纪录或者当前状态</h2><pre><code>$ git log --all --graph --oneline --decorate
+$ git log
+$ git log -p
+$ git log --stat --summary
+$ git log V3..V7 //显示V3之后直至V7的所有历史记录
+$ git log V3.. //显示所有V3之后的历史记录。注意&lt;since&gt;..&lt;until&gt;中任何一个被省略都将被默认设置为HEAD。所以如果使用..&lt;until&gt;的话，git log在大部分情况下会输出空的。
+$ git log –since=”2 weeks ago” //显示2周前到现在的所有历史记录。具体语法可查询git-ref-parse命令的帮助文件。
+$ git log stable..experimental //将显示在experimental分支但不在stable分支的历史记录
+$ git log experimental..stable //将显示在stable分支但不在experimental分支的历史记录
+$ git log -S&apos;你要找的内容&apos;，就可以从全部的历史纪录，瞬間找到你要找的东西
+$ git blame FILE // 标注出一个指定的文件里每一行内容的最后修改者，和最后修改时间。
+$ git diff // 这个命令只在git add之前使用有效。如果已经add了，那么此命令输出为空
+$ git diff –cached // 这个命令在git add之后在git commit之前有效。
+$ git diff &quot;@{yesterday}&quot; // 比较当前和昨天的内容
+$ git status // 这个命令在git commit之前有效，表示都有哪些文件发生了改动
+$ git show 5b888 // 使用git show再加上述的commit名称来显式更详细的commit信息
+$ git show master // 显示分支信息
+$ git show HEAD // 使用HEAD字段可以代表当前分支的头（也就是最近一次commit)
+$ git show HEAD^ //查看HEAD的父母的信息, 可以使用^表示parent
+$ git show HEAD^^ //查看HEAD的父母的父母的信息
+$ git show HEAD~4 //查看HEAD上溯4代的信息
+$ git tag V3 5b888 //以后可以用V3来代替复杂的名称(5b888…)
 $ git show V3
-$ git branch stable V3 <span class="comment">//建立一个基于V3的分支</span>
-$ git grep “<span class="keyword">print</span>” V3 <span class="comment">//在V3中搜索所有的包含print的行</span>
-$ git grep “<span class="keyword">print</span>” <span class="comment">//在所有的历史记录中搜索包含print的行</span>
+$ git branch stable V3 //建立一个基于V3的分支
+$ git grep “print” V3 //在V3中搜索所有的包含print的行
+$ git grep “print” //在所有的历史记录中搜索包含print的行
 
 $ git show branch:filepath
-</code></pre><h2 id="协作操作">协作操作</h2><pre><code>$ git <span class="keyword">clone</span> <span class="title">git</span>://server/path/to/files // Git deamon
-$ git <span class="keyword">clone</span> <span class="title">your</span>.computer:/path/to/script  <span class="operator">or</span> git <span class="keyword">clone</span> <span class="title">ssh</span>://car.colorado.edu/home/xxx ./xxxxx // SSH
+</code></pre><h2 id="协作操作"><a href="#协作操作" class="headerlink" title="协作操作"></a>协作操作</h2><pre><code>$ git clone git://server/path/to/files // Git deamon
+$ git clone your.computer:/path/to/script  or git clone ssh://car.colorado.edu/home/xxx ./xxxxx // SSH
 $ git pull
-$ git push // 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(<span class="literal">master</span>)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。
+$ git push // 在将代码提交(push)到服务器之前，首先要确认相关更新已经合并(merge)到主分支(master)。还应该先从服务器刷新(pull)最新代码，以确保自己的提交不会和别人最新提交的代码冲突。
 </code></pre><p>如果想在merge前先查看更改：</p>
-<pre><code>$ git fetch /home/bob/myrepo master:bobworks <span class="comment">//此命令意思是提取出bob修改的代码内容，然后放到我（rocrocket）工作目录下的bobworks分支中。之所以要放到分支中，而不是master中，就是要我先仔仔细细看看bob的开发成果，如果我觉得满意，我再merge到master中，如果不满意，我完全可以直接git branch -D掉。</span>
-$ git whatchanged -<span class="tag">p</span> master.<span class="class">.bobworks</span> <span class="comment">//用来查看bob都做了什么</span>
-$ git checkout master <span class="comment">//切换到master分区</span>
-$ git pull . bobworks <span class="comment">//如果我检查了bob的工作后很满意，就可以用pull来将bobworks分支合并到我的项目中了</span>
-</code></pre><h2 id="分支管理">分支管理</h2><pre><code><span class="variable">$ </span>git <span class="symbol">branch:</span> 查看当前分支
-<span class="variable">$ </span>git checkout -b/branch experimental： 创建新分支
-<span class="variable">$ </span>git checkout experimental： 切换到另一分支
-<span class="variable">$ </span>git merge experimental：合并分支
-<span class="variable">$ </span>git branch -d experimental：删除分支, 使用的是小写的-d，表示“在分支已经合并到主干后删除分支”。
-<span class="variable">$ </span>git branch -<span class="constant">D</span> experimental：删除分支, 表示“不论如何都删除分支”，-<span class="constant">D</span>使用在“分支被证明失败”
-</code></pre><h2 id="补丁工作">补丁工作</h2><p>git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的’format-patch’命令良好的支持了这个功能。</p>
+<pre><code>$ git fetch /home/bob/myrepo master:bobworks //此命令意思是提取出bob修改的代码内容，然后放到我（rocrocket）工作目录下的bobworks分支中。之所以要放到分支中，而不是master中，就是要我先仔仔细细看看bob的开发成果，如果我觉得满意，我再merge到master中，如果不满意，我完全可以直接git branch -D掉。
+$ git whatchanged -p master..bobworks //用来查看bob都做了什么
+$ git checkout master //切换到master分区
+$ git pull . bobworks //如果我检查了bob的工作后很满意，就可以用pull来将bobworks分支合并到我的项目中了
+</code></pre><h2 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h2><pre><code>$ git branch: 查看当前分支
+$ git checkout -b/branch experimental： 创建新分支
+$ git checkout experimental： 切换到另一分支
+$ git merge experimental：合并分支
+$ git branch -d experimental：删除分支, 使用的是小写的-d，表示“在分支已经合并到主干后删除分支”。
+$ git branch -D experimental：删除分支, 表示“不论如何都删除分支”，-D使用在“分支被证明失败”
+</code></pre><h2 id="补丁工作"><a href="#补丁工作" class="headerlink" title="补丁工作"></a>补丁工作</h2><p>git format-patch：当你想给一个开源项目（例如Rails）提交一段代码的时候，或者你想给小组成员展示一段你并不想提交的代码，那么你还是需要 patch的，Git的’format-patch’命令良好的支持了这个功能。</p>
 <ol>
 <li>利用branch命令 创建一个分支；</li>
 <li>修改你的代码；</li>
 <li>在该分支上提交你的修改；</li>
 <li>使用<code>git format-patch</code>命令来生成一个patch文件，<br>例如：<code>git format-patch master --stdout &gt; ~/Desktop/tmp.patch</code>就是将工作分支与master主干的不同，<br>存放在<code>~/Desktop</code>文件夹下，生成一个叫做 tmp.patch的文件<br>（另一种简单的版本是利用diff命令，例如<code>git diff ..master &gt; ~/Desktop/tmp.patch</code>），<br>这样就生成了patch文件。那么别人就可以使用<code>git apply</code>命令来应用patch，例如<code>git apply ~/Desktop/tmp.patch</code>就是将patch打在当前的工作分支上</li>
 </ol>
-<h2 id="仓库维护">仓库维护</h2><pre><code>$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。
+<h2 id="仓库维护"><a href="#仓库维护" class="headerlink" title="仓库维护"></a>仓库维护</h2><pre><code>$ git fsck: 不加–full参数的情况下，这个命令一般会以非常低廉的代价确保仓库在一个不错的健康状态之中。
 $ git count-objects: 统计有多少松散的对象，没有 repack 的对象消耗了多少硬盘空间。
 $ git gc: 在本地仓库进行 repack，并进行其他日常维护工作。
-$ git <span class="attribute">filter</span>-branch --tree-<span class="attribute">filter</span> `rm <span class="attribute">top</span>/secret/file` HEAD <span class="comment">//在所有记录中永久删除某个文件</span>
-$ git rebase -<span class="tag">i</span> HEAD~<span class="number">10</span> <span class="comment">// 后10个提交会出现在你喜爱的$EDITOR。通过删除行来移去提交。通过为行重新排序来为提交重新排序。用“edit”来替换“pick”来标志一个提交可修改。用“squash”来替换“pick”来将一个提交和前一个合并。</span>
-</code></pre><h2 id="错误查询">错误查询</h2><p>刚刚发现程序里有一个功能出错了，即使你过去经常提交变更，Git还是可以精确的找出问题所在：</p>
-<pre><code>$ git <span class="keyword">bisect </span>start
-$ git <span class="keyword">bisect </span><span class="keyword">bad </span>SHA1_OF_BAD_VERSION
-$ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
+$ git filter-branch --tree-filter `rm top/secret/file` HEAD //在所有记录中永久删除某个文件
+$ git rebase -i HEAD~10 // 后10个提交会出现在你喜爱的$EDITOR。通过删除行来移去提交。通过为行重新排序来为提交重新排序。用“edit”来替换“pick”来标志一个提交可修改。用“squash”来替换“pick”来将一个提交和前一个合并。
+</code></pre><h2 id="错误查询"><a href="#错误查询" class="headerlink" title="错误查询"></a>错误查询</h2><p>刚刚发现程序里有一个功能出错了，即使你过去经常提交变更，Git还是可以精确的找出问题所在：</p>
+<pre><code>$ git bisect start
+$ git bisect bad SHA1_OF_BAD_VERSION
+$ git bisect good SHA1_OF_GOOD_VERSION
 </code></pre><p>Git从历史记录中检出一个中间的状态，在这个状态上测试功能，如果还是错误的：</p>
-<pre><code>$ git <span class="keyword">bisect </span><span class="keyword">bad</span>
+<pre><code>$ git bisect bad
 </code></pre><p>如果可以工作了，则把”bad”替换成”good”。 Git会再次帮你找到一个以确定的好版本和坏版本之间的状态，经过一系列的迭代，这种二进制查询会帮你找到导致这个错误的那次提交。一旦完成了问题定位的调查，你可以返回到原始状态，键入：</p>
-<pre><code>$ git <span class="keyword">bisect </span>reset
+<pre><code>$ git bisect reset
 </code></pre><p>不需要手工测试每一次改动，执行如下命令可以自动的完成上面的搜索：</p>
-<pre><code>$ git bisect <span class="command">run</span> COMMAND
+<pre><code>$ git bisect run COMMAND
 </code></pre><p>Git使用指定命令（通常是一个一次性的脚本）的返回值来决定一次改动是否是正确的：命令退出时的代码0代表改动是正确的，125代表要跳过对这次改动的检查，1到127之间的其他数值代表改动是错误的。返回负数将会中断整个bisect的检查。</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cihgnbxoz001ot9dxdcbvjv5g" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cil0t73ja001r9ze5hvggfg2y" class="article-share-link" data-share="baidu" data-title="git-usage">分享到</a>
       
 
       
@@ -535,7 +579,7 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cihgnbxpe001zt9dxjhfgs1ah" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cil0t73jo00229ze5bj0pguec" class="article-share-link" data-share="baidu" data-title="eclipse-usage">分享到</a>
       
 
       
@@ -570,131 +614,131 @@ $ git <span class="keyword">bisect </span>good SHA1_OF_GOOD_VERSION
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="问题">问题</h1><p>##安装问题<br>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>##安装问题<br>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
 <ol>
 <li>服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；</li>
 <li>通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围</li>
 </ol>
 <p>解决方法：</p>
 <p>选择 <code>Troubleshooting</code> -&gt; <code>Install Centos 7 in basic graphics mode</code></p>
-<h2 id="centos_下怎样从root切换到普通用户">centos 下怎样从root切换到普通用户</h2><p>su 普通用户名</p>
-<h1 id="ssh设置">ssh设置</h1><h2 id="设置ssh">设置ssh</h2><pre><code>ssh-keygen <span class="comment">## 生成默认名字的公钥私钥对</span>
-ssh-keygen -f ~/.ssh/<span class="variable">&lt;filename&gt;</span> <span class="comment">## 生成指定名字的公钥私钥对</span>
-ssh-copy-id -i .ssh/<span class="variable">&lt;filename&gt;</span>.pub <span class="variable">&lt;user&gt;</span>@<span class="variable">&lt;server&gt;</span> <span class="comment">## 拷贝公钥到&lt;user&gt;用户 ~/.ssh/authorized_keys 文件中</span>
+<h2 id="centos-下怎样从root切换到普通用户"><a href="#centos-下怎样从root切换到普通用户" class="headerlink" title="centos 下怎样从root切换到普通用户"></a>centos 下怎样从root切换到普通用户</h2><p>su 普通用户名</p>
+<h1 id="ssh设置"><a href="#ssh设置" class="headerlink" title="ssh设置"></a>ssh设置</h1><h2 id="设置ssh"><a href="#设置ssh" class="headerlink" title="设置ssh"></a>设置ssh</h2><pre><code>ssh-keygen ## 生成默认名字的公钥私钥对
+ssh-keygen -f ~/.ssh/&lt;filename&gt; ## 生成指定名字的公钥私钥对
+ssh-copy-id -i .ssh/&lt;filename&gt;.pub &lt;user&gt;@&lt;server&gt; ## 拷贝公钥到&lt;user&gt;用户 ~/.ssh/authorized_keys 文件中
 
-ssh <span class="variable">&lt;user&gt;</span>@<span class="variable">&lt;server&gt;</span> <span class="comment">## 直接访问</span>
-</code></pre><h2 id="别名访问">别名访问</h2><pre><code>~/.ssh/config
+ssh &lt;user&gt;@&lt;server&gt; ## 直接访问
+</code></pre><h2 id="别名访问"><a href="#别名访问" class="headerlink" title="别名访问"></a>别名访问</h2><pre><code>~/.ssh/config
 host bj
-  <span class="keyword">user</span> <span class="title">git</span>
+  user git
   hostname bj.ossxp.com
-  port <span class="number">22</span>
-  identityfile ~/.ssh/<span class="tag">&lt;filename&gt;</span>
-</code></pre><h2 id="遇到问题">遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
-<h1 id="vnc设置">vnc设置</h1><h2 id="一、安装_VNC">一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># rpm -q vnc vnc-server</span>
+  port 22
+  identityfile ~/.ssh/&lt;filename&gt;
+</code></pre><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
+<h1 id="vnc设置"><a href="#vnc设置" class="headerlink" title="vnc设置"></a>vnc设置</h1><h2 id="一、安装-VNC"><a href="#一、安装-VNC" class="headerlink" title="一、安装 VNC"></a>一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
+<pre><code>[root@localhost ~]# rpm -q vnc vnc-server
 </code></pre><p>　　得到：</p>
-<pre><code><span class="keyword">package</span> vnc <span class="keyword">is</span> <span class="keyword">not</span> installed
+<pre><code>package vnc is not installed
 
-<span class="keyword">package</span> vnc-server <span class="keyword">is</span> <span class="keyword">not</span> installed
+package vnc-server is not installed
 </code></pre><p>　　提示没有安装，那么就开始安装，输入：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># yum install vnc vnc-server</span>
+<pre><code>[root@localhost ~]# yum install vnc vnc-server
 </code></pre><p>　　注：如果是 Ubuntu 则输入：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># apt-get install vnc vnc-server</span>
+<pre><code>[root@localhost ~]# apt-get install vnc vnc-server
 </code></pre><p>　　在一串指令提示后，会让你确认一些选项，输入两次 “Y” 并确认，稍作等待，提示 “Complete!” 即完成安装。</p>
-<h2 id="二、设置_VNC_密码">二、设置 VNC 密码</h2><p>　　启动 VNC，输入：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vncserver</span>
+<h2 id="二、设置-VNC-密码"><a href="#二、设置-VNC-密码" class="headerlink" title="二、设置 VNC 密码"></a>二、设置 VNC 密码</h2><p>　　启动 VNC，输入：</p>
+<pre><code>[root@localhost ~]# vncserver
 </code></pre><p>　　此时会提示你输入密码，因为是第一次配置。重复输入两次即可。</p>
-<h2 id="三、配置桌面类型_(可略过)">三、配置桌面类型 (可略过)</h2><p>　　设置一下远程桌面使用那个类型的桌面，分辨率多少等等。输入：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vi ~/.vnc/xstartup</span>
+<h2 id="三、配置桌面类型-可略过"><a href="#三、配置桌面类型-可略过" class="headerlink" title="三、配置桌面类型 (可略过)"></a>三、配置桌面类型 (可略过)</h2><p>　　设置一下远程桌面使用那个类型的桌面，分辨率多少等等。输入：</p>
+<pre><code>[root@localhost ~]# vi ~/.vnc/xstartup
 </code></pre><p>　　得到：</p>
-<pre><code><span class="shebang">#!/bin/sh
-</span>
-vncconfig -iconic &amp;
-<span class="built_in">unset</span> SESSION_MANAGER
-<span class="built_in">unset</span> DBUS_SESSION_BUS_ADDRESS
-OS=`uname <span class="operator">-s</span>`
-<span class="keyword">if</span>
-[ <span class="variable">$OS</span> = 
-<span class="string">'Linux'</span>
-]; <span class="keyword">then</span>
+<pre><code>#!/bin/sh
 
-<span class="keyword">case</span>
-<span class="string">"<span class="variable">$WINDOWMANAGER</span>"</span>
-<span class="keyword">in</span>
+vncconfig -iconic &amp;
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+OS=`uname -s`
+if
+[ $OS = 
+&apos;Linux&apos;
+]; then
+
+case
+&quot;$WINDOWMANAGER&quot;
+in
 
 *gnome*)
 
-<span class="keyword">if</span>
-[ <span class="operator">-e</span> /etc/SuSE-release ]; <span class="keyword">then</span>
+if
+[ -e /etc/SuSE-release ]; then
 
-PATH=<span class="variable">$PATH</span>:/opt/gnome/bin
+PATH=$PATH:/opt/gnome/bin
 
-<span class="built_in">export</span> PATH
+export PATH
 
-<span class="keyword">fi</span>
+fi
 
 ;;
 
-<span class="keyword">esac</span>
-<span class="keyword">fi</span>
-<span class="keyword">if</span>
-[ -x /etc/X11/xinit/xinitrc ]; <span class="keyword">then</span>
+esac
+fi
+if
+[ -x /etc/X11/xinit/xinitrc ]; then
 
-<span class="built_in">exec</span> /etc/X11/xinit/xinitrc
-<span class="keyword">fi</span>
-<span class="keyword">if</span>
-[ <span class="operator">-f</span> /etc/X11/xinit/xinitrc ]; <span class="keyword">then</span>
+exec /etc/X11/xinit/xinitrc
+fi
+if
+[ -f /etc/X11/xinit/xinitrc ]; then
 
-<span class="built_in">exec</span> sh /etc/X11/xinit/xinitrc
-<span class="keyword">fi</span>
-[ -r <span class="variable">$HOME</span>/.Xresources ] &amp;&amp; xrdb <span class="variable">$HOME</span>/.Xresources
+exec sh /etc/X11/xinit/xinitrc
+fi
+[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources
 xsetroot -solid grey
-xterm -geometry <span class="number">80</span>x24+<span class="number">10</span>+<span class="number">10</span> -ls -title 
-<span class="string">"<span class="variable">$VNCDESKTOP</span> Desktop"</span>
+xterm -geometry 80x24+10+10 -ls -title 
+&quot;$VNCDESKTOP Desktop&quot;
 &amp;
 twm &amp;
 </code></pre><p>　　一般情况下，我们使用的 Linux 桌面都是 “Gnome” 桌面，故配置成这个桌面比较习惯。<br>　　按 “i” 键进入编辑状态，主要修改最后两行。改为：</p>
-<pre><code><span class="preprocessor"># xterm -geometry <span class="number">80</span>x24+<span class="number">10</span>+<span class="number">10</span> -ls -title <span class="string">"$VNCDESKTOP Desktop"</span> &amp;</span>
-<span class="preprocessor"># twm &amp;</span>
+<pre><code># xterm -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP Desktop&quot; &amp;
+# twm &amp;
 gnome-session &amp;
 </code></pre><p>　　一看便知，将配置文件的最后两行注释掉，并且加入了一行代码，表明使用的是 “Gnome” 桌面。</p>
-<h2 id="四、配置登录帐号、桌面分辨率、连接方式_(可略过)">四、配置登录帐号、桌面分辨率、连接方式 (可略过)</h2><p>　　输入：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vi /etc/sysconfig/vncservers</span>
+<h2 id="四、配置登录帐号、桌面分辨率、连接方式-可略过"><a href="#四、配置登录帐号、桌面分辨率、连接方式-可略过" class="headerlink" title="四、配置登录帐号、桌面分辨率、连接方式 (可略过)"></a>四、配置登录帐号、桌面分辨率、连接方式 (可略过)</h2><p>　　输入：</p>
+<pre><code>[root@localhost ~]# vi /etc/sysconfig/vncservers
 </code></pre><p>　　出现如下提示：</p>
 <pre><code># The VNCSERVERS variable is a list of display:user pairs.
 #
-# Uncomment the lines below to <span class="operator"><span class="keyword">start</span> a VNC <span class="keyword">server</span> <span class="keyword">on</span> display :<span class="number">2</span>
-# <span class="keyword">as</span> my <span class="string">'myusername'</span> (adjust this <span class="keyword">to</span> your own).  You will also
-# need <span class="keyword">to</span> <span class="keyword">set</span> a VNC <span class="keyword">password</span>;</span> run 'man vncpasswd' to see how
-# to <span class="operator"><span class="keyword">do</span> that.
+# Uncomment the lines below to start a VNC server on display :2
+# as my &apos;myusername&apos; (adjust this to your own).  You will also
+# need to set a VNC password; run &apos;man vncpasswd&apos; to see how
+# to do that.
 #
-# <span class="keyword">DO</span> <span class="keyword">NOT</span> RUN THIS SERVICE <span class="keyword">if</span> your <span class="keyword">local</span> area network <span class="keyword">is</span>
-# <span class="keyword">untrusted</span>!  <span class="keyword">For</span> a secure way <span class="keyword">of</span> <span class="keyword">using</span> VNC, see this <span class="keyword">URL</span>:
-# <span class="keyword">http</span>://kbase.redhat.com/faq/docs/DOC-<span class="number">7028</span>
-# <span class="keyword">Use</span> <span class="string">"-nolisten tcp"</span> <span class="keyword">to</span> prevent X connections <span class="keyword">to</span> your VNC <span class="keyword">server</span> via TCP.
-# <span class="keyword">Use</span> <span class="string">"-localhost"</span> <span class="keyword">to</span> prevent remote VNC clients connecting <span class="keyword">except</span> <span class="keyword">when</span>
-# doing so <span class="keyword">through</span> a secure tunnel.  See the <span class="string">"-via"</span> <span class="keyword">option</span> <span class="keyword">in</span> the
-# <span class="string">`man vncviewer' manual page.
+# DO NOT RUN THIS SERVICE if your local area network is
+# untrusted!  For a secure way of using VNC, see this URL:
+# http://kbase.redhat.com/faq/docs/DOC-7028
+# Use &quot;-nolisten tcp&quot; to prevent X connections to your VNC server via TCP.
+# Use &quot;-localhost&quot; to prevent remote VNC clients connecting except when
+# doing so through a secure tunnel.  See the &quot;-via&quot; option in the
+# `man vncviewer&apos; manual page.
 
-# VNCSERVERS="2:myusername"
-# VNCSERVERARGS[2]="-geometry 800x600 -nolisten tcp -localhost"</span></span>
+# VNCSERVERS=&quot;2:myusername&quot;
+# VNCSERVERARGS[2]=&quot;-geometry 800x600 -nolisten tcp -localhost&quot;
 </code></pre><p>　　重点编辑最后两行，将这两行注释去掉，得到：</p>
-<pre><code><span class="setting">VNCSERVERS=<span class="value"><span class="string">"1:root"</span></span></span>
-<span class="setting">VNCSERVERARGS[1]=<span class="value"><span class="string">"-geometry 1024x768"</span></span></span>
+<pre><code>VNCSERVERS=&quot;1:root&quot;
+VNCSERVERARGS[1]=&quot;-geometry 1024x768&quot;
 </code></pre><p>　　这里是只有一个帐号登录，设置分辨率为1024*768，如果你有多个帐号，则按照下面格式配置。</p>
-<pre><code><span class="setting">VNCSERVERS=<span class="value"><span class="string">"1:user1 2:user2 3:user3"</span></span></span>
-<span class="setting">VNCSERVERARGS[1]=<span class="value"><span class="string">"-geometry 1024×768"</span></span></span>
-<span class="setting">VNCSERVERARGS[2]=<span class="value"><span class="string">"-geometry 1024×768"</span></span></span>
-<span class="setting">VNCSERVERARGS[3]=<span class="value"><span class="string">"-geometry 800×600 -depth 24 -nolisten tcp -nohttpd -localhost"</span></span></span>
+<pre><code>VNCSERVERS=&quot;1:user1 2:user2 3:user3&quot;
+VNCSERVERARGS[1]=&quot;-geometry 1024×768&quot;
+VNCSERVERARGS[2]=&quot;-geometry 1024×768&quot;
+VNCSERVERARGS[3]=&quot;-geometry 800×600 -depth 24 -nolisten tcp -nohttpd -localhost&quot;
 </code></pre><p>　　解释一下这个文件：</p>
-<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC server，上面的例子里运行了三个 VNC server，其中 user1 在 display :<span class="number">1</span>，user2 在 display :<span class="number">2</span>，user3 在 display :<span class="number">3</span>。
+<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC server，上面的例子里运行了三个 VNC server，其中 user1 在 display :1，user2 在 display :2，user3 在 display :3。
 
-VNCSERVERARGS 这三行，分别为 VNC server <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span> 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 <span class="number">1024</span>×<span class="number">768</span>，对 user3 使用 <span class="number">800</span>×<span class="number">600</span>,<span class="number">24</span> 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
+VNCSERVERARGS 这三行，分别为 VNC server 1, 2, 3 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 1024×768，对 user3 使用 800×600,24 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
 </code></pre><p>　　注释：在启动 VNCserver 时，你也可以为 server 指定一个 display 参数。你可以把 display 理解为一个桌面，每个用户都可以有自己的桌面。VNC 客户端在连接时，可以指定连接到哪个桌面上。在系统中，display 号不能重复，也就是说，如果有用户已经建立了名为 “:1” 的 display，另外一个用户就不能再使用 “:1” 了，他可以使用 “:2”。</p>
 <p>　　指定 display 号码的启动 VNC server 的命令是:</p>
-<pre><code><span class="label">vncserver:</span><span class="number">1</span>
-</code></pre><h2 id="五、配置防火墙，允许_VNC_连接">五、配置防火墙，允许 VNC 连接</h2><p>　　VNC server 监听的端口从 5900 开始，display:1 的监听 5901，display:2 监听 5902，以此类推。CentOS 的防火墙缺省是不允许连接这些端口的，所以需要使用下面的步骤打开防火墙（需要 root 权限)：<br>　　输入编辑：</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># vi /etc/sysconfig/iptables</span>
+<pre><code>vncserver:1
+</code></pre><h2 id="五、配置防火墙，允许-VNC-连接"><a href="#五、配置防火墙，允许-VNC-连接" class="headerlink" title="五、配置防火墙，允许 VNC 连接"></a>五、配置防火墙，允许 VNC 连接</h2><p>　　VNC server 监听的端口从 5900 开始，display:1 的监听 5901，display:2 监听 5902，以此类推。CentOS 的防火墙缺省是不允许连接这些端口的，所以需要使用下面的步骤打开防火墙（需要 root 权限)：<br>　　输入编辑：</p>
+<pre><code>[root@localhost ~]# vi /etc/sysconfig/iptables
 </code></pre><p>　　得到：</p>
 <pre><code># Firewall configuration written by system-config-firewall
 # Manual customization of this file is not recommended.
@@ -702,63 +746,63 @@ VNCSERVERARGS 这三行，分别为 VNC server <span class="number">1</span>, <s
 :INPUT ACCEPT [0:0]
 :FORWARD ACCEPT [0:0]
 :OUTPUT ACCEPT [0:0]
--<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">ESTABLISHED</span>,<span class="constant">RELATED</span> -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -p icmp -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -i lo -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -m state --state <span class="constant">NEW</span> -m tcp -p tcp --dport <span class="number">22</span> -j <span class="constant">ACCEPT</span>
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">INPUT</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
-</span>-<span class="ruby"><span class="constant">A</span> <span class="constant">FORWARD</span> -j <span class="constant">REJECT</span> --reject-with icmp-host-prohibited
-</span>COMMIT
-</code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
-<pre><code><span class="comment"># Firewall configuration written by system-config-firewall</span>
-<span class="comment"># Manual customization of this file is not recommended.</span>
-*filter
-:INPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
-:FORWARD ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
-:OUTPUT ACCEPT [<span class="number">0</span>:<span class="number">0</span>]
--A INPUT -m <span class="keyword">state</span> --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 -A INPUT -p icmp -j ACCEPT
 -A INPUT -i lo -j ACCEPT
--A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">22</span> -j ACCEPT
--A INPUT -m <span class="keyword">state</span> --state NEW -m tcp -p tcp --dport <span class="number">5901</span> -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 5901 -j ACCEPT
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
 COMMIT
 </code></pre><p>　　即添加了上述代码的第 11 行。</p>
-<h2 id="六、重启防火墙">六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
-<pre><code><span class="string">[root@localhost ~]</span># /sbin/service iptables restart
-iptables：清除防火墙规则：<span class="string">[确定]</span>
-iptables：将链设置为政策 ACCEPT：filter <span class="string">[确定]</span>
-iptables：正在卸载模块：<span class="string">[确定]</span>
-iptables：应用防火墙规则：<span class="string">[确定]</span>
+<h2 id="六、重启防火墙"><a href="#六、重启防火墙" class="headerlink" title="六、重启防火墙"></a>六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
+<pre><code>[root@localhost ~]# /sbin/service iptables restart
+iptables：清除防火墙规则：[确定]
+iptables：将链设置为政策 ACCEPT：filter [确定]
+iptables：正在卸载模块：[确定]
+iptables：应用防火墙规则：[确定]
 </code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
-<pre><code><span class="number">192.168</span><span class="number">.1</span><span class="number">.2</span>:<span class="number">1</span>    
+<pre><code>192.168.1.2:1    
 </code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
-<h2 id="七、设置_VNC_自动启动">七、设置 VNC 自动启动</h2><p>　　虽然上面配置是可以使用了，但是你一旦重启服务器后，VNC 的服务又会停止，得手动来启，不方便，虽说服务器不能老是启动，但是重启的时候还是有的，为了方便，你需要将 VNC 服务设置为自动自动。<br>　　方法很多，你可以在图形化的界面下打开服务窗口，然后将 VNC 服务设为自动。既然这里都是在用终端下的命令行形式，就继续沿用这个方式吧。</p>
-<pre><code>[root<span class="constant">@localhost</span> ~]<span class="preprocessor"># chkconfig vncserver on</span>
+<h2 id="七、设置-VNC-自动启动"><a href="#七、设置-VNC-自动启动" class="headerlink" title="七、设置 VNC 自动启动"></a>七、设置 VNC 自动启动</h2><p>　　虽然上面配置是可以使用了，但是你一旦重启服务器后，VNC 的服务又会停止，得手动来启，不方便，虽说服务器不能老是启动，但是重启的时候还是有的，为了方便，你需要将 VNC 服务设置为自动自动。<br>　　方法很多，你可以在图形化的界面下打开服务窗口，然后将 VNC 服务设为自动。既然这里都是在用终端下的命令行形式，就继续沿用这个方式吧。</p>
+<pre><code>[root@localhost ~]# chkconfig vncserver on
 </code></pre><p>#tomcat<br>    pscp -r -v tomcat.tar.gz root@192.168.1.217:/usr/local<br>    tar -xzf /usr/local/tomcat.tar.gz</p>
-<pre><code>svnadmin <span class="keyword">dump</span> Repositories\goutrip &gt; svndata\goutrip.<span class="keyword">dump</span>
-svnadmin load svndata/goutrip &lt; goutrip.<span class="keyword">dump</span>
+<pre><code>svnadmin dump Repositories\goutrip &gt; svndata\goutrip.dump
+svnadmin load svndata/goutrip &lt; goutrip.dump
 
-ps -aux|<span class="keyword">grep</span> svnserve
-<span class="keyword">kill</span> -<span class="number">9</span> id
+ps -aux|grep svnserve
+kill -9 id
 svnserve -d -r /home/goutrip/svndata
 </code></pre><p>最后不要加正斜杠</p>
 <p>可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动<br>解决办法 killall svnserve</p>
-<h1 id="远程桌面">远程桌面</h1><pre><code>[root@dlp ~]<span class="preprocessor"># yum -y install freerdp </span>
-[cent@dlp ~]$ xfreerdp -g <span class="number">800</span>x600 -u administrator <span class="number">10.0</span><span class="number">.0</span><span class="number">.100</span> 
-</code></pre><h1 id="virtualbox">virtualbox</h1><blockquote>
+<h1 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h1><pre><code>[root@dlp ~]# yum -y install freerdp 
+[cent@dlp ~]$ xfreerdp -g 800x600 -u administrator 10.0.0.100 
+</code></pre><h1 id="virtualbox"><a href="#virtualbox" class="headerlink" title="virtualbox"></a>virtualbox</h1><blockquote>
 <p>用root用户</p>
 </blockquote>
-<pre><code>[root<span class="constant">@dlp</span> ~]<span class="preprocessor"># vboxmanage list vms</span>
-[root<span class="constant">@dlp</span> ~]<span class="preprocessor"># vboxmanage startvm <span class="string">"widnows 2008"</span> --type headless</span>
-[root<span class="constant">@dlp</span> ~]<span class="preprocessor"># vboxmanage controlvm <span class="string">"windows 2008"</span> poweroff</span>
+<pre><code>[root@dlp ~]# vboxmanage list vms
+[root@dlp ~]# vboxmanage startvm &quot;widnows 2008&quot; --type headless
+[root@dlp ~]# vboxmanage controlvm &quot;windows 2008&quot; poweroff
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cihgnbxpm0022t9dxs9h5yhdf" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cil0t73jx00259ze57zjjaksv" class="article-share-link" data-share="baidu" data-title="centos-install">分享到</a>
       
 
       
@@ -793,7 +837,7 @@ svnserve -d -r /home/goutrip/svndata
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="记录类型">记录类型</h2><blockquote>
+        <h2 id="记录类型"><a href="#记录类型" class="headerlink" title="记录类型"></a>记录类型</h2><blockquote>
 <p>要将域名指向空间商提供的IP地址，请选择「A记录」，要将域名指向另一个域名，请选择「CNAME记录」。</p>
 </blockquote>
 <ol>
@@ -807,7 +851,7 @@ svnserve -d -r /home/goutrip/svndata
 <li>显性URL：将域名指向一个http（s)协议地址，访问域名时，自动跳转至目标地址（例如：将www.net.cn显性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址为：www.hichina.com）。</li>
 <li>隐性URL：与显性URL类似，但隐性转发会隐藏真实的目标地址（例如：将www.net.cn隐性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址仍然为：www.net.cn）。</li>
 </ol>
-<h2 id="主机记录(RR)">主机记录(RR)</h2><blockquote>
+<h2 id="主机记录-RR"><a href="#主机记录-RR" class="headerlink" title="主机记录(RR)"></a>主机记录(RR)</h2><blockquote>
 <p>要将域名解析为www.example.com，在主机记录(RR)处填写www即可。</p>
 </blockquote>
 <p>主机记录就是域名前缀，常见用法有：</p>
@@ -820,7 +864,7 @@ svnserve -d -r /home/goutrip/svndata
 </ul>
 </li>
 </ol>
-<h2 id="记录值">记录值</h2><ol>
+<h2 id="记录值"><a href="#记录值" class="headerlink" title="记录值"></a>记录值</h2><ol>
 <li>A记录值：请填写您的服务器IP地址（必须为IPv4地址，例如：11.11.11.11），若不清楚IP，请您咨询您的空间服务商。</li>
 <li>CNAME记录值：请填写空间服务商提供给您的域名（例如：hichina.com）。</li>
 <li>MX记录值：请填写邮件服务商提供给您的域名（例如：hichina.com）。</li>
@@ -828,13 +872,13 @@ svnserve -d -r /home/goutrip/svndata
 <li>AAAA记录值：请填写一个IPv6地址（例如：ff03:0:0:0:0:0:0:c1）。</li>
 <li>SRV记录值：格式为：优先级、空格、权重、空格、端口号、空格、目标地址，例如：3 0 2176 example-server.2.google.com。</li>
 </ol>
-<h2 id="示例">示例</h2><pre><code>记录类型 主机记录 解析线路 记录值
-A        @        默认        <span class="number">114.112</span><span class="number">.69</span><span class="number">.203</span>
-A        www        默认        <span class="number">114.112</span><span class="number">.69</span><span class="number">.203</span>
+<h2 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h2><pre><code>记录类型 主机记录 解析线路 记录值
+A        @        默认        114.112.69.203
+A        www        默认        114.112.69.203
 
-A        xj        默认        <span class="number">114.112</span><span class="number">.69</span><span class="number">.203</span>
+A        xj        默认        114.112.69.203
 
-A        mail    默认        <span class="number">114.112</span><span class="number">.69</span><span class="number">.194</span>
+A        mail    默认        114.112.69.194
 MX        mail    默认        goutrip.com
 
 MX        @        默认     mxbiz1.qq.com
@@ -847,59 +891,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cihgnbxph0020t9dxhf33pz2u" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-php-note" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/04/php-note/" class="article-date">
-  <time datetime="2014-09-04T13:43:45.000Z" itemprop="datePublished">2014-09-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/04/php-note/">php-note</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打印调试信息<br>error_log(“userinfo”, 3, “php_sql_err.log”);</p>
-<pre><code><span class="variable">$where</span>[<span class="string">'truename'</span>] = <span class="keyword">array</span>(<span class="string">'like'</span>, <span class="string">'%'</span>.trim($_POST[<span class="string">'truename'</span>]).<span class="string">'%'</span>);
-<span class="variable">$count</span>     = <span class="variable">$card</span>_create_db-&gt;<span class="keyword">where</span>(<span class="variable">$where</span>)-&gt;count();
-<span class="variable">$Page</span>      = new Page(<span class="variable">$count</span>, <span class="number">15</span>);
-<span class="variable">$show</span>      = <span class="variable">$Page-</span>&gt;show();
-<span class="variable">$list</span>      = <span class="variable">$card</span>_create_db-&gt;<span class="keyword">where</span>(<span class="variable">$where</span>)-&gt;limit(<span class="variable">$Page-</span>&gt;firstRow . <span class="string">','</span> . <span class="variable">$Page-</span>&gt;listRows)-&gt;select();
-
-<span class="variable">$userinfo</span>_db = M(<span class="string">'Userinfo'</span>);
-<span class="variable">$userinfo</span>_<span class="keyword">where</span>[<span class="string">'wecha_id'</span>] = <span class="keyword">array</span>(<span class="string">'in'</span>, <span class="variable">$wecha</span>_ids);
-<span class="variable">$users</span>                      = <span class="variable">$userinfo</span>_db-&gt;<span class="keyword">where</span>(<span class="variable">$userinfo</span>_<span class="keyword">where</span>)-&gt;select();
-</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
-<p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cihgnbxo50010t9dx02ff5qid" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cil0t73jq00239ze5xzaxw848" class="article-share-link" data-share="baidu" data-title="domain-config">分享到</a>
       
 
       
@@ -927,7 +919,7 @@ MX        @        默认     mxbiz2.qq.com
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -938,7 +930,7 @@ MX        @        默认     mxbiz2.qq.com
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -947,7 +939,7 @@ MX        @        默认     mxbiz2.qq.com
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -959,7 +951,11 @@ MX        @        默认     mxbiz2.qq.com
       <ul>
         
           <li>
-            <a href="/2015/11/26/hello-world/">Hello World</a>
+            <a href="/2016/02/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/15/h2/">h2</a>
           </li>
         
           <li>
@@ -972,10 +968,6 @@ MX        @        默认     mxbiz2.qq.com
         
           <li>
             <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/15/front-end/">front-end</a>
           </li>
         
       </ul>
@@ -1009,7 +1001,7 @@ MX        @        默认     mxbiz2.qq.com
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 evatlsong<br>
+      &copy; 2016 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

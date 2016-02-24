@@ -76,6 +76,206 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-thinking-in-java" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/16/thinking-in-java/" class="article-date">
+  <time datetime="2015-08-16T17:51:25.000Z" itemprop="datePublished">2015-08-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/16/thinking-in-java/">thinking-in-java</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="初始化与清理"><a href="#初始化与清理" class="headerlink" title="初始化与清理"></a>初始化与清理</h1><h2 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h2><p>对当前对象的引用<br><code>this(args)</code><br>可以用this调用一个构造器，但却不能调用两个。此外，必须将构造器调用置于最起始处<br><code>static</code>方法就是没有<code>this</code>的方法<br><code>static</code>方法内部不能调用非静态方法</p>
+<h2 id="清理：终结处理和垃圾回收"><a href="#清理：终结处理和垃圾回收" class="headerlink" title="清理：终结处理和垃圾回收"></a>清理：终结处理和垃圾回收</h2><p><code>protected void finalize()</code></p>
+<h2 id="成员初始化"><a href="#成员初始化" class="headerlink" title="成员初始化"></a>成员初始化</h2><p>所有变量在使用前都能得到恰当的初始化<br>方法的局部变量，Java以编译时错误的形式来贯彻这种保证<br>类的字段会有初始值</p>
+<h2 id="构造器初始化"><a href="#构造器初始化" class="headerlink" title="构造器初始化"></a>构造器初始化</h2><p>对象的创建过程</p>
+<ol>
+<li>即使没有显式地使用<code>static</code>关键字，构造器实际上也是静态方法。因此，当首次创建类型为Dog<br>的对象时（构造器可以看成静态方法）,或者Dog类的静态方法/静态域首次被访问时，Java解释器必须<br>查找类路径，以定位<code>Dog.class</code>文件。</li>
+<li>然后载入<code>Dog.class</code>（后面会学到，这将创建一个Class对象），有关静态初始化的所有动作都会执行，<br>因此，静态初始化只在Class对象首次加载的时候进行一次。</li>
+<li>当用<code>new Dog()</code>创建对象的时候，首先将在堆上为<code>Dog</code>对象分配足够的存储空间。</li>
+<li>这块存储空间会被清零，这就自动地将<code>Dog</code>对象中的所有基本类型数据都设置成了默认值<br>（对数字来说就是0，对布尔型和字符型也相同）,而引用则被设置成了<code>null</code>.</li>
+<li>执行所有出现于字段定义处的初始化动作。</li>
+<li><p>执行构造器。</p>
+<h3 id="显示的静态初始化"><a href="#显示的静态初始化" class="headerlink" title="显示的静态初始化"></a>显示的静态初始化</h3><p>Java允许将多个静态初始化动作组织成一个特殊的静态字句（有时也叫做静态块）</p>
+<p> public class Cups {</p>
+<pre><code>static Cup cup1;
+static Cup cup2;
+static {
+    cup1 = new Cup(1);
+    cup2 = new Cup(2);
+}
+</code></pre><p> }</p>
+</li>
+</ol>
+<h3 id="非静态实例初始化"><a href="#非静态实例初始化" class="headerlink" title="非静态实例初始化"></a>非静态实例初始化</h3><p>可以保证无论调用了哪个显式构造器，某些操作都会发生。</p>
+<pre><code>public class Cups {
+    Cup cup1;
+    Cup cup2;
+    {
+        cup1 = new Cup(1);
+        cup2 = new Cup(2);
+    }
+}
+</code></pre><h2 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h2><p><code>int[] a1 = { 1, 2, 3};</code><br><code>int[] a1 = new int[3];</code><br><code>Integer[] a1 = {new Integer(1), new Integer(2), new Integer(3)};</code><br><code>Integer[] a1 = new Integer[3];</code></p>
+<h3 id="可变参数列表"><a href="#可变参数列表" class="headerlink" title="可变参数列表"></a>可变参数列表</h3><p>应该总是只在重载方法的一个版本上使用可变参数列表，或者压根就不使用它</p>
+<p>public class OverloadingVarargs3 {<br>    static void f(float i, Character… args) {<br>        System.out.println(“first”);<br>    }</p>
+<pre><code>static void f(char c, Character... args) {
+    System.out.println(&quot;second&quot;);
+}
+
+public static void main(String[] args) {
+    f(1, &apos;a&apos;);
+    f(&apos;a&apos;, &apos;b&apos;);
+}
+</code></pre><p>}</p>
+<p>// {CompileTimeError} (Won’t compile)<br>public class OverloadingVarargs2 {<br>    static void f(float i, Character… args) {<br>        System.out.println(“first”);<br>    }</p>
+<pre><code>static void f(Character... args) {
+    System.out.print(&quot;second&quot;);
+}
+
+public static void main(String[] args) {
+    f(1, &apos;a&apos;);
+    // f(&apos;a&apos;, &apos;b&apos;);
+}
+</code></pre><p>}</p>
+<h1 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h1><h2 id="包：库单元"><a href="#包：库单元" class="headerlink" title="包：库单元"></a>包：库单元</h2><p>Java解释器的运行过程如下：首先，找出环境变量CLASSPATH。CLASSPATH包含一个或多个目录，用作查找.class文件的根目录。<br>从根目录开始，解释器获取包的名称并将每个句点替换成反斜杠，以从CLASSPATH根中产生一个路径名称。得到的路径会与<br>CLASSPATH中的各个不同的项相连接，解释器就在这些目录中查找与你所要创建的类名称相关的.class文件。（解释器还会<br>去查找某些设计Java解释器所在位置的标准目录。）</p>
+<h2 id="Java访问权限修饰词"><a href="#Java访问权限修饰词" class="headerlink" title="Java访问权限修饰词"></a>Java访问权限修饰词</h2><ol>
+<li>public</li>
+<li>protected(也提供包访问权限)</li>
+<li>默认的包访问权限</li>
+<li>private<h2 id="类的访问权限"><a href="#类的访问权限" class="headerlink" title="类的访问权限"></a>类的访问权限</h2></li>
+<li>public</li>
+<li>包访问权限</li>
+</ol>
+<h1 id="复用类"><a href="#复用类" class="headerlink" title="复用类"></a>复用类</h1><h2 id="final-关键字"><a href="#final-关键字" class="headerlink" title="final 关键字"></a>final 关键字</h2><h3 id="final数据"><a href="#final数据" class="headerlink" title="final数据"></a>final数据</h3><ol>
+<li>一个永不改变的编译时常量。</li>
+<li>一个在运行时被初始化的值，而你不希望它被改变<br>final参数<br>你无法在方法中更改参数引用所指向的对象<h3 id="final方法"><a href="#final方法" class="headerlink" title="final方法"></a>final方法</h3>只有在想要明确禁止覆盖时，才将方法设置为final的。<h3 id="final类"><a href="#final类" class="headerlink" title="final类"></a>final类</h3>不能被继承</li>
+</ol>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>多态也称动态绑定、后期绑定或运行时绑定</p>
+<h2 id="转机"><a href="#转机" class="headerlink" title="转机"></a>转机</h2><h3 id="方法调用绑定"><a href="#方法调用绑定" class="headerlink" title="方法调用绑定"></a>方法调用绑定</h3><p>Java中除了static方法和final方法（private方法属于final方法）之外，其他所有的方法都是后期绑定。</p>
+<h2 id="构造器和多态"><a href="#构造器和多态" class="headerlink" title="构造器和多态"></a>构造器和多态</h2><p>当覆盖被继承类的<code>dispose()</code>方法时，务必记住调用基类版本<code>dispose()</code>方法；否则，基类的清理动作就不会发生。<br>要调用构造器内部的一个动态绑定方法，就要用到那个方法的被覆盖后的定义</p>
+<h2 id="协变返回类型"><a href="#协变返回类型" class="headerlink" title="协变返回类型"></a>协变返回类型</h2><p>导出类中的被覆盖方法可以返回基类方法的返回类型的某种导出类型</p>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><h2 id="简单泛型"><a href="#简单泛型" class="headerlink" title="简单泛型"></a>简单泛型</h2><pre><code>public class Holder3&lt;T&gt; {
+    private T a;
+
+    public Holder3(T a) {
+        this.a = a;
+    }
+
+    public void set(T a) {
+        this.a = a;
+    }
+
+    public T get() {
+        return a;
+    }
+
+    public static void main(String[] args) {
+        Holder3&lt;Automobile&gt; h3 = new Holder3&lt;Automobile&gt;(new Automobile());
+        Automobile a = h3.get(); // No cast needed
+        // h3.set(&quot;Not an Automobile&quot;); // Error
+        // h3.set(1); // Error
+    }
+} // /:~
+</code></pre><h1 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h1><h2 id="Basic-syntax"><a href="#Basic-syntax" class="headerlink" title="Basic syntax"></a>Basic syntax</h2><p>three built-in annotations</p>
+<ul>
+<li>@Override</li>
+<li>@Deprecated</li>
+<li>@SuppressWarnings</li>
+</ul>
+<h3 id="Defining-annotations"><a href="#Defining-annotations" class="headerlink" title="Defining annotations"></a>Defining annotations</h3><pre><code>import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retection(RetentionPolicy.RUNTIME)
+public @interface UseCase {
+    public int id();
+    public String description() default &quot;no description&quot;;
+}
+
+import java.util.*;
+public class PasswordUtils {
+    @UseCase(id = 48, description = &quot;encrypt password&quot;)
+    public String encryptPassword(String password) {
+        return new StringBuilder(password).reverse().toString();
+    }
+}
+</code></pre><h3 id="Meta-annotations"><a href="#Meta-annotations" class="headerlink" title="Meta-annotations"></a>Meta-annotations</h3><ul>
+<li>@Target     Where this annotation can be applied. The possible <code>ElementType</code> arguments are:<pre><code>CONSTRUCTOR:
+FIELD:
+LOCAL_VARIABLE:
+METHOD:
+PACKAGE:
+PARAMETER:
+TYPE:
+</code></pre></li>
+<li>@Retention  How long the annotation information is kept. The possible <code>RetentionPolicy</code> arguments are:<pre><code>SOURCE:
+CLASS:
+RUNTIME:
+</code></pre></li>
+<li>@Documented Include this annotation int the Javadocs.</li>
+<li>@Inherited  Allow subclasses to inherit parent annotations.</li>
+</ul>
+<h2 id="Writing-annotation-processors"><a href="#Writing-annotation-processors" class="headerlink" title="Writing annotation processors"></a>Writing annotation processors</h2><p><strong>Class</strong>, <strong>Method</strong> and <strong>Field</strong> all implement the AnnotatedElement interface</p>
+<p>a list of the allowed types for annotation elements:<br>(you are not allowed to use any of the wrapper classes)</p>
+<ul>
+<li>All primitives(int, float, boolean etc.)</li>
+<li>String</li>
+<li>Class</li>
+<li>Enums</li>
+<li>Annotations</li>
+<li>Arrays of any of the above<h3 id="Default-value-constraints"><a href="#Default-value-constraints" class="headerlink" title="Default value constraints"></a>Default value constraints</h3>elements must either have default values or values provided by the class that uses the annotation.<br>none of the non-primitive type elements are allowed to take <code>null</code> as a value<br>you can provide specific values, like empty strings or negative values<br>This is a typical idiom in annotation definitions.</li>
+</ul>
+<h1 id="Java-I-O-系统"><a href="#Java-I-O-系统" class="headerlink" title="Java I/O 系统"></a>Java I/O 系统</h1><h2 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h2><pre><code>public static void serializeStaticState(ObjectOutputStream os)
+        throws IOException {
+    os.writeInt(color);
+}
+
+public static void deserializeStaticState(ObjectInputStream os)
+        throws IOException {
+    color = os.readInt();
+}
+
+private void writeObject(ObjectOutputStream stream) throws IOException {
+    stream.defaultWriteObject();
+    serializeStaticState(stream);
+}
+private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    stream.defaultReadObject();
+    deserializeStaticState(stream);
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cil0t73hl000f9ze5v99mnfia" class="article-share-link" data-share="baidu" data-title="thinking-in-java">分享到</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-ruby" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/08/15/ruby/" class="article-date">
@@ -98,15 +298,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="change_gem_source">change gem source</h1><pre><code>gem sources --remove <span class="string">https:</span><span class="comment">//rubygems.org/</span>
-gem sources -a <span class="string">https:</span><span class="comment">//ruby.taobao.org/</span>
+        <h1 id="change-gem-source"><a href="#change-gem-source" class="headerlink" title="change gem source"></a>change gem source</h1><pre><code>gem sources --remove https://rubygems.org/
+gem sources -a https://ruby.taobao.org/
 gem sources -l
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="cihgnbxny000tt9dxivgc2ru8" class="article-share-link" data-share="baidu" data-title="ruby">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="cil0t73i2000v9ze58btmgopo" class="article-share-link" data-share="baidu" data-title="ruby">分享到</a>
       
 
       
@@ -149,7 +349,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/13/windows-install/" data-id="cihgnbxn40002t9dxerdl3xdl" class="article-share-link" data-share="baidu" data-title="windows-install">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/13/windows-install/" data-id="cil0t73h500029ze54tejrdl8" class="article-share-link" data-share="baidu" data-title="windows-install">分享到</a>
       
 
       
@@ -189,7 +389,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/10/atom/" data-id="cihgnbxpr0026t9dx2ov6udre" class="article-share-link" data-share="baidu" data-title="atom">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/atom/" data-id="cil0t73k000299ze5njsinrdp" class="article-share-link" data-share="baidu" data-title="atom">分享到</a>
       
 
       
@@ -226,34 +426,35 @@ gem sources -l
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Editing">Editing</h2><pre><code>Alt + <span class="operator"><span class="keyword">Insert</span> Generate code...(Getters, Setters)
-Alt + Enter <span class="keyword">Show</span> intention actions <span class="keyword">and</span> <span class="keyword">quick</span>-fixes
-Ctrl + Alt + <span class="keyword">L</span> Reformat code
-Ctrl + Alt + O <span class="keyword">Optimize</span> imports
-Ctrl + F4 <span class="keyword">Close</span> active editor tab</span>
-</code></pre><h2 id="Navigation">Navigation</h2><pre><code>Ctrl + F12 File structure popup
-Ctrl + B <span class="keyword">or</span> Ctrl + Click Go <span class="keyword">to</span> declaration
-Ctrl + Alt + B Go <span class="keyword">to</span> <span class="keyword">implementation</span>(s)
-Ctrl + Alt + Left/Right Navigate back/<span class="keyword">forward</span>
+        <h2 id="Editing"><a href="#Editing" class="headerlink" title="Editing"></a>Editing</h2><pre><code>Alt + Insert Generate code...(Getters, Setters)
+Alt + Enter Show intention actions and quick-fixes
+Ctrl + Alt + L Reformat code
+Ctrl + Alt + O Optimize imports
+Ctrl + F4 Close active editor tab
+</code></pre><h2 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h2><pre><code>Ctrl + F12 File structure popup
+Ctrl + B or Ctrl + Click Go to declaration
+Ctrl + Alt + B Go to implementation(s)
+Ctrl + Alt + Left/Right Navigate back/forward
 Ctrl + Q Quick JavaDoc
 Ctrl + P Parameter info
-Ctrl + I Implement <span class="function"><span class="keyword">Method</span>
-<span class="title">Ctrl</span> + <span class="title">H</span> <span class="title">Type</span> <span class="title">Hierarchy</span>
-<span class="title">Ctrl</span> + <span class="title">Shift</span> + <span class="title">I</span> <span class="title">Open</span> <span class="title">quick</span> <span class="title">definition</span> <span class="title">lookup</span>
-<span class="title">Ctrl</span> + <span class="title">Shift</span> + <span class="title">B</span> <span class="title">Go</span> <span class="title">to</span> <span class="title">type</span> <span class="title">declaration</span>
-<span class="title">Esc</span> <span class="title">Go</span> <span class="title">to</span> <span class="title">editor</span> <span class="params">(<span class="keyword">from</span> tool window)</span>
-<span class="title">Shift</span> + <span class="title">Esc</span> <span class="title">Hide</span> <span class="title">active</span> <span class="title">or</span> <span class="title">last</span> <span class="title">active</span> <span class="title">window</span></span>
-</code></pre><h2 id="General">General</h2><pre><code>Ctrl + Shift + F12 Toggle maximizing editor
-Ctrl + Tab Switch between <span class="keyword">tabs</span> <span class="built_in">and</span> tool window
-Ctrl + <span class="string">'+/-'</span> <span class="keyword">fold</span> unfold
-Ctrl + Shift <span class="string">'+/-'</span> <span class="keyword">all</span> <span class="keyword">fold</span> unfold
-</code></pre><h2 id="plugin">plugin</h2><p>active vim<br>Ctrl+Alt+V Ctrl+;</p>
+Ctrl + I Implement Method
+Ctrl + H Type Hierarchy
+Ctrl + Shift + I Open quick definition lookup
+Ctrl + Shift + B Go to type declaration
+Esc Go to editor (from tool window)
+Shift + Esc Hide active or last active window
+Ctrl + ]/[ Move to code block end/start
+</code></pre><h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><pre><code>Ctrl + Shift + F12 Toggle maximizing editor
+Ctrl + Tab Switch between tabs and tool window
+Ctrl + &apos;+/-&apos; fold unfold
+Ctrl + Shift &apos;+/-&apos; all fold unfold
+</code></pre><h2 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h2><p>active vim<br>Ctrl+Alt+V Ctrl+;</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cihgnbxot001kt9dxuzne7v5k" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cil0t73j1001m9ze5og992j35" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
       
 
       
@@ -290,65 +491,65 @@ Ctrl + Shift <span class="string">'+/-'</span> <span class="keyword">all</span> 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Learning_The_Basics">Learning The Basics</h1><h2 id="Installing_tmux">Installing tmux</h2><h3 id="Installing_Via_a_Package_Manager">Installing Via a Package Manager</h3><pre><code>sudo apt-<span class="keyword">get</span> install tmux
+        <h1 id="Learning-The-Basics"><a href="#Learning-The-Basics" class="headerlink" title="Learning The Basics"></a>Learning The Basics</h1><h2 id="Installing-tmux"><a href="#Installing-tmux" class="headerlink" title="Installing tmux"></a>Installing tmux</h2><h3 id="Installing-Via-a-Package-Manager"><a href="#Installing-Via-a-Package-Manager" class="headerlink" title="Installing Via a Package Manager"></a>Installing Via a Package Manager</h3><pre><code>sudo apt-get install tmux
 </code></pre><p>check version</p>
-<pre><code><span class="title">tmux</span> -V
-</code></pre><h3 id="Installing_from_Source">Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
-<pre><code>sudo apt-get <span class="operator"><span class="keyword">install</span> <span class="keyword">build</span>-essential</span>
+<pre><code>tmux -V
+</code></pre><h3 id="Installing-from-Source"><a href="#Installing-from-Source" class="headerlink" title="Installing from Source"></a>Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
+<pre><code>sudo apt-get install build-essential
 </code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
-<pre><code>sudo apt-<span class="built_in">get</span> install libevent-<span class="built_in">dev</span> libncurses5-<span class="built_in">dev</span>
+<pre><code>sudo apt-get install libevent-dev libncurses5-dev
 
 ./configure
 make
 sudo make install
-</code></pre><h2 id="Starting_tmux">Starting tmux</h2><p>Starting tmux</p>
+</code></pre><h2 id="Starting-tmux"><a href="#Starting-tmux" class="headerlink" title="Starting tmux"></a>Starting tmux</h2><p>Starting tmux</p>
 <pre><code>tmux
 </code></pre><p>Close the tmux session</p>
-<pre><code><span class="keyword">exit</span>
-</code></pre><h3 id="Creating_Named_Sessions">Creating Named Sessions</h3><pre><code>tmux<span class="instruction"> new-session </span>-s basic
+<pre><code>exit
+</code></pre><h3 id="Creating-Named-Sessions"><a href="#Creating-Named-Sessions" class="headerlink" title="Creating Named Sessions"></a>Creating Named Sessions</h3><pre><code>tmux new-session -s basic
 </code></pre><p>shorten this command</p>
-<pre><code>tmux <span class="keyword">new</span> -s basic
-</code></pre><h2 id="Detaching_and_Attaching_Sessions">Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
-<pre><code>tmux <span class="type">list</span>-sessions
+<pre><code>tmux new -s basic
+</code></pre><h2 id="Detaching-and-Attaching-Sessions"><a href="#Detaching-and-Attaching-Sessions" class="headerlink" title="Detaching and Attaching Sessions"></a>Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
+<pre><code>tmux list-sessions
 </code></pre><p>shorten this command</p>
-<pre><code>tmux <span class="keyword">ls</span>
+<pre><code>tmux ls
 </code></pre><p>attach to the session</p>
-<pre><code>tmux <span class="keyword">attach</span>
-tmux <span class="keyword">attach</span> -t basic
-</code></pre><h3 id="Killing_Sessions">Killing Sessions</h3><pre><code>tmux <span class="operator"><span class="keyword">kill</span>-<span class="keyword">session</span> -<span class="keyword">t</span> basic</span>
-</code></pre><h2 id="Working_with_Windows">Working with Windows</h2><pre><code>tmux <span class="built_in">new</span> -s windows -n <span class="built_in">shell</span>
-</code></pre><h3 id="Creating_and_Naming_Windows">Creating and Naming Windows</h3><p>create a window</p>
-<pre><code><span class="title">PREFIX</span> c
+<pre><code>tmux attach
+tmux attach -t basic
+</code></pre><h3 id="Killing-Sessions"><a href="#Killing-Sessions" class="headerlink" title="Killing Sessions"></a>Killing Sessions</h3><pre><code>tmux kill-session -t basic
+</code></pre><h2 id="Working-with-Windows"><a href="#Working-with-Windows" class="headerlink" title="Working with Windows"></a>Working with Windows</h2><pre><code>tmux new -s windows -n shell
+</code></pre><h3 id="Creating-and-Naming-Windows"><a href="#Creating-and-Naming-Windows" class="headerlink" title="Creating and Naming Windows"></a>Creating and Naming Windows</h3><p>create a window</p>
+<pre><code>PREFIX c
 </code></pre><p>rename a window</p>
-<pre><code><span class="title">PREFIX</span> ,
-</code></pre><h3 id="Moving_Between_Windows">Moving Between Windows</h3><pre><code>PREFIX n
-PREFIX <span class="tag">p</span>
+<pre><code>PREFIX ,
+</code></pre><h3 id="Moving-Between-Windows"><a href="#Moving-Between-Windows" class="headerlink" title="Moving Between Windows"></a>Moving Between Windows</h3><pre><code>PREFIX n
+PREFIX p
 PREFIX nubmer
 </code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
-<pre><code><span class="title">PREFIX</span> w
-</code></pre><h3 id="close_a_window">close a window</h3><pre><code><span class="keyword">exit</span>
-<span class="keyword">or</span>
+<pre><code>PREFIX w
+</code></pre><h3 id="close-a-window"><a href="#close-a-window" class="headerlink" title="close a window"></a>close a window</h3><pre><code>exit
+or
 PREFIX &amp;
-</code></pre><h2 id="Working_with_Panes">Working with Panes</h2><h3 id="split_new_pane">split new pane</h3><pre><code>PREFIX %
-PREFIX <span class="string">"</span>
-</code></pre><h3 id="cycle_through_the_panes">cycle through the panes</h3><pre><code>PREFIX o
-PREFIX UP, DOWN, <span class="keyword">LEFT</span>, <span class="keyword">RIGHT</span>
-</code></pre><h3 id="cycle_through_layouts">cycle through layouts</h3><pre><code><span class="title">PREFIX</span> SPACEBAR
-</code></pre><h3 id="closing_panes">closing panes</h3><pre><code><span class="keyword">exit</span>
-<span class="keyword">or</span>
+</code></pre><h2 id="Working-with-Panes"><a href="#Working-with-Panes" class="headerlink" title="Working with Panes"></a>Working with Panes</h2><h3 id="split-new-pane"><a href="#split-new-pane" class="headerlink" title="split new pane"></a>split new pane</h3><pre><code>PREFIX %
+PREFIX &quot;
+</code></pre><h3 id="cycle-through-the-panes"><a href="#cycle-through-the-panes" class="headerlink" title="cycle through the panes"></a>cycle through the panes</h3><pre><code>PREFIX o
+PREFIX UP, DOWN, LEFT, RIGHT
+</code></pre><h3 id="cycle-through-layouts"><a href="#cycle-through-layouts" class="headerlink" title="cycle through layouts"></a>cycle through layouts</h3><pre><code>PREFIX SPACEBAR
+</code></pre><h3 id="closing-panes"><a href="#closing-panes" class="headerlink" title="closing panes"></a>closing panes</h3><pre><code>exit
+or
 PREFIX x
-</code></pre><h1 id="notebook">notebook</h1><pre><code>假定[prefix] = ctrl-b
-<span class="header">session
-=========================</span>
+</code></pre><h1 id="notebook"><a href="#notebook" class="headerlink" title="notebook"></a>notebook</h1><pre><code>假定[prefix] = ctrl-b
+session
+=========================
 创建一个被命名的session -&gt; $ tmux new -s name
 detach当前session -&gt; [prefix] d
 查看仍然存在的session列表 -&gt; $ tmux ls
 attach session -&gt; $ tmux attach
-创建一个后台session -d -&gt; $ tmux new -s second<span class="emphasis">_session -d
-选择一个session进行attach -t -&gt; $ tmux attach -t second_</span>session
+创建一个后台session -d -&gt; $ tmux new -s second_session -d
+选择一个session进行attach -t -&gt; $ tmux attach -t second_session
 关闭一个session -&gt; $ tmux kill-session -t basic
-<span class="header">window
-========================</span>
+window
+========================
 创建一个session并为默认window命名 -&gt; $ tmux new -s basic -n shell
 创建一个window在当前的session -&gt; [prefix] c
 重命名window -&gt; [prefix] ,
@@ -358,19 +559,19 @@ attach session -&gt; $ tmux attach
 按名字打开window -&gt; [prefix] $filename
 现实window列表并选择 -&gt; [prefix] w
 关闭window -&gt; [prefix] &amp; 或 输入exit
-<span class="header">pane
-==================</span>
+pane
+==================
 竖直切pane -&gt; [prefix] %
-水平切pane -&gt; [prefix] "
+水平切pane -&gt; [prefix] &quot;
 循环选pane -&gt; [prefix] o
 选pane可以[prefix] 加 上下左右箭头进行选择
 循环显示5种默认样式 -&gt; [prefix] space
 关闭pane -&gt; [prefix] x 或 输入exit
-<span class="header">命令模式
-===============</span>
+命令模式
+===============
 进入命令模式 -&gt; [prefix] :
-<span class="header">在buffer中操作
-==============</span>
+在buffer中操作
+==============
 进入选择模式 -&gt; [prefix] [
 退出 -&gt; enter
 移动 -&gt; 默认上下左右，可以在配置文件中选择vim模式(setw -g mode-keys vi)
@@ -379,12 +580,12 @@ attach session -&gt; $ tmux attach
 复制 -&gt; 涂蓝状态下按enter
 粘贴 -&gt; [prefix] ]
 复制当前pane的全部可见buffer -&gt; [prefix] : capture-pane
-<span class="header">其他
-=============</span>
+其他
+=============
 把pane转化成window -&gt; [prefix] !
-把[session]:[window].[pane]转化成当前window中的pane -&gt; [prefix] : join-pane -s [session<span class="emphasis">_name]:[window].[pane]
+把[session]:[window].[pane]转化成当前window中的pane -&gt; [prefix] : join-pane -s [session_name]:[window].[pane]
 
-</span>
+
 Tmux – terminal multiplexer
 
 Managing tmux server
@@ -394,11 +595,11 @@ tmux ls  #list running tmux sessions
 exit     #close tmux session
 
 Sharing session between terminals
-tmux new –s session<span class="emphasis">_name  #make new named session
-tmux at –t session_</span>name    #attach to exists session(s)
-tmux kil-session –t session<span class="emphasis">_name #killnamed session
+tmux new –s session_name  #make new named session
+tmux at –t session_name    #attach to exists session(s)
+tmux kil-session –t session_name #killnamed session
 
-</span>所有的命令以ctrl+b组合
+所有的命令以ctrl+b组合
 
 c       create new window
 n/p    move to next/previous windows
@@ -427,7 +628,7 @@ Alt+w 复制选择区域
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cihgnbxni000ct9dx58mofyyd" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
+        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cil0t73hi000c9ze5ok4st2qd" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
       
 
       
@@ -465,138 +666,138 @@ Alt+w 复制选择区域
     <div class="article-entry" itemprop="articleBody">
       
         <p>:version</p>
-<h1 id="basic_operate">basic operate</h1><h2 id="viewing_different_parts_of_the_work_buffer">viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: <span class="number">1</span> line)
+<h1 id="basic-operate"><a href="#basic-operate" class="headerlink" title="basic operate"></a>basic operate</h1><h2 id="viewing-different-parts-of-the-work-buffer"><a href="#viewing-different-parts-of-the-work-buffer" class="headerlink" title="viewing different parts of the work buffer"></a>viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: 1 line)
 CONTROL-Y 
 
-<span class="function"><span class="title">CONTROL-D</span><span class="params">(down)</span></span> (default: <span class="number">1</span>/<span class="number">2</span> window)
-<span class="function"><span class="title">CONTROL-U</span><span class="params">(up)</span></span>
+CONTROL-D(down) (default: 1/2 window)
+CONTROL-U(up)
 
-<span class="function"><span class="title">CONTROL-F</span><span class="params">(forward)</span></span> (default: <span class="number">1</span> window)
-<span class="function"><span class="title">CONTROL-B</span><span class="params">(backward)</span></span>
+CONTROL-F(forward) (default: 1 window)
+CONTROL-B(backward)
 
-zz: scroll <span class="attribute">cursor</span> to <span class="attribute">top</span>
-zb: <span class="attribute">bottom</span>
+zz: scroll cursor to top
+zb: bottom
 zz: center
 
 G: go to line
-</code></pre><h2 id="search">search</h2><pre><code>n     Jump <span class="built_in">to</span> next match, preserving direction <span class="operator">and</span> <span class="built_in">offset</span>
-N     Jump <span class="built_in">to</span> previous match, preserving direction <span class="operator">and</span> <span class="built_in">offset</span>
-/&lt;<span class="constant">CR</span>&gt; Jump forward <span class="built_in">to</span> next match <span class="operator">of</span> same pattern
-?&lt;<span class="constant">CR</span>&gt; Jump backward <span class="built_in">to</span> previous match <span class="operator">of</span> same pattern
+</code></pre><h2 id="search"><a href="#search" class="headerlink" title="search"></a>search</h2><pre><code>n     Jump to next match, preserving direction and offset
+N     Jump to previous match, preserving direction and offset
+/&lt;CR&gt; Jump forward to next match of same pattern
+?&lt;CR&gt; Jump backward to previous match of same pattern
 
 %
 
-:noh&lt;<span class="constant">CR</span>&gt; <span class="built_in">to</span> mute search highlighting
-</code></pre><h2 id="replace">replace</h2><pre><code><span class="literal">r</span>
-<span class="literal">R</span>
-</code></pre><h2 id="interact_with_the_System_clipboard">interact with the System clipboard</h2><pre><code>:<span class="keyword">set</span> paste
-:<span class="keyword">set</span> paste!
-</code></pre><h2 id="folding_and_outlining">folding and outlining</h2><pre><code>zA Toggle <span class="operator">the</span> state <span class="operator">of</span> folds, recursively
+:noh&lt;CR&gt; to mute search highlighting
+</code></pre><h2 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h2><pre><code>r
+R
+</code></pre><h2 id="interact-with-the-System-clipboard"><a href="#interact-with-the-System-clipboard" class="headerlink" title="interact with the System clipboard"></a>interact with the System clipboard</h2><pre><code>:set paste
+:set paste!
+</code></pre><h2 id="folding-and-outlining"><a href="#folding-and-outlining" class="headerlink" title="folding and outlining"></a>folding and outlining</h2><pre><code>zA Toggle the state of folds, recursively
 zC Close folds, recursively
 zD Delete folds, recursively
 zE Eliminate all folds
-zf Create <span class="operator">a</span> fold <span class="built_in">from</span> <span class="operator">the</span> current <span class="built_in">line</span> <span class="built_in">to</span> <span class="operator">the</span> <span class="constant">one</span> where <span class="operator">the</span> following motion
-   <span class="command"><span class="keyword">command</span> <span class="title">takes</span> <span class="title">the</span> <span class="title">cursor</span></span>
-countzF Create <span class="operator">a</span> fold covering count <span class="keyword">lines</span>, starting <span class="operator">with</span> <span class="operator">the</span> current <span class="built_in">line</span>
-zM Set option foldlevel <span class="built_in">to</span> <span class="number">0</span>
-zN, zn Set (zN) <span class="operator">or</span> reset (zn) <span class="operator">the</span> foldenable option
+zf Create a fold from the current line to the one where the following motion
+   command takes the cursor
+countzF Create a fold covering count lines, starting with the current line
+zM Set option foldlevel to 0
+zN, zn Set (zN) or reset (zn) the foldenable option
 zO Open folds, recursively
-za Toggle <span class="operator">the</span> state <span class="operator">of</span> <span class="constant">one</span> fold
-zc Close <span class="constant">one</span> fold
-zd Delete <span class="constant">one</span> fold
-zi Toggle <span class="operator">the</span> <span class="built_in">value</span> <span class="operator">of</span> <span class="operator">the</span> foldenable option
-zj, zk Move cursor <span class="built_in">to</span> <span class="operator">the</span> <span class="built_in">start</span> (zj) <span class="operator">of</span> <span class="operator">the</span> next fold <span class="operator">or</span> <span class="built_in">to</span> <span class="operator">the</span> <span class="function"><span class="keyword">end</span> (<span class="title">zk</span>) <span class="title">of</span> <span class="title">the</span></span>
+za Toggle the state of one fold
+zc Close one fold
+zd Delete one fold
+zi Toggle the value of the foldenable option
+zj, zk Move cursor to the start (zj) of the next fold or to the end (zk) of the
        previous fold
-zm, zr Decrement (zm) <span class="operator">or</span> increment (zr) <span class="operator">the</span> <span class="built_in">value</span> <span class="operator">of</span> <span class="operator">the</span> foldlevel option <span class="keyword">by</span> <span class="constant">one</span>
-zo Open <span class="constant">one</span> fold
+zm, zr Decrement (zm) or increment (zr) the value of the foldlevel option by one
+zo Open one fold
 
-zA, zC, zD <span class="operator">and</span> zO are called recursive because they operate <span class="command"><span class="keyword">on</span> <span class="title">all</span> <span class="title">folds</span> <span class="title">nested</span> </span>
-<span class="operator">within</span> <span class="operator">the</span> <span class="constant">one</span> where you issue <span class="operator">the</span> commands
+zA, zC, zD and zO are called recursive because they operate on all folds nested 
+within the one where you issue the commands
 </code></pre><p>text object (文本对象 aw iw it)</p>
 <p>. 重复上次修改<br>a change could be anything that modifies the text in the document. That includes<br>commands triggered from Normal, Visual, and Command-Line modes, but a change could<br>also encompass any text entered (or deleted) in Insert mode.</p>
 <p>Moving Around in Insert Mode Resets the Change</p>
 <pre><code>复合命令 等效的长命令
 C        c$
-s        <span class="keyword">cl</span>
+s        cl
 S        ^c
-I        ^<span class="literal">i</span>
-A        <span class="label">$a</span>
+I        ^i
+A        $a
 o        A&lt;CR&gt;
 O        ko
 
-Intent                               Act                     <span class="keyword">Repeat</span>   <span class="literal">Reverse</span>
-Make a change                        {<span class="keyword">edit</span>}                  .        <span class="keyword">u</span>
-Scan <span class="keyword">line</span> <span class="keyword">for</span> next character         f{<span class="keyword">char</span>}/t{<span class="keyword">char</span>}         ;        ,
-Scan <span class="keyword">line</span> <span class="keyword">for</span> previous character     F{<span class="keyword">char</span>}/T{<span class="keyword">char</span>}         ;        ,
-Scan document <span class="keyword">for</span> next match         /pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
-Scan document <span class="keyword">for</span> previous match     ?pattern&lt;CR&gt;            <span class="keyword">n</span>        <span class="keyword">N</span>
-Perform substitution                 :s/target/replacement   &amp;        <span class="keyword">u</span>
-Execute a sequence of changes        qx{changes}q            @x       <span class="keyword">u</span>
+Intent                               Act                     Repeat   Reverse
+Make a change                        {edit}                  .        u
+Scan line for next character         f{char}/t{char}         ;        ,
+Scan line for previous character     F{char}/T{char}         ;        ,
+Scan document for next match         /pattern&lt;CR&gt;            n        N
+Scan document for previous match     ?pattern&lt;CR&gt;            n        N
+Perform substitution                 :s/target/replacement   &amp;        u
+Execute a sequence of changes        qx{changes}q            @x       u
 </code></pre><ul>
 <li>查找当前光标下的单词</li>
 </ul>
 <p>normal mode</p>
-<pre><code><span class="attribute">Operator + Motion </span>=<span class="string"> Action</span>
+<pre><code>Operator + Motion = Action
 </code></pre><p>Vim’s grammar has just one more rule: when an operator command is invoked in<br>duplicate, it acts upon the current line. So dd deletes the current line,<br>while &gt;&gt; indents it.  The gU command is a special case. We can make it act upon<br>the current line by running either gUgU or the shorthand gUU.</p>
 <p>Vim’s Operator Commands</p>
 <pre><code>Trigger Effect
-c       <span class="operator"><span class="keyword">Change</span>
-<span class="keyword">d</span>       <span class="keyword">Delete</span>
-y       Yank <span class="keyword">into</span> <span class="keyword">register</span>
-<span class="keyword">g</span>~      Swap <span class="keyword">case</span>
+c       Change
+d       Delete
+y       Yank into register
+g~      Swap case
 gu      Make lowercase
 gU      Make uppercase
-&gt;       Shift <span class="keyword">right</span>
-&lt;       Shift <span class="keyword">left</span>
+&gt;       Shift right
+&lt;       Shift left
 =       Autoindent
-!       Filter {motion} <span class="keyword">lines</span> <span class="keyword">through</span> an <span class="keyword">external</span> program</span>
+!       Filter {motion} lines through an external program
 </code></pre><p>Insert Mode</p>
 <pre><code>Keystrokes Effect
-&lt;<span class="keyword">C</span>-h&gt;      <span class="keyword">Delete</span> back one character (backspace)
-&lt;<span class="keyword">C</span>-w&gt;      <span class="keyword">Delete</span> back one word
-&lt;<span class="keyword">C</span>-u&gt;      <span class="keyword">Delete</span> back to start of line
+&lt;C-h&gt;      Delete back one character (backspace)
+&lt;C-w&gt;      Delete back one word
+&lt;C-u&gt;      Delete back to start of line
 
 Keystrokes Effect
-&lt;Esc&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
-&lt;<span class="keyword">C</span>-[&gt;      <span class="keyword">Switch</span> to <span class="keyword">Normal</span> mode
-&lt;<span class="keyword">C</span>-o&gt;      <span class="keyword">Switch</span> to <span class="keyword">Insert</span> <span class="keyword">Normal</span> mode
+&lt;Esc&gt;      Switch to Normal mode
+&lt;C-[&gt;      Switch to Normal mode
+&lt;C-o&gt;      Switch to Insert Normal mode
 </code></pre><p>register<br>expression register </p>
 <pre><code>Keystrokes       Buffer Contents
-A                <span class="number">6</span> plus <span class="number">35</span> equals
-&lt;C-r&gt;=<span class="number">6</span>*<span class="number">35</span>&lt;CR&gt;   <span class="number">6</span> plus <span class="number">35</span> equals <span class="number">210</span>
+A                6 plus 35 equals
+&lt;C-r&gt;=6*35&lt;CR&gt;   6 plus 35 equals 210
 </code></pre><p>Insert Unusual Characters by Character Code<br>Insert Unusual Characters</p>
 <pre><code>Keystrokes             Effect
-&lt;<span class="keyword">C</span>-v&gt;<span class="list">{123}</span>             <span class="keyword">Insert</span> character by decimal code
-&lt;<span class="keyword">C</span>-v&gt;u<span class="list">{1234}</span>           <span class="keyword">Insert</span> character by hexadecimal code
-&lt;<span class="keyword">C</span>-v&gt;<span class="list">{nondigit}</span>        <span class="keyword">Insert</span> nondigit literally
-&lt;<span class="keyword">C</span>-k&gt;<span class="list">{char1}</span><span class="list">{char2}</span>    <span class="keyword">Insert</span> character represented by <span class="list">{char1}</span><span class="list">{char2}</span> digraph
+&lt;C-v&gt;{123}             Insert character by decimal code
+&lt;C-v&gt;u{1234}           Insert character by hexadecimal code
+&lt;C-v&gt;{nondigit}        Insert nondigit literally
+&lt;C-k&gt;{char1}{char2}    Insert character represented by {char1}{char2} digraph
 </code></pre><p>ga command outputs a message at the bottom of the screen, revealing the character<br>code in decimal and hexadecimal notations</p>
 <p>Overwrite Tab Characters with Virtual Replace Mode<br>gR<br>gr{char}</p>
 <p>Visual Mode<br>Enabling Visual Modes</p>
 <pre><code>Command  Effect
-<span class="keyword">v</span>        Enable character-wise Visual <span class="built_in">mode</span>
-V        Enable <span class="built_in">line</span>-wise Visual <span class="built_in">mode</span>
-&lt;C-<span class="keyword">v</span>&gt;    Enable block-wise Visual <span class="built_in">mode</span>
-<span class="keyword">gv</span>       Reselect the <span class="keyword">last</span> <span class="keyword">visual</span> selection
+v        Enable character-wise Visual mode
+V        Enable line-wise Visual mode
+&lt;C-v&gt;    Enable block-wise Visual mode
+gv       Reselect the last visual selection
 
-<span class="keyword">o</span>        Go <span class="keyword">to</span> other end of highlighted text
+o        Go to other end of highlighted text
 </code></pre><p>In Visual and Operator-Pending modes the i and a keys follow a different convention:<br>they form the first half of a text object.<br>If you’ve made a selection with Visual-Block mode and you wonder why you’re not<br>in Insert mode after pressing i, try using I instead.</p>
 <p>Command-Line Mode<br>a few of the symbols that can be used to create addresses and ranges for Ex commands</p>
 <pre><code>Symbol Address
-<span class="number">1</span>      First line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
-$      Last line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
-<span class="number">0</span>      Virtual line <span class="keyword">above</span> <span class="keyword">first</span> line <span class="keyword">of</span> <span class="keyword">the</span> <span class="type">file</span>
-.      Line <span class="keyword">where</span> <span class="keyword">the</span> cursor <span class="keyword">is</span> placed
-'m     Line containing mark m
-'&lt;     Start <span class="keyword">of</span> visual selection
-'&gt;     End <span class="keyword">of</span> visual selection
-%      The entire <span class="type">file</span> (shorthand <span class="keyword">for</span> : <span class="number">1</span>,$)
+1      First line of the file
+$      Last line of the file
+0      Virtual line above first line of the file
+.      Line where the cursor is placed
+&apos;m     Line containing mark m
+&apos;&lt;     Start of visual selection
+&apos;&gt;     End of visual selection
+%      The entire file (shorthand for : 1,$)
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cihgnbxo3000yt9dxbp7fpn4o" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cil0t73i500109ze52903bz4y" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
       
 
       
@@ -652,7 +853,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cihgnbxoe0016t9dx4nvw3pyb" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cil0t73ig00189ze5mtlu6le8" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
       
 
       
@@ -695,7 +896,7 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cihgnbxnn000gt9dxres29woy" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cil0t73hn000i9ze5rst1rubn" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
       
 
       
@@ -730,54 +931,14 @@ $      Last line <span class="keyword">of</span> <span class="keyword">the</span
     
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC7ctY3uxMB9Ok<span class="regexp">/+Ts5tNA2kyE8+tsM6YCHchpG19mOsPKRsx5wlG6GFDRVj1HGsRp2GB94emlMjLomgcOfhuyalEUGDi1nKG11KGD21NXIsHc/</span>XfjKCsAK4oD84PFE1xCx24BE6Vi8G7PRE<span class="regexp">/byiF0DGH6lYG9i4eheCgymNuSXWyKEfUJJk4O+USbvgnmIS1R6Gjj+9jLqcNH7+RkLnJwQpQlwhXJGDGAjY6Rii4vdb8R7W6jHPj6/</span>ePmaTbrCIDYj50Qwx7dch6XD0mYSNkzpMHzhBkwcX4R634dsixVvKwg88yLrCwaKkR8oTY6ThjEqqBFbUyKZvV/ZOnZ8sIB evatlsong<span class="annotation">@evatlsong</span>-AI
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="regexp">/YiujHBtq7vmrmbcYz3yTD4GjEHFXhwlmjRILI4zFWggsjrkZoB1RjElD/</span>C2FWUuc7Lddu3zCCfKm80fzX3b3fiTmt2heHJpJd6G4gaVy2Oj61MLilUDq+RBJ8LH0fepj7dOmd9qkBy<span class="regexp">/xLdBtfx8pY+b/</span>yqrBw8RlXMtajrL2Exp6mZV6vP1ixth9RuJVU258S0VH71C5ftEJ1YQEujvF<span class="regexp">/vtSxqgwUAab4/</span>BV6u72JlzZ<span class="regexp">/Zz0pau+IARMUQkGq88Gq8CGSLQQtHCEz3y/</span><span class="number">9</span>m7jo6Uqwb0qwzNPduqMifonTOgxzCovRqM12MObzl evatlsong<span class="annotation">@evatlsong</span>-ThinkPad
+        <pre><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC7ctY3uxMB9Ok/+Ts5tNA2kyE8+tsM6YCHchpG19mOsPKRsx5wlG6GFDRVj1HGsRp2GB94emlMjLomgcOfhuyalEUGDi1nKG11KGD21NXIsHc/XfjKCsAK4oD84PFE1xCx24BE6Vi8G7PRE/byiF0DGH6lYG9i4eheCgymNuSXWyKEfUJJk4O+USbvgnmIS1R6Gjj+9jLqcNH7+RkLnJwQpQlwhXJGDGAjY6Rii4vdb8R7W6jHPj6/ePmaTbrCIDYj50Qwx7dch6XD0mYSNkzpMHzhBkwcX4R634dsixVvKwg88yLrCwaKkR8oTY6ThjEqqBFbUyKZvV/ZOnZ8sIB evatlsong@evatlsong-AI
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmbcYz3yTD4GjEHFXhwlmjRILI4zFWggsjrkZoB1RjElD/C2FWUuc7Lddu3zCCfKm80fzX3b3fiTmt2heHJpJd6G4gaVy2Oj61MLilUDq+RBJ8LH0fepj7dOmd9qkBy/xLdBtfx8pY+b/yqrBw8RlXMtajrL2Exp6mZV6vP1ixth9RuJVU258S0VH71C5ftEJ1YQEujvF/vtSxqgwUAab4/BV6u72JlzZ/Zz0pau+IARMUQkGq88Gq8CGSLQQtHCEz3y/9m7jo6Uqwb0qwzNPduqMifonTOgxzCovRqM12MObzl evatlsong@evatlsong-ThinkPad
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cihgnbxnu000pt9dxakyrf29i" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-devops" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/07/devops/" class="article-date">
-  <time datetime="2015-06-07T08:37:36.000Z" itemprop="datePublished">2015-06-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/07/devops/">devops</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cihgnbxpj0021t9dx1id4orks" class="article-share-link" data-share="baidu" data-title="devops">分享到</a>
+        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cil0t73hv000r9ze5nv34x3hf" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
       
 
       
@@ -805,7 +966,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -816,7 +977,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -825,7 +986,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -837,7 +998,11 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
       <ul>
         
           <li>
-            <a href="/2015/11/26/hello-world/">Hello World</a>
+            <a href="/2016/02/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/15/h2/">h2</a>
           </li>
         
           <li>
@@ -850,10 +1015,6 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
         
           <li>
             <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/15/front-end/">front-end</a>
           </li>
         
       </ul>
@@ -887,7 +1048,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB<span class="re
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 evatlsong<br>
+      &copy; 2016 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

@@ -76,6 +76,58 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-php-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/04/php-note/" class="article-date">
+  <time datetime="2014-09-04T13:43:45.000Z" itemprop="datePublished">2014-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/04/php-note/">php-note</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打印调试信息<br>error_log(“userinfo”, 3, “php_sql_err.log”);</p>
+<pre><code>$where[&apos;truename&apos;] = array(&apos;like&apos;, &apos;%&apos;.trim($_POST[&apos;truename&apos;]).&apos;%&apos;);
+$count     = $card_create_db-&gt;where($where)-&gt;count();
+$Page      = new Page($count, 15);
+$show      = $Page-&gt;show();
+$list      = $card_create_db-&gt;where($where)-&gt;limit($Page-&gt;firstRow . &apos;,&apos; . $Page-&gt;listRows)-&gt;select();
+
+$userinfo_db = M(&apos;Userinfo&apos;);
+$userinfo_where[&apos;wecha_id&apos;] = array(&apos;in&apos;, $wecha_ids);
+$users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select();
+</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
+<p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cil0t73i800129ze5kyq55xbq" class="article-share-link" data-share="baidu" data-title="php-note">分享到</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-oracle-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/04/oracle-usage/" class="article-date">
@@ -98,15 +150,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="windows">windows</h2><p>sqlplus 连接<br>sqlplus username/password@database;<br>查询<br>select * from username.table t where t.id=1;</p>
+        <h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>sqlplus 连接<br>sqlplus username/password@database;<br>查询<br>select * from username.table t where t.id=1;</p>
 <p>表名前要加用户名</p>
 <p>查询结果保存到文本文件</p>
-<pre><code><span class="title">spool</span> abc.txt;
-<span class="title">select</span> * from wap_subscribe;
-<span class="title">spool</span> <span class="built_in">off</span>;
+<pre><code>spool abc.txt;
+select * from wap_subscribe;
+spool off;
 </code></pre><p>保存的只是输出到屏幕的内容</p>
 <p>设置屏幕输出大小 解决显示不全问题</p>
-<pre><code><span class="built_in">set</span> <span class="keyword">long</span> <span class="number">40000</span>;
+<pre><code>set long 40000;
 </code></pre><p>imp userid=ltwuliu/LTWULIU@huictrip file=D:\databackup\huitrip20140813.dmp full=y<br>exp userid=sunztravelweb/huictrip@goutrip file=E:\data\goutrip20140805.dmp </p>
 <p>When making some backup tasks (import or Export) on oracle 10g, 11g (for example), you can get a message error:<br>ORA-20446: The owner of the job is not registered ORA-06512: at “SYSMAN.MGMT_JOBS”…</p>
 <p>Solution<br>Open CMD<br>C:>Set oracle_sid= SID_OF_THE_DATABASE<br>C:>sqlplus<br>username: SYSMAN<br>password: <em>**</em><br>SQL&gt;execute MGMT_USER.MAKE_EM_USER(‘USERNAME’);</p>
@@ -132,7 +184,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cihgnbxo70011t9dxh91e88dp" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cil0t73ia00139ze5u2idv373" class="article-share-link" data-share="baidu" data-title="oracle-usage">分享到</a>
       
 
       
@@ -167,7 +219,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="操作方法">操作方法</h2><ul>
+        <h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><ul>
 <li>从svn切换到git<blockquote>
 <p><code>git svn clone --no-metadata your_svn_repository_url</code><br><code>git clone --bare git_repository_url git_server_url</code></p>
 </blockquote>
@@ -193,13 +245,13 @@
 </blockquote>
 </li>
 </ul>
-<h2 id="一般使用流程：">一般使用流程：</h2><ol>
+<h2 id="一般使用流程："><a href="#一般使用流程：" class="headerlink" title="一般使用流程："></a>一般使用流程：</h2><ol>
 <li><code>git-svn clone your_svn_repository</code>；</li>
 <li>修改本地代码，使用 <code>git add/commit</code> 将修改提交到本地git库；</li>
 <li>定期使用 <code>git-svn rebase</code> 获取中心svn repository的更新；</li>
 <li>使用 <code>git-svn dcommit</code> 命令将本地git库的修改同步到中心svn库。</li>
 </ol>
-<h2 id="注意事项">注意事项</h2><ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
 <li><p>处理冲突</p>
 <ul>
 <li>假设某svn中心库上的某个项目foo中只有一个源码文件foo.c：</li>
@@ -207,16 +259,16 @@
 <li>clone出来后，我在本地git库中修改foo.c，并通过 <code>git commit</code> 提交到本地git库中，版本为”git v1”；</li>
 <li>不过与此同时另外一个同事也在修改foo.c这个文件，并已经将他的修改提交到了svn库中，版本为”svn v2”；</li>
 <li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
-<pre><code><span class="constant">Committing</span> to <span class="symbol">svn:</span>/<span class="regexp">/10.10.1.1:80/foo</span> ...
-<span class="constant">M</span> foo.c
-事务过时: 过期: ”foo/foo.c“在事务“<span class="number">260</span>-<span class="number">1</span>” at /usr/<span class="class"><span class="keyword">lib</span>/<span class="title">git</span>-<span class="title">core</span>/<span class="title">git</span>-<span class="title">svn</span> <span class="title">line</span> 570</span>
+<pre><code>Committing to svn://10.10.1.1:80/foo ...
+M foo.c
+事务过时: 过期: ”foo/foo.c“在事务“260-1” at /usr/lib/git-core/git-svn line 570
 </code></pre></li>
 <li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
 </li>
 <li>打开foo.c，修改代码，解决冲突；</li>
 <li><p>执行 <code>git rebase --continue</code> ，git提示我：</p>
-<pre><code>You must edit all <span class="built_in">merge</span> conflicts <span class="operator">and</span> <span class="keyword">then</span>
-mark them <span class="keyword">as</span> resolved <span class="keyword">using</span> git <span class="built_in">add</span>
+<pre><code>You must edit all merge conflicts and then
+mark them as resolved using git add
 </code></pre></li>
 <li><p>执行 <code>git add foo.c</code> ，告知git已完成冲突解决；</p>
 </li>
@@ -233,7 +285,7 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cihgnbxp3001rt9dxcwwq52b4" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cil0t73jd001u9ze5vs0o6iwn" class="article-share-link" data-share="baidu" data-title="git-svn-usage">分享到</a>
       
 
       
@@ -271,9 +323,9 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     <div class="article-entry" itemprop="articleBody">
       
         <p>测试时可以修改hosts</p>
-<pre><code>127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span> <span class="tag">www</span><span class="class">.goutrip</span><span class="class">.com</span>
-127<span class="class">.0</span><span class="class">.0</span><span class="class">.1</span> <span class="tag">goutrip</span><span class="class">.com</span>
-</code></pre><h2 id="Table_of_Contents"><a name="TOC">Table of Contents</a></h2><ul>
+<pre><code>127.0.0.1 www.goutrip.com
+127.0.0.1 goutrip.com
+</code></pre><h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a><a name="TOC">Table of Contents</a></h2><ul>
 <li><a href="#windows">Windows</a><ul>
 <li><a href="#version">版本</a></li>
 <li><a href="#install-apache">安装apache</a></li>
@@ -291,109 +343,109 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
 </li>
 <li><a href="">Linux</a></li>
 </ul>
-<h2 id="Windows"><a id="windows">Windows</a></h2><h3 id="版本"><a id="version">版本</a></h3><pre><code><span class="tag">httpd-2</span><span class="class">.2</span><span class="class">.25-win32-x86-openssl-0</span><span class="class">.9</span><span class="class">.8y</span><span class="class">.msi</span>
-<span class="tag">apache-tomcat-7</span><span class="class">.0</span><span class="class">.55-windows-x64</span><span class="class">.zip</span>
-<span class="tag">php-5</span><span class="class">.2</span><span class="class">.13-Win32</span><span class="class">.zip</span>
-<span class="tag">mysql-5</span><span class="class">.5</span><span class="class">.39-winx64</span><span class="class">.zip</span>
-</code></pre><h3 id="安装apache"><a id="install-apache">安装apache</a></h3><p>httpd.conf</p>
-<pre><code><span class="tag">&lt;Directory /&gt;</span>
-    <span class="keyword"><span class="common">Options</span></span> FollowSymLinks
-    <span class="keyword">AllowOverride</span> None
-<span class="comment">#    Order deny,allow</span>
-<span class="comment">#    Deny from all</span>
-<span class="tag">&lt;/Directory&gt;</span>
-</code></pre><h3 id="安装tomcat"><a id="install-tomcat">安装tomcat</a></h3><h3 id="安装php"><a id="install-php">安装php</a></h3><p>解压到目录 设置 path 环境变量</p>
-<pre><code><span class="label">D:</span>\php5
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a><a id="windows">Windows</a></h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a><a id="version">版本</a></h3><pre><code>httpd-2.2.25-win32-x86-openssl-0.9.8y.msi
+apache-tomcat-7.0.55-windows-x64.zip
+php-5.2.13-Win32.zip
+mysql-5.5.39-winx64.zip
+</code></pre><h3 id="安装apache"><a href="#安装apache" class="headerlink" title="安装apache"></a><a id="install-apache">安装apache</a></h3><p>httpd.conf</p>
+<pre><code>&lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride None
+#    Order deny,allow
+#    Deny from all
+&lt;/Directory&gt;
+</code></pre><h3 id="安装tomcat"><a href="#安装tomcat" class="headerlink" title="安装tomcat"></a><a id="install-tomcat">安装tomcat</a></h3><h3 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a><a id="install-php">安装php</a></h3><p>解压到目录 设置 path 环境变量</p>
+<pre><code>D:\php5
 </code></pre><p>加载模块报错：</p>
 <p>有时启动Apache的时候会提示“找不到指定模块”的错误，是因为没有指定这些模块文件的位置，定位关键字“extension_dir”，修改Windows下为你的PHP模块的目录。</p>
-<pre><code><span class="setting">extession_dir = <span class="value"><span class="string">"D:\PHP\ext"</span></span></span>
+<pre><code>extession_dir = &quot;D:\PHP\ext&quot;
 </code></pre><p>或者添加 path 环境变量</p>
-<pre><code>D:<span class="command">\php</span><span class="command">\ext</span>
-</code></pre><h3 id="安装mysql"><a id="install-mysql">安装mysql</a></h3><p>解压到目录<br>添加到path环境变量</p>
-<pre><code>E:<span class="command">\Program</span><span class="command">\mysql</span>-5.5.39-winx64<span class="command">\bin</span>
+<pre><code>D:\php\ext
+</code></pre><h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a><a id="install-mysql">安装mysql</a></h3><p>解压到目录<br>添加到path环境变量</p>
+<pre><code>E:\Program\mysql-5.5.39-winx64\bin
 </code></pre><p>启动服务</p>
-<pre><code>mysqld <span class="comment">--console</span>
+<pre><code>mysqld --console
 </code></pre><p>关闭服务</p>
-<pre><code>mysqladmin -u root -<span class="tag">p</span> shutdown
+<pre><code>mysqladmin -u root -p shutdown
 </code></pre><p>连接到数据库</p>
-<pre><code><span class="title">mysql</span> -u root -p
+<pre><code>mysql -u root -p
 </code></pre><p>进行初始配置 详见mysql-usage.md</p>
-<h3 id="整合apache_tomcat"><a id="integrate-apache-tomcat">整合apache tomcat</a></h3><p>有三种方法</p>
+<h3 id="整合apache-tomcat"><a href="#整合apache-tomcat" class="headerlink" title="整合apache tomcat"></a><a id="integrate-apache-tomcat">整合apache tomcat</a></h3><p>有三种方法</p>
 <ol>
 <li>mod_jk.so</li>
 <li>ajp代理</li>
 </ol>
 <p>以下采用ajp代理方式</p>
-<h4 id="apache配置"><a id="config-apache">apache配置</a></h4><p>httpd.conf</p>
-<pre><code><span class="keyword"><span class="common">LoadModule</span></span> proxy_module modules/mod_proxy.so
-<span class="keyword"><span class="common">LoadModule</span></span> proxy_ajp_module modules/mod_proxy_ajp.so
-<span class="keyword"><span class="common">LoadModule</span></span> proxy_balancer_module modules/mod_proxy_balancer.so
+<h4 id="apache配置"><a href="#apache配置" class="headerlink" title="apache配置"></a><a id="config-apache">apache配置</a></h4><p>httpd.conf</p>
+<pre><code>LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
 
-<span class="comment"># Virtual hosts</span>
-<span class="keyword">Include</span> conf/extra/httpd-vhosts.conf
+# Virtual hosts
+Include conf/extra/httpd-vhosts.conf
 
-<span class="comment">#</span>
-<span class="comment"># DirectoryIndex: sets the file that Apache will serve if a directory</span>
-<span class="comment"># is requested.</span>
-<span class="comment">#</span>
-<span class="tag">&lt;IfModule dir_module&gt;</span>
-    <span class="keyword">DirectoryIndex</span> index.html index.jsp index.php
-<span class="tag">&lt;/IfModule&gt;</span>
+#
+# DirectoryIndex: sets the file that Apache will serve if a directory
+# is requested.
+#
+&lt;IfModule dir_module&gt;
+    DirectoryIndex index.html index.jsp index.php
+&lt;/IfModule&gt;
 </code></pre><p>extra/httpd-vhosts.conf</p>
-<pre><code>&lt;VirtualHost *:<span class="number">80</span>&gt;
-    ServerName www<span class="class">.goutrip</span><span class="class">.com</span>
-    ServerAlias goutrip<span class="class">.com</span>
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName www.goutrip.com
+    ServerAlias goutrip.com
     ProxyPreserveHost on
     ProxyRequests Off
-    &lt;proxy balancer:<span class="comment">//goutrip&gt;</span>
-        BalancerMember ajp:<span class="comment">//localhost:8009 loadfactor=1 route=jvm1</span>
-        BalancerMember ajp:<span class="comment">//localhost:8010 loadfactor=1 route=jvm2</span>
-        BalancerMember ajp:<span class="comment">//localhost:8012 loadfactor=1 route=jvm3</span>
+    &lt;proxy balancer://goutrip&gt;
+        BalancerMember ajp://localhost:8009 loadfactor=1 route=jvm1
+        BalancerMember ajp://localhost:8010 loadfactor=1 route=jvm2
+        BalancerMember ajp://localhost:8012 loadfactor=1 route=jvm3
     &lt;/proxy&gt;
-    ProxyPass / balancer:<span class="comment">//goutrip/ lbmethod=byrequests stickysession=JSESSIONID nofailover=on</span>
-    ProxyPassReverse / balancer:<span class="comment">//goutrip/</span>
-    ErrorLog <span class="string">"logs/goutrip.com-error.log"</span>
-    CustomLog <span class="string">"logs/goutrip.com-access.log"</span> common
+    ProxyPass / balancer://goutrip/ lbmethod=byrequests stickysession=JSESSIONID nofailover=on
+    ProxyPassReverse / balancer://goutrip/
+    ErrorLog &quot;logs/goutrip.com-error.log&quot;
+    CustomLog &quot;logs/goutrip.com-access.log&quot; common
 &lt;/VirtualHost&gt;
 
-&lt;VirtualHost *:<span class="number">80</span>&gt;
-    DocumentRoot <span class="string">"D:/website/g.goutrip.com"</span>
-    ServerName www<span class="class">.g</span><span class="class">.goutrip</span><span class="class">.com</span>
-    ServerAlias g<span class="class">.goutrip</span><span class="class">.com</span>
-    ErrorLog <span class="string">"logs/g.goutrip.com-error.log"</span>
-    CustomLog <span class="string">"logs/g.goutrip.com-access.log"</span> common
+&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;D:/website/g.goutrip.com&quot;
+    ServerName www.g.goutrip.com
+    ServerAlias g.goutrip.com
+    ErrorLog &quot;logs/g.goutrip.com-error.log&quot;
+    CustomLog &quot;logs/g.goutrip.com-access.log&quot; common
 &lt;/VirtualHost&gt;
 </code></pre><p>以上也配置了负载均衡</p>
-<h4 id="tomcat配置"><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
-<pre><code>&lt;Engine <span class="property">name</span>=<span class="string">"Standalone"</span> defaultHost=<span class="string">"localhost"</span> jvmRoute=<span class="string">"jvm1"</span>&gt;
+<h4 id="tomcat配置"><a href="#tomcat配置" class="headerlink" title="tomcat配置"></a><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
+<pre><code>&lt;Engine name=&quot;Standalone&quot; defaultHost=&quot;localhost&quot; jvmRoute=&quot;jvm1&quot;&gt;
 </code></pre><p>修改端口</p>
-<pre><code><span class="tag">&lt;<span class="title">Server</span> <span class="attribute">port</span>=<span class="value">"8005"</span> <span class="attribute">shutdown</span>=<span class="value">"SHUTDOWN"</span>&gt;</span>
-<span class="tag">&lt;<span class="title">Connector</span> <span class="attribute">port</span>=<span class="value">"8009"</span> <span class="attribute">protocol</span>=<span class="value">"AJP/1.3"</span> <span class="attribute">redirectPort</span>=<span class="value">"8443"</span> /&gt;</span>
-</code></pre><h3 id="整合apache_php"><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
-<pre><code><span class="keyword"><span class="common">LoadModule</span></span> php5_module <span class="string">"D:/php5/php5apache2_2.dll"</span>
-<span class="keyword">phpinidir</span> <span class="string">"D:/php5"</span>
+<pre><code>&lt;Server port=&quot;8005&quot; shutdown=&quot;SHUTDOWN&quot;&gt;
+&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot; /&gt;
+</code></pre><h3 id="整合apache-php"><a href="#整合apache-php" class="headerlink" title="整合apache php"></a><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
+<pre><code>LoadModule php5_module &quot;D:/php5/php5apache2_2.dll&quot;
+phpinidir &quot;D:/php5&quot;
 
-<span class="tag">&lt;IfModule mime_module&gt;</span>
-<span class="keyword">AddType</span> application/x-httpd-php .php .html  #也可分多行写
-<span class="tag">&lt;/IfModule&gt;</span>
+&lt;IfModule mime_module&gt;
+AddType application/x-httpd-php .php .html  #也可分多行写
+&lt;/IfModule&gt;
 
-<span class="comment">#</span>
-<span class="comment"># DirectoryIndex: sets the file that Apache will serve if a directory</span>
-<span class="comment"># is requested.</span>
-<span class="comment">#</span>
-<span class="tag">&lt;IfModule dir_module&gt;</span>
-    <span class="keyword">DirectoryIndex</span> index.html index.jsp index.php
-<span class="tag">&lt;/IfModule&gt;</span>
+#
+# DirectoryIndex: sets the file that Apache will serve if a directory
+# is requested.
+#
+&lt;IfModule dir_module&gt;
+    DirectoryIndex index.html index.jsp index.php
+&lt;/IfModule&gt;
 </code></pre><p>修改后重启apache</p>
-<h3 id="整合php_mysql"><a id="integrate-php-mysql">整合php mysql</a></h3><p>php.ini</p>
-<pre><code><span class="attribute">extension</span>=<span class="string">php_mysql.dll</span>
+<h3 id="整合php-mysql"><a href="#整合php-mysql" class="headerlink" title="整合php mysql"></a><a id="integrate-php-mysql">整合php mysql</a></h3><p>php.ini</p>
+<pre><code>extension=php_mysql.dll
 </code></pre><p>修改后重启apache</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cihgnbxpv002et9dxmoyhrpm2" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cil0t73k4002h9ze52rrhl0n6" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">分享到</a>
       
 
       
@@ -430,63 +482,63 @@ mark them <span class="keyword">as</span> resolved <span class="keyword">using</
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装">安装</h2><h3 id="免安装版">免安装版</h3><p>下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）</p>
-<h4 id="Securing_the_Initial_MySQL_Accounts_reference">Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="external">reference</a></h4><p>For Windows, do this:</p>
+        <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="免安装版"><a href="#免安装版" class="headerlink" title="免安装版"></a>免安装版</h3><p>下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）</p>
+<h4 id="Securing-the-Initial-MySQL-Accounts-reference"><a href="#Securing-the-Initial-MySQL-Accounts-reference" class="headerlink" title="Securing the Initial MySQL Accounts reference"></a>Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="external">reference</a></h4><p>For Windows, do this:</p>
 <pre><code>shell&gt; mysql -u root
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'::1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'%'</span> = PASSWORD(<span class="string">'newpwd'</span>);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;127.0.0.1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;::1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;%&apos; = PASSWORD(&apos;newpwd&apos;);
 </code></pre><p>The last statement is unnecessary if the mysql.user table has no root account with a host value of %.</p>
 <p>For Unix, do this:</p>
 <pre><code>shell&gt; mysql -u root
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'localhost'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'127.0.0.1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'::1'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-mysql&gt; <span class="keyword">SET</span> PASSWORD <span class="keyword">FOR</span> <span class="string">'root'</span>@<span class="string">'host_name'</span> = PASSWORD(<span class="string">'newpwd'</span>);
-</code></pre><h3 id="After_connecting_to_the_server_as_root,_you_can_add_new_accounts-_The_following_statements_use_GRANT_to_set_up_four_new_accounts:">After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql&gt; CREATE USER <span class="string">'monty'</span>@<span class="string">'localhost'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
-mysql&gt; GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'localhost'</span>
-    <span class="subst">-&gt;     </span><span class="keyword">WITH</span> GRANT OPTION;
-mysql&gt; CREATE USER <span class="string">'monty'</span>@<span class="string">'%'</span> IDENTIFIED <span class="keyword">BY</span> <span class="string">'some_pass'</span>;
-mysql&gt; GRANT <span class="literal">ALL</span> PRIVILEGES <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'monty'</span>@<span class="string">'%'</span>
-    <span class="subst">-&gt;     </span><span class="keyword">WITH</span> GRANT OPTION;
-mysql&gt; CREATE USER <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
-mysql&gt; GRANT RELOAD,PROCESS <span class="keyword">ON</span> *<span class="built_in">.</span>* <span class="keyword">TO</span> <span class="string">'admin'</span>@<span class="string">'localhost'</span>;
-mysql&gt; CREATE USER <span class="string">'dummy'</span>@<span class="string">'localhost'</span>;
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;127.0.0.1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;::1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;host_name&apos; = PASSWORD(&apos;newpwd&apos;);
+</code></pre><h3 id="After-connecting-to-the-server-as-root-you-can-add-new-accounts-The-following-statements-use-GRANT-to-set-up-four-new-accounts"><a href="#After-connecting-to-the-server-as-root-you-can-add-new-accounts-The-following-statements-use-GRANT-to-set-up-four-new-accounts" class="headerlink" title="After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:"></a>After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql&gt; CREATE USER &apos;monty&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;some_pass&apos;;
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;monty&apos;@&apos;localhost&apos;
+    -&gt;     WITH GRANT OPTION;
+mysql&gt; CREATE USER &apos;monty&apos;@&apos;%&apos; IDENTIFIED BY &apos;some_pass&apos;;
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;monty&apos;@&apos;%&apos;
+    -&gt;     WITH GRANT OPTION;
+mysql&gt; CREATE USER &apos;admin&apos;@&apos;localhost&apos;;
+mysql&gt; GRANT RELOAD,PROCESS ON *.* TO &apos;admin&apos;@&apos;localhost&apos;;
+mysql&gt; CREATE USER &apos;dummy&apos;@&apos;localhost&apos;;
 </code></pre><p>The accounts created by these statements have the following properties:</p>
 <p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty’@’localhost’ account can be used only when connecting from the local host. The ‘monty’@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
 <p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
 <p>The ‘admin’@’localhost’ account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.</p>
 <p>The ‘dummy’@’localhost’ account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.</p>
-<h3 id="create_database">create database</h3><pre><code><span class="operator"><span class="keyword">create</span> <span class="keyword">database</span> goods <span class="keyword">default</span> <span class="built_in">character</span> <span class="keyword">set</span> utf8 <span class="keyword">collate</span> utf8_general_ci;</span>
-</code></pre><h3 id="import_sql_file">import sql file</h3><pre><code><span class="tag">mysql</span> <span class="tag">-u</span> <span class="tag">root</span> <span class="tag">-p</span> <span class="tag">goods</span> &lt; <span class="tag">goods_version1</span><span class="class">.2</span><span class="class">.sql</span>;
+<h3 id="create-database"><a href="#create-database" class="headerlink" title="create database"></a>create database</h3><pre><code>create database goods default character set utf8 collate utf8_general_ci;
+</code></pre><h3 id="import-sql-file"><a href="#import-sql-file" class="headerlink" title="import sql file"></a>import sql file</h3><pre><code>mysql -u root -p goods &lt; goods_version1.2.sql;
 </code></pre><p>加上-h参数指定主机时 sql文件要用全限定名称</p>
-<h2 id="配置">配置</h2><p>my.ini</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>my.ini</p>
 <pre><code>[mysql]
-default-character-<span class="operator"><span class="keyword">set</span>=utf8
-# <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">client</span>=utf8
-# <span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">connection</span>=utf8
+default-character-set=utf8
+# character-set-client=utf8
+# character-set-connection=utf8
 [mysqld]
-<span class="built_in">character</span>-<span class="keyword">set</span>-<span class="keyword">server</span>=utf8
+character-set-server=utf8
 
-port = <span class="number">3306</span>
-server_id = mysqld</span>
-</code></pre><h2 id="運行">運行</h2><p>/lib/systemd/system/mysql.service</p>
-<pre><code>systemctl <span class="literal">start</span> mysql.service
-</code></pre><h2 id="导入导出">导入导出</h2><pre><code>mysqldump -u 用户名 -<span class="tag">p</span> 数据库名 &gt; 导出的文件名
-mysql&gt;source /wcnc_db<span class="class">.sql</span> 
-</code></pre><h2 id="性能测试">性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=";" --create-schema=weixinhuictrip
-    -<span class="ruby">-query=<span class="string">"select * from wy_wxuser"</span>
-</span>    -<span class="ruby">-concurrency=<span class="number">500</span> --iterations=<span class="number">100</span>
-</span>    -<span class="ruby">uroot -pgoutrip314;</span>
-</code></pre><h2 id="数据文件路径">数据文件路径</h2><pre><code>centos7 mariadb
-/var/<span class="class"><span class="keyword">lib</span>/<span class="title">mysql</span>/</span>
+port = 3306
+server_id = mysqld
+</code></pre><h2 id="運行"><a href="#運行" class="headerlink" title="運行"></a>運行</h2><p>/lib/systemd/system/mysql.service</p>
+<pre><code>systemctl start mysql.service
+</code></pre><h2 id="导入导出"><a href="#导入导出" class="headerlink" title="导入导出"></a>导入导出</h2><pre><code>mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名
+mysql&gt;source /wcnc_db.sql 
+</code></pre><h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=&quot;;&quot; --create-schema=weixinhuictrip
+    --query=&quot;select * from wy_wxuser&quot;
+    --concurrency=500 --iterations=100
+    -uroot -pgoutrip314;
+</code></pre><h2 id="数据文件路径"><a href="#数据文件路径" class="headerlink" title="数据文件路径"></a>数据文件路径</h2><pre><code>centos7 mariadb
+/var/lib/mysql/
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cihgnbxo90012t9dxv78oz9ri" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cil0t73ib00149ze59oeea3nv" class="article-share-link" data-share="baidu" data-title="mysql-usage">分享到</a>
       
 
       
@@ -529,7 +581,7 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cihgnbxmx0001t9dxsaknehe8" class="article-share-link" data-share="baidu" data-title="work-in-windows">分享到</a>
+        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cil0t73gy00019ze5pwv8494g" class="article-share-link" data-share="baidu" data-title="work-in-windows">分享到</a>
       
 
       
@@ -564,13 +616,13 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Markdown:_Basics">Markdown: Basics</h1><ul id="ProjectSubmenu"><br>    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li><br>    <li><a class="selected" title="Markdown Basics">Basics</a></li><br>    <li><a href="/projects/markdown/syntax" title="Markdown Syntax Documentation">Syntax</a></li><br>    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li><br>    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li><br></ul>
+        <h1 id="Markdown-Basics"><a href="#Markdown-Basics" class="headerlink" title="Markdown: Basics"></a>Markdown: Basics</h1><ul id="ProjectSubmenu"><br>    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li><br>    <li><a class="selected" title="Markdown Basics">Basics</a></li><br>    <li><a href="/projects/markdown/syntax" title="Markdown Syntax Documentation">Syntax</a></li><br>    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li><br>    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li><br></ul>
 
 
-<h2 id="Getting_the_Gist_of_Markdown’s_Formatting_Syntax">Getting the Gist of Markdown’s Formatting Syntax</h2><p>This page offers a brief overview of what it’s like to use Markdown.<br>The <a href="/projects/markdown/syntax" title="Markdown Syntax">syntax page</a> provides complete, detailed documentation for<br>every feature, but Markdown should be very easy to pick up simply by<br>looking at a few examples of it in action. The examples on this page<br>are written in a before/after style, showing example syntax and the<br>HTML output produced by Markdown.</p>
+<h2 id="Getting-the-Gist-of-Markdown’s-Formatting-Syntax"><a href="#Getting-the-Gist-of-Markdown’s-Formatting-Syntax" class="headerlink" title="Getting the Gist of Markdown’s Formatting Syntax"></a>Getting the Gist of Markdown’s Formatting Syntax</h2><p>This page offers a brief overview of what it’s like to use Markdown.<br>The <a href="/projects/markdown/syntax" title="Markdown Syntax">syntax page</a> provides complete, detailed documentation for<br>every feature, but Markdown should be very easy to pick up simply by<br>looking at a few examples of it in action. The examples on this page<br>are written in a before/after style, showing example syntax and the<br>HTML output produced by Markdown.</p>
 <p>It’s also helpful to simply try Markdown out; the <a href="/projects/markdown/dingus" title="Markdown Dingus">Dingus</a> is a<br>web application that allows you type your own Markdown-formatted text<br>and translate it to XHTML.</p>
 <p><strong>Note:</strong> This document is itself written using Markdown; you<br>can <a href="/projects/markdown/basics.text">see the source for it by adding ‘.text’ to the URL</a>.</p>
-<h2 id="Paragraphs,_Headers,_Blockquotes">Paragraphs, Headers, Blockquotes</h2><p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like<br>a blank line – a line containing nothing but spaces or tabs is<br>considered blank.) Normal paragraphs should not be indented with<br>spaces or tabs.</p>
+<h2 id="Paragraphs-Headers-Blockquotes"><a href="#Paragraphs-Headers-Blockquotes" class="headerlink" title="Paragraphs, Headers, Blockquotes"></a>Paragraphs, Headers, Blockquotes</h2><p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like<br>a blank line – a line containing nothing but spaces or tabs is<br>considered blank.) Normal paragraphs should not be indented with<br>spaces or tabs.</p>
 <p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.<br>Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by<br>“underlining” with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.<br>To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the<br>beginning of the line – the number of hashes equals the resulting<br>HTML header level.</p>
 <p>Blockquotes are indicated using email-style ‘<code>&gt;</code>‘ angle brackets.</p>
 <p>Markdown:</p>
@@ -578,170 +630,170 @@ mysql&gt;source /wcnc_db<span class="class">.sql</span>
 ====================
 
 A Second Level Header
-<span class="comment">---------------------</span>
+---------------------
 
-Now <span class="keyword">is</span> <span class="keyword">the</span> <span class="property">time</span> <span class="keyword">for</span> all good men <span class="keyword">to</span> come <span class="keyword">to</span>
-<span class="keyword">the</span> aid <span class="keyword">of</span> their country. This <span class="keyword">is</span> just a
-regular <span class="property">paragraph</span>.
-
-The quick brown fox jumped <span class="keyword">over</span> <span class="keyword">the</span> lazy
-dog's <span class="keyword">back</span>.
-
-<span class="comment">### Header 3</span>
-
-&gt; This <span class="keyword">is</span> a blockquote.
-&gt; 
-&gt; This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="property">paragraph</span> <span class="keyword">in</span> <span class="keyword">the</span> blockquote.
-&gt;
-&gt; <span class="comment">## This is an H2 in a blockquote</span>
-</code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;h1&gt;</span>A First Level Header<span class="variable">&lt;/h1&gt;</span>
-
-<span class="variable">&lt;h2&gt;</span>A Second Level Header<span class="variable">&lt;/h2&gt;</span>
-
-<span class="variable">&lt;p&gt;</span>Now is the time <span class="keyword">for</span> <span class="literal">all</span> good men <span class="keyword">to</span> come <span class="keyword">to</span>
+Now is the time for all good men to come to
 the aid of their country. This is just a
-regular paragraph.<span class="variable">&lt;/p&gt;</span>
+regular paragraph.
 
-<span class="variable">&lt;p&gt;</span>The <span class="keyword">quick</span> brown fox jumped over the lazy
-dog's back.<span class="variable">&lt;/p&gt;</span>
+The quick brown fox jumped over the lazy
+dog&apos;s back.
 
-<span class="variable">&lt;h3&gt;</span>Header <span class="number">3</span><span class="variable">&lt;/h3&gt;</span>
+### Header 3
 
-<span class="variable">&lt;blockquote&gt;</span>
-    <span class="variable">&lt;p&gt;</span>This is a blockquote.<span class="variable">&lt;/p&gt;</span>
+&gt; This is a blockquote.
+&gt; 
+&gt; This is the second paragraph in the blockquote.
+&gt;
+&gt; ## This is an H2 in a blockquote
+</code></pre><p>Output:</p>
+<pre><code>&lt;h1&gt;A First Level Header&lt;/h1&gt;
 
-    <span class="variable">&lt;p&gt;</span>This is the second paragraph <span class="keyword">in</span> the blockquote.<span class="variable">&lt;/p&gt;</span>
+&lt;h2&gt;A Second Level Header&lt;/h2&gt;
 
-    <span class="variable">&lt;h2&gt;</span>This is an H2 <span class="keyword">in</span> a blockquote<span class="variable">&lt;/h2&gt;</span>
-<span class="variable">&lt;/blockquote&gt;</span>
-</code></pre><h3 id="Phrase_Emphasis">Phrase Emphasis</h3><p>Markdown uses asterisks and underscores to indicate spans of emphasis.</p>
+&lt;p&gt;Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.&lt;/p&gt;
+
+&lt;p&gt;The quick brown fox jumped over the lazy
+dog&apos;s back.&lt;/p&gt;
+
+&lt;h3&gt;Header 3&lt;/h3&gt;
+
+&lt;blockquote&gt;
+    &lt;p&gt;This is a blockquote.&lt;/p&gt;
+
+    &lt;p&gt;This is the second paragraph in the blockquote.&lt;/p&gt;
+
+    &lt;h2&gt;This is an H2 in a blockquote&lt;/h2&gt;
+&lt;/blockquote&gt;
+</code></pre><h3 id="Phrase-Emphasis"><a href="#Phrase-Emphasis" class="headerlink" title="Phrase Emphasis"></a>Phrase Emphasis</h3><p>Markdown uses asterisks and underscores to indicate spans of emphasis.</p>
 <p>Markdown:</p>
-<pre><code>Some <span class="operator">of</span> these <span class="keyword">words</span> *are emphasized*.
-Some <span class="operator">of</span> these <span class="keyword">words</span> <span class="title">_are</span> emphasized also_.
+<pre><code>Some of these words *are emphasized*.
+Some of these words _are emphasized also_.
 
-Use <span class="constant">two</span> asterisks <span class="keyword">for</span> **strong emphasis**.
-Or, <span class="keyword">if</span> you prefer, __use <span class="constant">two</span> underscores instead__.
+Use two asterisks for **strong emphasis**.
+Or, if you prefer, __use two underscores instead__.
 </code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;p&gt;</span>Some of these words <span class="variable">&lt;em&gt;</span>are emphasized<span class="variable">&lt;/em&gt;</span>.
-Some of these words <span class="variable">&lt;em&gt;</span>are emphasized also<span class="variable">&lt;/em&gt;</span>.<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;Some of these words &lt;em&gt;are emphasized&lt;/em&gt;.
+Some of these words &lt;em&gt;are emphasized also&lt;/em&gt;.&lt;/p&gt;
 
-<span class="variable">&lt;p&gt;</span>Use two asterisks <span class="keyword">for</span> <span class="variable">&lt;strong&gt;</span>strong emphasis<span class="variable">&lt;/strong&gt;</span>.
-Or, if you prefer, <span class="variable">&lt;strong&gt;</span>use two underscores instead<span class="variable">&lt;/strong&gt;</span>.<span class="variable">&lt;/p&gt;</span>
-</code></pre><h2 id="Lists">Lists</h2><p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,<br><code>+</code>, and <code>-</code>) as list markers. These three markers are<br>interchangable; this:</p>
-<pre><code><span class="bullet">*   </span>Candy.
-<span class="bullet">*   </span>Gum.
-<span class="bullet">*   </span>Booze.
+&lt;p&gt;Use two asterisks for &lt;strong&gt;strong emphasis&lt;/strong&gt;.
+Or, if you prefer, &lt;strong&gt;use two underscores instead&lt;/strong&gt;.&lt;/p&gt;
+</code></pre><h2 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h2><p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,<br><code>+</code>, and <code>-</code>) as list markers. These three markers are<br>interchangable; this:</p>
+<pre><code>*   Candy.
+*   Gum.
+*   Booze.
 </code></pre><p>this:</p>
-<pre><code><span class="bullet">+   </span>Candy.
-<span class="bullet">+   </span>Gum.
-<span class="bullet">+   </span>Booze.
+<pre><code>+   Candy.
++   Gum.
++   Booze.
 </code></pre><p>and this:</p>
-<pre><code>-<span class="ruby">   <span class="constant">Candy</span>.
-</span>-<span class="ruby">   <span class="constant">Gum</span>.
-</span>-<span class="ruby">   <span class="constant">Booze</span>.</span>
+<pre><code>-   Candy.
+-   Gum.
+-   Booze.
 </code></pre><p>all produce the same output:</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Candy.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Gum.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Booze.<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;Candy.&lt;/li&gt;
+&lt;li&gt;Gum.&lt;/li&gt;
+&lt;li&gt;Booze.&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre><p>Ordered (numbered) lists use regular numbers, followed by periods, as<br>list markers:</p>
-<pre><code><span class="number">1.</span>  Red
-<span class="number">2.</span>  Green
-<span class="number">3.</span>  Blue
+<pre><code>1.  Red
+2.  Green
+3.  Blue
 </code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Red<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Green<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Blue<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+<pre><code>&lt;ol&gt;
+&lt;li&gt;Red&lt;/li&gt;
+&lt;li&gt;Green&lt;/li&gt;
+&lt;li&gt;Blue&lt;/li&gt;
+&lt;/ol&gt;
 </code></pre><p>If you put blank lines between items, you’ll get <code>&lt;p&gt;</code> tags for the<br>list item text. You can create multi-paragraph list items by indenting<br>the paragraphs by 4 spaces or 1 tab:</p>
-<pre><code>*   A <span class="type">list</span> <span class="property">item</span>.
+<pre><code>*   A list item.
 
-    With multiple <span class="property">paragraphs</span>.
+    With multiple paragraphs.
 
-*   Another <span class="property">item</span> <span class="keyword">in</span> <span class="keyword">the</span> <span class="type">list</span>.
+*   Another item in the list.
 </code></pre><p>Output:</p>
-<pre><code><span class="variable">&lt;ul&gt;</span>
-<span class="variable">&lt;li&gt;</span><span class="variable">&lt;p&gt;</span>A list item.<span class="variable">&lt;/p&gt;</span>
-<span class="variable">&lt;p&gt;</span>With multiple paragraphs.<span class="variable">&lt;/p&gt;</span><span class="variable">&lt;/li&gt;</span>
-<span class="variable">&lt;li&gt;</span><span class="variable">&lt;p&gt;</span>Another item <span class="keyword">in</span> the list.<span class="variable">&lt;/p&gt;</span><span class="variable">&lt;/li&gt;</span>
-<span class="variable">&lt;/ul&gt;</span>
-</code></pre><h3 id="Links">Links</h3><p>Markdown supports two styles for creating links: <em>inline</em> and<br><em>reference</em>. With both styles, you use square brackets to delimit the<br>text you want to turn into a link.</p>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A list item.&lt;/p&gt;
+&lt;p&gt;With multiple paragraphs.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Another item in the list.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p>Markdown supports two styles for creating links: <em>inline</em> and<br><em>reference</em>. With both styles, you use square brackets to delimit the<br>text you want to turn into a link.</p>
 <p>Inline-style links use parentheses immediately after the link text.<br>For example:</p>
-<pre><code>This is an [<span class="link_label">example link</span>](<span class="link_url">http://example.com/</span>).
+<pre><code>This is an [example link](http://example.com/).
 </code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is an <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span>&gt;</span>
-example link<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;This is an &lt;a href=&quot;http://example.com/&quot;&gt;
+example link&lt;/a&gt;.&lt;/p&gt;
 </code></pre><p>Optionally, you may include a title attribute in the parentheses:</p>
-<pre><code>This is an [<span class="link_label">example link</span>](<span class="link_url">http://example.com/ "With a Title"</span>).
+<pre><code>This is an [example link](http://example.com/ &quot;With a Title&quot;).
 </code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is an <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span> <span class="attribute">title</span>=<span class="value">"With a Title"</span>&gt;</span>
-example link<span class="tag">&lt;/<span class="title">a</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;This is an &lt;a href=&quot;http://example.com/&quot; title=&quot;With a Title&quot;&gt;
+example link&lt;/a&gt;.&lt;/p&gt;
 </code></pre><p>Reference-style links allow you to refer to your links by names, which<br>you define elsewhere in your document:</p>
-<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>][<span class="link_reference">1</span>] than from
-[<span class="link_label">Yahoo</span>][<span class="link_reference">2</span>] or [<span class="link_label">MSN</span>][<span class="link_reference">3</span>].
+<pre><code>I get 10 times more traffic from [Google][1] than from
+[Yahoo][2] or [MSN][3].
 
-[<span class="link_reference">1</span>]:<span class="link_url"> http://google.com/        "Google"</span>
-[<span class="link_reference">2</span>]:<span class="link_url"> http://search.yahoo.com/  "Yahoo Search"</span>
-[<span class="link_reference">3</span>]:<span class="link_url"> http://search.msn.com/    "MSN Search"</span>
+[1]: http://google.com/        &quot;Google&quot;
+[2]: http://search.yahoo.com/  &quot;Yahoo Search&quot;
+[3]: http://search.msn.com/    &quot;MSN Search&quot;
 </code></pre><p>Output:</p>
-<pre><code>&lt;p&gt;I <span class="built_in">get</span> <span class="number">10</span> times more traffic <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://google.com/"</span>
-title=<span class="string">"Google"</span>&gt;Google&lt;/<span class="operator">a</span>&gt; than <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.yahoo.com/"</span>
-title=<span class="string">"Yahoo Search"</span>&gt;Yahoo&lt;/<span class="operator">a</span>&gt; <span class="operator">or</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.msn.com/"</span>
-title=<span class="string">"MSN Search"</span>&gt;MSN&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
+<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href=&quot;http://google.com/&quot;
+title=&quot;Google&quot;&gt;Google&lt;/a&gt; than from &lt;a href=&quot;http://search.yahoo.com/&quot;
+title=&quot;Yahoo Search&quot;&gt;Yahoo&lt;/a&gt; or &lt;a href=&quot;http://search.msn.com/&quot;
+title=&quot;MSN Search&quot;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
 </code></pre><p>The title attribute is optional. Link names may contain letters,<br>numbers and spaces, but are <em>not</em> case sensitive:</p>
 <pre><code>I start my morning with a cup of coffee and
-[<span class="link_label">The New York Times</span>][<span class="link_reference">NY Times</span>].
+[The New York Times][NY Times].
 
-[<span class="link_reference">ny times</span>]:<span class="link_url"> http://www.nytimes.com/</span>
+[ny times]: http://www.nytimes.com/
 </code></pre><p>Output:</p>
-<pre><code>&lt;p&gt;I <span class="built_in">start</span> my morning <span class="operator">with</span> <span class="operator">a</span> cup <span class="operator">of</span> coffee <span class="operator">and</span>
-&lt;<span class="operator">a</span> href=<span class="string">"http://www.nytimes.com/"</span>&gt;The New York Times&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
-</code></pre><h3 id="Images">Images</h3><p>Image syntax is very much like link syntax.</p>
+<pre><code>&lt;p&gt;I start my morning with a cup of coffee and
+&lt;a href=&quot;http://www.nytimes.com/&quot;&gt;The New York Times&lt;/a&gt;.&lt;/p&gt;
+</code></pre><h3 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h3><p>Image syntax is very much like link syntax.</p>
 <p>Inline (titles are optional):</p>
-<pre><code>![<span class="link_label">alt text</span>](<span class="link_url">/path/to/img.jpg "Title"</span>)
+<pre><code>![alt text](/path/to/img.jpg &quot;Title&quot;)
 </code></pre><p>Reference-style:</p>
-<pre><code>![<span class="link_label">alt text</span>][<span class="link_reference">id</span>]
+<pre><code>![alt text][id]
 
-[<span class="link_reference">id</span>]:<span class="link_url"> /path/to/img.jpg "Title"</span>
+[id]: /path/to/img.jpg &quot;Title&quot;
 </code></pre><p>Both of the above examples produce the same output:</p>
-<pre><code>&lt;<span class="tag">img</span> src=<span class="string">"/path/to/img.jpg"</span> alt=<span class="string">"alt text"</span> title=<span class="string">"Title"</span> /&gt;
-</code></pre><h3 id="Code">Code</h3><p>In a regular paragraph, you can create code span by wrapping text in<br>backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or<br><code>&gt;</code>) will automatically be translated into HTML entities. This makes<br>it easy to use Markdown to write about HTML example code:</p>
-<pre><code>I strongly recommend against <span class="keyword">using</span> any `&lt;blink&gt;` tags.
+<pre><code>&lt;img src=&quot;/path/to/img.jpg&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;
+</code></pre><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p>In a regular paragraph, you can create code span by wrapping text in<br>backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or<br><code>&gt;</code>) will automatically be translated into HTML entities. This makes<br>it easy to use Markdown to write about HTML example code:</p>
+<pre><code>I strongly recommend against using any `&lt;blink&gt;` tags.
 
-I wish SmartyPants used named entities <span class="keyword">like</span> `&amp;mdash;`
-instead <span class="keyword">of</span> <span class="built_in">decimal</span>-encoded entites <span class="keyword">like</span> `&amp;<span class="preprocessor">#8212;`.</span>
+I wish SmartyPants used named entities like `&amp;mdash;`
+instead of decimal-encoded entites like `&amp;#8212;`.
 </code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>I strongly recommend against using any
-<span class="tag">&lt;<span class="title">code</span>&gt;</span>&amp;lt;blink&amp;gt;<span class="tag">&lt;/<span class="title">code</span>&gt;</span> tags.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;I strongly recommend against using any
+&lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
 
-<span class="tag">&lt;<span class="title">p</span>&gt;</span>I wish SmartyPants used named entities like
-<span class="tag">&lt;<span class="title">code</span>&gt;</span>&amp;amp;mdash;<span class="tag">&lt;/<span class="title">code</span>&gt;</span> instead of decimal-encoded
-entites like <span class="tag">&lt;<span class="title">code</span>&gt;</span>&amp;amp;#8212;<span class="tag">&lt;/<span class="title">code</span>&gt;</span>.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+&lt;p&gt;I wish SmartyPants used named entities like
+&lt;code&gt;&amp;amp;mdash;&lt;/code&gt; instead of decimal-encoded
+entites like &lt;code&gt;&amp;amp;#8212;&lt;/code&gt;.&lt;/p&gt;
 </code></pre><p>To specify an entire block of pre-formatted code, indent every line of<br>the block by 4 spaces or 1 tab. Just like with code spans, <code>&amp;</code>, <code>&lt;</code>,<br>and <code>&gt;</code> characters will be escaped automatically.</p>
 <p>Markdown:</p>
-<pre><code>If you want your page <span class="keyword">to</span> validate under XHTML <span class="number">1.0</span> Strict,
-you've got <span class="keyword">to</span> put paragraph tags <span class="keyword">in</span> your blockquotes:
+<pre><code>If you want your page to validate under XHTML 1.0 Strict,
+you&apos;ve got to put paragraph tags in your blockquotes:
 
-    <span class="variable">&lt;blockquote&gt;</span>
-        <span class="variable">&lt;p&gt;</span>For example.<span class="variable">&lt;/p&gt;</span>
-    <span class="variable">&lt;/blockquote&gt;</span>
+    &lt;blockquote&gt;
+        &lt;p&gt;For example.&lt;/p&gt;
+    &lt;/blockquote&gt;
 </code></pre><p>Output:</p>
-<pre><code><span class="tag">&lt;p&gt;</span>If you want your page to validate under XHTML <span class="number">1.0</span> Strict,
-you've got to put paragraph tags <span class="operator">in</span> your blockquotes:<span class="tag">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;If you want your page to validate under XHTML 1.0 Strict,
+you&apos;ve got to put paragraph tags in your blockquotes:&lt;/p&gt;
 
-<span class="tag">&lt;pre&gt;</span><span class="tag">&lt;code&gt;</span>&amp;<span class="operator">lt</span>;blockquote&amp;<span class="operator">gt</span>;
-    &amp;<span class="operator">lt</span>;p&amp;<span class="operator">gt</span>;For example.&amp;<span class="operator">lt</span>;/p&amp;<span class="operator">gt</span>;
-&amp;<span class="operator">lt</span>;/blockquote&amp;<span class="operator">gt</span>;
-<span class="tag">&lt;/code&gt;</span><span class="tag">&lt;/pre&gt;</span>
+&lt;pre&gt;&lt;code&gt;&amp;lt;blockquote&amp;gt;
+    &amp;lt;p&amp;gt;For example.&amp;lt;/p&amp;gt;
+&amp;lt;/blockquote&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cihgnbxol001ct9dxql0eikj0" class="article-share-link" data-share="baidu" data-title="markdown-basics">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cil0t73io001e9ze5iiilnx29" class="article-share-link" data-share="baidu" data-title="markdown-basics">分享到</a>
       
 
       
@@ -778,9 +830,9 @@ you've got to put paragraph tags <span class="operator">in</span> your blockquot
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Markdown_文件">Markdown 文件</h1><p><img src="http://markdown.tw/images/208x128.png" alt="Markdown"></p>
+        <h1 id="Markdown-文件"><a href="#Markdown-文件" class="headerlink" title="Markdown 文件"></a>Markdown 文件</h1><p><img src="http://markdown.tw/images/208x128.png" alt="Markdown"></p>
 <p><strong>NOTE:</strong> This is Traditional Chinese Edition Document of<br>Markdown Syntax. If you are seeking for English Edition<br>Document. Please refer to <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">Markdown: Syntax</a>.</p>
-<h1 id="Markdown:_Syntax">Markdown: Syntax</h1><ul>
+<h1 id="Markdown-Syntax"><a href="#Markdown-Syntax" class="headerlink" title="Markdown: Syntax"></a>Markdown: Syntax</h1><ul>
 <li><a href="#overview">概述</a><ul>
 <li><a href="#philosophy">哲學</a></li>
 <li><a href="#html">行內 HTML</a></li>
@@ -828,11 +880,11 @@ you've got to put paragraph tags <span class="operator">in</span> your blockquot
 <p>舉例來說，在 Markdown 文件裡加上一段 HTML 表格：</p>
 <pre><code>This is a regular paragraph.
 
-<span class="tag">&lt;<span class="title">table</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">td</span>&gt;</span>Foo<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">table</span>&gt;</span>
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Foo&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
 
 This is another regular paragraph.
 </code></pre><p>請注意，Markdown 語法在 HTML 區塊標籤中將不會被進行處理。例如，你無法在 HTML 區塊內使用 Markdown 形式的<code>*強調*</code>。</p>
@@ -842,20 +894,20 @@ This is another regular paragraph.
 
 <p>在 HTML 文件中，有兩個字元需要特殊處理： <code>&lt;</code> 和 <code>&amp;</code> 。 <code>&lt;</code> 符號用於起始標籤，<code>&amp;</code> 符號則用於標記 HTML 實體，如果你只是想要使用這些符號，你必須要使用實體的形式，像是 <code>&amp;lt;</code> 和 <code>&amp;amp;</code>。</p>
 <p><code>&amp;</code> 符號其實很容易讓寫作網路文件的人感到困擾，如果你要打「AT&amp;T」 ，你必須要寫成「<code>AT&amp;amp;T</code>」 ，還得轉換網址內的 <code>&amp;</code> 符號，如果你要連結到：</p>
-<pre><code><span class="string">http:</span><span class="comment">//images.google.com/images?num=30&amp;q=larry+bird</span>
+<pre><code>http://images.google.com/images?num=30&amp;q=larry+bird
 </code></pre><p>你必須要把網址轉成：</p>
-<pre><code><span class="string">http:</span><span class="comment">//images.google.com/images?num=30&amp;amp;q=larry+bird</span>
+<pre><code>http://images.google.com/images?num=30&amp;amp;q=larry+bird
 </code></pre><p>才能放到連結標籤的 <code>href</code> 屬性裡。不用說也知道這很容易忘記，這也可能是 HTML 標準檢查所檢查到的錯誤中，數量最多的。</p>
 <p>Markdown 允許你直接使用這些符號，但是你要小心跳脫字元的使用，如果你是在HTML 實體中使用 <code>&amp;</code> 符號的話，它不會被轉換，而在其它情形下，它則會被轉換成 <code>&amp;amp;</code>。所以你如果要在文件中插入一個著作權的符號，你可以這樣寫：</p>
-<pre><code>&amp;<span class="keyword">copy</span>;
+<pre><code>&amp;copy;
 </code></pre><p>Markdown 將不會對這段文字做修改，但是如果你這樣寫：</p>
-<pre><code><span class="built_in">AT</span>&amp;T
+<pre><code>AT&amp;T
 </code></pre><p>Markdown 就會將它轉為：</p>
-<pre><code>AT&amp;amp<span class="comment">;T</span>
+<pre><code>AT&amp;amp;T
 </code></pre><p>類似的狀況也會發生在 <code>&lt;</code> 符號上，因為 Markdown 支援 <a href="#html">行內 HTML</a> ，如果你是使用 <code>&lt;</code> 符號作為 HTML 標籤使用，那 Markdown 也不會對它做任何轉換，但是如果你是寫：</p>
-<pre><code><span class="number">4</span> &lt; <span class="number">5</span>
+<pre><code>4 &lt; 5
 </code></pre><p>Markdown 將會把它轉換為：</p>
-<pre><code><span class="number">4</span> &amp;lt; <span class="number">5</span>
+<pre><code>4 &amp;lt; 5
 </code></pre><p>不過需要注意的是，code 範圍內，不論是行內還是區塊， <code>&lt;</code> 和 <code>&amp;</code> 兩個符號都<em>一定</em>會被轉換成 HTML 實體，這項特性讓你可以很容易地用 Markdown 寫 HTML code （和 HTML 相對而言， HTML 語法中，你要把所有的 <code>&lt;</code> 和 <code>&amp;</code> 都轉換為 HTML 實體，才能在 HTML 文件裡面寫出 HTML code。）</p>
 <hr>
 <h2 id="block">區塊元素</h2>
@@ -871,196 +923,196 @@ This is another regular paragraph.
 
 <p>Markdown 支援兩種標題的語法，<a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a> 和 <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a> 形式。</p>
 <p>Setext 形式是用底線的形式，利用 <code>=</code> （最高階標題）和 <code>-</code> （第二階標題），例如：</p>
-<pre><code><span class="header">This is an H1
-=============</span>
+<pre><code>This is an H1
+=============
 
-<span class="header">This is an H2
--------------</span>
+This is an H2
+-------------
 </code></pre><p>任何數量的 <code>=</code> 和 <code>-</code> 都可以有效果。</p>
 <p>Atx 形式則是在行首插入 1 到 6 個 <code>#</code> ，對應到標題 1 到 6 階，例如：</p>
-<pre><code><span class="comment"># This is an H1</span>
+<pre><code># This is an H1
 
-<span class="comment">## This is an H2</span>
+## This is an H2
 
-<span class="comment">###### This is an H6</span>
+###### This is an H6
 </code></pre><p>你可以選擇性地「關閉」atx 樣式的標題，這純粹只是美觀用的，若是覺得這樣看起來比較舒適，你就可以在行尾加上 <code>#</code>，而行尾的 <code>#</code> 數量也不用和開頭一樣（行首的井字數量決定標題的階數）：</p>
-<pre><code><span class="comment"># This is an H1 #</span>
+<pre><code># This is an H1 #
 
-<span class="comment">## This is an H2 ##</span>
+## This is an H2 ##
 
-<span class="comment">### This is an H3 ######</span>
+### This is an H3 ######
 </code></pre><h3 id="blockquote">Blockquotes</h3>
 
 <p>Markdown 使用 email 形式的區塊引言，如果你很熟悉如何在 email 信件中引言，你就知道怎麼在 Markdown 文件中建立一個區塊引言，那會看起來像是你強迫斷行，然後在每行的最前面加上 <code>&gt;</code> ：</p>
-<pre><code>&gt; This is a blockquote with two paragraphs. Lo<span class="comment">rem ipsum dolor sit amet,</span>
+<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 &gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-&gt; Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 &gt; 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 &gt; id sem consectetuer libero luctus adipiscing.
 </code></pre><p>Markdown 也允許你只在整個段落的第一行最前面加上 <code>&gt;</code> ：</p>
-<pre><code>&gt; This is a blockquote with two paragraphs. Lo<span class="comment">rem ipsum dolor sit amet,</span>
+<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
 </code></pre><p>區塊引言可以有階層（例如：引言內的引言），只要根據層數加上不同數量的 <code>&gt;</code> ：</p>
-<pre><code>&gt; This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">first</span> level <span class="keyword">of</span> quoting.
+<pre><code>&gt; This is the first level of quoting.
 &gt;
-&gt; &gt; This <span class="keyword">is</span> nested blockquote.
+&gt; &gt; This is nested blockquote.
 &gt;
-&gt; Back <span class="keyword">to</span> <span class="keyword">the</span> <span class="keyword">first</span> level.
+&gt; Back to the first level.
 </code></pre><p>引言的區塊內也可以使用其他的 Markdown 語法，包括標題、清單、程式碼區塊等：</p>
-<pre><code>&gt; <span class="comment">## This is a header.</span>
+<pre><code>&gt; ## This is a header.
 &gt; 
-&gt; <span class="number">1.</span>   This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">first</span> <span class="type">list</span> <span class="property">item</span>.
-&gt; <span class="number">2.</span>   This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="type">list</span> <span class="property">item</span>.
+&gt; 1.   This is the first list item.
+&gt; 2.   This is the second list item.
 &gt; 
-&gt; Here's <span class="keyword">some</span> example code:
+&gt; Here&apos;s some example code:
 &gt; 
-&gt;     <span class="constant">return</span> shell_exec(<span class="string">"echo $input | $markdown_script"</span>);
+&gt;     return shell_exec(&quot;echo $input | $markdown_script&quot;);
 </code></pre><p>任何標準的文字編輯器都能簡單地建立 email 樣式的引言，例如 BBEdit ，你可以選取文字後然後從選單中選擇<em>增加引言階層</em>。</p>
 <h3 id="list">清單</h3>
 
 <p>Markdown 支援有序清單和無序清單。</p>
 <p>無序清單使用星號、加號或是減號作為清單標記：</p>
-<pre><code><span class="bullet">*   </span>Red
-<span class="bullet">*   </span>Green
-<span class="bullet">*   </span>Blue
+<pre><code>*   Red
+*   Green
+*   Blue
 </code></pre><p>等同於：</p>
-<pre><code><span class="bullet">+   </span>Red
-<span class="bullet">+   </span>Green
-<span class="bullet">+   </span>Blue
+<pre><code>+   Red
++   Green
++   Blue
 </code></pre><p>也等同於：</p>
-<pre><code>-<span class="ruby">   <span class="constant">Red</span>
-</span>-<span class="ruby">   <span class="constant">Green</span>
-</span>-<span class="ruby">   <span class="constant">Blue</span></span>
+<pre><code>-   Red
+-   Green
+-   Blue
 </code></pre><p>有序清單則使用數字接著一個英文句點：</p>
-<pre><code><span class="number">1.</span>  Bird
-<span class="number">2.</span>  McHale
-<span class="number">3.</span>  Parish
+<pre><code>1.  Bird
+2.  McHale
+3.  Parish
 </code></pre><p>很重要的一點是，你在清單標記上使用的數字並不會影響輸出的 HTML 結果，上面的清單所產生的 HTML 標記為：</p>
-<pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>McHale<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Parish<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+<pre><code>&lt;ol&gt;
+&lt;li&gt;Bird&lt;/li&gt;
+&lt;li&gt;McHale&lt;/li&gt;
+&lt;li&gt;Parish&lt;/li&gt;
+&lt;/ol&gt;
 </code></pre><p>如果你的清單標記寫成：</p>
-<pre><code><span class="number">1.</span>  Bird
-<span class="number">1.</span>  McHale
-<span class="number">1.</span>  Parish
+<pre><code>1.  Bird
+1.  McHale
+1.  Parish
 </code></pre><p>或甚至是：</p>
-<pre><code><span class="number">3.</span> Bird
-<span class="number">1.</span> McHale
-<span class="number">8.</span> Parish
+<pre><code>3. Bird
+1. McHale
+8. Parish
 </code></pre><p>你都會得到完全相同的 HTML 輸出。重點在於，你可以讓 Markdown 文件的清單數字和輸出的結果相同，或是你懶一點，你可以完全不用在意數字的正確性。</p>
 <p>如果你使用懶惰的寫法，建議第一個項目最好還是從 1. 開始，因為 Markdown 未來可能會支援有序清單的 start 屬性。</p>
 <p>清單項目標記通常是放在最左邊，但是其實也可以縮排，最多三個空白，項目標記後面則一定要接著至少一個空白或 tab。</p>
 <p>要讓清單看起來更漂亮，你可以把內容用固定的縮排整理好：</p>
-<pre><code>*   Lo<span class="comment">rem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+<pre><code>*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-    viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+    viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
     Suspendisse id sem consectetuer libero luctus adipiscing.
 </code></pre><p>但是如果你很懶，那也不一定需要：</p>
-<pre><code>*   Lo<span class="comment">rem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+<pre><code>*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 Suspendisse id sem consectetuer libero luctus adipiscing.
 </code></pre><p>如果清單項目間用空行分開， Markdown 會把項目的內容在輸出時用 <code>&lt;p&gt;</code><br>標籤包起來，舉例來說：</p>
-<pre><code><span class="bullet">*   </span>Bird
-<span class="bullet">*   </span>Magic
+<pre><code>*   Bird
+*   Magic
 </code></pre><p>會被轉換為：</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Magic<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;Bird&lt;/li&gt;
+&lt;li&gt;Magic&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre><p>但是這個：</p>
-<pre><code><span class="bullet">*   </span>Bird
+<pre><code>*   Bird
 
-<span class="bullet">*   </span>Magic
+*   Magic
 </code></pre><p>會被轉換為：</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Magic<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Bird&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Magic&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre><p>清單項目可以包含多個段落，每個項目下的段落都必須縮排 4 個空白或是一個 tab ：</p>
-<pre><code><span class="number">1</span>.  This is a list item with two paragraphs. Lo<span class="comment">rem ipsum dolor</span>
+<pre><code>1.  This is a list item with two paragraphs. Lorem ipsum dolor
     sit amet, consectetuer adipiscing elit. Aliquam hendrerit
     mi posuere lectus.
 
-    Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet
+    Vestibulum enim wisi, viverra nec, fringilla in, laoreet
     vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
     sit amet velit.
 
-<span class="number">2</span>.  Suspendisse id sem consectetuer libero luctus adipiscing.
+2.  Suspendisse id sem consectetuer libero luctus adipiscing.
 </code></pre><p>如果你每行都有縮排，看起來會看好很多，當然，再次地，如果你很懶惰，Markdown 也允許：</p>
-<pre><code>*   This <span class="keyword">is</span> a <span class="type">list</span> <span class="property">item</span> <span class="keyword">with</span> two <span class="property">paragraphs</span>.
+<pre><code>*   This is a list item with two paragraphs.
 
-    This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="property">paragraph</span> <span class="keyword">in</span> <span class="keyword">the</span> <span class="type">list</span> <span class="property">item</span>. You're
-only required <span class="keyword">to</span> indent <span class="keyword">the</span> <span class="keyword">first</span> line. Lorem ipsum dolor
+    This is the second paragraph in the list item. You&apos;re
+only required to indent the first line. Lorem ipsum dolor
 sit amet, consectetuer adipiscing elit.
 
-*   Another <span class="property">item</span> <span class="keyword">in</span> <span class="keyword">the</span> same <span class="type">list</span>.
+*   Another item in the same list.
 </code></pre><p>如果要在清單項目內放進引言，那 <code>&gt;</code> 就需要縮排：</p>
-<pre><code>*   A <span class="type">list</span> <span class="property">item</span> <span class="keyword">with</span> a blockquote:
+<pre><code>*   A list item with a blockquote:
 
-    &gt; This <span class="keyword">is</span> a blockquote
-    &gt; inside a <span class="type">list</span> <span class="property">item</span>.
+    &gt; This is a blockquote
+    &gt; inside a list item.
 </code></pre><p>如果要放程式碼區塊的話，該區塊就需要縮排<em>兩次</em>，也就是 8 個空白或是兩個 tab：</p>
-<pre><code>*   A list <span class="keyword">item </span>with a <span class="preprocessor">code</span> <span class="keyword">block:
-</span>
-        &lt;<span class="preprocessor">code</span> goes here&gt;
+<pre><code>*   A list item with a code block:
+
+        &lt;code goes here&gt;
 </code></pre><p>當然，項目清單很可能會不小心產生，像是下面這樣的寫法：</p>
-<pre><code><span class="number">1986</span>. What <span class="tag">a</span> great season.
+<pre><code>1986. What a great season.
 </code></pre><p>換句話說，也就是在行首出現<em>數字-句點-空白</em>，要避免這樣的狀況，你可以在句點前面加上反斜線。</p>
-<pre><code><span class="number">1986</span>\. What <span class="tag">a</span> great season.
+<pre><code>1986\. What a great season.
 </code></pre><h3 id="precode">程式碼區塊</h3>
 
 <p>和程式相關的寫作或是標籤語言原始碼通常會有已經排版好的程式碼區塊，通常這些區塊我們並不希望它以一般段落文件的方式去排版，而是照原來的樣子顯示，Markdown 會用 <code>&lt;pre&gt;</code> 和 <code>&lt;code&gt;</code> 標籤來把程式碼區塊包起來。</p>
 <p>要在 Markdown 中建立程式碼區塊很簡單，只要簡單地縮排 4 個空白或是 1 個 tab 就可以，例如，下面的輸入：</p>
-<pre><code>This is <span class="tag">a</span> <span class="attribute">normal</span> paragraph:
+<pre><code>This is a normal paragraph:
 
-    This is <span class="tag">a</span> <span class="tag">code</span> block.
+    This is a code block.
 </code></pre><p>Markdown 會轉換成：</p>
-<pre><code><span class="variable">&lt;p&gt;</span>This is a normal paragraph:<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;This is a normal paragraph:&lt;/p&gt;
 
-<span class="variable">&lt;pre&gt;</span><span class="variable">&lt;code&gt;</span>This is a code <span class="built_in">block</span>.
-<span class="variable">&lt;/code&gt;</span><span class="variable">&lt;/pre&gt;</span>
+&lt;pre&gt;&lt;code&gt;This is a code block.
+&lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>這個每行一階的縮排（4 個空白或是 1 個 tab），都會被移除，例如：</p>
-<pre><code>Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:
+<pre><code>Here is an example of AppleScript:
 
-    <span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
-        <span class="command">beep</span>
-    <span class="keyword">end</span> <span class="keyword">tell</span>
+    tell application &quot;Foo&quot;
+        beep
+    end tell
 </code></pre><p>會被轉換為：</p>
-<pre><code>&lt;p&gt;Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:&lt;/p&gt;
+<pre><code>&lt;p&gt;Here is an example of AppleScript:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;<span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
-    <span class="command">beep</span>
-<span class="keyword">end</span> <span class="keyword">tell</span>
+&lt;pre&gt;&lt;code&gt;tell application &quot;Foo&quot;
+    beep
+end tell
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>一個程式碼區塊會一直持續到沒有縮排的那一行（或是文件結尾）。</p>
 <p>在程式碼區塊裡面， <code>&amp;</code> 、 <code>&lt;</code> 和 <code>&gt;</code> 會自動轉成 HTML 實體，這樣的方式讓你非常容易使用 Markdown 插入範例用的 HTML 原始碼，只需要複製貼上，再加上縮排就可以了，剩下的 Markdown 都會幫你處理，例如：</p>
-<pre><code>&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"footer"</span>&gt;
-    &amp;<span class="keyword">copy</span>; <span class="number">2004</span> Foo Corporation
-&lt;/<span class="keyword">div</span>&gt;
+<pre><code>&lt;div class=&quot;footer&quot;&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
 </code></pre><p>會被轉換為：</p>
-<pre><code>&lt;<span class="keyword">pre</span>&gt;&lt;code&gt;&amp;<span class="keyword">lt</span>;div class=<span class="string">"footer"</span>&amp;gt;
-    &amp;amp;<span class="built_in">copy</span>; <span class="number">2004</span> Foo Corporation
-&amp;<span class="keyword">lt</span>;/div&amp;gt;
-&lt;/code&gt;&lt;/<span class="keyword">pre</span>&gt;
+<pre><code>&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&quot;footer&quot;&amp;gt;
+    &amp;amp;copy; 2004 Foo Corporation
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>程式碼區塊中，一般的 Markdown 語法不會被轉換，像是星號便只是星號，這表示你可以很容易地以 Markdown 語法撰寫 Markdown 語法相關的文件。</p>
 <h3 id="hr">分隔線</h3>
 
 <p>你可以在一行中用三個或以上的星號、減號、底線來建立一個分隔線，行內不能有其他東西。你也可以在星號中間插入空白。下面每種寫法都可以建立分隔線：</p>
-<pre><code><span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span>
+<pre><code>* * *
 
-<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+***
 
-<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+*****
 
 - - -
 
@@ -1073,23 +1125,23 @@ sit amet, consectetuer adipiscing elit.
 <p>Markdown 支援兩種形式的連結語法： <em>行內</em>和<em>參考</em>兩種形式。</p>
 <p>不管是哪一種，連結的文字都是用 [方括號] 來標記。</p>
 <p>要建立一個行內形式的連結，只要在方塊括號後面馬上接著括號並插入網址連結即可，如果你還想要加上連結的 title 文字，只要在網址後面，用雙引號把 title 文字包起來即可，例如：</p>
-<pre><code>This is [<span class="link_label">an example</span>](<span class="link_url">http://example.com/ "Title"</span>) inline link.
+<pre><code>This is [an example](http://example.com/ &quot;Title&quot;) inline link.
 
-[<span class="link_label">This link</span>](<span class="link_url">http://example.net/</span>) has no title attribute.
+[This link](http://example.net/) has no title attribute.
 </code></pre><p>會產生：</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span> <span class="attribute">title</span>=<span class="value">"Title"</span>&gt;</span>
-an example<span class="tag">&lt;/<span class="title">a</span>&gt;</span> inline link.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot; title=&quot;Title&quot;&gt;
+an example&lt;/a&gt; inline link.&lt;/p&gt;
 
-<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.net/"</span>&gt;</span>This link<span class="tag">&lt;/<span class="title">a</span>&gt;</span> has no
-title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+&lt;p&gt;&lt;a href=&quot;http://example.net/&quot;&gt;This link&lt;/a&gt; has no
+title attribute.&lt;/p&gt;
 </code></pre><p>如果你是要連結到同樣主機的資源，你可以使用相對路徑：</p>
-<pre><code>See my [<span class="link_label">About</span>](<span class="link_url">/about/</span>) page for details.   
+<pre><code>See my [About](/about/) page for details.   
 </code></pre><p>參考形式的連結使用另外一個方括號接在連結文字的括號後面，而在第二個方括號裡面要填入用以辨識連結的標籤：</p>
-<pre><code>This is [<span class="link_label">an example</span>][<span class="link_reference">id</span>] reference-style link.
+<pre><code>This is [an example][id] reference-style link.
 </code></pre><p>你也可以選擇性地在兩個方括號中間加上空白：</p>
-<pre><code>This <span class="keyword">is</span> [an example] [<span class="property">id</span>] <span class="keyword">reference</span>-style link.
+<pre><code>This is [an example] [id] reference-style link.
 </code></pre><p>接著，在文件的任意處，你可以把這個標籤的連結內容定義出來：</p>
-<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
+<pre><code>[id]: http://example.com/  &quot;Optional Title Here&quot;
 </code></pre><p>連結定義的形式為：</p>
 <ul>
 <li>方括號，裡面輸入連結的辨識用標籤</li>
@@ -1099,112 +1151,112 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <li>選擇性地接著 title 內容，可以用單引號、雙引號或是括弧包著</li>
 </ul>
 <p>下面這三種連結的定義都是相同：</p>
-<pre><code>[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
-[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  'Optional Title Here'</span>
-[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  (Optional Title Here)</span>
+<pre><code>[foo]: http://example.com/  &quot;Optional Title Here&quot;
+[foo]: http://example.com/  &apos;Optional Title Here&apos;
+[foo]: http://example.com/  (Optional Title Here)
 </code></pre><p><strong>請注意：</strong>有一個已知的問題是 Markdown.pl 1.0.1 會忽略單引號包起來的連結 title。</p>
 <p>連結網址也可以用方括號包起來：</p>
-<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> &lt;http://example.com/&gt;  "Optional Title Here"</span>
+<pre><code>[id]: &lt;http://example.com/&gt;  &quot;Optional Title Here&quot;
 </code></pre><p>你也可以把 title 屬性放到下一行，也可以加一些縮排，網址太長的話，這樣會比較好看：</p>
-<pre><code>[id]<span class="symbol">:</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/longish</span><span class="regexp">/path/to</span><span class="regexp">/resource/here</span>
-    <span class="string">"Optional Title Here"</span>
+<pre><code>[id]: http://example.com/longish/path/to/resource/here
+    &quot;Optional Title Here&quot;
 </code></pre><p>網址定義只有在產生連結的時候用到，並不會直接出現在文件之中。</p>
 <p>連結辨識標籤可以有字母、數字、空白和標點符號，但是並<em>不</em>區分大小寫，因此下面兩個連結是一樣的：</p>
-<pre><code>[<span class="link_label">link text</span>][<span class="link_reference">a</span>]
-[<span class="link_label">link text</span>][<span class="link_reference">A</span>]
+<pre><code>[link text][a]
+[link text][A]
 </code></pre><p><em>預設的連結標籤</em>功能讓你可以省略指定連結標籤，這種情形下，連結標籤和連結文字會視為相同，要用預設連結標籤只要在連結文字後面加上一個空的方括號，如果你要讓 “Google” 連結到 google.com，你可以簡化成：</p>
-<pre><code>[<span class="link_label">Google</span>][<span class="link_reference"></span>]
+<pre><code>[Google][]
 </code></pre><p>然後定義連結內容：</p>
-<pre><code>[<span class="link_reference">Google</span>]:<span class="link_url"> http://google.com/</span>
+<pre><code>[Google]: http://google.com/
 </code></pre><p>由於連結文字可能包含空白，所以這種簡化的標籤內也可以包含多個文字：</p>
-<pre><code>Visit [<span class="link_label">Daring Fireball</span>][<span class="link_reference"></span>] for more information.
+<pre><code>Visit [Daring Fireball][] for more information.
 </code></pre><p>然後接著定義連結：</p>
-<pre><code>[<span class="link_reference">Daring Fireball</span>]:<span class="link_url"> http://daringfireball.net/</span>
+<pre><code>[Daring Fireball]: http://daringfireball.net/
 </code></pre><p>連結的定義可以放在文件中的任何一個地方，我比較偏好直接放在連結出現段落的後面，你也可以把它放在文件最後面，就像是註解一樣。</p>
 <p>下面是一個參考式連結的範例：</p>
-<pre><code><span class="name">I</span> <span class="atom">get</span> <span class="number">10</span> <span class="atom">times</span> <span class="atom">more</span> <span class="atom">traffic</span> <span class="atom">from</span> [<span class="name">Google</span>] [<span class="number">1</span>] <span class="atom">than</span> <span class="atom">from</span>
-[<span class="name">Yahoo</span>] [<span class="number">2</span>] <span class="atom">or</span> [<span class="name">MSN</span>] [<span class="number">3</span>].
+<pre><code>I get 10 times more traffic from [Google] [1] than from
+[Yahoo] [2] or [MSN] [3].
 
-  [<span class="number">1</span>]: <span class="atom">http</span>://<span class="atom">google</span>.<span class="atom">com</span>/        <span class="string">"Google"</span>
-  [<span class="number">2</span>]: <span class="atom">http</span>://<span class="atom">search</span>.<span class="atom">yahoo</span>.<span class="atom">com</span>/  <span class="string">"Yahoo Search"</span>
-  [<span class="number">3</span>]: <span class="atom">http</span>://<span class="atom">search</span>.<span class="atom">msn</span>.<span class="atom">com</span>/    <span class="string">"MSN Search"</span>
+  [1]: http://google.com/        &quot;Google&quot;
+  [2]: http://search.yahoo.com/  &quot;Yahoo Search&quot;
+  [3]: http://search.msn.com/    &quot;MSN Search&quot;
 </code></pre><p>如果改成用連結名稱的方式寫：</p>
-<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>][<span class="link_reference"></span>] than from
-[<span class="link_label">Yahoo</span>][<span class="link_reference"></span>] or [<span class="link_label">MSN</span>][<span class="link_reference"></span>].
+<pre><code>I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
 
-  [google]: http://google.com/        "Google"
-  [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
-  [msn]:    http://search.msn.com/    "MSN Search"
+  [google]: http://google.com/        &quot;Google&quot;
+  [yahoo]:  http://search.yahoo.com/  &quot;Yahoo Search&quot;
+  [msn]:    http://search.msn.com/    &quot;MSN Search&quot;
 </code></pre><p>上面兩種寫法都會產生下面的 HTML。</p>
-<pre><code>&lt;p&gt;I <span class="built_in">get</span> <span class="number">10</span> times more traffic <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://google.com/"</span>
-title=<span class="string">"Google"</span>&gt;Google&lt;/<span class="operator">a</span>&gt; than <span class="built_in">from</span>
-&lt;<span class="operator">a</span> href=<span class="string">"http://search.yahoo.com/"</span> title=<span class="string">"Yahoo Search"</span>&gt;Yahoo&lt;/<span class="operator">a</span>&gt;
-<span class="operator">or</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.msn.com/"</span> title=<span class="string">"MSN Search"</span>&gt;MSN&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
+<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href=&quot;http://google.com/&quot;
+title=&quot;Google&quot;&gt;Google&lt;/a&gt; than from
+&lt;a href=&quot;http://search.yahoo.com/&quot; title=&quot;Yahoo Search&quot;&gt;Yahoo&lt;/a&gt;
+or &lt;a href=&quot;http://search.msn.com/&quot; title=&quot;MSN Search&quot;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
 </code></pre><p>下面是用行內形式寫的同樣一段內容的 Markdown 文件，提供作為比較之用：</p>
-<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>](<span class="link_url">http://google.com/ "Google"</span>)
-than from [<span class="link_label">Yahoo</span>](<span class="link_url">http://search.yahoo.com/ "Yahoo Search"</span>) or
-[<span class="link_label">MSN</span>](<span class="link_url">http://search.msn.com/ "MSN Search"</span>).
+<pre><code>I get 10 times more traffic from [Google](http://google.com/ &quot;Google&quot;)
+than from [Yahoo](http://search.yahoo.com/ &quot;Yahoo Search&quot;) or
+[MSN](http://search.msn.com/ &quot;MSN Search&quot;).
 </code></pre><p>參考式的連結其實重點不在於它比較好寫，而是它比較好讀，比較一下上面的範例，使用參考式的文章本身只有 81 個字元，但是用行內形式的連結卻會增加到 176 個字元，如果是用純 HTML 格式來寫，會有 234 個字元，在 HTML 格式中，標籤比文字還要多。</p>
 <p>使用 Markdown 的參考式連結，可以讓文件更像是瀏覽器最後產生的結果，讓你可以把一些標記相關的資訊移到段落文字之外，你就可以增加連結而不讓文章的閱讀感覺被打斷。</p>
 <h3 id="em">強調</h3>
 
 <p>Markdown 使用星號（<code>*</code>）和底線（<code>_</code>）作為標記強調字詞的符號，被 <code>*</code> 或 <code>_</code> 包圍的字詞會被轉成用 <code>&lt;em&gt;</code> 標籤包圍，用兩個 <code>*</code> 或 <code>_</code> 包起來的話，則會被轉成 <code>&lt;strong&gt;</code>，例如：</p>
-<pre><code><span class="keyword">*</span>single asterisks<span class="keyword">*</span>
+<pre><code>*single asterisks*
 
 _single underscores_
 
-<span class="keyword">*</span><span class="keyword">*</span>double asterisks<span class="keyword">*</span><span class="keyword">*</span>
+**double asterisks**
 
 __double underscores__
 </code></pre><p>會轉成：</p>
-<pre><code><span class="tag">&lt;<span class="title">em</span>&gt;</span>single asterisks<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+<pre><code>&lt;em&gt;single asterisks&lt;/em&gt;
 
-<span class="tag">&lt;<span class="title">em</span>&gt;</span>single underscores<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+&lt;em&gt;single underscores&lt;/em&gt;
 
-<span class="tag">&lt;<span class="title">strong</span>&gt;</span>double asterisks<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+&lt;strong&gt;double asterisks&lt;/strong&gt;
 
-<span class="tag">&lt;<span class="title">strong</span>&gt;</span>double underscores<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+&lt;strong&gt;double underscores&lt;/strong&gt;
 </code></pre><p>你可以隨便用你喜歡的樣式，唯一的限制是，你用什麼符號開啟標籤，就要用什麼符號結束。</p>
 <p>強調也可以直接插在文字中間：</p>
-<pre><code>un<span class="keyword">*</span>frigging<span class="keyword">*</span>believable
+<pre><code>un*frigging*believable
 </code></pre><p>但是如果你的 <code>*</code> 和 <code>_</code> 兩邊都有空白的話，它們就只會被當成普通的符號。</p>
 <p>如果要在文字前後直接插入普通的星號或底線，你可以用反斜線：</p>
-<pre><code><span class="string">\*this</span> text <span class="keyword">is</span> surrounded <span class="keyword">by</span> literal asterisks<span class="string">\*</span>
+<pre><code>\*this text is surrounded by literal asterisks\*
 </code></pre><h3 id="code">程式碼</h3>
 
 <p>如果要標記一小段行內程式碼，你可以用反引號把它包起來（<code>` </code>），例如：</p>
-<pre><code><span class="keyword">Use</span> the `printf()` <span class="function"><span class="keyword">function</span>.</span>
+<pre><code>Use the `printf()` function.
 </code></pre><p>會產生：</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>Use the <span class="tag">&lt;<span class="title">code</span>&gt;</span>printf()<span class="tag">&lt;/<span class="title">code</span>&gt;</span> function.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
 </code></pre><p>如果要在程式碼區段內插入反引號，你可以用多個反引號來開啟和結束程式碼區段：</p>
-<pre><code><span class="escape">``</span>There is <span class="literal">a</span> literal backtick (<span class="escape">`)</span> here.<span class="escape">``</span>
+<pre><code>``There is a literal backtick (`) here.``
 </code></pre><p>這段語法會產生：</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>There is a literal backtick (`) here.<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;&lt;code&gt;There is a literal backtick (`) here.&lt;/code&gt;&lt;/p&gt;
 </code></pre><p>程式碼區段的起始和結束端都可以放入一個空白，起始端後面一個，結束端前面一個，這樣你就可以在區段的一開始就插入反引號：</p>
-<pre><code>A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` ` ``
+<pre><code>A single backtick in a code span: `` ` ``
 
-A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` `foo` ``
+A backtick-delimited string in a code span: `` `foo` ``
 </code></pre><p>會產生：</p>
-<pre><code>&lt;p&gt;A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
+<pre><code>&lt;p&gt;A single backtick in a code span: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;A backtick-delimited string in a code span: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
 </code></pre><p>在程式碼區段內，<code>&amp;</code> 和方括號都會被轉成 HTML 實體，這樣會比較容易插入 HTML 原始碼，Markdown 會把下面這段：</p>
-<pre><code>Please don't <span class="operator"><span class="keyword">use</span> <span class="keyword">any</span> <span class="string">`&lt;blink&gt;`</span> tags.</span>
+<pre><code>Please don&apos;t use any `&lt;blink&gt;` tags.
 </code></pre><p>轉為：</p>
-<pre><code><span class="variable">&lt;p&gt;</span>Please don't use <span class="literal">any</span> <span class="variable">&lt;code&gt;</span>&amp;lt;blink&amp;gt;<span class="variable">&lt;/code&gt;</span> tags.<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;Please don&apos;t use any &lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
 </code></pre><p>你也可以這樣寫：</p>
-<pre><code>`<span class="javascript">&amp;#<span class="number">8212</span>;</span>` <span class="keyword">is</span> the decimal-encoded equivalent <span class="keyword">of</span> `<span class="javascript">&amp;mdash;</span>`.
+<pre><code>`&amp;#8212;` is the decimal-encoded equivalent of `&amp;mdash;`.
 </code></pre><p>以產生：</p>
-<pre><code><span class="variable">&lt;p&gt;</span><span class="variable">&lt;code&gt;</span>&amp;amp;<span class="comment">#8212;&lt;/code&gt; is the decimal-encoded</span>
-equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span class="variable">&lt;/code&gt;</span>.<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;&lt;code&gt;&amp;amp;#8212;&lt;/code&gt; is the decimal-encoded
+equivalent of &lt;code&gt;&amp;amp;mdash;&lt;/code&gt;.&lt;/p&gt;
 </code></pre><h3 id="img">圖片</h3>
 
 <p>很明顯地，要在純文字應用中設計一個 「自然」的語法來插入圖片是有一定難度的。</p>
 <p>Markdown 使用一種和連結很相似的語法來標記圖片，同樣也允許兩種樣式： <em>行內</em>和<em>參考</em>。</p>
 <p>行內圖片的語法看起來像是：</p>
-<pre><code>![<span class="link_label">Alt text</span>](<span class="link_url">/path/to/img.jpg</span>)
+<pre><code>![Alt text](/path/to/img.jpg)
 
-![<span class="link_label">Alt text</span>](<span class="link_url">/path/to/img.jpg "Optional title"</span>)
+![Alt text](/path/to/img.jpg &quot;Optional title&quot;)
 </code></pre><p>詳細敘述如下：</p>
 <ul>
 <li>一個驚嘆號 <code>!</code></li>
@@ -1212,9 +1264,9 @@ equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span cla
 <li>接著一個普通括號，裡面放上圖片的網址，最後還可以用引號包住並加上<br>選擇性的 ‘title’ 文字。</li>
 </ul>
 <p>參考式的圖片語法則長得像這樣：</p>
-<pre><code>![<span class="link_label">Alt text</span>][<span class="link_reference">id</span>]
+<pre><code>![Alt text][id]
 </code></pre><p>「id」是圖片參考的名稱，圖片參考的定義方式則和連結參考一樣：</p>
-<pre><code>[<span class="property">id</span>]: url/<span class="keyword">to</span>/image  <span class="string">"Optional title attribute"</span>
+<pre><code>[id]: url/to/image  &quot;Optional title attribute&quot;
 </code></pre><p>到目前為止， Markdown 還沒有辦法指定圖片的寬高，如果你需要的話，你可以使用普通的 <code>&lt;img&gt;</code> 標籤。</p>
 <hr>
 <h2 id="misc">其它</h2>
@@ -1222,33 +1274,33 @@ equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span cla
 <h3 id="autolink">自動連結</h3>
 
 <p>Markdown 支援比較簡短的自動連結形式來處理網址和電子郵件信箱，只要是用方括號包起來， Markdown 就會自動把它轉成連結，連結的文字就和連結位置一樣，例如：</p>
-<pre><code>&lt;<span class="string">http:</span><span class="comment">//example.com/&gt;</span>
+<pre><code>&lt;http://example.com/&gt;
 </code></pre><p>Markdown 會轉為：</p>
-<pre><code>&lt;<span class="tag">a</span> href=<span class="string">"http://example.com/"</span>&gt;http:<span class="comment">//example.com/&lt;/a&gt;</span>
+<pre><code>&lt;a href=&quot;http://example.com/&quot;&gt;http://example.com/&lt;/a&gt;
 </code></pre><p>自動的郵件連結也很類似，只是 Markdown 會先做一個編碼轉換的過程，把文字字元轉成 16 進位碼的 HTML 實體，這樣的格式可以混淆一些不好的信箱地址收集機器人，例如：</p>
-<pre><code><span class="tag">&lt;address@example.com&gt;</span>
+<pre><code>&lt;address@example.com&gt;
 </code></pre><p>Markdown 會轉成：</p>
-<pre><code>&lt;a href=<span class="string">"&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
+<pre><code>&lt;a href=&quot;&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
 &amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
-&amp;#109;"</span>&gt;&amp;<span class="title">#x61</span>;&amp;<span class="title">#x64</span>;&amp;<span class="title">#x64</span>;&amp;<span class="title">#x72</span>;&amp;<span class="title">#x65</span>;&amp;<span class="title">#115</span>;&amp;<span class="title">#115</span>;&amp;<span class="title">#64</span>;&amp;<span class="title">#101</span>;&amp;<span class="title">#120</span>;&amp;<span class="title">#x61</span>;
-&amp;<span class="title">#109</span>;&amp;<span class="title">#x70</span>;&amp;<span class="title">#x6</span>C;e&amp;<span class="title">#x2</span>E;&amp;<span class="title">#99</span>;&amp;<span class="title">#111</span>;&amp;<span class="title">#109</span>;&lt;/a&gt;
+&amp;#109;&quot;&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
+&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
 </code></pre><p>在瀏覽器裡面，這段字串會變成一個可以點擊的「address@example.com」連結。</p>
 <p>（這種作法雖然可以混淆不少的機器人，但並無法全部擋下來，不過這樣也比什麼都不做好些。無論如何，公開你的信箱終究會引來廣告信件的。）</p>
 <h3 id="backslash">跳脫字元</h3>
 
 <p>Markdown 可以利用反斜線來插入一些在語法中有其它意義的符號，例如：如果你想要用星號加在文字旁邊的方式來做出強調效果（但不用 <code>&lt;em&gt;</code> 標籤），你可以在星號的前面加上反斜線：</p>
-<pre><code>\<span class="keyword">*</span>literal asterisks\<span class="keyword">*</span>
+<pre><code>\*literal asterisks\*
 </code></pre><p>Markdown 支援在下面這些符號前面加上反斜線來幫助插入普通的符號：</p>
 <pre><code>\   反斜線
 `   反引號
-<span class="bullet">*   </span>星號
+*   星號
 _   底線
 {}  大括號
 []  方括號
 ()  括號
-<span class="header">#   井字號</span>
-<span class="bullet">+    </span>加號
-<span class="bullet">-    </span>減號
+#   井字號
++    加號
+-    減號
 .   英文句點
 !   驚嘆號
 </code></pre><h2 id="acknowledgement">感謝</h2>
@@ -1259,7 +1311,7 @@ _   底線
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cihgnbxoj001bt9dxnqnjerf8" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cil0t73im001d9ze51unlnx7h" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">分享到</a>
       
 
       
@@ -1294,7 +1346,7 @@ _   底線
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Markdown:_Syntax">Markdown: Syntax</h1><ul id="ProjectSubmenu"><br>    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li><br>    <li><a href="/projects/markdown/basics" title="Markdown Basics">Basics</a></li><br>    <li><a class="selected" title="Markdown Syntax Documentation">Syntax</a></li><br>    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li><br>    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li><br></ul>
+        <h1 id="Markdown-Syntax"><a href="#Markdown-Syntax" class="headerlink" title="Markdown: Syntax"></a>Markdown: Syntax</h1><ul id="ProjectSubmenu"><br>    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li><br>    <li><a href="/projects/markdown/basics" title="Markdown Basics">Basics</a></li><br>    <li><a class="selected" title="Markdown Syntax Documentation">Syntax</a></li><br>    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li><br>    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li><br></ul>
 
 
 <ul>
@@ -1344,11 +1396,11 @@ _   底線
 <p>For example, to add an HTML table to a Markdown article:</p>
 <pre><code>This is a regular paragraph.
 
-<span class="tag">&lt;<span class="title">table</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">tr</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">td</span>&gt;</span>Foo<span class="tag">&lt;/<span class="title">td</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">tr</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">table</span>&gt;</span>
+&lt;table&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Foo&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
 
 This is another regular paragraph.
 </code></pre><p>Note that Markdown formatting syntax is not processed within block-level<br>HTML tags. E.g., you can’t use Markdown-style <code>*emphasis*</code> inside an<br>HTML block.</p>
@@ -1358,21 +1410,21 @@ This is another regular paragraph.
 
 <p>In HTML, there are two characters that demand special treatment: <code>&lt;</code><br>and <code>&amp;</code>. Left angle brackets are used to start tags; ampersands are<br>used to denote HTML entities. If you want to use them as literal<br>characters, you must escape them as entities, e.g. <code>&amp;lt;</code>, and<br><code>&amp;amp;</code>.</p>
 <p>Ampersands in particular are bedeviling for web writers. If you want to<br>write about ‘AT&amp;T’, you need to write ‘<code>AT&amp;amp;T</code>‘. You even need to<br>escape ampersands within URLs. Thus, if you want to link to:</p>
-<pre><code><span class="string">http:</span><span class="comment">//images.google.com/images?num=30&amp;q=larry+bird</span>
+<pre><code>http://images.google.com/images?num=30&amp;q=larry+bird
 </code></pre><p>you need to encode the URL as:</p>
-<pre><code><span class="string">http:</span><span class="comment">//images.google.com/images?num=30&amp;amp;q=larry+bird</span>
+<pre><code>http://images.google.com/images?num=30&amp;amp;q=larry+bird
 </code></pre><p>in your anchor tag <code>href</code> attribute. Needless to say, this is easy to<br>forget, and is probably the single most common source of HTML validation<br>errors in otherwise well-marked-up web sites.</p>
 <p>Markdown allows you to use these characters naturally, taking care of<br>all the necessary escaping for you. If you use an ampersand as part of<br>an HTML entity, it remains unchanged; otherwise it will be translated<br>into <code>&amp;amp;</code>.</p>
 <p>So, if you want to include a copyright symbol in your article, you can write:</p>
-<pre><code>&amp;<span class="keyword">copy</span>;
+<pre><code>&amp;copy;
 </code></pre><p>and Markdown will leave it alone. But if you write:</p>
-<pre><code><span class="built_in">AT</span>&amp;T
+<pre><code>AT&amp;T
 </code></pre><p>Markdown will translate it to:</p>
-<pre><code>AT&amp;amp<span class="comment">;T</span>
+<pre><code>AT&amp;amp;T
 </code></pre><p>Similarly, because Markdown supports <a href="#html">inline HTML</a>, if you use<br>angle brackets as delimiters for HTML tags, Markdown will treat them as<br>such. But if you write:</p>
-<pre><code><span class="number">4</span> &lt; <span class="number">5</span>
+<pre><code>4 &lt; 5
 </code></pre><p>Markdown will translate it to:</p>
-<pre><code><span class="number">4</span> &amp;lt; <span class="number">5</span>
+<pre><code>4 &amp;lt; 5
 </code></pre><p>However, inside Markdown code spans and blocks, angle brackets and<br>ampersands are <em>always</em> encoded automatically. This makes it easy to use<br>Markdown to write about HTML code. (As opposed to raw HTML, which is a<br>terrible format for writing about HTML syntax, because every single <code>&lt;</code><br>and <code>&amp;</code> in your example code needs to be escaped.)</p>
 <hr>
 <h2 id="block">Block Elements</h2>
@@ -1388,196 +1440,196 @@ This is another regular paragraph.
 
 <p>Markdown supports two styles of headers, <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a> and <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>.</p>
 <p>Setext-style headers are “underlined” using equal signs (for first-level<br>headers) and dashes (for second-level headers). For example:</p>
-<pre><code><span class="header">This is an H1
-=============</span>
+<pre><code>This is an H1
+=============
 
-<span class="header">This is an H2
--------------</span>
+This is an H2
+-------------
 </code></pre><p>Any number of underlining <code>=</code>‘s or <code>-</code>‘s will work.</p>
 <p>Atx-style headers use 1-6 hash characters at the start of the line,<br>corresponding to header levels 1-6. For example:</p>
-<pre><code><span class="comment"># This is an H1</span>
+<pre><code># This is an H1
 
-<span class="comment">## This is an H2</span>
+## This is an H2
 
-<span class="comment">###### This is an H6</span>
+###### This is an H6
 </code></pre><p>Optionally, you may “close” atx-style headers. This is purely<br>cosmetic – you can use this if you think it looks better. The<br>closing hashes don’t even need to match the number of hashes<br>used to open the header. (The number of opening hashes<br>determines the header level.) :</p>
-<pre><code><span class="comment"># This is an H1 #</span>
+<pre><code># This is an H1 #
 
-<span class="comment">## This is an H2 ##</span>
+## This is an H2 ##
 
-<span class="comment">### This is an H3 ######</span>
+### This is an H3 ######
 </code></pre><h3 id="blockquote">Blockquotes</h3>
 
 <p>Markdown uses email-style <code>&gt;</code> characters for blockquoting. If you’re<br>familiar with quoting passages of text in an email message, then you<br>know how to create a blockquote in Markdown. It looks best if you hard<br>wrap the text and put a <code>&gt;</code> before every line:</p>
-<pre><code>&gt; This is a blockquote with two paragraphs. Lo<span class="comment">rem ipsum dolor sit amet,</span>
+<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 &gt; consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-&gt; Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+&gt; Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 &gt; 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 &gt; id sem consectetuer libero luctus adipiscing.
 </code></pre><p>Markdown allows you to be lazy and only put the <code>&gt;</code> before the first<br>line of a hard-wrapped paragraph:</p>
-<pre><code>&gt; This is a blockquote with two paragraphs. Lo<span class="comment">rem ipsum dolor sit amet,</span>
+<pre><code>&gt; This is a blockquote with two paragraphs. Lorem ipsum dolor sit amet,
 consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
-Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae, risus.
 
 &gt; Donec sit amet nisl. Aliquam semper ipsum sit amet velit. Suspendisse
 id sem consectetuer libero luctus adipiscing.
 </code></pre><p>Blockquotes can be nested (i.e. a blockquote-in-a-blockquote) by<br>adding additional levels of <code>&gt;</code>:</p>
-<pre><code>&gt; This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">first</span> level <span class="keyword">of</span> quoting.
+<pre><code>&gt; This is the first level of quoting.
 &gt;
-&gt; &gt; This <span class="keyword">is</span> nested blockquote.
+&gt; &gt; This is nested blockquote.
 &gt;
-&gt; Back <span class="keyword">to</span> <span class="keyword">the</span> <span class="keyword">first</span> level.
+&gt; Back to the first level.
 </code></pre><p>Blockquotes can contain other Markdown elements, including headers, lists,<br>and code blocks:</p>
-<pre><code>&gt; <span class="comment">## This is a header.</span>
+<pre><code>&gt; ## This is a header.
 &gt; 
-&gt; <span class="number">1.</span>   This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">first</span> <span class="type">list</span> <span class="property">item</span>.
-&gt; <span class="number">2.</span>   This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="type">list</span> <span class="property">item</span>.
+&gt; 1.   This is the first list item.
+&gt; 2.   This is the second list item.
 &gt; 
-&gt; Here's <span class="keyword">some</span> example code:
+&gt; Here&apos;s some example code:
 &gt; 
-&gt;     <span class="constant">return</span> shell_exec(<span class="string">"echo $input | $markdown_script"</span>);
+&gt;     return shell_exec(&quot;echo $input | $markdown_script&quot;);
 </code></pre><p>Any decent text editor should make email-style quoting easy. For<br>example, with BBEdit, you can make a selection and choose Increase<br>Quote Level from the Text menu.</p>
 <h3 id="list">Lists</h3>
 
 <p>Markdown supports ordered (numbered) and unordered (bulleted) lists.</p>
 <p>Unordered lists use asterisks, pluses, and hyphens – interchangably<br>– as list markers:</p>
-<pre><code><span class="bullet">*   </span>Red
-<span class="bullet">*   </span>Green
-<span class="bullet">*   </span>Blue
+<pre><code>*   Red
+*   Green
+*   Blue
 </code></pre><p>is equivalent to:</p>
-<pre><code><span class="bullet">+   </span>Red
-<span class="bullet">+   </span>Green
-<span class="bullet">+   </span>Blue
+<pre><code>+   Red
++   Green
++   Blue
 </code></pre><p>and:</p>
-<pre><code>-<span class="ruby">   <span class="constant">Red</span>
-</span>-<span class="ruby">   <span class="constant">Green</span>
-</span>-<span class="ruby">   <span class="constant">Blue</span></span>
+<pre><code>-   Red
+-   Green
+-   Blue
 </code></pre><p>Ordered lists use numbers followed by periods:</p>
-<pre><code><span class="number">1.</span>  Bird
-<span class="number">2.</span>  McHale
-<span class="number">3.</span>  Parish
+<pre><code>1.  Bird
+2.  McHale
+3.  Parish
 </code></pre><p>It’s important to note that the actual numbers you use to mark the<br>list have no effect on the HTML output Markdown produces. The HTML<br>Markdown produces from the above list is:</p>
-<pre><code><span class="tag">&lt;<span class="title">ol</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>McHale<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Parish<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ol</span>&gt;</span>
+<pre><code>&lt;ol&gt;
+&lt;li&gt;Bird&lt;/li&gt;
+&lt;li&gt;McHale&lt;/li&gt;
+&lt;li&gt;Parish&lt;/li&gt;
+&lt;/ol&gt;
 </code></pre><p>If you instead wrote the list in Markdown like this:</p>
-<pre><code><span class="number">1.</span>  Bird
-<span class="number">1.</span>  McHale
-<span class="number">1.</span>  Parish
+<pre><code>1.  Bird
+1.  McHale
+1.  Parish
 </code></pre><p>or even:</p>
-<pre><code><span class="number">3.</span> Bird
-<span class="number">1.</span> McHale
-<span class="number">8.</span> Parish
+<pre><code>3. Bird
+1. McHale
+8. Parish
 </code></pre><p>you’d get the exact same HTML output. The point is, if you want to,<br>you can use ordinal numbers in your ordered Markdown lists, so that<br>the numbers in your source match the numbers in your published HTML.<br>But if you want to be lazy, you don’t have to.</p>
 <p>If you do use lazy list numbering, however, you should still start the<br>list with the number 1. At some point in the future, Markdown may support<br>starting ordered lists at an arbitrary number.</p>
 <p>List markers typically start at the left margin, but may be indented by<br>up to three spaces. List markers must be followed by one or more spaces<br>or a tab.</p>
 <p>To make lists look nice, you can wrap items with hanging indents:</p>
-<pre><code>*   Lo<span class="comment">rem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+<pre><code>*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-    viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+    viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
     Suspendisse id sem consectetuer libero luctus adipiscing.
 </code></pre><p>But if you want to be lazy, you don’t have to:</p>
-<pre><code>*   Lo<span class="comment">rem ipsum dolor sit amet, consectetuer adipiscing elit.</span>
+<pre><code>*   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
-viverra nec, fringilla <span class="flow">in</span>, laoreet vitae, risus.
+viverra nec, fringilla in, laoreet vitae, risus.
 *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 Suspendisse id sem consectetuer libero luctus adipiscing.
 </code></pre><p>If list items are separated by blank lines, Markdown will wrap the<br>items in <code>&lt;p&gt;</code> tags in the HTML output. For example, this input:</p>
-<pre><code><span class="bullet">*   </span>Bird
-<span class="bullet">*   </span>Magic
+<pre><code>*   Bird
+*   Magic
 </code></pre><p>will turn into:</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span>Magic<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;Bird&lt;/li&gt;
+&lt;li&gt;Magic&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre><p>But this:</p>
-<pre><code><span class="bullet">*   </span>Bird
+<pre><code>*   Bird
 
-<span class="bullet">*   </span>Magic
+*   Magic
 </code></pre><p>will turn into:</p>
-<pre><code><span class="tag">&lt;<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Bird<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;<span class="title">p</span>&gt;</span>Magic<span class="tag">&lt;/<span class="title">p</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Bird&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Magic&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </code></pre><p>List items may consist of multiple paragraphs. Each subsequent<br>paragraph in a list item must be indented by either 4 spaces<br>or one tab:</p>
-<pre><code><span class="number">1</span>.  This is a list item with two paragraphs. Lo<span class="comment">rem ipsum dolor</span>
+<pre><code>1.  This is a list item with two paragraphs. Lorem ipsum dolor
     sit amet, consectetuer adipiscing elit. Aliquam hendrerit
     mi posuere lectus.
 
-    Vestibulum enim wisi, viverra nec, fringilla <span class="flow">in</span>, laoreet
+    Vestibulum enim wisi, viverra nec, fringilla in, laoreet
     vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
     sit amet velit.
 
-<span class="number">2</span>.  Suspendisse id sem consectetuer libero luctus adipiscing.
+2.  Suspendisse id sem consectetuer libero luctus adipiscing.
 </code></pre><p>It looks nice if you indent every line of the subsequent<br>paragraphs, but here again, Markdown will allow you to be<br>lazy:</p>
-<pre><code>*   This <span class="keyword">is</span> a <span class="type">list</span> <span class="property">item</span> <span class="keyword">with</span> two <span class="property">paragraphs</span>.
+<pre><code>*   This is a list item with two paragraphs.
 
-    This <span class="keyword">is</span> <span class="keyword">the</span> <span class="keyword">second</span> <span class="property">paragraph</span> <span class="keyword">in</span> <span class="keyword">the</span> <span class="type">list</span> <span class="property">item</span>. You're
-only required <span class="keyword">to</span> indent <span class="keyword">the</span> <span class="keyword">first</span> line. Lorem ipsum dolor
+    This is the second paragraph in the list item. You&apos;re
+only required to indent the first line. Lorem ipsum dolor
 sit amet, consectetuer adipiscing elit.
 
-*   Another <span class="property">item</span> <span class="keyword">in</span> <span class="keyword">the</span> same <span class="type">list</span>.
+*   Another item in the same list.
 </code></pre><p>To put a blockquote within a list item, the blockquote’s <code>&gt;</code><br>delimiters need to be indented:</p>
-<pre><code>*   A <span class="type">list</span> <span class="property">item</span> <span class="keyword">with</span> a blockquote:
+<pre><code>*   A list item with a blockquote:
 
-    &gt; This <span class="keyword">is</span> a blockquote
-    &gt; inside a <span class="type">list</span> <span class="property">item</span>.
+    &gt; This is a blockquote
+    &gt; inside a list item.
 </code></pre><p>To put a code block within a list item, the code block needs<br>to be indented <em>twice</em> – 8 spaces or two tabs:</p>
-<pre><code>*   A list <span class="keyword">item </span>with a <span class="preprocessor">code</span> <span class="keyword">block:
-</span>
-        &lt;<span class="preprocessor">code</span> goes here&gt;
+<pre><code>*   A list item with a code block:
+
+        &lt;code goes here&gt;
 </code></pre><p>It’s worth noting that it’s possible to trigger an ordered list by<br>accident, by writing something like this:</p>
-<pre><code><span class="number">1986</span>. What <span class="tag">a</span> great season.
+<pre><code>1986. What a great season.
 </code></pre><p>In other words, a <em>number-period-space</em> sequence at the beginning of a<br>line. To avoid this, you can backslash-escape the period:</p>
-<pre><code><span class="number">1986</span>\. What <span class="tag">a</span> great season.
+<pre><code>1986\. What a great season.
 </code></pre><h3 id="precode">Code Blocks</h3>
 
 <p>Pre-formatted code blocks are used for writing about programming or<br>markup source code. Rather than forming normal paragraphs, the lines<br>of a code block are interpreted literally. Markdown wraps a code block<br>in both <code>&lt;pre&gt;</code> and <code>&lt;code&gt;</code> tags.</p>
 <p>To produce a code block in Markdown, simply indent every line of the<br>block by at least 4 spaces or 1 tab. For example, given this input:</p>
-<pre><code>This is <span class="tag">a</span> <span class="attribute">normal</span> paragraph:
+<pre><code>This is a normal paragraph:
 
-    This is <span class="tag">a</span> <span class="tag">code</span> block.
+    This is a code block.
 </code></pre><p>Markdown will generate:</p>
-<pre><code><span class="variable">&lt;p&gt;</span>This is a normal paragraph:<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;This is a normal paragraph:&lt;/p&gt;
 
-<span class="variable">&lt;pre&gt;</span><span class="variable">&lt;code&gt;</span>This is a code <span class="built_in">block</span>.
-<span class="variable">&lt;/code&gt;</span><span class="variable">&lt;/pre&gt;</span>
+&lt;pre&gt;&lt;code&gt;This is a code block.
+&lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>One level of indentation – 4 spaces or 1 tab – is removed from each<br>line of the code block. For example, this:</p>
-<pre><code>Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:
+<pre><code>Here is an example of AppleScript:
 
-    <span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
-        <span class="command">beep</span>
-    <span class="keyword">end</span> <span class="keyword">tell</span>
+    tell application &quot;Foo&quot;
+        beep
+    end tell
 </code></pre><p>will turn into:</p>
-<pre><code>&lt;p&gt;Here <span class="keyword">is</span> an example <span class="keyword">of</span> <span class="constant">AppleScript</span>:&lt;/p&gt;
+<pre><code>&lt;p&gt;Here is an example of AppleScript:&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;<span class="keyword">tell</span> <span class="type">application</span> <span class="string">"Foo"</span>
-    <span class="command">beep</span>
-<span class="keyword">end</span> <span class="keyword">tell</span>
+&lt;pre&gt;&lt;code&gt;tell application &quot;Foo&quot;
+    beep
+end tell
 &lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>A code block continues until it reaches a line that is not indented<br>(or the end of the article).</p>
 <p>Within a code block, ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> and <code>&gt;</code>)<br>are automatically converted into HTML entities. This makes it very<br>easy to include example HTML source code using Markdown – just paste<br>it and indent it, and Markdown will handle the hassle of encoding the<br>ampersands and angle brackets. For example, this:</p>
-<pre><code>&lt;<span class="keyword">div</span> <span class="type">class</span>=<span class="string">"footer"</span>&gt;
-    &amp;<span class="keyword">copy</span>; <span class="number">2004</span> Foo Corporation
-&lt;/<span class="keyword">div</span>&gt;
+<pre><code>&lt;div class=&quot;footer&quot;&gt;
+    &amp;copy; 2004 Foo Corporation
+&lt;/div&gt;
 </code></pre><p>will turn into:</p>
-<pre><code>&lt;<span class="keyword">pre</span>&gt;&lt;code&gt;&amp;<span class="keyword">lt</span>;div class=<span class="string">"footer"</span>&amp;gt;
-    &amp;amp;<span class="built_in">copy</span>; <span class="number">2004</span> Foo Corporation
-&amp;<span class="keyword">lt</span>;/div&amp;gt;
-&lt;/code&gt;&lt;/<span class="keyword">pre</span>&gt;
+<pre><code>&lt;pre&gt;&lt;code&gt;&amp;lt;div class=&quot;footer&quot;&amp;gt;
+    &amp;amp;copy; 2004 Foo Corporation
+&amp;lt;/div&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
 </code></pre><p>Regular Markdown syntax is not processed within code blocks. E.g.,<br>asterisks are just literal asterisks within a code block. This means<br>it’s also easy to use Markdown to write about Markdown’s own syntax.</p>
 <h3 id="hr">Horizontal Rules</h3>
 
 <p>You can produce a horizontal rule tag (<code>&lt;hr /&gt;</code>) by placing three or<br>more hyphens, asterisks, or underscores on a line by themselves. If you<br>wish, you may use spaces between the hyphens or asterisks. Each of the<br>following lines will produce a horizontal rule:</p>
-<pre><code><span class="keyword">*</span> <span class="keyword">*</span> <span class="keyword">*</span>
+<pre><code>* * *
 
-<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+***
 
-<span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span><span class="keyword">*</span>
+*****
 
 - - -
 
@@ -1590,23 +1642,23 @@ sit amet, consectetuer adipiscing elit.
 <p>Markdown supports two style of links: <em>inline</em> and <em>reference</em>.</p>
 <p>In both styles, the link text is delimited by [square brackets].</p>
 <p>To create an inline link, use a set of regular parentheses immediately<br>after the link text’s closing square bracket. Inside the parentheses,<br>put the URL where you want the link to point, along with an <em>optional</em><br>title for the link, surrounded in quotes. For example:</p>
-<pre><code>This is [<span class="link_label">an example</span>](<span class="link_url">http://example.com/ "Title"</span>) inline link.
+<pre><code>This is [an example](http://example.com/ &quot;Title&quot;) inline link.
 
-[<span class="link_label">This link</span>](<span class="link_url">http://example.net/</span>) has no title attribute.
+[This link](http://example.net/) has no title attribute.
 </code></pre><p>Will produce:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>This is <span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.com/"</span> <span class="attribute">title</span>=<span class="value">"Title"</span>&gt;</span>
-an example<span class="tag">&lt;/<span class="title">a</span>&gt;</span> inline link.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;This is &lt;a href=&quot;http://example.com/&quot; title=&quot;Title&quot;&gt;
+an example&lt;/a&gt; inline link.&lt;/p&gt;
 
-<span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">a</span> <span class="attribute">href</span>=<span class="value">"http://example.net/"</span>&gt;</span>This link<span class="tag">&lt;/<span class="title">a</span>&gt;</span> has no
-title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+&lt;p&gt;&lt;a href=&quot;http://example.net/&quot;&gt;This link&lt;/a&gt; has no
+title attribute.&lt;/p&gt;
 </code></pre><p>If you’re referring to a local resource on the same server, you can<br>use relative paths:</p>
-<pre><code>See my [<span class="link_label">About</span>](<span class="link_url">/about/</span>) page for details.   
+<pre><code>See my [About](/about/) page for details.   
 </code></pre><p>Reference-style links use a second set of square brackets, inside<br>which you place a label of your choosing to identify the link:</p>
-<pre><code>This is [<span class="link_label">an example</span>][<span class="link_reference">id</span>] reference-style link.
+<pre><code>This is [an example][id] reference-style link.
 </code></pre><p>You can optionally use a space to separate the sets of brackets:</p>
-<pre><code>This <span class="keyword">is</span> [an example] [<span class="property">id</span>] <span class="keyword">reference</span>-style link.
+<pre><code>This is [an example] [id] reference-style link.
 </code></pre><p>Then, anywhere in the document, you define your link label like this,<br>on a line by itself:</p>
-<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
+<pre><code>[id]: http://example.com/  &quot;Optional Title Here&quot;
 </code></pre><p>That is:</p>
 <ul>
 <li>Square brackets containing the link identifier (optionally<br>indented from the left margin using up to three spaces);</li>
@@ -1616,113 +1668,113 @@ title attribute.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
 <li>optionally followed by a title attribute for the link, enclosed<br>in double or single quotes, or enclosed in parentheses.</li>
 </ul>
 <p>The following three link definitions are equivalent:</p>
-<pre><code>[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  "Optional Title Here"</span>
-[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  'Optional Title Here'</span>
-[<span class="link_reference">foo</span>]:<span class="link_url"> http://example.com/  (Optional Title Here)</span>
+<pre><code>[foo]: http://example.com/  &quot;Optional Title Here&quot;
+[foo]: http://example.com/  &apos;Optional Title Here&apos;
+[foo]: http://example.com/  (Optional Title Here)
 </code></pre><p><strong>Note:</strong> There is a known bug in Markdown.pl 1.0.1 which prevents<br>single quotes from being used to delimit link titles.</p>
 <p>The link URL may, optionally, be surrounded by angle brackets:</p>
-<pre><code>[<span class="link_reference">id</span>]:<span class="link_url"> &lt;http://example.com/&gt;  "Optional Title Here"</span>
+<pre><code>[id]: &lt;http://example.com/&gt;  &quot;Optional Title Here&quot;
 </code></pre><p>You can put the title attribute on the next line and use extra spaces<br>or tabs for padding, which tends to look better with longer URLs:</p>
-<pre><code>[id]<span class="symbol">:</span> <span class="symbol">http:</span>/<span class="regexp">/example.com/longish</span><span class="regexp">/path/to</span><span class="regexp">/resource/here</span>
-    <span class="string">"Optional Title Here"</span>
+<pre><code>[id]: http://example.com/longish/path/to/resource/here
+    &quot;Optional Title Here&quot;
 </code></pre><p>Link definitions are only used for creating links during Markdown<br>processing, and are stripped from your document in the HTML output.</p>
 <p>Link definition names may consist of letters, numbers, spaces, and<br>punctuation – but they are <em>not</em> case sensitive. E.g. these two<br>links:</p>
-<pre><code>[<span class="link_label">link text</span>][<span class="link_reference">a</span>]
-[<span class="link_label">link text</span>][<span class="link_reference">A</span>]
+<pre><code>[link text][a]
+[link text][A]
 </code></pre><p>are equivalent.</p>
 <p>The <em>implicit link name</em> shortcut allows you to omit the name of the<br>link, in which case the link text itself is used as the name.<br>Just use an empty set of square brackets – e.g., to link the word<br>“Google” to the google.com web site, you could simply write:</p>
-<pre><code>[<span class="link_label">Google</span>][<span class="link_reference"></span>]
+<pre><code>[Google][]
 </code></pre><p>And then define the link:</p>
-<pre><code>[<span class="link_reference">Google</span>]:<span class="link_url"> http://google.com/</span>
+<pre><code>[Google]: http://google.com/
 </code></pre><p>Because link names may contain spaces, this shortcut even works for<br>multiple words in the link text:</p>
-<pre><code>Visit [<span class="link_label">Daring Fireball</span>][<span class="link_reference"></span>] for more information.
+<pre><code>Visit [Daring Fireball][] for more information.
 </code></pre><p>And then define the link:</p>
-<pre><code>[<span class="link_reference">Daring Fireball</span>]:<span class="link_url"> http://daringfireball.net/</span>
+<pre><code>[Daring Fireball]: http://daringfireball.net/
 </code></pre><p>Link definitions can be placed anywhere in your Markdown document. I<br>tend to put them immediately after each paragraph in which they’re<br>used, but if you want, you can put them all at the end of your<br>document, sort of like footnotes.</p>
 <p>Here’s an example of reference links in action:</p>
-<pre><code><span class="name">I</span> <span class="atom">get</span> <span class="number">10</span> <span class="atom">times</span> <span class="atom">more</span> <span class="atom">traffic</span> <span class="atom">from</span> [<span class="name">Google</span>] [<span class="number">1</span>] <span class="atom">than</span> <span class="atom">from</span>
-[<span class="name">Yahoo</span>] [<span class="number">2</span>] <span class="atom">or</span> [<span class="name">MSN</span>] [<span class="number">3</span>].
+<pre><code>I get 10 times more traffic from [Google] [1] than from
+[Yahoo] [2] or [MSN] [3].
 
-  [<span class="number">1</span>]: <span class="atom">http</span>://<span class="atom">google</span>.<span class="atom">com</span>/        <span class="string">"Google"</span>
-  [<span class="number">2</span>]: <span class="atom">http</span>://<span class="atom">search</span>.<span class="atom">yahoo</span>.<span class="atom">com</span>/  <span class="string">"Yahoo Search"</span>
-  [<span class="number">3</span>]: <span class="atom">http</span>://<span class="atom">search</span>.<span class="atom">msn</span>.<span class="atom">com</span>/    <span class="string">"MSN Search"</span>
+  [1]: http://google.com/        &quot;Google&quot;
+  [2]: http://search.yahoo.com/  &quot;Yahoo Search&quot;
+  [3]: http://search.msn.com/    &quot;MSN Search&quot;
 </code></pre><p>Using the implicit link name shortcut, you could instead write:</p>
-<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>][<span class="link_reference"></span>] than from
-[<span class="link_label">Yahoo</span>][<span class="link_reference"></span>] or [<span class="link_label">MSN</span>][<span class="link_reference"></span>].
+<pre><code>I get 10 times more traffic from [Google][] than from
+[Yahoo][] or [MSN][].
 
-  [google]: http://google.com/        "Google"
-  [yahoo]:  http://search.yahoo.com/  "Yahoo Search"
-  [msn]:    http://search.msn.com/    "MSN Search"
+  [google]: http://google.com/        &quot;Google&quot;
+  [yahoo]:  http://search.yahoo.com/  &quot;Yahoo Search&quot;
+  [msn]:    http://search.msn.com/    &quot;MSN Search&quot;
 </code></pre><p>Both of the above examples will produce the following HTML output:</p>
-<pre><code>&lt;p&gt;I <span class="built_in">get</span> <span class="number">10</span> times more traffic <span class="built_in">from</span> &lt;<span class="operator">a</span> href=<span class="string">"http://google.com/"</span>
-title=<span class="string">"Google"</span>&gt;Google&lt;/<span class="operator">a</span>&gt; than <span class="built_in">from</span>
-&lt;<span class="operator">a</span> href=<span class="string">"http://search.yahoo.com/"</span> title=<span class="string">"Yahoo Search"</span>&gt;Yahoo&lt;/<span class="operator">a</span>&gt;
-<span class="operator">or</span> &lt;<span class="operator">a</span> href=<span class="string">"http://search.msn.com/"</span> title=<span class="string">"MSN Search"</span>&gt;MSN&lt;/<span class="operator">a</span>&gt;.&lt;/p&gt;
+<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href=&quot;http://google.com/&quot;
+title=&quot;Google&quot;&gt;Google&lt;/a&gt; than from
+&lt;a href=&quot;http://search.yahoo.com/&quot; title=&quot;Yahoo Search&quot;&gt;Yahoo&lt;/a&gt;
+or &lt;a href=&quot;http://search.msn.com/&quot; title=&quot;MSN Search&quot;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
 </code></pre><p>For comparison, here is the same paragraph written using<br>Markdown’s inline link style:</p>
-<pre><code>I get 10 times more traffic from [<span class="link_label">Google</span>](<span class="link_url">http://google.com/ "Google"</span>)
-than from [<span class="link_label">Yahoo</span>](<span class="link_url">http://search.yahoo.com/ "Yahoo Search"</span>) or
-[<span class="link_label">MSN</span>](<span class="link_url">http://search.msn.com/ "MSN Search"</span>).
+<pre><code>I get 10 times more traffic from [Google](http://google.com/ &quot;Google&quot;)
+than from [Yahoo](http://search.yahoo.com/ &quot;Yahoo Search&quot;) or
+[MSN](http://search.msn.com/ &quot;MSN Search&quot;).
 </code></pre><p>The point of reference-style links is not that they’re easier to<br>write. The point is that with reference-style links, your document<br>source is vastly more readable. Compare the above examples: using<br>reference-style links, the paragraph itself is only 81 characters<br>long; with inline-style links, it’s 176 characters; and as raw HTML,<br>it’s 234 characters. In the raw HTML, there’s more markup than there<br>is text.</p>
 <p>With Markdown’s reference-style links, a source document much more<br>closely resembles the final output, as rendered in a browser. By<br>allowing you to move the markup-related metadata out of the paragraph,<br>you can add links without interrupting the narrative flow of your<br>prose.</p>
 <h3 id="em">Emphasis</h3>
 
 <p>Markdown treats asterisks (<code>*</code>) and underscores (<code>_</code>) as indicators of<br>emphasis. Text wrapped with one <code>*</code> or <code>_</code> will be wrapped with an<br>HTML <code>&lt;em&gt;</code> tag; double <code>*</code>‘s or <code>_</code>‘s will be wrapped with an HTML<br><code>&lt;strong&gt;</code> tag. E.g., this input:</p>
-<pre><code><span class="keyword">*</span>single asterisks<span class="keyword">*</span>
+<pre><code>*single asterisks*
 
 _single underscores_
 
-<span class="keyword">*</span><span class="keyword">*</span>double asterisks<span class="keyword">*</span><span class="keyword">*</span>
+**double asterisks**
 
 __double underscores__
 </code></pre><p>will produce:</p>
-<pre><code><span class="tag">&lt;<span class="title">em</span>&gt;</span>single asterisks<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+<pre><code>&lt;em&gt;single asterisks&lt;/em&gt;
 
-<span class="tag">&lt;<span class="title">em</span>&gt;</span>single underscores<span class="tag">&lt;/<span class="title">em</span>&gt;</span>
+&lt;em&gt;single underscores&lt;/em&gt;
 
-<span class="tag">&lt;<span class="title">strong</span>&gt;</span>double asterisks<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+&lt;strong&gt;double asterisks&lt;/strong&gt;
 
-<span class="tag">&lt;<span class="title">strong</span>&gt;</span>double underscores<span class="tag">&lt;/<span class="title">strong</span>&gt;</span>
+&lt;strong&gt;double underscores&lt;/strong&gt;
 </code></pre><p>You can use whichever style you prefer; the lone restriction is that<br>the same character must be used to open and close an emphasis span.</p>
 <p>Emphasis can be used in the middle of a word:</p>
-<pre><code>un<span class="keyword">*</span>frigging<span class="keyword">*</span>believable
+<pre><code>un*frigging*believable
 </code></pre><p>But if you surround an <code>*</code> or <code>_</code> with spaces, it’ll be treated as a<br>literal asterisk or underscore.</p>
 <p>To produce a literal asterisk or underscore at a position where it<br>would otherwise be used as an emphasis delimiter, you can backslash<br>escape it:</p>
-<pre><code><span class="string">\*this</span> text <span class="keyword">is</span> surrounded <span class="keyword">by</span> literal asterisks<span class="string">\*</span>
+<pre><code>\*this text is surrounded by literal asterisks\*
 </code></pre><h3 id="code">Code</h3>
 
 <p>To indicate a span of code, wrap it with backtick quotes (<code>` </code>).<br>Unlike a pre-formatted code block, a code span indicates code within a<br>normal paragraph. For example:</p>
-<pre><code><span class="keyword">Use</span> the `printf()` <span class="function"><span class="keyword">function</span>.</span>
+<pre><code>Use the `printf()` function.
 </code></pre><p>will produce:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span>Use the <span class="tag">&lt;<span class="title">code</span>&gt;</span>printf()<span class="tag">&lt;/<span class="title">code</span>&gt;</span> function.<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
 </code></pre><p>To include a literal backtick character within a code span, you can use<br>multiple backticks as the opening and closing delimiters:</p>
-<pre><code><span class="escape">``</span>There is <span class="literal">a</span> literal backtick (<span class="escape">`)</span> here.<span class="escape">``</span>
+<pre><code>``There is a literal backtick (`) here.``
 </code></pre><p>which will produce this:</p>
-<pre><code><span class="tag">&lt;<span class="title">p</span>&gt;</span><span class="tag">&lt;<span class="title">code</span>&gt;</span>There is a literal backtick (`) here.<span class="tag">&lt;/<span class="title">code</span>&gt;</span><span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+<pre><code>&lt;p&gt;&lt;code&gt;There is a literal backtick (`) here.&lt;/code&gt;&lt;/p&gt;
 </code></pre><p>The backtick delimiters surrounding a code span may include spaces –<br>one after the opening, one before the closing. This allows you to place<br>literal backtick characters at the beginning or end of a code span:</p>
-<pre><code>A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` ` ``
+<pre><code>A single backtick in a code span: `` ` ``
 
-A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: `` `foo` ``
+A backtick-delimited string in a code span: `` `foo` ``
 </code></pre><p>will produce:</p>
-<pre><code>&lt;p&gt;A single backtick <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
+<pre><code>&lt;p&gt;A single backtick in a code span: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;A backtick-delimited string <span class="keyword">in</span> <span class="tag">a</span> <span class="tag">code</span> <span class="tag">span</span>: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;A backtick-delimited string in a code span: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
 </code></pre><p>With a code span, ampersands and angle brackets are encoded as HTML<br>entities automatically, which makes it easy to include example HTML<br>tags. Markdown will turn this:</p>
-<pre><code>Please don't <span class="operator"><span class="keyword">use</span> <span class="keyword">any</span> <span class="string">`&lt;blink&gt;`</span> tags.</span>
+<pre><code>Please don&apos;t use any `&lt;blink&gt;` tags.
 </code></pre><p>into:</p>
-<pre><code><span class="variable">&lt;p&gt;</span>Please don't use <span class="literal">any</span> <span class="variable">&lt;code&gt;</span>&amp;lt;blink&amp;gt;<span class="variable">&lt;/code&gt;</span> tags.<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;Please don&apos;t use any &lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
 </code></pre><p>You can write this:</p>
-<pre><code>`<span class="javascript">&amp;#<span class="number">8212</span>;</span>` <span class="keyword">is</span> the decimal-encoded equivalent <span class="keyword">of</span> `<span class="javascript">&amp;mdash;</span>`.
+<pre><code>`&amp;#8212;` is the decimal-encoded equivalent of `&amp;mdash;`.
 </code></pre><p>to produce:</p>
-<pre><code><span class="variable">&lt;p&gt;</span><span class="variable">&lt;code&gt;</span>&amp;amp;<span class="comment">#8212;&lt;/code&gt; is the decimal-encoded</span>
-equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span class="variable">&lt;/code&gt;</span>.<span class="variable">&lt;/p&gt;</span>
+<pre><code>&lt;p&gt;&lt;code&gt;&amp;amp;#8212;&lt;/code&gt; is the decimal-encoded
+equivalent of &lt;code&gt;&amp;amp;mdash;&lt;/code&gt;.&lt;/p&gt;
 </code></pre><h3 id="img">Images</h3>
 
 <p>Admittedly, it’s fairly difficult to devise a “natural” syntax for<br>placing images into a plain text document format.</p>
 <p>Markdown uses an image syntax that is intended to resemble the syntax<br>for links, allowing for two styles: <em>inline</em> and <em>reference</em>.</p>
 <p>Inline image syntax looks like this:</p>
-<pre><code>![<span class="link_label">Alt text</span>](<span class="link_url">/path/to/img.jpg</span>)
+<pre><code>![Alt text](/path/to/img.jpg)
 
-![<span class="link_label">Alt text</span>](<span class="link_url">/path/to/img.jpg "Optional title"</span>)
+![Alt text](/path/to/img.jpg &quot;Optional title&quot;)
 </code></pre><p>That is:</p>
 <ul>
 <li>An exclamation mark: <code>!</code>;</li>
@@ -1730,9 +1782,9 @@ equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span cla
 <li>followed by a set of parentheses, containing the URL or path to<br>the image, and an optional <code>title</code> attribute enclosed in double<br>or single quotes.</li>
 </ul>
 <p>Reference-style image syntax looks like this:</p>
-<pre><code>![<span class="link_label">Alt text</span>][<span class="link_reference">id</span>]
+<pre><code>![Alt text][id]
 </code></pre><p>Where “id” is the name of a defined image reference. Image references<br>are defined using syntax identical to link references:</p>
-<pre><code>[<span class="property">id</span>]: url/<span class="keyword">to</span>/image  <span class="string">"Optional title attribute"</span>
+<pre><code>[id]: url/to/image  &quot;Optional title attribute&quot;
 </code></pre><p>As of this writing, Markdown has no syntax for specifying the<br>dimensions of an image; if this is important to you, you can simply<br>use regular HTML <code>&lt;img&gt;</code> tags.</p>
 <hr>
 <h2 id="misc">Miscellaneous</h2>
@@ -1740,41 +1792,41 @@ equivalent of <span class="variable">&lt;code&gt;</span>&amp;amp;mdash;<span cla
 <h3 id="autolink">Automatic Links</h3>
 
 <p>Markdown supports a shortcut style for creating “automatic” links for URLs and email addresses: simply surround the URL or email address with angle brackets. What this means is that if you want to show the actual text of a URL or email address, and also have it be a clickable link, you can do this:</p>
-<pre><code>&lt;<span class="string">http:</span><span class="comment">//example.com/&gt;</span>
+<pre><code>&lt;http://example.com/&gt;
 </code></pre><p>Markdown will turn this into:</p>
-<pre><code>&lt;<span class="tag">a</span> href=<span class="string">"http://example.com/"</span>&gt;http:<span class="comment">//example.com/&lt;/a&gt;</span>
+<pre><code>&lt;a href=&quot;http://example.com/&quot;&gt;http://example.com/&lt;/a&gt;
 </code></pre><p>Automatic links for email addresses work similarly, except that<br>Markdown will also perform a bit of randomized decimal and hex<br>entity-encoding to help obscure your address from address-harvesting<br>spambots. For example, Markdown will turn this:</p>
-<pre><code><span class="tag">&lt;address@example.com&gt;</span>
+<pre><code>&lt;address@example.com&gt;
 </code></pre><p>into something like this:</p>
-<pre><code>&lt;a href=<span class="string">"&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
+<pre><code>&lt;a href=&quot;&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
 &amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
-&amp;#109;"</span>&gt;&amp;<span class="title">#x61</span>;&amp;<span class="title">#x64</span>;&amp;<span class="title">#x64</span>;&amp;<span class="title">#x72</span>;&amp;<span class="title">#x65</span>;&amp;<span class="title">#115</span>;&amp;<span class="title">#115</span>;&amp;<span class="title">#64</span>;&amp;<span class="title">#101</span>;&amp;<span class="title">#120</span>;&amp;<span class="title">#x61</span>;
-&amp;<span class="title">#109</span>;&amp;<span class="title">#x70</span>;&amp;<span class="title">#x6</span>C;e&amp;<span class="title">#x2</span>E;&amp;<span class="title">#99</span>;&amp;<span class="title">#111</span>;&amp;<span class="title">#109</span>;&lt;/a&gt;
+&amp;#109;&quot;&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
+&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
 </code></pre><p>which will render in a browser as a clickable link to “address@example.com”.</p>
 <p>(This sort of entity-encoding trick will indeed fool many, if not<br>most, address-harvesting bots, but it definitely won’t fool all of<br>them. It’s better than nothing, but an address published in this way<br>will probably eventually start receiving spam.)</p>
 <h3 id="backslash">Backslash Escapes</h3>
 
 <p>Markdown allows you to use backslash escapes to generate literal<br>characters which would otherwise have special meaning in Markdown’s<br>formatting syntax. For example, if you wanted to surround a word<br>with literal asterisks (instead of an HTML <code>&lt;em&gt;</code> tag), you can use<br>backslashes before the asterisks, like this:</p>
-<pre><code>\<span class="keyword">*</span>literal asterisks\<span class="keyword">*</span>
+<pre><code>\*literal asterisks\*
 </code></pre><p>Markdown provides backslash escapes for the following characters:</p>
-<pre><code>\   <span class="keyword">backslash
-</span>`   <span class="keyword">backtick
-</span>*   asterisk
+<pre><code>\   backslash
+`   backtick
+*   asterisk
 _   underscore
-{}  curly <span class="keyword">braces
-</span>[]  square <span class="keyword">brackets
-</span>()  parentheses
-#   hash <span class="keyword">mark
-</span>+    plus sign
+{}  curly braces
+[]  square brackets
+()  parentheses
+#   hash mark
++    plus sign
 -    minus sign (hyphen)
 .   dot
-!   exclamation <span class="keyword">mark</span>
+!   exclamation mark
 </code></pre>
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cihgnbxog0018t9dxwtea39xy" class="article-share-link" data-share="baidu" data-title="markdown-syntax">分享到</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cil0t73ij001a9ze5po8qcc4w" class="article-share-link" data-share="baidu" data-title="markdown-syntax">分享到</a>
       
 
       
@@ -1817,7 +1869,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cihgnbxnd0007t9dxknm2ecng" class="article-share-link" data-share="baidu" data-title="useHexo">分享到</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cil0t73he00079ze5aun3uesb" class="article-share-link" data-share="baidu" data-title="useHexo">分享到</a>
       
 
       
@@ -1847,7 +1899,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">標簽</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1858,7 +1910,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">標簽雲</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
@@ -1867,7 +1919,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">歸檔</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1879,7 +1931,11 @@ _   underscore
       <ul>
         
           <li>
-            <a href="/2015/11/26/hello-world/">Hello World</a>
+            <a href="/2016/02/24/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2016/01/15/h2/">h2</a>
           </li>
         
           <li>
@@ -1892,10 +1948,6 @@ _   underscore
         
           <li>
             <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
-          </li>
-        
-          <li>
-            <a href="/2015/09/15/front-end/">front-end</a>
           </li>
         
       </ul>
@@ -1929,7 +1981,7 @@ _   underscore
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2015 evatlsong<br>
+      &copy; 2016 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
