@@ -6,22 +6,19 @@
   
   <title>evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="evatlsong">
 <meta property="og:url" content="http://evatlsong.com/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="evatlsong">
-<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
@@ -76,10 +73,47 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-node-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/06/node-usage/" class="article-date">
+  <time datetime="2016-07-06T09:13:19.576Z" itemprop="datePublished">2016-07-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sinopia<br>sinopia<br>bao镜像比较快。但是仍然不如在本地设个私服务器。</p>
+<p>sudo npm install -g sinopia<br>sinopia<br>修改npm的registry到<a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a></p>
+<p>创建新用户</p>
+<p>$ npm adduser –registry <a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a><br>发布npm包</p>
+<p>$ npm publish</p>
+<p>npm install -g nrm<br>nrm add local <a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a><br>nrm use local<br>想切换回来的时候:</p>
+<p>nrm use npm</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/07/06/node-usage/" data-id="ciqao5o6l001ceyfypbrxigzo" class="article-share-link" data-share="baidu" data-title="">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/02/24/hello-world/" class="article-date">
-  <time datetime="2016-02-24T12:19:36.871Z" itemprop="datePublished">2016-02-24</time>
+    <a href="/2016/07/06/hello-world/" class="article-date">
+  <time datetime="2016-07-06T09:13:19.576Z" itemprop="datePublished">2016-07-06</time>
 </a>
     
   </div>
@@ -90,7 +124,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/02/24/hello-world/">Hello World</a>
+      <a class="article-title" href="/2016/07/06/hello-world/">Hello World</a>
     </h1>
   
 
@@ -99,25 +133,288 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
 <p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/02/24/hello-world/" data-id="cil0t73j4001p9ze518pvkrex" class="article-share-link" data-share="baidu" data-title="Hello World">分享到</a>
+        <a data-url="http://evatlsong.com/2016/07/06/hello-world/" data-id="ciqao5o5r000reyfyisp47zng" class="article-share-link" data-share="baidu" data-title="Hello World">Share</a>
       
 
       
 
       
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-kettle" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/10/kettle/" class="article-date">
+  <time datetime="2016-05-10T17:34:02.000Z" itemprop="datePublished">2016-05-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/10/kettle/">kettle</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>excel输入 数据类型要与数据库中相同<br>java代码 要能编译通过才可以显示input fields output fields<br>表输出选择使用批量插入 不要返回一个自动产生的关键字  否则会产生rowid相关错误<br>ktr文件可用java调用 自动执行</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/05/10/kettle/" data-id="ciqao5o5y000yeyfypkmsmf5u" class="article-share-link" data-share="baidu" data-title="kettle">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/kettle/">kettle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ubuntu-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/03/ubuntu-usage/" class="article-date">
+  <time datetime="2016-04-03T08:24:06.000Z" itemprop="datePublished">2016-04-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/03/ubuntu-usage/">ubuntu-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>安装Ubuntu Restricted Extras. 这样可以安装许多由于法律原因而无法与操作系统绑定的重要软件包，如Adobe公司的Flash与Microsoft的字体。自己安装这些软件是没有任何问题的，但开发者不能默认地包含这些软件。打开一个终端，输入如下命令：<br>    sudo apt-get update<br>    sudo apt-get install ubuntu-restricted-extras</p>
+<p>ibus<br>sudo apt-get install ibus-pinyin</p>
+<p>git<br>calibre<br>nvm<br>node<br>shadowsocks<br>npm install -g shadowsocks</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/04/03/ubuntu-usage/" data-id="ciqao5o7i0028eyfy76i5up0e" class="article-share-link" data-share="baidu" data-title="ubuntu-usage">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-server-monitor" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/14/server-monitor/" class="article-date">
+  <time datetime="2016-03-14T10:56:21.000Z" itemprop="datePublished">2016-03-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/14/server-monitor/">server-monitor</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>graphite</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/03/14/server-monitor/" data-id="ciqao5o72001qeyfyktyod4wx" class="article-share-link" data-share="baidu" data-title="server-monitor">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/monitor/">monitor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/server/">server</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-resume-question" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/02/resume-question/" class="article-date">
+  <time datetime="2016-03-02T18:05:12.000Z" itemprop="datePublished">2016-03-02</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/03/02/resume-question/">resume-question</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="自我介绍"><a href="#自我介绍" class="headerlink" title="自我介绍"></a>自我介绍</h2><p>我叫宋铁磊 毕业于河北科技大学 10年开始做java开发<br>刚开始是给一个游戏代理公司做网站<br>第二家公司是海市经纬<br>上一家公司是够旅游 这是一个在线旅游网站<br>我负责公司项目的框架搭建 然后开发了 线路管理 酒店管理等多个模块<br>项目采用apache的反向代理实现了负载均衡<br>配置了多个tomcat节点 提高了系统的可用性<br>使用memcache实现了分布式会话<br>这就是我的工作经历</p>
+<h2 id="我的优势"><a href="#我的优势" class="headerlink" title="我的优势"></a>我的优势</h2><p>技术全面 基础扎实 学习能力强</p>
+<p>memcache 配置<br>if or else memcached-session-manager<br>-m 内存数量<br>-c 最大允许的并发连接数</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/03/02/resume-question/" data-id="ciqao5o6z001meyfy0imsxb2h" class="article-share-link" data-share="baidu" data-title="resume-question">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resume/">resume</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-poi" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/15/poi/" class="article-date">
+  <time datetime="2016-01-15T10:52:51.000Z" itemprop="datePublished">2016-01-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/15/poi/">poi</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>设置背景色<br>HSSFWorkbook wb = new HSSFWorkbook();<br>HSSFCellStyle style = wb.createCellStyle();<br>style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);<br>style.setFillForegroundColor(HSSFColor.WHITE.index);<br>cell.setCellStyle(style);  //cell 是 HSSFCell 对象</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/01/15/poi/" data-id="ciqao5o6s001ieyfyqadqf4p1" class="article-share-link" data-share="baidu" data-title="poi">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poi/">poi</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/01/15/css/" class="article-date">
+  <time datetime="2016-01-15T10:52:51.000Z" itemprop="datePublished">2016-01-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/01/15/css/">css</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>div中设置文本垂直居中<br>height: xx px;<br>line-height: xx px;<br>两个设置相同值</p>
+<p>select 火狐的autocomplete=on 要按照它的实际值做相关操作</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2016/01/15/css/" data-id="ciqao5o540008eyfylhmquvk0" class="article-share-link" data-share="baidu" data-title="css">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
     </footer>
   </div>
   
@@ -153,7 +450,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/01/15/h2/" data-id="cil0t73j8001q9ze55nn37k68" class="article-share-link" data-share="baidu" data-title="h2">分享到</a>
+        <a data-url="http://evatlsong.com/2016/01/15/h2/" data-id="ciqao5o5o000oeyfy9l8zyxwe" class="article-share-link" data-share="baidu" data-title="h2">Share</a>
       
 
       
@@ -205,7 +502,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/06/maven-usage/" data-id="cil0t73ie00159ze5d7cc60o5" class="article-share-link" data-share="baidu" data-title="maven-usage">分享到</a>
+        <a data-url="http://evatlsong.com/2015/11/06/maven-usage/" data-id="ciqao5o6f0018eyfyldyh3tof" class="article-share-link" data-share="baidu" data-title="maven-usage">Share</a>
       
 
       
@@ -220,774 +517,9 @@
 
 
   
-    <article id="post-java-persistence-with-hibernate" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/06/java-persistence-with-hibernate/" class="article-date">
-  <time datetime="2015-11-06T11:49:34.000Z" itemprop="datePublished">2015-11-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/06/java-persistence-with-hibernate/">java-persistence-with-hibernate</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Understand-object-relational-persistence"><a href="#Understand-object-relational-persistence" class="headerlink" title="Understand object/relational persistence"></a>Understand object/relational persistence</h1><p>the problem of granularity<br>粒度问题 4.4节描述了这个问题的解决方案<br>the problem of subtypes<br>5.1节将讨论ORM解决方案如何解决把一个类层次结构持久化到一个或者多个数据库表的问题<br>第5章介绍的继承映射解决方案中，有3种被设计为适应多态关联的表示法和多态查询的有效执行</p>
-<h2 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h2><h3 id="What-is-ORM"><a href="#What-is-ORM" class="headerlink" title="What is ORM?"></a>What is ORM?</h3><p>An ORM solution consists of the following four pieces:</p>
-<ul>
-<li>An API for performing basic CRUD operations on objects of persistent classes</li>
-<li>A language or API for specifying queries that refer to classes and properties of classes</li>
-<li>A facility for specifying mapping metadata</li>
-<li>A technique for the ORM implementation to interact with transactional objects to perform<br>dirty checking,lazy association fetching, and other optimization functions</li>
-</ul>
-<h3 id="Generic-ORM-problems"><a href="#Generic-ORM-problems" class="headerlink" title="Generic ORM problems"></a>Generic ORM problems</h3><ul>
-<li>What do persistent classes look like</li>
-<li>How is mapping metadata defined</li>
-<li>How do object identity and equality relate to database (primary key) identity</li>
-<li>How should we map class inheritance hierarhies</li>
-<li>How does the persistence logic interact at runtime with the objects of the business domain</li>
-<li>What is the lifecycle of a persistent object</li>
-<li>What facilities are provided for sorting,searching,and aggregating</li>
-<li>How do we efficiently retrieve data with associations</li>
-</ul>
-<h3 id="Hibernate-configuration-and-startup"><a href="#Hibernate-configuration-and-startup" class="headerlink" title="Hibernate configuration and startup"></a>Hibernate configuration and startup</h3><p><code>hibernate.generate_statistics</code> 启用统计集合</p>
-<h1 id="Mapping-persistent-classes"><a href="#Mapping-persistent-classes" class="headerlink" title="Mapping persistent classes"></a>Mapping persistent classes</h1><p>Whether field or perperty access is enabled for an entity depends on the position of mandatory <code>@Id</code> annotation.<br>If it’s present on a field, so all attributes of the class are accessed by Hibernate through fields.</p>
-<h2 id="Fine-grained-models-and-mappings"><a href="#Fine-grained-models-and-mappings" class="headerlink" title="Fine-grained models and mappings"></a>Fine-grained models and mappings</h2><h3 id="Mapping-basic-properties"><a href="#Mapping-basic-properties" class="headerlink" title="Mapping basic properties"></a>Mapping basic properties</h3><p>Using derived properties</p>
-<pre><code>@org.hibernate.annotations.Formula(&quot;TOTAL + TAX_RATE * TOTAL&quot;)
-public BigDecimal getTotalIncludingTax() {
-    return totalIncludingTax;
-}
-</code></pre><p>The given SQL formula is evaluated every time the entity is retrieved from the database<br>(and not at any other time, so the result may be outdated if other properties are modified).</p>
-<p>Generated and default property values<br>Properties marked as database-generated must additionally be nininsertable and nonupdateable,<br>which you control with the insert and update attributes. If both are set to false, the property’s<br>columns never appear in the INSERT or UPDATE statements– the property value is read-only. Alse,<br>you usually don’t add a public setter method in your class for immutable property(and switch to field access).</p>
-<pre><code>@Column(updatable = false, insertable = false)
-@org.hibernate.annotations.Generated(
-    org.hibernate.annotations.GenerationTime.ALWAYS
-)
-private Date lastModified;
-</code></pre><p>A special case of database-generated property values are default values.<br>you have to enable dynamic insertion and update statement generation, so that the column with the default<br>value isn’t included in every statement if its value is null (otherwise a NULL would be inserted instead<br>of the default value). Furthermore, an instance of Item that has been made persistent but not yet flushed<br>to the database and not refreshed again won’t have the default value set on the object property. In other<br>words, you need to execute an explicit flush;</p>
-<pre><code>Item newItem = new Item(...);
-session.save(newItem);
-
-newItem.getInitialPrice();   // is null
-
-session.flush();             // Trigger an INSERT
-// Hibernate does a SELECT automatically
-
-newItem.getInitialPrice();   // is $1
-
-@Column(name = &quot;INITIAL_PRICE&quot;,
-        columnDefinition = &quot;number(10, 2) default &apos;1&apos;&quot;)
-@org.hibernate.annotations.Generated(
-    org.hibernate.annotations.GenerationTime.INSERT
-)
-@org.hibernate.annotations.DynamicInsert
-@org.hibernate.annotations.DynamicUpdate
-private BigDecimal initalPrice;
-</code></pre><h3 id="Mapping-components"><a href="#Mapping-components" class="headerlink" title="Mapping components"></a>Mapping components</h3><pre><code>&lt;&lt;Table&gt;&gt; 
-USERS
----------------
-FIRSTNAME
-LASTNAME
-USERNAME
-PASSWORD
-EMAIL
----------------
-HOME_STREET
-HOME_ZIPCODE
-HOME_CITY
----------------
-BILLING_STREET
-BILLING_ZIPCODE
-BILLING_CITY
-
-@Entity
-@Table(name = &quot;USERS&quot;)
-public class User {
-    @Embedded
-    private Address homeAddress;
-}
-
-@Embeddable
-public class Address {
-    @Column(name = &quot;ADDRESS_STREET&quot;, nullable = false)
-    private String street;
-
-    @Column(name = &quot;ADDRESS_ZIPCODE&quot;, nullable = false)
-    private String zipcode;
-
-    @Column(name = &quot;ADDRESS_CITY&quot;, nullable = false)
-    private String city;
-}
-
-//=================================================================
-
-@Entity
-@Table(name = &quot;USERS&quot;)
-public class User {
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = &quot;street&quot;,
-                            column = @Column(name = &quot;HOME_STREET&quot;)),
-    @AttributeOverrides({
-        @AttributeOverride(name = &quot;zipcode&quot;,
-                            column = @Column(name = &quot;HOME_ZIPCODE&quot;)),
-    @AttributeOverrides({
-        @AttributeOverride(name = &quot;city&quot;,
-                            column = @Column(name = &quot;HOME_CITY&quot;))
-    })
-    private Address homeAddress;
-}
-</code></pre><h1 id="Inheritance-and-custom-types"><a href="#Inheritance-and-custom-types" class="headerlink" title="Inheritance and custom types"></a>Inheritance and custom types</h1><h2 id="Mapping-class-inheritance"><a href="#Mapping-class-inheritance" class="headerlink" title="Mapping class inheritance"></a>Mapping class inheritance</h2><ol>
-<li>Table per concrete class with implicit polymorphism</li>
-<li>Table per concrete class with unions(与1 表结构相同)</li>
-<li>Table per class hierarchy</li>
-<li>Table per subclass</li>
-<li>Mixing inheritance strategies</li>
-</ol>
-<h3 id="Table-per-concrete-class-with-implicit-polymorphism"><a href="#Table-per-concrete-class-with-implicit-polymorphism" class="headerlink" title="Table per concrete class with implicit polymorphism"></a>Table per concrete class with implicit polymorphism</h3><pre><code>&lt;&lt;Table&gt;&gt;                   &lt;&lt;Table&gt;&gt;             
-CREDIT_CARD                 BANK_ACCOUNT
----------------             -----------------
-CREDIT_CARD_ID              BANK_ACCOUNT_ID
-OWNER                       OWNER
-NUMBER                      ACCOUNT
-EXP_MONTH                   BANKNAME
-EXP_YEAR                    SWIFT
-
-@MappedSuperclass
-public abstract class BillingDetails {
-    @Column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@AttributeOverride(name = &quot;owner&quot;, column =
-    @Column(name = &quot;CC_OWNER&quot;, nullable = false)
-)
-public class CreditCard extends BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;CREDIT_CARD_ID&quot;)
-    private Long id = null;
-
-    @Column(name = &quot;NUMBER&quot;, nullable = false)
-    private String number;
-}
-</code></pre><h3 id="Table-per-concrete-class-with-unions-与1-表结构相同"><a href="#Table-per-concrete-class-with-unions-与1-表结构相同" class="headerlink" title="Table per concrete class with unions(与1 表结构相同)"></a>Table per concrete class with unions(与1 表结构相同)</h3><pre><code>@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = null;
-
-    @column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@Table(name = &quot;CREDIT_CARD&quot;)
-public class CreditCard extends BillingDetails {
-    @Column(name = &quot;NUMBER&quot;, nullable = false)
-    private String number;
-}
-</code></pre><h3 id="Table-per-class-hierarchy"><a href="#Table-per-class-hierarchy" class="headerlink" title="Table per class hierarchy"></a>Table per class hierarchy</h3><pre><code>&lt;&lt;Table&gt;&gt;
-BILLING_DETAILS
------------------------
-BILLING_DETAILS_ID
-BILLING_DETAILS_TYPE&lt;&lt;Discriminator&gt;&gt;
-OWNER
-CC_NUMBER
-CC_EXP_MONTH
-CC_EXP_YEAR
-BA_ACCOUNT
-BA_BANKNAME
-BA_SWIFT
-
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name = &quot;BILLING_DETAILS_TYPE&quot;,
-    discriminatorType = DiscriminatorType.STRING
-)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = null;
-
-    @Column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@DiscriminatorValue(&quot;CC&quot;)
-public class CreditCard extends BillingDetails {
-    @Column(name = &quot;CC_NUMBER&quot;)
-    private String number;
-}
-</code></pre><h3 id="Table-per-subclass"><a href="#Table-per-subclass" class="headerlink" title="Table per subclass"></a>Table per subclass</h3><pre><code>&lt;&lt;Table&gt;&gt;
-BILLING_DETAILS
-------------------
-OWNER
-
-&lt;&lt;Table&gt;&gt;
-CREDIT_CARD
------------------
-CREDIT_CARD_ID&lt;&lt;PK&gt;&gt;&lt;&lt;FK&gt;&gt;
-NUMBER
-EXP_MONTH
-EXP_YEAR
-
-&lt;&lt;Table&gt;&gt;
-BANK_ACCOUNT
-----------------
-BANK_ACCOUNT_ID&lt;&lt;PK&gt;&gt;&lt;&lt;FK&gt;&gt;
-ACCOUNT
-BANKNAME
-SWIFT
-
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = nulll;
-}
-
-@Entity
-@PrimaryKeyJoinColumn(name = &quot;CREDIT_CARD_ID&quot;)
-public class CreditCard extends BillingDetails {
-}
-</code></pre><h3 id="Mixing-inheritance-strategies"><a href="#Mixing-inheritance-strategies" class="headerlink" title="Mixing inheritance strategies"></a>Mixing inheritance strategies</h3><pre><code>&lt;&lt;Table&gt;&gt;
-BILLING_DETAILS
--------------------
-BILLING_DETAILS_ID
-BILLING_DETAILS_TYPE&lt;&lt;Discriminator&gt;&gt;
-OWNER
-BA_ACCOUNT
-BA_BANKNAME
-BA_SWIFT
-
-&lt;&lt;Table&gt;&gt;
-CREDIT_CARD
--------------------
-CREDIT_CARD_ID&lt;&lt;PK&gt;&gt;
-CC_NUMBER
-CC_EXP_MONTH
-CC_EXP_YEAR
-
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name = &quot;BILLING_DETAILS_TYPE&quot;,
-    discriminatorType = DiscriminatorType.STRING
-)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = null;
-
-    @Column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@DiscriminatorValue(&quot;CC&quot;)
-@SecondaryTable(
-    name = &quot;CREDIT_CARD&quot;
-    pkJoinColumns = @PrimaryKeyJoinColumn(name = &quot;CREDIT_CARD_ID&quot;)
-)
-public class CreditCard extends BillingDetails {
-    @Column(table = &quot;credit_card&quot;,
-            name = &quot;CC_NUMBER&quot;,
-            nullable = false)
-    private String number;
-}
-</code></pre><h1 id="Mapping-collections-and-entity-associations"><a href="#Mapping-collections-and-entity-associations" class="headerlink" title="Mapping collections and entity associations"></a>Mapping collections and entity associations</h1><h2 id="Mapping-collections-with-annotations"><a href="#Mapping-collections-with-annotations" class="headerlink" title="Mapping collections with annotations"></a>Mapping collections with annotations</h2><pre><code>@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-private Set&lt;String&gt; images = new HashSet&lt;String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@OrderColumn(name = &quot;POSITION&quot;)
-@org.hibernate.annotations.ListIndexBase(1)
-@Column(name = &quot;FILENAME&quot;)
-private List&lt;String&gt; images = new ArrayList&lt;String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@org.hibernate.annotations.MapKey(
-    columns = @Column(name = &quot;IMAGENAME&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-private Map&lt;String, String&gt; images = new HashMap&lt;String, String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-@org.hibernate.annotations.Sortnatural
-private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-@org.hibernate.annotations.OrderBy(
-    clause = &quot;FILENAME asc&quot;
-)
-private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
-</code></pre><h3 id="Mapping-a-collection-of-embedded-objects"><a href="#Mapping-a-collection-of-embedded-objects" class="headerlink" title="Mapping a collection of embedded objects"></a>Mapping a collection of embedded objects</h3><pre><code>@Embeddable
-public class Image {
-    @org.hibernate.annotations.Parent
-    Item item;
-
-    @Column(length = 255, nullable = false)
-    private String name;
-    @Column(length = 255, nullable = false)
-    private String filename;
-
-    @Column(nullable = false)
-    private int sizeX;
-
-    @Column(nullable = false)
-    private int sizeY;
-}
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@AttributeOverride(
-    name = &quot;element.name&quot;,
-    column = @Column(name = &quot;IMAGENAME&quot;,
-                    length = 255,
-                    nullable = false)
-)
-private Set&lt;Image&gt; images = new HashSet&lt;Image&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@org.hibernate.annotations.CollectionId(
-    columns = @Column(name = &quot;ITEM_IMAGE_ID&quot;),
-    type = @org.hibernate.annotations.Type(type = &quot;long&quot;),
-    generator = &quot;sequence&quot;
-)
-private Collection&lt;Image&gt; images = new ArrayList&lt;Image&gt;();
-</code></pre><h2 id="Mapping-a-parent-children-relationship"><a href="#Mapping-a-parent-children-relationship" class="headerlink" title="Mapping a parent/children relationship"></a>Mapping a parent/children relationship</h2><p>在操作两个实例之间的链接时，如果没有inverse属性，Hibernate会试图执行两个不同的SQL语句，这两者更新同一个<br>外键列。通过指定inverse=”true”，显式地告诉Hibernate链接的哪一端不应该与数据库同步。<br>JPA注解的mappedBy属性相当于XML映射中的inverse属性</p>
-<p>cascade和inverse都不出现在值类型的集合或者任何其他值类型映射中。这些规则隐含在值类型的特性中。</p>
-<pre><code>public class Bid {
-    @ManyToOne
-    @JoinColumn(name = &quot;ITEM_ID&quot;, nullable = false)
-    private Item item;
-}
-
-public class Item {
-    @OneToMany(cascade = { CascadeType.PERSIST,
-                           CascadeType.MERGE,
-                           CascadeType.REMOVE },
-               orphanRemoval = true,
-               mappedBy = &quot;item&quot;)
-    private Set&lt;Bid&gt; bids = new HashSet&lt;Bid&gt;();
-}
-</code></pre><h1 id="Advanced-entity-association-mappings"><a href="#Advanced-entity-association-mappings" class="headerlink" title="Advanced entity association mappings"></a>Advanced entity association mappings</h1><h2 id="single-valued-entity-associations"><a href="#single-valued-entity-associations" class="headerlink" title="single-valued entity associations"></a>single-valued entity associations</h2><h3 id="Shared-primary-key-associations"><a href="#Shared-primary-key-associations" class="headerlink" title="Shared primary key associations"></a>Shared primary key associations</h3><pre><code>@OneToOne
-@PrimaryKeyJoinColumn
-private Address shippingAddress;
-
-
-@Entity
-@Table(name = &quot;ADDRESS&quot;)
-public class Address {
-    @Id
-    @GeneratedValue(generator = &quot;myForeignGenerator&quot;)
-    @org.hibernate.annotations.GenericGenerator(
-        name = &quot;myForeignGenerator&quot;,
-        strategy = &quot;foreign&quot;,
-        parameters = @Parameter(name = &quot;property&quot;, value = &quot;user&quot;)
-    )
-    @Column(name = &quot;ADDRESS_ID&quot;)
-    private Long id;
-
-    private User user;
-}
-</code></pre><h3 id="One-to-one-foreign-key-asociations"><a href="#One-to-one-foreign-key-asociations" class="headerlink" title="One-to-one foreign key asociations"></a>One-to-one foreign key asociations</h3><pre><code>public class User {
-    @OneToOne
-    @JoinColumn(name = &quot;SHIPPING_ADDRESS_ID&quot;)
-    private Address shippingAddress;
-}
-
-
-public class Address {
-    @OneToOne(mappedBy = &quot;shippingAddress&quot;)
-    private User user;
-}
-</code></pre><h3 id="Mapping-with-a-join-table"><a href="#Mapping-with-a-join-table" class="headerlink" title="Mapping with a join table"></a>Mapping with a join table</h3><pre><code>public class Shipment {
-    @OneToOne
-    @JoinTable(
-        name = &quot;ITEM_SHIPMENT&quot;,
-        joinColumns = @JoinColumn(name = &quot;SHIPMENT_ID&quot;),
-        inverseJoinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-    )
-    private Item auction;
-}
-
-
-@Entity
-@Table(name = &quot;SHIPMENT&quot;)
-@SecondaryTable(name = &quot;ITEM_SHIPMENT&quot;)
-public class Shipment {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;SHIPMENT_ID&quot;)
-    private Long id;
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/" data-id="cil0t73iw001h9ze56xy6ae3t" class="article-share-link" data-share="baidu" data-title="java-persistence-with-hibernate">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jpa/">jpa</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-spring-in-action" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/11/04/spring-in-action/" class="article-date">
-  <time datetime="2015-11-04T16:14:54.000Z" itemprop="datePublished">2015-11-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/04/spring-in-action/">spring-in-action</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Core-Spring"><a href="#Core-Spring" class="headerlink" title="Core Spring"></a>Core Spring</h1><h2 id="working-with-an-application-context"><a href="#working-with-an-application-context" class="headerlink" title="working with an application context"></a>working with an application context</h2><ul>
-<li>AnnotationConfigApplicationContext</li>
-<li>AnnotationConfigWebApplicationContext</li>
-<li>ClassPathXmlApplicationContext</li>
-<li>FileSystemXmlApplicationContext</li>
-<li>XmlWebApplicationContext<h1 id="java-based"><a href="#java-based" class="headerlink" title="java based"></a>java based</h1><h2 id="AbstractAnnotationConfigDispatcherServletInitializer-exposed"><a href="#AbstractAnnotationConfigDispatcherServletInitializer-exposed" class="headerlink" title="AbstractAnnotationConfigDispatcherServletInitializer exposed"></a>AbstractAnnotationConfigDispatcherServletInitializer exposed</h2></li>
-</ul>
-<p>In a Servlet 3.0 environment, the container looks for any classes in the classpath that<br>implement the <code>javax.servlet.ServletContainerInitializer</code> interface; if any are found,<br>they’re used to configure the servlet container.</p>
-<p>Spring supplies an implementation of that interface called <code>SpringServletContainerInitializer</code><br>that, in turn, seeks out any classes that implement <code>WebApplicationInitializer</code> and delegates<br>to them for configuration. Spring 3.2 introduced a convenient base implementation of<br><code>WebApplicationInitializer</code> called <code>AbstractAnnotationConfigDispatcherServletInitializer</code>.</p>
-<h2 id="Adding-additional-servlets-and-filters"><a href="#Adding-additional-servlets-and-filters" class="headerlink" title="Adding additional servlets and filters"></a>Adding additional servlets and filters</h2><pre><code>public class MyServletInitializer implements WebApplicationInitializer throws ServletException {
-    @Override
-    public void onStartup(ServletContext servletContext) {
-        Dynamic myServlet = servletContext.addServlet(&quot;myServlet&quot;, MyServlet.class);
-        myServlet.addMapping(&quot;/custom/**&quot;);
-    }
-}
-
-@Override
-public void onStartup(ServletContext servletContext)
-        throws ServletException {
-    javax.servlet.FilterRegistration.Dynamic filter = 
-        servletContext.addFilter(&quot;myFilger&quot;, MyFilger.class);
-    filter.addMappingForUrlPatterns(null, false, &quot;/custom/*&quot;);
-}
-</code></pre><p>to register one or more filters and map them to DispatcherServlet, all you need to do is override<br>the <code>getServletFilters()</code> method of <code>AbstractAnnotationConfigDispatcherServletInitializer</code></p>
-<pre><code>@Override
-protected Filter[] getServletFilters() {
-    return new Filter[] { new MyFilter() };
-}
-</code></pre><p>A controller advice is any class that’s annotated with <code>@ControllerAdvice</code> and has one or more of<br>the following kind of methods:<br>@ExceptionHandler<br>@InitBinder<br>@ModelAttribute<br>Those methods in an <code>@ControllerAdvice</code>-annotated class are applied globally across all<br><code>@RequestMapping</code>-annotated methods on all controllers in an application.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="cil0t73hy000s9ze5bl84vr1w" class="article-share-link" data-share="baidu" data-title="spring-in-action">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-front-end" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/09/15/front-end/" class="article-date">
-  <time datetime="2015-09-15T15:51:22.000Z" itemprop="datePublished">2015-09-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/15/front-end/">front-end</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><p><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></p>
-<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p><a href="https://nodejs.org" target="_blank" rel="external">https://nodejs.org</a></p>
-<h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p><a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a><br>npm init<br>npm install package<br>npm uninstall package<br>npm -g install package<br>npm -g uninstall package<br>npm help json</p>
-<h2 id="yeoman"><a href="#yeoman" class="headerlink" title="yeoman"></a>yeoman</h2><p><a href="http://yeoman.io" target="_blank" rel="external">http://yeoman.io</a><br>npm install -g yo bower grunt-cli gulp</p>
-<h2 id="bower"><a href="#bower" class="headerlink" title="bower"></a>bower</h2><p><a href="http://bower.io" target="_blank" rel="external">http://bower.io</a></p>
-<h2 id="grunt"><a href="#grunt" class="headerlink" title="grunt"></a>grunt</h2>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/09/15/front-end/" data-id="cil0t73jg001x9ze5l6oc4cs3" class="article-share-link" data-share="baidu" data-title="front-end">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/front-end/">front-end</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-enterprise-web-development" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/09/12/enterprise-web-development/" class="article-date">
-  <time datetime="2015-09-12T17:49:28.000Z" itemprop="datePublished">2015-09-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/12/enterprise-web-development/">enterprise-web-development</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/09/12/enterprise-web-development/" data-id="cil0t73jm00219ze5x7lc93tq" class="article-share-link" data-share="baidu" data-title="enterprise-web-development">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-vim" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/09/10/vim/" class="article-date">
-  <time datetime="2015-09-10T12:34:41.000Z" itemprop="datePublished">2015-09-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/10/vim/">vim</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>:help option-list<br>leader: \<br>:help functions</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/09/10/vim/" data-id="cil0t73h900049ze54v6m27tw" class="article-share-link" data-share="baidu" data-title="vim">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-apache2-web-server" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/08/26/apache2-web-server/" class="article-date">
-  <time datetime="2015-08-26T22:53:55.000Z" itemprop="datePublished">2015-08-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/26/apache2-web-server/">apache2-web-server</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>ubuntu 15.04<br>apache version 2.4.10<br>/etc/init.d/apache2<br>systemctl start apache2</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="cil0t73k2002c9ze5rrkgnix1" class="article-share-link" data-share="baidu" data-title="apache2-web-server">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/httpd/">httpd</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-systemd-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/08/26/systemd-usage/" class="article-date">
-  <time datetime="2015-08-26T19:07:56.000Z" itemprop="datePublished">2015-08-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/26/systemd-usage/">systemd-usage</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Systemctl is a linux command to control the systemd system and service manager.<br>In Fedora 16 linux <code>systemctl</code> command is used to Enable, Start, Restart, Reload, Stop<br>and to check the status of system services like SSHD HTTPD MySqld etc. </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/08/26/systemd-usage/" data-id="cil0t73hp000j9ze5ehcmuk4p" class="article-share-link" data-share="baidu" data-title="systemd-usage">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemctl/">systemctl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemd/">systemd</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -998,9 +530,9 @@ protected Filter[] getServletFilters() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標簽</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/">kettle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monitor/">monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poi/">poi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/">resume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -1009,46 +541,46 @@ protected Filter[] getServletFilters() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標簽雲</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/kettle/" style="font-size: 10px;">kettle</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/monitor/" style="font-size: 10px;">monitor</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">歸檔</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">近期文章</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/02/24/hello-world/">Hello World</a>
+            <a href="/2016/07/06/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/01/15/h2/">h2</a>
+            <a href="/2016/07/06/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2015/11/06/maven-usage/">maven-usage</a>
+            <a href="/2016/05/10/kettle/">kettle</a>
           </li>
         
           <li>
-            <a href="/2015/11/06/java-persistence-with-hibernate/">java-persistence-with-hibernate</a>
+            <a href="/2016/04/03/ubuntu-usage/">ubuntu-usage</a>
           </li>
         
           <li>
-            <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
+            <a href="/2016/03/14/server-monitor/">server-monitor</a>
           </li>
         
       </ul>
@@ -1058,7 +590,7 @@ protected Filter[] getServletFilters() {
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">友情鏈接</h3>
+    <h3 class="widget-title">Links</h3>
     <div class="widget">
       <ul>
         
@@ -1105,7 +637,7 @@ protected Filter[] getServletFilters() {
 </nav>
   <!-- totop start -->
 <div id="totop">
-<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+<a title="totop"><img src="/img/scrollup.png"/></a>
 </div>
 
 <!-- totop end -->
@@ -1144,7 +676,7 @@ protected Filter[] getServletFilters() {
 
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
 </div>
 </body>

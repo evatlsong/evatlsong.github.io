@@ -6,22 +6,19 @@
   
   <title>evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta property="og:type" content="website">
 <meta property="og:title" content="evatlsong">
 <meta property="og:url" content="http://evatlsong.com/page/2/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="evatlsong">
-<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
   
-  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/css/style.css">
   <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   <!--[if lt IE 9]><script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.min.js"></script><![endif]-->
   
@@ -75,6 +72,775 @@
 </header>
     <div class="outer">
       <section id="main">
+  
+    <article id="post-java-persistence-with-hibernate" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/06/java-persistence-with-hibernate/" class="article-date">
+  <time datetime="2015-11-06T11:49:34.000Z" itemprop="datePublished">2015-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/06/java-persistence-with-hibernate/">java-persistence-with-hibernate</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Understand-object-relational-persistence"><a href="#Understand-object-relational-persistence" class="headerlink" title="Understand object/relational persistence"></a>Understand object/relational persistence</h1><p>the problem of granularity<br>粒度问题 4.4节描述了这个问题的解决方案<br>the problem of subtypes<br>5.1节将讨论ORM解决方案如何解决把一个类层次结构持久化到一个或者多个数据库表的问题<br>第5章介绍的继承映射解决方案中，有3种被设计为适应多态关联的表示法和多态查询的有效执行</p>
+<h2 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h2><h3 id="What-is-ORM"><a href="#What-is-ORM" class="headerlink" title="What is ORM?"></a>What is ORM?</h3><p>An ORM solution consists of the following four pieces:</p>
+<ul>
+<li>An API for performing basic CRUD operations on objects of persistent classes</li>
+<li>A language or API for specifying queries that refer to classes and properties of classes</li>
+<li>A facility for specifying mapping metadata</li>
+<li>A technique for the ORM implementation to interact with transactional objects to perform<br>dirty checking,lazy association fetching, and other optimization functions</li>
+</ul>
+<h3 id="Generic-ORM-problems"><a href="#Generic-ORM-problems" class="headerlink" title="Generic ORM problems"></a>Generic ORM problems</h3><ul>
+<li>What do persistent classes look like</li>
+<li>How is mapping metadata defined</li>
+<li>How do object identity and equality relate to database (primary key) identity</li>
+<li>How should we map class inheritance hierarhies</li>
+<li>How does the persistence logic interact at runtime with the objects of the business domain</li>
+<li>What is the lifecycle of a persistent object</li>
+<li>What facilities are provided for sorting,searching,and aggregating</li>
+<li>How do we efficiently retrieve data with associations</li>
+</ul>
+<h3 id="Hibernate-configuration-and-startup"><a href="#Hibernate-configuration-and-startup" class="headerlink" title="Hibernate configuration and startup"></a>Hibernate configuration and startup</h3><p><code>hibernate.generate_statistics</code> 启用统计集合</p>
+<h1 id="Mapping-persistent-classes"><a href="#Mapping-persistent-classes" class="headerlink" title="Mapping persistent classes"></a>Mapping persistent classes</h1><p>Whether field or perperty access is enabled for an entity depends on the position of mandatory <code>@Id</code> annotation.<br>If it’s present on a field, so all attributes of the class are accessed by Hibernate through fields.</p>
+<h2 id="Fine-grained-models-and-mappings"><a href="#Fine-grained-models-and-mappings" class="headerlink" title="Fine-grained models and mappings"></a>Fine-grained models and mappings</h2><h3 id="Mapping-basic-properties"><a href="#Mapping-basic-properties" class="headerlink" title="Mapping basic properties"></a>Mapping basic properties</h3><p>Using derived properties</p>
+<pre><code>@org.hibernate.annotations.Formula(&quot;TOTAL + TAX_RATE * TOTAL&quot;)
+public BigDecimal getTotalIncludingTax() {
+    return totalIncludingTax;
+}
+</code></pre><p>The given SQL formula is evaluated every time the entity is retrieved from the database<br>(and not at any other time, so the result may be outdated if other properties are modified).</p>
+<p>Generated and default property values<br>Properties marked as database-generated must additionally be nininsertable and nonupdateable,<br>which you control with the insert and update attributes. If both are set to false, the property’s<br>columns never appear in the INSERT or UPDATE statements– the property value is read-only. Alse,<br>you usually don’t add a public setter method in your class for immutable property(and switch to field access).</p>
+<pre><code>@Column(updatable = false, insertable = false)
+@org.hibernate.annotations.Generated(
+    org.hibernate.annotations.GenerationTime.ALWAYS
+)
+private Date lastModified;
+</code></pre><p>A special case of database-generated property values are default values.<br>you have to enable dynamic insertion and update statement generation, so that the column with the default<br>value isn’t included in every statement if its value is null (otherwise a NULL would be inserted instead<br>of the default value). Furthermore, an instance of Item that has been made persistent but not yet flushed<br>to the database and not refreshed again won’t have the default value set on the object property. In other<br>words, you need to execute an explicit flush;</p>
+<pre><code>Item newItem = new Item(...);
+session.save(newItem);
+
+newItem.getInitialPrice();   // is null
+
+session.flush();             // Trigger an INSERT
+// Hibernate does a SELECT automatically
+
+newItem.getInitialPrice();   // is $1
+
+@Column(name = &quot;INITIAL_PRICE&quot;,
+        columnDefinition = &quot;number(10, 2) default &apos;1&apos;&quot;)
+@org.hibernate.annotations.Generated(
+    org.hibernate.annotations.GenerationTime.INSERT
+)
+@org.hibernate.annotations.DynamicInsert
+@org.hibernate.annotations.DynamicUpdate
+private BigDecimal initalPrice;
+</code></pre><h3 id="Mapping-components"><a href="#Mapping-components" class="headerlink" title="Mapping components"></a>Mapping components</h3><pre><code>&lt;&lt;Table&gt;&gt; 
+USERS
+---------------
+FIRSTNAME
+LASTNAME
+USERNAME
+PASSWORD
+EMAIL
+---------------
+HOME_STREET
+HOME_ZIPCODE
+HOME_CITY
+---------------
+BILLING_STREET
+BILLING_ZIPCODE
+BILLING_CITY
+
+@Entity
+@Table(name = &quot;USERS&quot;)
+public class User {
+    @Embedded
+    private Address homeAddress;
+}
+
+@Embeddable
+public class Address {
+    @Column(name = &quot;ADDRESS_STREET&quot;, nullable = false)
+    private String street;
+
+    @Column(name = &quot;ADDRESS_ZIPCODE&quot;, nullable = false)
+    private String zipcode;
+
+    @Column(name = &quot;ADDRESS_CITY&quot;, nullable = false)
+    private String city;
+}
+
+//=================================================================
+
+@Entity
+@Table(name = &quot;USERS&quot;)
+public class User {
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = &quot;street&quot;,
+                            column = @Column(name = &quot;HOME_STREET&quot;)),
+    @AttributeOverrides({
+        @AttributeOverride(name = &quot;zipcode&quot;,
+                            column = @Column(name = &quot;HOME_ZIPCODE&quot;)),
+    @AttributeOverrides({
+        @AttributeOverride(name = &quot;city&quot;,
+                            column = @Column(name = &quot;HOME_CITY&quot;))
+    })
+    private Address homeAddress;
+}
+</code></pre><h1 id="Inheritance-and-custom-types"><a href="#Inheritance-and-custom-types" class="headerlink" title="Inheritance and custom types"></a>Inheritance and custom types</h1><h2 id="Mapping-class-inheritance"><a href="#Mapping-class-inheritance" class="headerlink" title="Mapping class inheritance"></a>Mapping class inheritance</h2><ol>
+<li>Table per concrete class with implicit polymorphism</li>
+<li>Table per concrete class with unions(与1 表结构相同)</li>
+<li>Table per class hierarchy</li>
+<li>Table per subclass</li>
+<li>Mixing inheritance strategies</li>
+</ol>
+<h3 id="Table-per-concrete-class-with-implicit-polymorphism"><a href="#Table-per-concrete-class-with-implicit-polymorphism" class="headerlink" title="Table per concrete class with implicit polymorphism"></a>Table per concrete class with implicit polymorphism</h3><pre><code>&lt;&lt;Table&gt;&gt;                   &lt;&lt;Table&gt;&gt;             
+CREDIT_CARD                 BANK_ACCOUNT
+---------------             -----------------
+CREDIT_CARD_ID              BANK_ACCOUNT_ID
+OWNER                       OWNER
+NUMBER                      ACCOUNT
+EXP_MONTH                   BANKNAME
+EXP_YEAR                    SWIFT
+
+@MappedSuperclass
+public abstract class BillingDetails {
+    @Column(name = &quot;OWNER&quot;, nullable = false)
+    private String owner;
+}
+
+@Entity
+@AttributeOverride(name = &quot;owner&quot;, column =
+    @Column(name = &quot;CC_OWNER&quot;, nullable = false)
+)
+public class CreditCard extends BillingDetails {
+    @Id
+    @GeneratedValue
+    @Column(name = &quot;CREDIT_CARD_ID&quot;)
+    private Long id = null;
+
+    @Column(name = &quot;NUMBER&quot;, nullable = false)
+    private String number;
+}
+</code></pre><h3 id="Table-per-concrete-class-with-unions-与1-表结构相同"><a href="#Table-per-concrete-class-with-unions-与1-表结构相同" class="headerlink" title="Table per concrete class with unions(与1 表结构相同)"></a>Table per concrete class with unions(与1 表结构相同)</h3><pre><code>@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class BillingDetails {
+    @Id
+    @GeneratedValue
+    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
+    private Long id = null;
+
+    @column(name = &quot;OWNER&quot;, nullable = false)
+    private String owner;
+}
+
+@Entity
+@Table(name = &quot;CREDIT_CARD&quot;)
+public class CreditCard extends BillingDetails {
+    @Column(name = &quot;NUMBER&quot;, nullable = false)
+    private String number;
+}
+</code></pre><h3 id="Table-per-class-hierarchy"><a href="#Table-per-class-hierarchy" class="headerlink" title="Table per class hierarchy"></a>Table per class hierarchy</h3><pre><code>&lt;&lt;Table&gt;&gt;
+BILLING_DETAILS
+-----------------------
+BILLING_DETAILS_ID
+BILLING_DETAILS_TYPE&lt;&lt;Discriminator&gt;&gt;
+OWNER
+CC_NUMBER
+CC_EXP_MONTH
+CC_EXP_YEAR
+BA_ACCOUNT
+BA_BANKNAME
+BA_SWIFT
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name = &quot;BILLING_DETAILS_TYPE&quot;,
+    discriminatorType = DiscriminatorType.STRING
+)
+public abstract class BillingDetails {
+    @Id
+    @GeneratedValue
+    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
+    private Long id = null;
+
+    @Column(name = &quot;OWNER&quot;, nullable = false)
+    private String owner;
+}
+
+@Entity
+@DiscriminatorValue(&quot;CC&quot;)
+public class CreditCard extends BillingDetails {
+    @Column(name = &quot;CC_NUMBER&quot;)
+    private String number;
+}
+</code></pre><h3 id="Table-per-subclass"><a href="#Table-per-subclass" class="headerlink" title="Table per subclass"></a>Table per subclass</h3><pre><code>&lt;&lt;Table&gt;&gt;
+BILLING_DETAILS
+------------------
+OWNER
+
+&lt;&lt;Table&gt;&gt;
+CREDIT_CARD
+-----------------
+CREDIT_CARD_ID&lt;&lt;PK&gt;&gt;&lt;&lt;FK&gt;&gt;
+NUMBER
+EXP_MONTH
+EXP_YEAR
+
+&lt;&lt;Table&gt;&gt;
+BANK_ACCOUNT
+----------------
+BANK_ACCOUNT_ID&lt;&lt;PK&gt;&gt;&lt;&lt;FK&gt;&gt;
+ACCOUNT
+BANKNAME
+SWIFT
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class BillingDetails {
+    @Id
+    @GeneratedValue
+    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
+    private Long id = nulll;
+}
+
+@Entity
+@PrimaryKeyJoinColumn(name = &quot;CREDIT_CARD_ID&quot;)
+public class CreditCard extends BillingDetails {
+}
+</code></pre><h3 id="Mixing-inheritance-strategies"><a href="#Mixing-inheritance-strategies" class="headerlink" title="Mixing inheritance strategies"></a>Mixing inheritance strategies</h3><pre><code>&lt;&lt;Table&gt;&gt;
+BILLING_DETAILS
+-------------------
+BILLING_DETAILS_ID
+BILLING_DETAILS_TYPE&lt;&lt;Discriminator&gt;&gt;
+OWNER
+BA_ACCOUNT
+BA_BANKNAME
+BA_SWIFT
+
+&lt;&lt;Table&gt;&gt;
+CREDIT_CARD
+-------------------
+CREDIT_CARD_ID&lt;&lt;PK&gt;&gt;
+CC_NUMBER
+CC_EXP_MONTH
+CC_EXP_YEAR
+
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(
+    name = &quot;BILLING_DETAILS_TYPE&quot;,
+    discriminatorType = DiscriminatorType.STRING
+)
+public abstract class BillingDetails {
+    @Id
+    @GeneratedValue
+    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
+    private Long id = null;
+
+    @Column(name = &quot;OWNER&quot;, nullable = false)
+    private String owner;
+}
+
+@Entity
+@DiscriminatorValue(&quot;CC&quot;)
+@SecondaryTable(
+    name = &quot;CREDIT_CARD&quot;
+    pkJoinColumns = @PrimaryKeyJoinColumn(name = &quot;CREDIT_CARD_ID&quot;)
+)
+public class CreditCard extends BillingDetails {
+    @Column(table = &quot;credit_card&quot;,
+            name = &quot;CC_NUMBER&quot;,
+            nullable = false)
+    private String number;
+}
+</code></pre><h1 id="Mapping-collections-and-entity-associations"><a href="#Mapping-collections-and-entity-associations" class="headerlink" title="Mapping collections and entity associations"></a>Mapping collections and entity associations</h1><h2 id="Mapping-collections-with-annotations"><a href="#Mapping-collections-with-annotations" class="headerlink" title="Mapping collections with annotations"></a>Mapping collections with annotations</h2><pre><code>@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@Column(name = &quot;FILENAME&quot;, nullable = false)
+private Set&lt;String&gt; images = new HashSet&lt;String&gt;();
+
+
+@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@OrderColumn(name = &quot;POSITION&quot;)
+@org.hibernate.annotations.ListIndexBase(1)
+@Column(name = &quot;FILENAME&quot;)
+private List&lt;String&gt; images = new ArrayList&lt;String&gt;();
+
+
+@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@org.hibernate.annotations.MapKey(
+    columns = @Column(name = &quot;IMAGENAME&quot;)
+)
+@Column(name = &quot;FILENAME&quot;, nullable = false)
+private Map&lt;String, String&gt; images = new HashMap&lt;String, String&gt;();
+
+
+@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@Column(name = &quot;FILENAME&quot;, nullable = false)
+@org.hibernate.annotations.Sortnatural
+private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
+
+
+@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@Column(name = &quot;FILENAME&quot;, nullable = false)
+@org.hibernate.annotations.OrderBy(
+    clause = &quot;FILENAME asc&quot;
+)
+private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
+</code></pre><h3 id="Mapping-a-collection-of-embedded-objects"><a href="#Mapping-a-collection-of-embedded-objects" class="headerlink" title="Mapping a collection of embedded objects"></a>Mapping a collection of embedded objects</h3><pre><code>@Embeddable
+public class Image {
+    @org.hibernate.annotations.Parent
+    Item item;
+
+    @Column(length = 255, nullable = false)
+    private String name;
+    @Column(length = 255, nullable = false)
+    private String filename;
+
+    @Column(nullable = false)
+    private int sizeX;
+
+    @Column(nullable = false)
+    private int sizeY;
+}
+
+
+@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@AttributeOverride(
+    name = &quot;element.name&quot;,
+    column = @Column(name = &quot;IMAGENAME&quot;,
+                    length = 255,
+                    nullable = false)
+)
+private Set&lt;Image&gt; images = new HashSet&lt;Image&gt;();
+
+
+@ElementCollection
+@JoinTable(
+    name = &quot;ITEM_IMAGE&quot;
+    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+)
+@org.hibernate.annotations.CollectionId(
+    columns = @Column(name = &quot;ITEM_IMAGE_ID&quot;),
+    type = @org.hibernate.annotations.Type(type = &quot;long&quot;),
+    generator = &quot;sequence&quot;
+)
+private Collection&lt;Image&gt; images = new ArrayList&lt;Image&gt;();
+</code></pre><h2 id="Mapping-a-parent-children-relationship"><a href="#Mapping-a-parent-children-relationship" class="headerlink" title="Mapping a parent/children relationship"></a>Mapping a parent/children relationship</h2><p>在操作两个实例之间的链接时，如果没有inverse属性，Hibernate会试图执行两个不同的SQL语句，这两者更新同一个<br>外键列。通过指定inverse=”true”，显式地告诉Hibernate链接的哪一端不应该与数据库同步。<br>JPA注解的mappedBy属性相当于XML映射中的inverse属性</p>
+<p>cascade和inverse都不出现在值类型的集合或者任何其他值类型映射中。这些规则隐含在值类型的特性中。</p>
+<pre><code>public class Bid {
+    @ManyToOne
+    @JoinColumn(name = &quot;ITEM_ID&quot;, nullable = false)
+    private Item item;
+}
+
+public class Item {
+    @OneToMany(cascade = { CascadeType.PERSIST,
+                           CascadeType.MERGE,
+                           CascadeType.REMOVE },
+               orphanRemoval = true,
+               mappedBy = &quot;item&quot;)
+    private Set&lt;Bid&gt; bids = new HashSet&lt;Bid&gt;();
+}
+</code></pre><h1 id="Advanced-entity-association-mappings"><a href="#Advanced-entity-association-mappings" class="headerlink" title="Advanced entity association mappings"></a>Advanced entity association mappings</h1><h2 id="single-valued-entity-associations"><a href="#single-valued-entity-associations" class="headerlink" title="single-valued entity associations"></a>single-valued entity associations</h2><h3 id="Shared-primary-key-associations"><a href="#Shared-primary-key-associations" class="headerlink" title="Shared primary key associations"></a>Shared primary key associations</h3><pre><code>@OneToOne
+@PrimaryKeyJoinColumn
+private Address shippingAddress;
+
+
+@Entity
+@Table(name = &quot;ADDRESS&quot;)
+public class Address {
+    @Id
+    @GeneratedValue(generator = &quot;myForeignGenerator&quot;)
+    @org.hibernate.annotations.GenericGenerator(
+        name = &quot;myForeignGenerator&quot;,
+        strategy = &quot;foreign&quot;,
+        parameters = @Parameter(name = &quot;property&quot;, value = &quot;user&quot;)
+    )
+    @Column(name = &quot;ADDRESS_ID&quot;)
+    private Long id;
+
+    private User user;
+}
+</code></pre><h3 id="One-to-one-foreign-key-asociations"><a href="#One-to-one-foreign-key-asociations" class="headerlink" title="One-to-one foreign key asociations"></a>One-to-one foreign key asociations</h3><pre><code>public class User {
+    @OneToOne
+    @JoinColumn(name = &quot;SHIPPING_ADDRESS_ID&quot;)
+    private Address shippingAddress;
+}
+
+
+public class Address {
+    @OneToOne(mappedBy = &quot;shippingAddress&quot;)
+    private User user;
+}
+</code></pre><h3 id="Mapping-with-a-join-table"><a href="#Mapping-with-a-join-table" class="headerlink" title="Mapping with a join table"></a>Mapping with a join table</h3><pre><code>public class Shipment {
+    @OneToOne
+    @JoinTable(
+        name = &quot;ITEM_SHIPMENT&quot;,
+        joinColumns = @JoinColumn(name = &quot;SHIPMENT_ID&quot;),
+        inverseJoinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
+    )
+    private Item auction;
+}
+
+
+@Entity
+@Table(name = &quot;SHIPMENT&quot;)
+@SecondaryTable(name = &quot;ITEM_SHIPMENT&quot;)
+public class Shipment {
+    @Id
+    @GeneratedValue
+    @Column(name = &quot;SHIPMENT_ID&quot;)
+    private Long id;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/" data-id="ciqao5o5v000veyfyu1ty6sq7" class="article-share-link" data-share="baidu" data-title="java-persistence-with-hibernate">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hibernate/">hibernate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jpa/">jpa</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-spring-in-action" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/11/04/spring-in-action/" class="article-date">
+  <time datetime="2015-11-04T16:14:54.000Z" itemprop="datePublished">2015-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/04/spring-in-action/">spring-in-action</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Core-Spring"><a href="#Core-Spring" class="headerlink" title="Core Spring"></a>Core Spring</h1><h2 id="working-with-an-application-context"><a href="#working-with-an-application-context" class="headerlink" title="working with an application context"></a>working with an application context</h2><ul>
+<li>AnnotationConfigApplicationContext</li>
+<li>AnnotationConfigWebApplicationContext</li>
+<li>ClassPathXmlApplicationContext</li>
+<li>FileSystemXmlApplicationContext</li>
+<li>XmlWebApplicationContext<h1 id="java-based"><a href="#java-based" class="headerlink" title="java based"></a>java based</h1><h2 id="AbstractAnnotationConfigDispatcherServletInitializer-exposed"><a href="#AbstractAnnotationConfigDispatcherServletInitializer-exposed" class="headerlink" title="AbstractAnnotationConfigDispatcherServletInitializer exposed"></a>AbstractAnnotationConfigDispatcherServletInitializer exposed</h2></li>
+</ul>
+<p>In a Servlet 3.0 environment, the container looks for any classes in the classpath that<br>implement the <code>javax.servlet.ServletContainerInitializer</code> interface; if any are found,<br>they’re used to configure the servlet container.</p>
+<p>Spring supplies an implementation of that interface called <code>SpringServletContainerInitializer</code><br>that, in turn, seeks out any classes that implement <code>WebApplicationInitializer</code> and delegates<br>to them for configuration. Spring 3.2 introduced a convenient base implementation of<br><code>WebApplicationInitializer</code> called <code>AbstractAnnotationConfigDispatcherServletInitializer</code>.</p>
+<h2 id="Adding-additional-servlets-and-filters"><a href="#Adding-additional-servlets-and-filters" class="headerlink" title="Adding additional servlets and filters"></a>Adding additional servlets and filters</h2><pre><code>public class MyServletInitializer implements WebApplicationInitializer throws ServletException {
+    @Override
+    public void onStartup(ServletContext servletContext) {
+        Dynamic myServlet = servletContext.addServlet(&quot;myServlet&quot;, MyServlet.class);
+        myServlet.addMapping(&quot;/custom/**&quot;);
+    }
+}
+
+@Override
+public void onStartup(ServletContext servletContext)
+        throws ServletException {
+    javax.servlet.FilterRegistration.Dynamic filter = 
+        servletContext.addFilter(&quot;myFilger&quot;, MyFilger.class);
+    filter.addMappingForUrlPatterns(null, false, &quot;/custom/*&quot;);
+}
+</code></pre><p>to register one or more filters and map them to DispatcherServlet, all you need to do is override<br>the <code>getServletFilters()</code> method of <code>AbstractAnnotationConfigDispatcherServletInitializer</code></p>
+<pre><code>@Override
+protected Filter[] getServletFilters() {
+    return new Filter[] { new MyFilter() };
+}
+</code></pre><p>A controller advice is any class that’s annotated with <code>@ControllerAdvice</code> and has one or more of<br>the following kind of methods:<br>@ExceptionHandler<br>@InitBinder<br>@ModelAttribute<br>Those methods in an <code>@ControllerAdvice</code>-annotated class are applied globally across all<br><code>@RequestMapping</code>-annotated methods on all controllers in an application.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="ciqao5o74001seyfyxfv7yooh" class="article-share-link" data-share="baidu" data-title="spring-in-action">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/spring/">spring</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-front-end" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/15/front-end/" class="article-date">
+  <time datetime="2015-09-15T15:51:22.000Z" itemprop="datePublished">2015-09-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/15/front-end/">front-end</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="nvm"><a href="#nvm" class="headerlink" title="nvm"></a>nvm</h2><p><a href="https://github.com/creationix/nvm" target="_blank" rel="external">https://github.com/creationix/nvm</a></p>
+<h2 id="node"><a href="#node" class="headerlink" title="node"></a>node</h2><p><a href="https://nodejs.org" target="_blank" rel="external">https://nodejs.org</a></p>
+<h2 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h2><p><a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a><br>npm init<br>npm install package<br>npm uninstall package<br>npm -g install package<br>npm -g uninstall package<br>npm help json</p>
+<p>npm install -g sinopia<br>sinopia</p>
+<p>npm install -g nrm<br>nrm add local <a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a><br>nrm use local</p>
+<h2 id="yeoman"><a href="#yeoman" class="headerlink" title="yeoman"></a>yeoman</h2><p><a href="http://yeoman.io" target="_blank" rel="external">http://yeoman.io</a><br>npm install -g yo bower grunt-cli gulp</p>
+<h2 id="bower"><a href="#bower" class="headerlink" title="bower"></a>bower</h2><p><a href="http://bower.io" target="_blank" rel="external">http://bower.io</a></p>
+<h2 id="grunt"><a href="#grunt" class="headerlink" title="grunt"></a>grunt</h2><p>nodejs调试<br>npm install -g node-inspector<br>node-inspector<br>node –debug-brk app.js</p>
+<p>node提供了两种debug模式运行：<br>node —debug[=port] filename （这种方式，其实就是在指定的端口（默认为 5858）监听远程调试连接）<br>node —debug-brk[=port] filename （这种方式在监听的同时，会在代码执行的时候，强制断点在第一行，这样有个好处就是：可以debug到node内部的是如何运行的）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/09/15/front-end/" data-id="ciqao5o5h000heyfymddll1o6" class="article-share-link" data-share="baidu" data-title="front-end">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/front-end/">front-end</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-enterprise-web-development" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/12/enterprise-web-development/" class="article-date">
+  <time datetime="2015-09-12T17:49:28.000Z" itemprop="datePublished">2015-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/12/enterprise-web-development/">enterprise-web-development</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/09/12/enterprise-web-development/" data-id="ciqao5o5d000eeyfynw6n9bx0" class="article-share-link" data-share="baidu" data-title="enterprise-web-development">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/10/vim/" class="article-date">
+  <time datetime="2015-09-10T12:34:41.000Z" itemprop="datePublished">2015-09-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/10/vim/">vim</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>:help option-list<br>leader: \<br>:help functions</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/09/10/vim/" data-id="ciqao5o7m002ceyfyv2j9nkwe" class="article-share-link" data-share="baidu" data-title="vim">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-apache2-web-server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/26/apache2-web-server/" class="article-date">
+  <time datetime="2015-08-26T22:53:55.000Z" itemprop="datePublished">2015-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/26/apache2-web-server/">apache2-web-server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>ubuntu 15.04<br>apache version 2.4.10<br>/etc/init.d/apache2<br>systemctl start apache2</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="ciqao5o4k0002eyfyl9ccx9k3" class="article-share-link" data-share="baidu" data-title="apache2-web-server">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/apache/">apache</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/httpd/">httpd</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-systemd-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/26/systemd-usage/" class="article-date">
+  <time datetime="2015-08-26T19:07:56.000Z" itemprop="datePublished">2015-08-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/26/systemd-usage/">systemd-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Systemctl is a linux command to control the systemd system and service manager.<br>In Fedora 16 linux <code>systemctl</code> command is used to Enable, Start, Restart, Reload, Stop<br>and to check the status of system services like SSHD HTTPD MySqld etc. </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/08/26/systemd-usage/" data-id="ciqao5o7c001yeyfyznnx95d1" class="article-share-link" data-share="baidu" data-title="systemd-usage">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemctl/">systemctl</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/systemd/">systemd</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-thinking-in-java" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -261,7 +1027,7 @@ private void readObject(ObjectInputStream stream) throws IOException, ClassNotFo
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cil0t73hl000f9ze5v99mnfia" class="article-share-link" data-share="baidu" data-title="thinking-in-java">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="ciqao5o7f0023eyfyiikbaxbe" class="article-share-link" data-share="baidu" data-title="thinking-in-java">Share</a>
       
 
       
@@ -306,7 +1072,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="cil0t73i2000v9ze58btmgopo" class="article-share-link" data-share="baidu" data-title="ruby">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="ciqao5o71001oeyfyj6ckq6j6" class="article-share-link" data-share="baidu" data-title="ruby">Share</a>
       
 
       
@@ -321,10 +1087,10 @@ gem sources -l
 
 
   
-    <article id="post-windows-install" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-ssh" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/08/13/windows-install/" class="article-date">
-  <time datetime="2015-08-13T22:40:53.000Z" itemprop="datePublished">2015-08-13</time>
+    <a href="/2015/08/15/ssh/" class="article-date">
+  <time datetime="2015-08-15T12:58:36.000Z" itemprop="datePublished">2015-08-15</time>
 </a>
     
   </div>
@@ -335,7 +1101,7 @@ gem sources -l
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/13/windows-install/">windows-install</a>
+      <a class="article-title" href="/2015/08/15/ssh/">ssh</a>
     </h1>
   
 
@@ -343,607 +1109,20 @@ gem sources -l
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>U盘安装<br>启动盘制作<br>用老毛桃uefi版生成启动盘后 将原版光盘复制到U盘上<br>U盘启动后选择安装原版windows 然后选择用windows8PE启动 最后执行iso文件中的setup.exe安装程序<br>若不选择安装原版windows 会提示安装程序无法创建新的系统分区 也无法定位系统分区</p>
+        <p>sshd status<br>sudo apt install openssh-server</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/13/windows-install/" data-id="cil0t73h500029ze54tejrdl8" class="article-share-link" data-share="baidu" data-title="windows-install">分享到</a>
+        <a data-url="http://evatlsong.com/2015/08/15/ssh/" data-id="ciqao5o75001teyfy17ftkdbn" class="article-share-link" data-share="baidu" data-title="ssh">Share</a>
       
 
       
 
       
-    </footer>
-  </div>
-  
-</article>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li></ul>
 
-
-  
-    <article id="post-atom" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/08/10/atom/" class="article-date">
-  <time datetime="2015-08-10T16:11:21.000Z" itemprop="datePublished">2015-08-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/10/atom/">atom</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/08/10/atom/" data-id="cil0t73k000299ze5njsinrdp" class="article-share-link" data-share="baidu" data-title="atom">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/atom/">atom</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-intellij-idea" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/08/10/intellij-idea/" class="article-date">
-  <time datetime="2015-08-10T16:05:40.000Z" itemprop="datePublished">2015-08-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/10/intellij-idea/">intellij-idea</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Editing"><a href="#Editing" class="headerlink" title="Editing"></a>Editing</h2><pre><code>Alt + Insert Generate code...(Getters, Setters)
-Alt + Enter Show intention actions and quick-fixes
-Ctrl + Alt + L Reformat code
-Ctrl + Alt + O Optimize imports
-Ctrl + F4 Close active editor tab
-</code></pre><h2 id="Navigation"><a href="#Navigation" class="headerlink" title="Navigation"></a>Navigation</h2><pre><code>Ctrl + F12 File structure popup
-Ctrl + B or Ctrl + Click Go to declaration
-Ctrl + Alt + B Go to implementation(s)
-Ctrl + Alt + Left/Right Navigate back/forward
-Ctrl + Q Quick JavaDoc
-Ctrl + P Parameter info
-Ctrl + I Implement Method
-Ctrl + H Type Hierarchy
-Ctrl + Shift + I Open quick definition lookup
-Ctrl + Shift + B Go to type declaration
-Esc Go to editor (from tool window)
-Shift + Esc Hide active or last active window
-Ctrl + ]/[ Move to code block end/start
-</code></pre><h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><pre><code>Ctrl + Shift + F12 Toggle maximizing editor
-Ctrl + Tab Switch between tabs and tool window
-Ctrl + &apos;+/-&apos; fold unfold
-Ctrl + Shift &apos;+/-&apos; all fold unfold
-</code></pre><h2 id="plugin"><a href="#plugin" class="headerlink" title="plugin"></a>plugin</h2><p>active vim<br>Ctrl+Alt+V Ctrl+;</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/08/10/intellij-idea/" data-id="cil0t73j1001m9ze5og992j35" class="article-share-link" data-share="baidu" data-title="intellij-idea">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/intellij-idea/">intellij-idea</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tmux" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/07/23/tmux/" class="article-date">
-  <time datetime="2015-07-23T16:02:12.000Z" itemprop="datePublished">2015-07-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/23/tmux/">tmux</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Learning-The-Basics"><a href="#Learning-The-Basics" class="headerlink" title="Learning The Basics"></a>Learning The Basics</h1><h2 id="Installing-tmux"><a href="#Installing-tmux" class="headerlink" title="Installing tmux"></a>Installing tmux</h2><h3 id="Installing-Via-a-Package-Manager"><a href="#Installing-Via-a-Package-Manager" class="headerlink" title="Installing Via a Package Manager"></a>Installing Via a Package Manager</h3><pre><code>sudo apt-get install tmux
-</code></pre><p>check version</p>
-<pre><code>tmux -V
-</code></pre><h3 id="Installing-from-Source"><a href="#Installing-from-Source" class="headerlink" title="Installing from Source"></a>Installing from Source</h3><p>The process of installing tmux is the same on both Mac OS X and Linux<br>You’ll need the GCC compiler in either case.<br>For Linux users, the package management tools usually have the GCC compilers.<br>On Ubuntu, you simply type</p>
-<pre><code>sudo apt-get install build-essential
-</code></pre><p>tmux also depends on libevent and ncurses, and you’ll nedd the prerequisites<br>for these as well. On Ubuntu, you can install these using the package manager<br>like this:</p>
-<pre><code>sudo apt-get install libevent-dev libncurses5-dev
-
-./configure
-make
-sudo make install
-</code></pre><h2 id="Starting-tmux"><a href="#Starting-tmux" class="headerlink" title="Starting tmux"></a>Starting tmux</h2><p>Starting tmux</p>
-<pre><code>tmux
-</code></pre><p>Close the tmux session</p>
-<pre><code>exit
-</code></pre><h3 id="Creating-Named-Sessions"><a href="#Creating-Named-Sessions" class="headerlink" title="Creating Named Sessions"></a>Creating Named Sessions</h3><pre><code>tmux new-session -s basic
-</code></pre><p>shorten this command</p>
-<pre><code>tmux new -s basic
-</code></pre><h2 id="Detaching-and-Attaching-Sessions"><a href="#Detaching-and-Attaching-Sessions" class="headerlink" title="Detaching and Attaching Sessions"></a>Detaching and Attaching Sessions</h2><p>list existing tmux sessions using the command</p>
-<pre><code>tmux list-sessions
-</code></pre><p>shorten this command</p>
-<pre><code>tmux ls
-</code></pre><p>attach to the session</p>
-<pre><code>tmux attach
-tmux attach -t basic
-</code></pre><h3 id="Killing-Sessions"><a href="#Killing-Sessions" class="headerlink" title="Killing Sessions"></a>Killing Sessions</h3><pre><code>tmux kill-session -t basic
-</code></pre><h2 id="Working-with-Windows"><a href="#Working-with-Windows" class="headerlink" title="Working with Windows"></a>Working with Windows</h2><pre><code>tmux new -s windows -n shell
-</code></pre><h3 id="Creating-and-Naming-Windows"><a href="#Creating-and-Naming-Windows" class="headerlink" title="Creating and Naming Windows"></a>Creating and Naming Windows</h3><p>create a window</p>
-<pre><code>PREFIX c
-</code></pre><p>rename a window</p>
-<pre><code>PREFIX ,
-</code></pre><h3 id="Moving-Between-Windows"><a href="#Moving-Between-Windows" class="headerlink" title="Moving Between Windows"></a>Moving Between Windows</h3><pre><code>PREFIX n
-PREFIX p
-PREFIX nubmer
-</code></pre><p>display a visual menu of our windows so we can select the one we’d like</p>
-<pre><code>PREFIX w
-</code></pre><h3 id="close-a-window"><a href="#close-a-window" class="headerlink" title="close a window"></a>close a window</h3><pre><code>exit
-or
-PREFIX &amp;
-</code></pre><h2 id="Working-with-Panes"><a href="#Working-with-Panes" class="headerlink" title="Working with Panes"></a>Working with Panes</h2><h3 id="split-new-pane"><a href="#split-new-pane" class="headerlink" title="split new pane"></a>split new pane</h3><pre><code>PREFIX %
-PREFIX &quot;
-</code></pre><h3 id="cycle-through-the-panes"><a href="#cycle-through-the-panes" class="headerlink" title="cycle through the panes"></a>cycle through the panes</h3><pre><code>PREFIX o
-PREFIX UP, DOWN, LEFT, RIGHT
-</code></pre><h3 id="cycle-through-layouts"><a href="#cycle-through-layouts" class="headerlink" title="cycle through layouts"></a>cycle through layouts</h3><pre><code>PREFIX SPACEBAR
-</code></pre><h3 id="closing-panes"><a href="#closing-panes" class="headerlink" title="closing panes"></a>closing panes</h3><pre><code>exit
-or
-PREFIX x
-</code></pre><h1 id="notebook"><a href="#notebook" class="headerlink" title="notebook"></a>notebook</h1><pre><code>假定[prefix] = ctrl-b
-session
-=========================
-创建一个被命名的session -&gt; $ tmux new -s name
-detach当前session -&gt; [prefix] d
-查看仍然存在的session列表 -&gt; $ tmux ls
-attach session -&gt; $ tmux attach
-创建一个后台session -d -&gt; $ tmux new -s second_session -d
-选择一个session进行attach -t -&gt; $ tmux attach -t second_session
-关闭一个session -&gt; $ tmux kill-session -t basic
-window
-========================
-创建一个session并为默认window命名 -&gt; $ tmux new -s basic -n shell
-创建一个window在当前的session -&gt; [prefix] c
-重命名window -&gt; [prefix] ,
-下一个window -&gt; [prefix] n
-上一个window -&gt; [prefix] p
-快速跳至$num编号的window -&gt; [prefix] $num
-按名字打开window -&gt; [prefix] $filename
-现实window列表并选择 -&gt; [prefix] w
-关闭window -&gt; [prefix] &amp; 或 输入exit
-pane
-==================
-竖直切pane -&gt; [prefix] %
-水平切pane -&gt; [prefix] &quot;
-循环选pane -&gt; [prefix] o
-选pane可以[prefix] 加 上下左右箭头进行选择
-循环显示5种默认样式 -&gt; [prefix] space
-关闭pane -&gt; [prefix] x 或 输入exit
-命令模式
-===============
-进入命令模式 -&gt; [prefix] :
-在buffer中操作
-==============
-进入选择模式 -&gt; [prefix] [
-退出 -&gt; enter
-移动 -&gt; 默认上下左右，可以在配置文件中选择vim模式(setw -g mode-keys vi)
-涂蓝选择 -&gt; space
-搜索 -&gt; ?向上搜索 /向下搜索 下一个结果n 反方向N
-复制 -&gt; 涂蓝状态下按enter
-粘贴 -&gt; [prefix] ]
-复制当前pane的全部可见buffer -&gt; [prefix] : capture-pane
-其他
-=============
-把pane转化成window -&gt; [prefix] !
-把[session]:[window].[pane]转化成当前window中的pane -&gt; [prefix] : join-pane -s [session_name]:[window].[pane]
-
-
-Tmux – terminal multiplexer
-
-Managing tmux server
-tmux    #start tmux server
-tmux at  #attach running sesseion to terminal
-tmux ls  #list running tmux sessions
-exit     #close tmux session
-
-Sharing session between terminals
-tmux new –s session_name  #make new named session
-tmux at –t session_name    #attach to exists session(s)
-tmux kil-session –t session_name #killnamed session
-
-所有的命令以ctrl+b组合
-
-c       create new window
-n/p    move to next/previous windows
-f      find window  by name
-w     menu with all windows
-&amp;     kill current window
-,      rename window
-
-%     split window. Add vertical pane to right
-“      split window add horizontal pane below
-←/ →   move focus to left/right pane
-↑/↓      move focus to upper/lower pane
-
-!        break current pane into new window
-x        kill the current pane
-
-[        enter copy mode
-CTRL-SPACE or CTRL+@  开始选择
-移动光标到选择区域
-Alt+w 复制选择区域
-]       粘贴选则的区域
-
-?       show tmux key bindings 
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/07/23/tmux/" data-id="cil0t73hi000c9ze5ok4st2qd" class="article-share-link" data-share="baidu" data-title="tmux">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tmux/">tmux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-practical-vim" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/29/practical-vim/" class="article-date">
-  <time datetime="2015-06-29T10:39:27.000Z" itemprop="datePublished">2015-06-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/29/practical-vim/">practical-vim</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>:version</p>
-<h1 id="basic-operate"><a href="#basic-operate" class="headerlink" title="basic operate"></a>basic operate</h1><h2 id="viewing-different-parts-of-the-work-buffer"><a href="#viewing-different-parts-of-the-work-buffer" class="headerlink" title="viewing different parts of the work buffer"></a>viewing different parts of the work buffer</h2><pre><code>CONTROL-E (default: 1 line)
-CONTROL-Y 
-
-CONTROL-D(down) (default: 1/2 window)
-CONTROL-U(up)
-
-CONTROL-F(forward) (default: 1 window)
-CONTROL-B(backward)
-
-zz: scroll cursor to top
-zb: bottom
-zz: center
-
-G: go to line
-</code></pre><h2 id="search"><a href="#search" class="headerlink" title="search"></a>search</h2><pre><code>n     Jump to next match, preserving direction and offset
-N     Jump to previous match, preserving direction and offset
-/&lt;CR&gt; Jump forward to next match of same pattern
-?&lt;CR&gt; Jump backward to previous match of same pattern
-
-%
-
-:noh&lt;CR&gt; to mute search highlighting
-</code></pre><h2 id="replace"><a href="#replace" class="headerlink" title="replace"></a>replace</h2><pre><code>r
-R
-</code></pre><h2 id="interact-with-the-System-clipboard"><a href="#interact-with-the-System-clipboard" class="headerlink" title="interact with the System clipboard"></a>interact with the System clipboard</h2><pre><code>:set paste
-:set paste!
-</code></pre><h2 id="folding-and-outlining"><a href="#folding-and-outlining" class="headerlink" title="folding and outlining"></a>folding and outlining</h2><pre><code>zA Toggle the state of folds, recursively
-zC Close folds, recursively
-zD Delete folds, recursively
-zE Eliminate all folds
-zf Create a fold from the current line to the one where the following motion
-   command takes the cursor
-countzF Create a fold covering count lines, starting with the current line
-zM Set option foldlevel to 0
-zN, zn Set (zN) or reset (zn) the foldenable option
-zO Open folds, recursively
-za Toggle the state of one fold
-zc Close one fold
-zd Delete one fold
-zi Toggle the value of the foldenable option
-zj, zk Move cursor to the start (zj) of the next fold or to the end (zk) of the
-       previous fold
-zm, zr Decrement (zm) or increment (zr) the value of the foldlevel option by one
-zo Open one fold
-
-zA, zC, zD and zO are called recursive because they operate on all folds nested 
-within the one where you issue the commands
-</code></pre><p>text object (文本对象 aw iw it)</p>
-<p>. 重复上次修改<br>a change could be anything that modifies the text in the document. That includes<br>commands triggered from Normal, Visual, and Command-Line modes, but a change could<br>also encompass any text entered (or deleted) in Insert mode.</p>
-<p>Moving Around in Insert Mode Resets the Change</p>
-<pre><code>复合命令 等效的长命令
-C        c$
-s        cl
-S        ^c
-I        ^i
-A        $a
-o        A&lt;CR&gt;
-O        ko
-
-Intent                               Act                     Repeat   Reverse
-Make a change                        {edit}                  .        u
-Scan line for next character         f{char}/t{char}         ;        ,
-Scan line for previous character     F{char}/T{char}         ;        ,
-Scan document for next match         /pattern&lt;CR&gt;            n        N
-Scan document for previous match     ?pattern&lt;CR&gt;            n        N
-Perform substitution                 :s/target/replacement   &amp;        u
-Execute a sequence of changes        qx{changes}q            @x       u
-</code></pre><ul>
-<li>查找当前光标下的单词</li>
-</ul>
-<p>normal mode</p>
-<pre><code>Operator + Motion = Action
-</code></pre><p>Vim’s grammar has just one more rule: when an operator command is invoked in<br>duplicate, it acts upon the current line. So dd deletes the current line,<br>while &gt;&gt; indents it.  The gU command is a special case. We can make it act upon<br>the current line by running either gUgU or the shorthand gUU.</p>
-<p>Vim’s Operator Commands</p>
-<pre><code>Trigger Effect
-c       Change
-d       Delete
-y       Yank into register
-g~      Swap case
-gu      Make lowercase
-gU      Make uppercase
-&gt;       Shift right
-&lt;       Shift left
-=       Autoindent
-!       Filter {motion} lines through an external program
-</code></pre><p>Insert Mode</p>
-<pre><code>Keystrokes Effect
-&lt;C-h&gt;      Delete back one character (backspace)
-&lt;C-w&gt;      Delete back one word
-&lt;C-u&gt;      Delete back to start of line
-
-Keystrokes Effect
-&lt;Esc&gt;      Switch to Normal mode
-&lt;C-[&gt;      Switch to Normal mode
-&lt;C-o&gt;      Switch to Insert Normal mode
-</code></pre><p>register<br>expression register </p>
-<pre><code>Keystrokes       Buffer Contents
-A                6 plus 35 equals
-&lt;C-r&gt;=6*35&lt;CR&gt;   6 plus 35 equals 210
-</code></pre><p>Insert Unusual Characters by Character Code<br>Insert Unusual Characters</p>
-<pre><code>Keystrokes             Effect
-&lt;C-v&gt;{123}             Insert character by decimal code
-&lt;C-v&gt;u{1234}           Insert character by hexadecimal code
-&lt;C-v&gt;{nondigit}        Insert nondigit literally
-&lt;C-k&gt;{char1}{char2}    Insert character represented by {char1}{char2} digraph
-</code></pre><p>ga command outputs a message at the bottom of the screen, revealing the character<br>code in decimal and hexadecimal notations</p>
-<p>Overwrite Tab Characters with Virtual Replace Mode<br>gR<br>gr{char}</p>
-<p>Visual Mode<br>Enabling Visual Modes</p>
-<pre><code>Command  Effect
-v        Enable character-wise Visual mode
-V        Enable line-wise Visual mode
-&lt;C-v&gt;    Enable block-wise Visual mode
-gv       Reselect the last visual selection
-
-o        Go to other end of highlighted text
-</code></pre><p>In Visual and Operator-Pending modes the i and a keys follow a different convention:<br>they form the first half of a text object.<br>If you’ve made a selection with Visual-Block mode and you wonder why you’re not<br>in Insert mode after pressing i, try using I instead.</p>
-<p>Command-Line Mode<br>a few of the symbols that can be used to create addresses and ranges for Ex commands</p>
-<pre><code>Symbol Address
-1      First line of the file
-$      Last line of the file
-0      Virtual line above first line of the file
-.      Line where the cursor is placed
-&apos;m     Line containing mark m
-&apos;&lt;     Start of visual selection
-&apos;&gt;     End of visual selection
-%      The entire file (shorthand for : 1,$)
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/06/29/practical-vim/" data-id="cil0t73i500109ze52903bz4y" class="article-share-link" data-share="baidu" data-title="practical-vim">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-maven-in-action" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/17/maven-in-action/" class="article-date">
-  <time datetime="2015-06-17T15:01:48.000Z" itemprop="datePublished">2015-06-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/17/maven-in-action/">maven-in-action</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>使用Archetype生成项目骨架<br>mvn archetype:generate<br>mvn org.apache.maven.plugins:maven-archetype-plugin:2.0-alpha-5:generate<br>format:    groupId:artifactId:version:goal</p>
-<p>Maven坐标的元素包括groupId,artifactId,version,packaging(可选 默认为jar),classifier(不能直接定义)</p>
-<p>依赖范围   编译classpath 测试classpath 运行classpath sample<br>compile    Y             Y             Y             spring-core<br>test       -             Y             -             JUnit<br>provided   Y             Y             -             servlet-api<br>runtime    -             Y             Y             JDBC驱动实现<br>system     Y             Y             -             本地的 Maven仓库之外的类库文件<br>import</p>
-<p>依赖范围影响传递性依赖<br>          compile    test    provided    runtime<br>compile   compile    -       -           runtime<br>test      test       -       -           test<br>provided  provided   -       provided    provided<br>runtime   runtime    -       -           runtime<br>最左边一列表示第一直接依赖范围 最上面一行表示第二直接依赖范围 中间的交叉单元格表示传递性依赖范围</p>
-<p>优化依赖<br>mvn dependency:list<br>mvn dependency:tree<br>mvn dependency:analyze</p>
-<p>Used undeclared dependencies<br>Unused declared dependencies</p>
-<p>三套声明周期<br>clean<br>  pre-clean clean post-clean<br>default<br>  validate initialize generate-sources process-sources generate-resources process-resources compile process-classes generate-test-sources<br>  process-test-sources generate-test-resources process-test-resources test-compile process-test-classes test prepare-package<br>  package pre-integration-test integration-test post-integration-test verify install deploy<br>site<br>  pre-site site post-site site-deploy</p>
-<p>各个声明周期是独立的 而一个声明周期的阶段是有前后依赖关系的</p>
-<p>插件配置<br>命令行插件配置<br>mvn install -Dmaven.test.skip=true<br>参数-D是Java自带的 其功能是通过命令行设置一个Java系统属性 Maven简单地重用了该参数 在准备插件的时候检查系统属性 便实现了插件参数的配置<br>POM中插件全局配置</p>
-<p><plugin></plugin></p>
-<p><configration></configration><br><br>POM中插件任务配置</p>
-<p>命令行参数是由该插件参数的表达式(Expression)决定的</p>
-<p>mvn help:describe -Dplugin=org.apache.maven.plugins:maven-compiler-plugin<br>mvn help:describe -Dplugin=compiler<br>mvn help:describe -Dplugin=compiler -Dgoal=compile<br>mvn help:describe -Dplugin=compiler -Ddetail<br>使用目标前缀(Goal Prefix) 简化groupId artifactId</p>
-<p>通过mvn命令激活生命周期阶段 从而执行那些绑定在生命周期阶段上的插件目标<br>example: mvn compile<br>但Maven还支持直接从命令行调用插件目标 从而执行不适合绑定在生命周期上的任务<br>example: mvn help:describe -Dplugin=compiler</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/06/17/maven-in-action/" data-id="cil0t73ig00189ze5mtlu6le8" class="article-share-link" data-share="baidu" data-title="maven-in-action">分享到</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-tdd-in-action" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/12/tdd-in-action/" class="article-date">
-  <time datetime="2015-06-12T17:12:37.000Z" itemprop="datePublished">2015-06-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/12/tdd-in-action/">tdd-in-action</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>支持ATDD的测试框架<br>表格形式(Fit Fitness)<br>纯文本形式(Exactor)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/06/12/tdd-in-action/" data-id="cil0t73hn000i9ze5rst1rubn" class="article-share-link" data-share="baidu" data-title="tdd-in-action">分享到</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-sshkey" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2015/06/12/sshkey/" class="article-date">
-  <time datetime="2015-06-12T09:51:10.000Z" itemprop="datePublished">2015-06-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/12/sshkey/">sshkey</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <pre><code>ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDC7ctY3uxMB9Ok/+Ts5tNA2kyE8+tsM6YCHchpG19mOsPKRsx5wlG6GFDRVj1HGsRp2GB94emlMjLomgcOfhuyalEUGDi1nKG11KGD21NXIsHc/XfjKCsAK4oD84PFE1xCx24BE6Vi8G7PRE/byiF0DGH6lYG9i4eheCgymNuSXWyKEfUJJk4O+USbvgnmIS1R6Gjj+9jLqcNH7+RkLnJwQpQlwhXJGDGAjY6Rii4vdb8R7W6jHPj6/ePmaTbrCIDYj50Qwx7dch6XD0mYSNkzpMHzhBkwcX4R634dsixVvKwg88yLrCwaKkR8oTY6ThjEqqBFbUyKZvV/ZOnZ8sIB evatlsong@evatlsong-AI
-ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmbcYz3yTD4GjEHFXhwlmjRILI4zFWggsjrkZoB1RjElD/C2FWUuc7Lddu3zCCfKm80fzX3b3fiTmt2heHJpJd6G4gaVy2Oj61MLilUDq+RBJ8LH0fepj7dOmd9qkBy/xLdBtfx8pY+b/yqrBw8RlXMtajrL2Exp6mZV6vP1ixth9RuJVU258S0VH71C5ftEJ1YQEujvF/vtSxqgwUAab4/BV6u72JlzZ/Zz0pau+IARMUQkGq88Gq8CGSLQQtHCEz3y/9m7jo6Uqwb0qwzNPduqMifonTOgxzCovRqM12MObzl evatlsong@evatlsong-ThinkPad
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2015/06/12/sshkey/" data-id="cil0t73hv000r9ze5nv34x3hf" class="article-share-link" data-share="baidu" data-title="sshkey">分享到</a>
-      
-
-      
-
-      
     </footer>
   </div>
   
@@ -953,7 +1132,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmb
   
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
     </nav>
   
 </section>
@@ -964,9 +1143,9 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmb
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標簽</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/apache/">apache</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/atom/">atom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos7/">centos7</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/front-end/">front-end</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gem/">gem</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git-svn/">git svn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hibernate/">hibernate</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/httpd/">httpd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/intellij-idea/">intellij-idea</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jpa/">jpa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kettle/">kettle</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/maven/">maven</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monitor/">monitor</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php/">php</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/poi/">poi</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/resume/">resume</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ruby/">ruby</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/server/">server</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/spring/">spring</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemctl/">systemctl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/systemd/">systemd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tmux/">tmux</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomat/">tomat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tomcat/">tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/useage/">useage</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -975,46 +1154,46 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmb
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">標簽雲</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
+      <a href="/tags/apache/" style="font-size: 20px;">apache</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/centos7/" style="font-size: 10px;">centos7</a> <a href="/tags/css/" style="font-size: 20px;">css</a> <a href="/tags/front-end/" style="font-size: 10px;">front-end</a> <a href="/tags/gem/" style="font-size: 10px;">gem</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/git-svn/" style="font-size: 10px;">git svn</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/hibernate/" style="font-size: 10px;">hibernate</a> <a href="/tags/httpd/" style="font-size: 10px;">httpd</a> <a href="/tags/intellij-idea/" style="font-size: 10px;">intellij-idea</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/jpa/" style="font-size: 10px;">jpa</a> <a href="/tags/kettle/" style="font-size: 10px;">kettle</a> <a href="/tags/markdown/" style="font-size: 20px;">markdown</a> <a href="/tags/maven/" style="font-size: 20px;">maven</a> <a href="/tags/monitor/" style="font-size: 10px;">monitor</a> <a href="/tags/php/" style="font-size: 10px;">php</a> <a href="/tags/poi/" style="font-size: 10px;">poi</a> <a href="/tags/resume/" style="font-size: 10px;">resume</a> <a href="/tags/ruby/" style="font-size: 10px;">ruby</a> <a href="/tags/server/" style="font-size: 10px;">server</a> <a href="/tags/spring/" style="font-size: 10px;">spring</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/systemctl/" style="font-size: 10px;">systemctl</a> <a href="/tags/systemd/" style="font-size: 10px;">systemd</a> <a href="/tags/tmux/" style="font-size: 10px;">tmux</a> <a href="/tags/tomat/" style="font-size: 10px;">tomat</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/ubuntu/" style="font-size: 10px;">ubuntu</a> <a href="/tags/useage/" style="font-size: 10px;">useage</a> <a href="/tags/vim/" style="font-size: 20px;">vim</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">歸檔</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">近期文章</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/02/24/hello-world/">Hello World</a>
+            <a href="/2016/07/06/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/01/15/h2/">h2</a>
+            <a href="/2016/07/06/hello-world/">Hello World</a>
           </li>
         
           <li>
-            <a href="/2015/11/06/maven-usage/">maven-usage</a>
+            <a href="/2016/05/10/kettle/">kettle</a>
           </li>
         
           <li>
-            <a href="/2015/11/06/java-persistence-with-hibernate/">java-persistence-with-hibernate</a>
+            <a href="/2016/04/03/ubuntu-usage/">ubuntu-usage</a>
           </li>
         
           <li>
-            <a href="/2015/11/04/spring-in-action/">spring-in-action</a>
+            <a href="/2016/03/14/server-monitor/">server-monitor</a>
           </li>
         
       </ul>
@@ -1024,7 +1203,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmb
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">友情鏈接</h3>
+    <h3 class="widget-title">Links</h3>
     <div class="widget">
       <ul>
         
@@ -1071,7 +1250,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmb
 </nav>
   <!-- totop start -->
 <div id="totop">
-<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+<a title="totop"><img src="/img/scrollup.png"/></a>
 </div>
 
 <!-- totop end -->
@@ -1110,7 +1289,7 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDaG91Q+zoWTos1CHSr7fQH5whgB/YiujHBtq7vmrmb
 
 
 
-<script src="/js/script.js" type="text/javascript"></script>
+<script src="/js/script.js"></script>
 
 </div>
 </body>
