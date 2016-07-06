@@ -15,3 +15,6 @@ git bash下执行命令
 git bash下执行命令
 
 	vim +BundleInstall +qall
+
+node
+nvm-windows

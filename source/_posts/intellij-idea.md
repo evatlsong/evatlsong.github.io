@@ -34,6 +34,7 @@ tags: intellij-idea
     Ctrl + Tab Switch between tabs and tool window
     Ctrl + '+/-' fold unfold
     Ctrl + Shift '+/-' all fold unfold
+    Alt + Left/Right Switch between tabs
  
 ## plugin
 active vim

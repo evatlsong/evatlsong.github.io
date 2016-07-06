@@ -16,3 +16,5 @@ convmv -f cp950 -t utf8 --notest filename
 解决解压乱码
 export LANG=zh_CN.gb18030
 7z x filename
+
+tar -xf name.tar.gz

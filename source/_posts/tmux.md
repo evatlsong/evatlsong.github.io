@@ -182,3 +182,5 @@ display a visual menu of our windows so we can select the one we'd like
     ]       粘贴选则的区域
 
     ?       show tmux key bindings 
+
+	prefix 同时按下方向键 可更改panel大小
