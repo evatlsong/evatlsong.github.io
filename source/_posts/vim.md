@@ -6,3 +6,9 @@ tags: vim
 :help option-list
 leader: \
 :help functions
+
+YouCompleteMe
+Bundle: 'Valloric/YouCompleteMe'
+
+cd ~/.vim/bundle/YouCompleteMe
+./install.py --clang-completer
