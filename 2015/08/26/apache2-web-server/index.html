@@ -6,16 +6,31 @@
   
   <title>apache2-web-server | evatlsong</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ubuntu 15.04apache version 2.4.10/etc/init.d/apache2systemctl start apache2">
+  <meta name="description" content="ubuntu 15.04apache version 2.4.10/etc/init.d/apache2systemctl start apache2
+ubuntu 16.04第一步，首先是要打开apache的相关功能。
+sudo a2enmod rewrite #打开 url 重写 
+sudo a2enmod proxy 
+sudo a2enmod proxy_http 
+sudo a2enmo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="apache2-web-server">
 <meta property="og:url" content="http://evatlsong.com/2015/08/26/apache2-web-server/index.html">
 <meta property="og:site_name" content="evatlsong">
-<meta property="og:description" content="ubuntu 15.04apache version 2.4.10/etc/init.d/apache2systemctl start apache2">
-<meta property="og:updated_time" content="2016-07-12T05:10:30.912Z">
+<meta property="og:description" content="ubuntu 15.04apache version 2.4.10/etc/init.d/apache2systemctl start apache2
+ubuntu 16.04第一步，首先是要打开apache的相关功能。
+sudo a2enmod rewrite #打开 url 重写 
+sudo a2enmod proxy 
+sudo a2enmod proxy_http 
+sudo a2enmo">
+<meta property="og:updated_time" content="2016-07-27T01:11:35.771Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="apache2-web-server">
-<meta name="twitter:description" content="ubuntu 15.04apache version 2.4.10/etc/init.d/apache2systemctl start apache2">
+<meta name="twitter:description" content="ubuntu 15.04apache version 2.4.10/etc/init.d/apache2systemctl start apache2
+ubuntu 16.04第一步，首先是要打开apache的相关功能。
+sudo a2enmod rewrite #打开 url 重写 
+sudo a2enmod proxy 
+sudo a2enmod proxy_http 
+sudo a2enmo">
   
     <link rel="alternative" href="/atom.xml" title="evatlsong" type="application/atom+xml">
   
@@ -98,12 +113,33 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>ubuntu 15.04<br>apache version 2.4.10<br>/etc/init.d/apache2<br>systemctl start apache2</p>
+<p>ubuntu 16.04<br>第一步，首先是要打开apache的相关功能。</p>
+<pre><code>sudo a2enmod rewrite #打开 url 重写 
+sudo a2enmod proxy 
+sudo a2enmod proxy_http 
+sudo a2enmod proxy_balancer
+</code></pre><p>第二步，设置网站的配置文件，在 /etc/apache2/sites-available/ 目录下 新建文件 localhost.conf， 写入如下内容</p>
+<pre><code>ServerName localhost
+ProxyPreserveHost On
+ProxyRequests Off
+&lt;Proxy *&gt;
+    Order deny,allow
+    Allow from all
+&lt;/Proxy&gt;
+ProxyPass / http://localhost:8082/
+ProxyPassReverse / http://localhost:8082/
+</code></pre><p>第三步，在/etc/apache2/sites-enabled/目录下把刚才建的文件做个软链接过来</p>
+<pre><code>sudo ln -s ../sites-available/localhost.conf 
+</code></pre><p>第四步，执行、启用这个站点</p>
+<pre><code>sudo a2ensite localhost.conf
+sudo service apache2 reload
+</code></pre><p>或者直接重启apache服务<br>sudo service apache2 restart</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="ciqj037jl0002eif9ogr37oll" class="article-share-link" data-share="baidu" data-title="apache2-web-server">Share</a>
+        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="cir4760p40002emdcg3kpmcsl" class="article-share-link" data-share="baidu" data-title="apache2-web-server">Share</a>
       
 
       
@@ -179,11 +215,11 @@
       <ul>
         
           <li>
-            <a href="/2016/07/12/node-usage/">(no title)</a>
+            <a href="/2016/07/27/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/07/12/hello-world/">Hello World</a>
+            <a href="/2016/07/27/hello-world/">Hello World</a>
           </li>
         
           <li>

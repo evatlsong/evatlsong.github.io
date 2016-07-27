@@ -535,7 +535,7 @@ public class Shipment {
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/" data-id="ciqj037l3000veif9ur8gl3bi" class="article-share-link" data-share="baidu" data-title="java-persistence-with-hibernate">Share</a>
+        <a data-url="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/" data-id="cir4760rs000vemdc4rodii10" class="article-share-link" data-share="baidu" data-title="java-persistence-with-hibernate">Share</a>
       
 
       
@@ -607,7 +607,7 @@ protected Filter[] getServletFilters() {
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="ciqj037mf001seif96f5hx5ep" class="article-share-link" data-share="baidu" data-title="spring-in-action">Share</a>
+        <a data-url="http://evatlsong.com/2015/11/04/spring-in-action/" data-id="cir4760u6001semdc4kr32o3u" class="article-share-link" data-share="baidu" data-title="spring-in-action">Share</a>
       
 
       
@@ -658,7 +658,7 @@ protected Filter[] getServletFilters() {
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/09/15/front-end/" data-id="ciqj037kl000heif9jm3pubqb" class="article-share-link" data-share="baidu" data-title="front-end">Share</a>
+        <a data-url="http://evatlsong.com/2015/09/15/front-end/" data-id="cir4760r1000hemdcn1hcikrh" class="article-share-link" data-share="baidu" data-title="front-end">Share</a>
       
 
       
@@ -700,7 +700,7 @@ protected Filter[] getServletFilters() {
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/09/12/enterprise-web-development/" data-id="ciqj037kf000eeif9c9tmjc3j" class="article-share-link" data-share="baidu" data-title="enterprise-web-development">Share</a>
+        <a data-url="http://evatlsong.com/2015/09/12/enterprise-web-development/" data-id="cir4760qq000eemdcpsxrim0q" class="article-share-link" data-share="baidu" data-title="enterprise-web-development">Share</a>
       
 
       
@@ -737,13 +737,14 @@ protected Filter[] getServletFilters() {
       
         <p>:help option-list<br>leader: \<br>:help functions</p>
 <p>YouCompleteMe<br>Bundle: ‘Valloric/YouCompleteMe’</p>
-<p>cd ~/.vim/bundle/YouCompleteMe<br>./install.py –clang-completer</p>
+<p>修改install.py中的python版本<br>cd ~/.vim/bundle/YouCompleteMe<br>./install.py –clang-completer</p>
+<p>navigating windows with Ctrl+w g/h/j/k</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/09/10/vim/" data-id="ciqj037mz002ceif99f74i8gk" class="article-share-link" data-share="baidu" data-title="vim">Share</a>
+        <a data-url="http://evatlsong.com/2015/09/10/vim/" data-id="cir4760ve002cemdcgiu4y2py" class="article-share-link" data-share="baidu" data-title="vim">Share</a>
       
 
       
@@ -781,12 +782,33 @@ protected Filter[] getServletFilters() {
     <div class="article-entry" itemprop="articleBody">
       
         <p>ubuntu 15.04<br>apache version 2.4.10<br>/etc/init.d/apache2<br>systemctl start apache2</p>
+<p>ubuntu 16.04<br>第一步，首先是要打开apache的相关功能。</p>
+<pre><code>sudo a2enmod rewrite #打开 url 重写 
+sudo a2enmod proxy 
+sudo a2enmod proxy_http 
+sudo a2enmod proxy_balancer
+</code></pre><p>第二步，设置网站的配置文件，在 /etc/apache2/sites-available/ 目录下 新建文件 localhost.conf， 写入如下内容</p>
+<pre><code>ServerName localhost
+ProxyPreserveHost On
+ProxyRequests Off
+&lt;Proxy *&gt;
+    Order deny,allow
+    Allow from all
+&lt;/Proxy&gt;
+ProxyPass / http://localhost:8082/
+ProxyPassReverse / http://localhost:8082/
+</code></pre><p>第三步，在/etc/apache2/sites-enabled/目录下把刚才建的文件做个软链接过来</p>
+<pre><code>sudo ln -s ../sites-available/localhost.conf 
+</code></pre><p>第四步，执行、启用这个站点</p>
+<pre><code>sudo a2ensite localhost.conf
+sudo service apache2 reload
+</code></pre><p>或者直接重启apache服务<br>sudo service apache2 restart</p>
 
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="ciqj037jl0002eif9ogr37oll" class="article-share-link" data-share="baidu" data-title="apache2-web-server">Share</a>
+        <a data-url="http://evatlsong.com/2015/08/26/apache2-web-server/" data-id="cir4760p40002emdcg3kpmcsl" class="article-share-link" data-share="baidu" data-title="apache2-web-server">Share</a>
       
 
       
@@ -829,7 +851,7 @@ protected Filter[] getServletFilters() {
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/26/systemd-usage/" data-id="ciqj037mn001yeif9t3ecwhl1" class="article-share-link" data-share="baidu" data-title="systemd-usage">Share</a>
+        <a data-url="http://evatlsong.com/2015/08/26/systemd-usage/" data-id="cir4760um001yemdckvneu1bq" class="article-share-link" data-share="baidu" data-title="systemd-usage">Share</a>
       
 
       
@@ -1029,7 +1051,7 @@ private void readObject(ObjectInputStream stream) throws IOException, ClassNotFo
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="ciqj037mr0023eif9zs7oe2n4" class="article-share-link" data-share="baidu" data-title="thinking-in-java">Share</a>
+        <a data-url="http://evatlsong.com/2015/08/16/thinking-in-java/" data-id="cir4760uu0023emdc2g03rmeq" class="article-share-link" data-share="baidu" data-title="thinking-in-java">Share</a>
       
 
       
@@ -1074,7 +1096,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="ciqj037mb001oeif9ksh8a2vr" class="article-share-link" data-share="baidu" data-title="ruby">Share</a>
+        <a data-url="http://evatlsong.com/2015/08/15/ruby/" data-id="cir4760u0001oemdcwk4opfmm" class="article-share-link" data-share="baidu" data-title="ruby">Share</a>
       
 
       
@@ -1117,7 +1139,7 @@ gem sources -l
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/08/15/ssh/" data-id="ciqj037mg001teif9if033sds" class="article-share-link" data-share="baidu" data-title="ssh">Share</a>
+        <a data-url="http://evatlsong.com/2015/08/15/ssh/" data-id="cir4760u9001temdcu9d5b7l5" class="article-share-link" data-share="baidu" data-title="ssh">Share</a>
       
 
       
@@ -1179,11 +1201,11 @@ gem sources -l
       <ul>
         
           <li>
-            <a href="/2016/07/12/node-usage/">(no title)</a>
+            <a href="/2016/07/27/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/07/12/hello-world/">Hello World</a>
+            <a href="/2016/07/27/hello-world/">Hello World</a>
           </li>
         
           <li>
