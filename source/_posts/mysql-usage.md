@@ -84,3 +84,7 @@ my.ini
 ## 数据文件路径
 	centos7 mariadb
 	/var/lib/mysql/
+
+## 允许远程连接
+1：在服务端MySQL文件夹下找到my.ini文件。修改bind-address=127.0.0.1 为 bind-address=0.0.0.0
+2：重新启动MySQL服务
