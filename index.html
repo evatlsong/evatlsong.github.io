@@ -75,8 +75,8 @@
   
     <article id="post-node-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/01/node-usage/" class="article-date">
-  <time datetime="2016-08-01T09:36:38.209Z" itemprop="datePublished">2016-08-01</time>
+    <a href="/2017/03/06/node-usage/" class="article-date">
+  <time datetime="2017-03-06T05:13:57.977Z" itemprop="datePublished">2017-03-06</time>
 </a>
     
   </div>
@@ -97,7 +97,109 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/08/01/node-usage/" data-id="cirbue7jd001cehee26mqs79d" class="article-share-link" data-share="baidu" data-title="">Share</a>
+        <a data-url="http://evatlsong.com/2017/03/06/node-usage/" data-id="cizxnk62y001ej85h5c9br4me" class="article-share-link" data-share="baidu" data-title="">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-samba" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/06/samba/" class="article-date">
+  <time datetime="2017-03-06T05:13:57.977Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>sudo apt install samba<br>编辑 /etc/samba/smb.conf 配置<br>默认配置了打印机共享, 通常不需要, 可注释掉这部分内容。</p>
+<p>#[printers]</p>
+<h1 id="comment-All-Printers"><a href="#comment-All-Printers" class="headerlink" title="comment = All Printers"></a>comment = All Printers</h1><h1 id="browseable-no"><a href="#browseable-no" class="headerlink" title="browseable = no"></a>browseable = no</h1><h1 id="path-var-spool-samba"><a href="#path-var-spool-samba" class="headerlink" title="path = /var/spool/samba"></a>path = /var/spool/samba</h1><h1 id="printable-yes"><a href="#printable-yes" class="headerlink" title="printable = yes"></a>printable = yes</h1><h1 id="guest-ok-no"><a href="#guest-ok-no" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><h1 id="read-only-yes"><a href="#read-only-yes" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="create-mask-0700"><a href="#create-mask-0700" class="headerlink" title="create mask = 0700"></a>create mask = 0700</h1><p>#</p>
+<h2 id="Windows-clients-look-for-this-share-name-as-a-source-of-downloadable"><a href="#Windows-clients-look-for-this-share-name-as-a-source-of-downloadable" class="headerlink" title="Windows clients look for this share name as a source of downloadable"></a>Windows clients look for this share name as a source of downloadable</h2><h2 id="printer-drivers"><a href="#printer-drivers" class="headerlink" title="printer drivers"></a>printer drivers</h2><p>#[print$]</p>
+<h1 id="comment-Printer-Drivers"><a href="#comment-Printer-Drivers" class="headerlink" title="comment = Printer Drivers"></a>comment = Printer Drivers</h1><h1 id="path-var-lib-samba-printers"><a href="#path-var-lib-samba-printers" class="headerlink" title="path = /var/lib/samba/printers"></a>path = /var/lib/samba/printers</h1><h1 id="browseable-yes"><a href="#browseable-yes" class="headerlink" title="browseable = yes"></a>browseable = yes</h1><h1 id="read-only-yes-1"><a href="#read-only-yes-1" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="guest-ok-no-1"><a href="#guest-ok-no-1" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><p>添加自定义共享配置</p>
+<pre><code>[dongrun]                                                      
+     path = /home/evatlsong/Project/dongrun                 
+     browsable = yes                                      
+     writeable = yes                                    
+     read only = no   
+
+ sudo smbpasswd -a evatlsong
+ sudo systemctl restart smbd
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2017/03/06/samba/" data-id="cizxnk63i001sj85hjmq3eh9w" class="article-share-link" data-share="baidu" data-title="">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-json-problem" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/06/json-problem/" class="article-date">
+  <time datetime="2017-03-06T05:13:57.973Z" itemprop="datePublished">2017-03-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>var query = {
+    age:10
+};
+
+$.ajax({
+    url:url,
+    data:JSON.stringify(query),
+    type:&apos;post&apos;,
+    contentType:&apos;application/json;charset=utf-8&apos;,
+    dataType:&apos;json&apos;,
+    success: function (json) {
+        alert(json)
+    }
+});
+</code></pre><p>springMVC 接收时要加@ResquestBody 传输的json字符串</p>
+<pre><code>var query = {
+    age:10
+};
+
+$.ajax({
+    url:url,
+    data:query,
+    type:&apos;post&apos;,
+    dataType:&apos;json&apos;,
+    success: function (json) {
+        alert(json)
+    }
+});
+</code></pre><p>springMVC 接收时不加@ResquestBody 传输的form表单</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2017/03/06/json-problem/" data-id="cizxnk628000xj85hv84dln5n" class="article-share-link" data-share="baidu" data-title="">Share</a>
       
 
       
@@ -112,8 +214,8 @@
   
     <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/01/hello-world/" class="article-date">
-  <time datetime="2016-08-01T09:36:38.209Z" itemprop="datePublished">2016-08-01</time>
+    <a href="/2017/03/06/hello-world/" class="article-date">
+  <time datetime="2017-03-06T05:13:57.973Z" itemprop="datePublished">2017-03-06</time>
 </a>
     
   </div>
@@ -124,7 +226,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/01/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/03/06/hello-world/">Hello World</a>
     </h1>
   
 
@@ -146,7 +248,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/08/01/hello-world/" data-id="cirbue7ig000reheeqkfyc90i" class="article-share-link" data-share="baidu" data-title="Hello World">Share</a>
+        <a data-url="http://evatlsong.com/2017/03/06/hello-world/" data-id="cizxnk622000qj85hbfjot08u" class="article-share-link" data-share="baidu" data-title="Hello World">Share</a>
       
 
       
@@ -187,7 +289,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/05/10/kettle/" data-id="cirbue7iq000yeheeft6b7oj4" class="article-share-link" data-share="baidu" data-title="kettle">Share</a>
+        <a data-url="http://evatlsong.com/2016/05/10/kettle/" data-id="cizxnk62a000zj85hprhia5kv" class="article-share-link" data-share="baidu" data-title="kettle">Share</a>
       
 
       
@@ -232,7 +334,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/04/03/ubuntu-usage/" data-id="cirbue7k90028eheeg9pph7tk" class="article-share-link" data-share="baidu" data-title="ubuntu-usage">Share</a>
+        <a data-url="http://evatlsong.com/2016/04/03/ubuntu-usage/" data-id="cizxnk643002bj85hdct62hvk" class="article-share-link" data-share="baidu" data-title="ubuntu-usage">Share</a>
       
 
       
@@ -275,7 +377,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/03/14/server-monitor/" data-id="cirbue7jt001qeheeck051lgm" class="article-share-link" data-share="baidu" data-title="server-monitor">Share</a>
+        <a data-url="http://evatlsong.com/2016/03/14/server-monitor/" data-id="cizxnk63k001tj85ho4ajfim8" class="article-share-link" data-share="baidu" data-title="server-monitor">Share</a>
       
 
       
@@ -320,100 +422,13 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/03/02/resume-question/" data-id="cirbue7jq001meheeoiaduhsx" class="article-share-link" data-share="baidu" data-title="resume-question">Share</a>
+        <a data-url="http://evatlsong.com/2016/03/02/resume-question/" data-id="cizxnk63d001oj85hg8ortkxp" class="article-share-link" data-share="baidu" data-title="resume-question">Share</a>
       
 
       
 
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/resume/">resume</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-poi" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/15/poi/" class="article-date">
-  <time datetime="2016-01-15T10:52:51.000Z" itemprop="datePublished">2016-01-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/15/poi/">poi</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>设置背景色<br>HSSFWorkbook wb = new HSSFWorkbook();<br>HSSFCellStyle style = wb.createCellStyle();<br>style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);<br>style.setFillForegroundColor(HSSFColor.WHITE.index);<br>cell.setCellStyle(style);  //cell 是 HSSFCell 对象</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2016/01/15/poi/" data-id="cirbue7jk001ieheelbdztdcz" class="article-share-link" data-share="baidu" data-title="poi">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/poi/">poi</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/01/15/css/" class="article-date">
-  <time datetime="2016-01-15T10:52:51.000Z" itemprop="datePublished">2016-01-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/01/15/css/">css</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>div中设置文本垂直居中<br>height: xx px;<br>line-height: xx px;<br>两个设置相同值</p>
-<p>select 火狐的autocomplete=on 要按照它的实际值做相关操作</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2016/01/15/css/" data-id="cirbue7hp0008ehee655r3j28" class="article-share-link" data-share="baidu" data-title="css">Share</a>
-      
-
-      
-
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
     </footer>
   </div>
@@ -450,7 +465,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2016/01/15/h2/" data-id="cirbue7id000oeheecmjsv3jk" class="article-share-link" data-share="baidu" data-title="h2">Share</a>
+        <a data-url="http://evatlsong.com/2016/01/15/h2/" data-id="cizxnk620000oj85hd27duicl" class="article-share-link" data-share="baidu" data-title="h2">Share</a>
       
 
       
@@ -463,10 +478,10 @@
 
 
   
-    <article id="post-maven-usage" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-css" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2015/11/06/maven-usage/" class="article-date">
-  <time datetime="2015-11-06T16:20:03.000Z" itemprop="datePublished">2015-11-06</time>
+    <a href="/2016/01/15/css/" class="article-date">
+  <time datetime="2016-01-15T10:52:51.000Z" itemprop="datePublished">2016-01-15</time>
 </a>
     
   </div>
@@ -477,7 +492,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/11/06/maven-usage/">maven-usage</a>
+      <a class="article-title" href="/2016/01/15/css/">css</a>
     </h1>
   
 
@@ -485,30 +500,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="resources"><a href="#resources" class="headerlink" title="resources"></a>resources</h2><p>解决hibernate mybatis 找不到xml文件的错误</p>
-<pre><code>&lt;build&gt;
-    &lt;resources&gt;
-        &lt;resource&gt;
-            &lt;directory&gt;src/main/java&lt;/directory&gt;
-            &lt;includes&gt;
-                &lt;include&gt;**/*.xml&lt;/include&gt;
-            &lt;/includes&gt;
-            &lt;filtering&gt;true&lt;/filtering&gt;
-        &lt;/resource&gt;
-    &lt;/resources&gt;
-&lt;/build&gt;
-</code></pre>
+        <p>div中设置文本垂直居中<br>height: xx px;<br>line-height: xx px;<br>两个设置相同值</p>
+<p>select 火狐的autocomplete=on 要按照它的实际值做相关操作</p>
+
       
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2015/11/06/maven-usage/" data-id="cirbue7j80018eheerrzhd983" class="article-share-link" data-share="baidu" data-title="maven-usage">Share</a>
+        <a data-url="http://evatlsong.com/2016/01/15/css/" data-id="cizxnk61a0008j85hvfts8mvg" class="article-share-link" data-share="baidu" data-title="css">Share</a>
       
 
       
 
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/maven/">maven</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
     </footer>
   </div>
@@ -552,7 +557,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -564,23 +569,23 @@
       <ul>
         
           <li>
-            <a href="/2016/08/01/node-usage/">(no title)</a>
+            <a href="/2017/03/06/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/08/01/hello-world/">Hello World</a>
+            <a href="/2017/03/06/samba/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/06/json-problem/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/06/hello-world/">Hello World</a>
           </li>
         
           <li>
             <a href="/2016/05/10/kettle/">kettle</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/03/ubuntu-usage/">ubuntu-usage</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/14/server-monitor/">server-monitor</a>
           </li>
         
       </ul>
@@ -614,7 +619,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 evatlsong<br>
+      &copy; 2017 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

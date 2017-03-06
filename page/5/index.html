@@ -73,6 +73,127 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-php-note" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/04/php-note/" class="article-date">
+  <time datetime="2014-09-04T13:43:45.000Z" itemprop="datePublished">2014-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/04/php-note/">php-note</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打印调试信息<br>error_log(“userinfo”, 3, “php_sql_err.log”);</p>
+<pre><code>$where[&apos;truename&apos;] = array(&apos;like&apos;, &apos;%&apos;.trim($_POST[&apos;truename&apos;]).&apos;%&apos;);
+$count     = $card_create_db-&gt;where($where)-&gt;count();
+$Page      = new Page($count, 15);
+$show      = $Page-&gt;show();
+$list      = $card_create_db-&gt;where($where)-&gt;limit($Page-&gt;firstRow . &apos;,&apos; . $Page-&gt;listRows)-&gt;select();
+
+$userinfo_db = M(&apos;Userinfo&apos;);
+$userinfo_where[&apos;wecha_id&apos;] = array(&apos;in&apos;, $wecha_ids);
+$users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select();
+</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
+<p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cizxnk631001gj85haviyar51" class="article-share-link" data-share="baidu" data-title="php-note">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-oracle-usage" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2014/09/04/oracle-usage/" class="article-date">
+  <time datetime="2014-09-04T11:40:08.000Z" itemprop="datePublished">2014-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/09/04/oracle-usage/">oracle-usage</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>sqlplus 连接<br>sqlplus username/password@database;<br>查询<br>select * from username.table t where t.id=1;</p>
+<p>表名前要加用户名</p>
+<p>查询结果保存到文本文件</p>
+<pre><code>spool abc.txt;
+select * from wap_subscribe;
+spool off;
+</code></pre><p>保存的只是输出到屏幕的内容</p>
+<p>设置屏幕输出大小 解决显示不全问题</p>
+<pre><code>set long 40000;
+</code></pre><p>imp userid=ltwuliu/LTWULIU@huictrip file=D:\databackup\huitrip20140813.dmp full=y<br>exp userid=sunztravelweb/huictrip@goutrip file=E:\data\goutrip20140805.dmp </p>
+<p>When making some backup tasks (import or Export) on oracle 10g, 11g (for example), you can get a message error:<br>ORA-20446: The owner of the job is not registered ORA-06512: at “SYSMAN.MGMT_JOBS”…</p>
+<p>Solution<br>Open CMD<br>C:>Set oracle_sid= SID_OF_THE_DATABASE<br>C:>sqlplus<br>username: SYSMAN<br>password: <em>**</em><br>SQL&gt;execute MGMT_USER.MAKE_EM_USER(‘USERNAME’);</p>
+<p>USERNAME – the user that you use to connect to enterprise managert<br>don’t copy/past the command, sometimes they are some hidden characters</p>
+<p>11G中有个新特性，当表无数据时，不分配segment，以节省空间<br>　　解决方法：<br>　　1、insert一行，再rollback就产生segment了。<br>　　该方法是在在空表中插入数据，再删除，则产生segment。导出时则可导出空表。<br>　　2、设置deferred_segment_creation 参数<br>show parameter deferred_segment_creation</p>
+<p>NAME                                 TYPE        VALUE</p>
+<hr>
+<p>deferred_segment_creation            boolean     TRUE<br>SQL&gt; alter system set deferred_segment_creation=false;</p>
+<p>系统已更改。</p>
+<p>SQL&gt; show parameter deferred_segment_creation</p>
+<p>NAME                                 TYPE        VALUE</p>
+<hr>
+<p>deferred_segment_creation            boolean     FALSE</p>
+<p> 3、用以下这句查找空表并分配空间<br>　　select ‘alter table ‘||table_name||’ allocate extent;’ from user_tables where num_rows=0;<br>　　把SQL查询的结果导出，然后执行导出的语句，强行为表分配空间修改segment值，然后再导出即可导出空表了。</p>
+<p>drop user sunztravelweb cascade;</p>
+<p>CREATE TEMPORARY TABLESPACE USER_TEMP<br>TEMPFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_TEMP.dbf’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
+<p>CREATE TABLESPACE USER_DATA<br>LOGGING<br>DATAFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_DATA.DBF’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
+<p>CREATE USER sunztravelweb IDENTIFIED BY huictrip<br>DEFAULT TABLESPACE USER_DATA<br>TEMPORARY TABLESPACE USER_TEMP;</p>
+<p>grant connect,resource,dba to sunztravelweb;</p>
+<p>imp userid=sunztravelweb/huictrip@localhost/goutrip file=E:\data\goutrip20140708.dmp full=y</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cizxnk635001ij85h3aaw02lq" class="article-share-link" data-share="baidu" data-title="oracle-usage">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-git-svn-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/09/02/git-svn-usage/" class="article-date">
@@ -161,7 +282,7 @@ mark them as resolved using git add
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cirbue7i7000jehees1p5fcto" class="article-share-link" data-share="baidu" data-title="git-svn-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/02/git-svn-usage/" data-id="cizxnk61t000jj85h2sufu4e5" class="article-share-link" data-share="baidu" data-title="git-svn-usage">Share</a>
       
 
       
@@ -321,7 +442,7 @@ AddType application/x-httpd-php .php .html  #也可分多行写
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cirbue7gy0000ehee1iqrw997" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">Share</a>
+        <a data-url="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/" data-id="cizxnk60a0000j85h7g6h6ulj" class="article-share-link" data-share="baidu" data-title="apache-php-tomcat-integration">Share</a>
       
 
       
@@ -415,7 +536,7 @@ mysql&gt;source /wcnc_db.sql
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cirbue7ja001aeheeb8mn6g1c" class="article-share-link" data-share="baidu" data-title="mysql-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/08/27/mysql-usage/" data-id="cizxnk62w001cj85hp628ygjn" class="article-share-link" data-share="baidu" data-title="mysql-usage">Share</a>
       
 
       
@@ -458,7 +579,7 @@ mysql&gt;source /wcnc_db.sql
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cirbue7kj002iehee2ivo8gts" class="article-share-link" data-share="baidu" data-title="work-in-windows">Share</a>
+        <a data-url="http://evatlsong.com/2014/08/26/work-in-windows/" data-id="cizxnk64e002lj85hcchg0m4m" class="article-share-link" data-share="baidu" data-title="work-in-windows">Share</a>
       
 
       
@@ -670,7 +791,7 @@ you&apos;ve got to put paragraph tags in your blockquotes:&lt;/p&gt;
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cirbue7iw0011eheeis7safgc" class="article-share-link" data-share="baidu" data-title="markdown-basics">Share</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-basics/" data-id="cizxnk62h0013j85hw28e6v7b" class="article-share-link" data-share="baidu" data-title="markdown-basics">Share</a>
       
 
       
@@ -1188,7 +1309,7 @@ _   底線
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cirbue7iy0013ehee1wp6ndmg" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">Share</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax-tw/" data-id="cizxnk62k0015j85hque8sucq" class="article-share-link" data-share="baidu" data-title="markdown-syntax-tw">Share</a>
       
 
       
@@ -1703,7 +1824,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cirbue7j30015eheezqw9qdyu" class="article-share-link" data-share="baidu" data-title="markdown-syntax">Share</a>
+        <a data-url="http://evatlsong.com/2014/06/25/markdown-syntax/" data-id="cizxnk62o0016j85hetvfcocc" class="article-share-link" data-share="baidu" data-title="markdown-syntax">Share</a>
       
 
       
@@ -1746,7 +1867,7 @@ _   underscore
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cirbue7kb002aeheel2sspxpj" class="article-share-link" data-share="baidu" data-title="useHexo">Share</a>
+        <a data-url="http://evatlsong.com/2014/05/30/usehexo/" data-id="cizxnk646002ej85hdi2se3i7" class="article-share-link" data-share="baidu" data-title="useHexo">Share</a>
       
 
       
@@ -1796,7 +1917,7 @@ _   underscore
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1808,23 +1929,23 @@ _   underscore
       <ul>
         
           <li>
-            <a href="/2016/08/01/node-usage/">(no title)</a>
+            <a href="/2017/03/06/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/08/01/hello-world/">Hello World</a>
+            <a href="/2017/03/06/samba/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/06/json-problem/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/06/hello-world/">Hello World</a>
           </li>
         
           <li>
             <a href="/2016/05/10/kettle/">kettle</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/03/ubuntu-usage/">ubuntu-usage</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/14/server-monitor/">server-monitor</a>
           </li>
         
       </ul>
@@ -1858,7 +1979,7 @@ _   underscore
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 evatlsong<br>
+      &copy; 2017 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>

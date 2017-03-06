@@ -73,6 +73,148 @@
     <div class="outer">
       <section id="main">
   
+    <article id="post-devops" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/07/devops/" class="article-date">
+  <time datetime="2015-06-07T08:37:36.000Z" itemprop="datePublished">2015-06-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/07/devops/">devops</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/06/07/devops/" data-id="cizxnk61f0009j85hcrdt57w4" class="article-share-link" data-share="baidu" data-title="devops">Share</a>
+      
+
+      
+
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-stylin-study" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/05/stylin-study/" class="article-date">
+  <time datetime="2015-06-05T07:55:00.000Z" itemprop="datePublished">2015-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/05/stylin-study/">stylin-study</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>文本用闭合标签 <code>&lt;p&gt;test&lt;/p&gt;</code><br>引用内容用自闭合标签 <code>&lt;img src=&quot;song.jpg&quot; /&gt;</code><br>ol ordered list<br>ul unordered list<br>dl definition list<br>src source<br>href hyperlink reference<br>img 是行内元素<br><code>&lt;a&gt;</code> anchor 锚<br>alt alternative<br>根据CSS标准，默认情况下，多个空白会被浏览器叠加为一个</p>
+<p>行内样式<br>嵌入样式</p>
+<pre><code>&lt;style type=&quot;text/css&quot;&gt;
+&lt;/style&gt;
+</code></pre><p>链接样式</p>
+<pre><code>&lt;link href=&quot;style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;
+@import url(css/style.css)
+</code></pre><p>上下文选择符 descendant combinator selector (后代组合式选择符)<br>标签1 标签2 {声明}<br>example: <code>article p {font-weight: bold;}</code></p>
+<p>子选择符 <code>&gt;</code> 标签2必须是标签1的子元素<br>标签1 &gt; 标签2<br>example: <code>section &gt; h2 {font-style: italic;}</code></p>
+<p>紧邻同胞选择符 <code>+</code><br>标签1 + 标签2<br>example: <code>h2 + p {font-variant: small-caps;}</code></p>
+<p>一般同胞选择符 ~<br>标签1 ~ 标签2<br>example: <code>h2 ~ a {color:red;}</code></p>
+<p>通用选择符 <em><br>example: `section </em> a {font-size: 1.3em;}`</p>
+<p>ID和类选择符<br>标签带类选择符<br>把标签名和类选择符写在一块</p>
+<pre><code>p.specialtext {color: red;}
+</code></pre><p>多类选择符</p>
+<pre><code>.specialtext.featured {font-size: 120%;}
+</code></pre><p>属性选择符<br>标签名[属性名]<br>属性值选择符<br>标签名[属性名=”属性值”] (引号可加可不加)</p>
+<p>伪类<br>UI伪类<br>链接伪类</p>
+<pre><code>a:link
+a:visited
+a:hover
+a:active
+</code></pre><p>css3用双冒号代替单冒号 表示伪类</p>
+<p>:focus伪类<br>:target伪类</p>
+<p>结构化伪类</p>
+<pre><code>:first-child  :last-child
+ol.results li:first-child {color: blue;}
+:nth-child
+e:nth-child(n)
+</code></pre><p>e表示元素名，n表示一个数值（也可以使用odd或even）</p>
+<p>伪元素<br>伪元素就是你的文档中若有实无的元素</p>
+<pre><code>::first-letter
+p::first-letter {font-size:300%;}
+::first-line
+p::first-line {font-variant: small-caps;}
+::before ::after
+</code></pre><p>用于在特定元素前面或后面添加特殊内容</p>
+<pre><code>p.age::before {content: &quot;Age: &quot;;}
+</code></pre><p>层叠<br>浏览器默认样式表<br>用户样式表<br>作者链接样式表<br>作者嵌入样式<br>作者行内样式<br>层叠规则<br>1：找到应用给每个元素和属性的所有声明<br>2：按照顺序和权重排序<br>3：按特指度排序<br>计算特指度<br>I-C-E<br>1.选择符中有一个ID，就在I的位置上加1<br>2.选择符中有一个类，就在C的位置上加1<br>3.选择符中有一个元素（标签）名，就在E的位置上加1<br>4.得到一个三位数 最大的特指度最高</p>
+<p>4.顺序决定权重</p>
+<p>定位元素<br>盒模型<br>border padding margin</p>
+<p>position display float<br>简写属性<br>{margin:5px 10px 12px 8px;}<br>属性值的顺序是 上 右 下 左 顺时针方向<br>如果哪个值没有写 那就使用对边的值<br>{margin:12px 10px 6px;} 在这个例子中，由于没有写最后一个值（左边的值），所以左边就会使用右边的值，即10px。<br>垂直方向上的外边距会叠加<br>只有普通文档流中块级元素的垂直空白边才会发生空白边叠加。行内元素，浮动元素或者定位元素之间是不会产生空白边叠加。<br>元素的顶空白边与前面元素的底空白边发生叠加<br>元素的顶空白边与父元素的顶空白边发生叠加<br>元素的顶空白边与底部空白边发生叠加<br>空元素中已经叠加的空白边与另一个空元素的空白边发生叠加</p>
+<p>盒子的width属性设定的只是盒子内容区的宽度，而非盒子要占据的水平宽度</p>
+<p>强迫父元素包围其浮动的子元素有三种方式<br>1.为父元素应用overflow:hidden<br>2.浮动父元素<br>3.在父元素内容的末尾添加非浮动元素，可以直接在标记中加，也可以通过给父元素添加clearfix类来加</p>
+<p>不能在下拉菜单的顶级元素上应用overflow:hidden,否则作为其子元素的下拉菜单就不会显示了<br>不能对已经靠自动外边距居中的元素使用“浮动父元素”技术，否则他就不会再居中，而是根据浮动值浮动到左边或右边了。</p>
+<p>font and text</p>
+<p>font:<br>font-family<br>font-size<br>font-style<br>font-weight<br>font-variant<br>font(简写属性)<br>    1.必须声明font-size和font-family的值<br>    2.声明顺序<br>        1 font-weight, font-style, font-variant不分先后<br>        2 然后是font-size<br>        3 最后是font-family<br>        example p {font: bold italic small-caps .9em helvetica, arial, sans-serif;}<br>                p {font: 1.2em/1.4 helvetica, arial, sans-serif;}</p>
+<p>font collection<br>    serif(衬线字体), sans-serif(无衬线字体), monospace(等宽字体), cursive(手写体), fantasy<br>    font family<br>        Times, Helvetica<br>        font face<br>        Times Roman, Times Bold, Helvetica Condensed, bodoni italic</p>
+<p>font-size是可以继承的<br>1em = 16像素<br>h1 2em h2 1.5em p 1em<br>修改body元素的字体大小，不会影响页面中以绝对单位控制的元素，但没有设定字体大小的元素则会与body的字体大小成比例变化。</p>
+<p>text:<br>text-indent<br>letter-spacing<br>word-spacing<br>text-decoration<br>text-align<br>line-height<br>text-transform<br>vertical-align</p>
+<p>VSP (Vendor Specific Prefixes) 厂商前缀 自动添加VPS，可以使用prefix-free腻子脚本</p>
+<h2 id="note"><a href="#note" class="headerlink" title="note"></a>note</h2><pre><code>box-sizing: border-box
+</code></pre><p>IE6 IE7不支持box-sizing属性<br>polyfill borderBoxModel.js</p>
+<pre><code>&lt;!--[if lt IE 8]&gt;
+&lt;script src=&quot;borderBoxModel.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+
+inner img {max-width: 100%;}
+div {overflow: hidden;} //真正用途是防止包含元素被超大内容撑大 还能可靠得迫使父元素包含其浮动的子元素
+div {word-wrap: break-word;}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      
+        <a data-url="http://evatlsong.com/2015/06/05/stylin-study/" data-id="cizxnk63s0020j85hbhaod7mh" class="article-share-link" data-share="baidu" data-title="stylin-study">Share</a>
+      
+
+      
+
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-linux-usage" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2014/10/09/linux-usage/" class="article-date">
@@ -106,7 +248,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cirbue7it000zeheewzn33rsk" class="article-share-link" data-share="baidu" data-title="linux-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/10/09/linux-usage/" data-id="cizxnk62e0011j85hatxm21a3" class="article-share-link" data-share="baidu" data-title="linux-usage">Share</a>
       
 
       
@@ -147,7 +289,7 @@
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cirbue7i1000feheew69hq2kn" class="article-share-link" data-share="baidu" data-title="fonts">Share</a>
+        <a data-url="http://evatlsong.com/2014/10/08/fonts/" data-id="cizxnk61n000fj85h9ljy5vlh" class="article-share-link" data-share="baidu" data-title="fonts">Share</a>
       
 
       
@@ -196,7 +338,7 @@ git clone https://github.com/gmarik/vundle.git &quot;C:\Users\evasong10\.vim\bun
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cirbue7ke002eehee5x3norbp" class="article-share-link" data-share="baidu" data-title="windows-config">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/20/windows-config/" data-id="cizxnk64a002hj85h5tpkr080" class="article-share-link" data-share="baidu" data-title="windows-config">Share</a>
       
 
       
@@ -248,7 +390,7 @@ systemctl start iptables.service
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cirbue7hh0005ehee3jh7fqmx" class="article-share-link" data-share="baidu" data-title="centos-7-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/17/centos-7-usage/" data-id="cizxnk6100005j85hyc2pxed3" class="article-share-link" data-share="baidu" data-title="centos-7-usage">Share</a>
       
 
       
@@ -392,7 +534,7 @@ $ git bisect good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cirbue7ia000mehees4i7ypt8" class="article-share-link" data-share="baidu" data-title="git-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/15/git-usage/" data-id="cizxnk61y000mj85hzvf3jkej" class="article-share-link" data-share="baidu" data-title="git-usage">Share</a>
       
 
       
@@ -436,7 +578,7 @@ $ git bisect good SHA1_OF_GOOD_VERSION
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cirbue7hx000cehee1utyes4c" class="article-share-link" data-share="baidu" data-title="eclipse-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/11/eclipse-usage/" data-id="cizxnk61j000cj85hwvcfsruu" class="article-share-link" data-share="baidu" data-title="eclipse-usage">Share</a>
       
 
       
@@ -659,7 +801,7 @@ svnserve -d -r /home/goutrip/svndata
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cirbue7hl0007eheed9ly1en9" class="article-share-link" data-share="baidu" data-title="centos-install">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/10/centos-install/" data-id="cizxnk6160006j85h19c6bmk1" class="article-share-link" data-share="baidu" data-title="centos-install">Share</a>
       
 
       
@@ -748,128 +890,7 @@ MX        @        默认     mxbiz2.qq.com
     </div>
     <footer class="article-footer">
       
-        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cirbue7hw000beheelzisy6r3" class="article-share-link" data-share="baidu" data-title="domain-config">Share</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-php-note" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/04/php-note/" class="article-date">
-  <time datetime="2014-09-04T13:43:45.000Z" itemprop="datePublished">2014-09-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/04/php-note/">php-note</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>打印调试信息<br>error_log(“userinfo”, 3, “php_sql_err.log”);</p>
-<pre><code>$where[&apos;truename&apos;] = array(&apos;like&apos;, &apos;%&apos;.trim($_POST[&apos;truename&apos;]).&apos;%&apos;);
-$count     = $card_create_db-&gt;where($where)-&gt;count();
-$Page      = new Page($count, 15);
-$show      = $Page-&gt;show();
-$list      = $card_create_db-&gt;where($where)-&gt;limit($Page-&gt;firstRow . &apos;,&apos; . $Page-&gt;listRows)-&gt;select();
-
-$userinfo_db = M(&apos;Userinfo&apos;);
-$userinfo_where[&apos;wecha_id&apos;] = array(&apos;in&apos;, $wecha_ids);
-$users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select();
-</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
-<p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/04/php-note/" data-id="cirbue7ji001geheetywt3nl5" class="article-share-link" data-share="baidu" data-title="php-note">Share</a>
-      
-
-      
-
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-oracle-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2014/09/04/oracle-usage/" class="article-date">
-  <time datetime="2014-09-04T11:40:08.000Z" itemprop="datePublished">2014-09-04</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2014/09/04/oracle-usage/">oracle-usage</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="windows"><a href="#windows" class="headerlink" title="windows"></a>windows</h2><p>sqlplus 连接<br>sqlplus username/password@database;<br>查询<br>select * from username.table t where t.id=1;</p>
-<p>表名前要加用户名</p>
-<p>查询结果保存到文本文件</p>
-<pre><code>spool abc.txt;
-select * from wap_subscribe;
-spool off;
-</code></pre><p>保存的只是输出到屏幕的内容</p>
-<p>设置屏幕输出大小 解决显示不全问题</p>
-<pre><code>set long 40000;
-</code></pre><p>imp userid=ltwuliu/LTWULIU@huictrip file=D:\databackup\huitrip20140813.dmp full=y<br>exp userid=sunztravelweb/huictrip@goutrip file=E:\data\goutrip20140805.dmp </p>
-<p>When making some backup tasks (import or Export) on oracle 10g, 11g (for example), you can get a message error:<br>ORA-20446: The owner of the job is not registered ORA-06512: at “SYSMAN.MGMT_JOBS”…</p>
-<p>Solution<br>Open CMD<br>C:>Set oracle_sid= SID_OF_THE_DATABASE<br>C:>sqlplus<br>username: SYSMAN<br>password: <em>**</em><br>SQL&gt;execute MGMT_USER.MAKE_EM_USER(‘USERNAME’);</p>
-<p>USERNAME – the user that you use to connect to enterprise managert<br>don’t copy/past the command, sometimes they are some hidden characters</p>
-<p>11G中有个新特性，当表无数据时，不分配segment，以节省空间<br>　　解决方法：<br>　　1、insert一行，再rollback就产生segment了。<br>　　该方法是在在空表中插入数据，再删除，则产生segment。导出时则可导出空表。<br>　　2、设置deferred_segment_creation 参数<br>show parameter deferred_segment_creation</p>
-<p>NAME                                 TYPE        VALUE</p>
-<hr>
-<p>deferred_segment_creation            boolean     TRUE<br>SQL&gt; alter system set deferred_segment_creation=false;</p>
-<p>系统已更改。</p>
-<p>SQL&gt; show parameter deferred_segment_creation</p>
-<p>NAME                                 TYPE        VALUE</p>
-<hr>
-<p>deferred_segment_creation            boolean     FALSE</p>
-<p> 3、用以下这句查找空表并分配空间<br>　　select ‘alter table ‘||table_name||’ allocate extent;’ from user_tables where num_rows=0;<br>　　把SQL查询的结果导出，然后执行导出的语句，强行为表分配空间修改segment值，然后再导出即可导出空表了。</p>
-<p>drop user sunztravelweb cascade;</p>
-<p>CREATE TEMPORARY TABLESPACE USER_TEMP<br>TEMPFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_TEMP.dbf’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
-<p>CREATE TABLESPACE USER_DATA<br>LOGGING<br>DATAFILE ‘D:\app\Administrator\product\11.1.0\db_1\oradata\USER_DATA.DBF’<br>SIZE 32M<br>AUTOEXTEND ON<br>NEXT 32M MAXSIZE 2048M<br>EXTENT MANAGEMENT LOCAL;</p>
-<p>CREATE USER sunztravelweb IDENTIFIED BY huictrip<br>DEFAULT TABLESPACE USER_DATA<br>TEMPORARY TABLESPACE USER_TEMP;</p>
-<p>grant connect,resource,dba to sunztravelweb;</p>
-<p>imp userid=sunztravelweb/huictrip@localhost/goutrip file=E:\data\goutrip20140708.dmp full=y</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      
-        <a data-url="http://evatlsong.com/2014/09/04/oracle-usage/" data-id="cirbue7jg001feheetknf3uho" class="article-share-link" data-share="baidu" data-title="oracle-usage">Share</a>
+        <a data-url="http://evatlsong.com/2014/09/09/domain-config/" data-id="cizxnk61h000bj85h1a10xesu" class="article-share-link" data-share="baidu" data-title="domain-config">Share</a>
       
 
       
@@ -917,7 +938,7 @@ spool off;
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">January 2016</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/11/">November 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">September 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">August 2015</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">July 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/10/">October 2014</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/09/">September 2014</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/08/">August 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/06/">June 2014</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/05/">May 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -929,23 +950,23 @@ spool off;
       <ul>
         
           <li>
-            <a href="/2016/08/01/node-usage/">(no title)</a>
+            <a href="/2017/03/06/node-usage/">(no title)</a>
           </li>
         
           <li>
-            <a href="/2016/08/01/hello-world/">Hello World</a>
+            <a href="/2017/03/06/samba/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/06/json-problem/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/03/06/hello-world/">Hello World</a>
           </li>
         
           <li>
             <a href="/2016/05/10/kettle/">kettle</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/03/ubuntu-usage/">ubuntu-usage</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/14/server-monitor/">server-monitor</a>
           </li>
         
       </ul>
@@ -979,7 +1000,7 @@ spool off;
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 evatlsong<br>
+      &copy; 2017 evatlsong<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
       .
       Theme by <a href="https://github.com/xiangming/landscape-plus" target="_blank">Landscape-plus</a>
