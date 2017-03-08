@@ -2,3 +2,6 @@
 	path = themes/landscape-plus
 	url = https://github.com/evatlsong/landscape-plus.git
 	branch = evatlsong-custom
+[submodule "themes/hexo-theme-material"]
+	path = themes/hexo-theme-material
+	url = https://github.com/evatlsong/hexo-theme-material.git
