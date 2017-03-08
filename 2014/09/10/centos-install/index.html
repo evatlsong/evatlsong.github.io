@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            centos-install | 
+        
+        evatlsong
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="evatlsong">
+    <meta name="description" content="null">
+    <meta name="keywords" content="null">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="evatlsong">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://evatlsong.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="centos-install | evatlsong">
+    <meta property="og:description" content="null">
+    
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.en.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">问题</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#centos-下怎样从root切换到普通用户"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">centos 下怎样从root切换到普通用户</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#ssh设置"><span class="post-toc-number">2.</span> <span class="post-toc-text">ssh设置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#设置ssh"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">设置ssh</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#别名访问"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">别名访问</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#遇到问题"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">遇到问题</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#vnc设置"><span class="post-toc-number">3.</span> <span class="post-toc-text">vnc设置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、安装-VNC"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">一、安装 VNC</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、设置-VNC-密码"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">二、设置 VNC 密码</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、配置桌面类型-可略过"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">三、配置桌面类型 (可略过)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、配置登录帐号、桌面分辨率、连接方式-可略过"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">四、配置登录帐号、桌面分辨率、连接方式 (可略过)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、配置防火墙，允许-VNC-连接"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">五、配置防火墙，允许 VNC 连接</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六、重启防火墙"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">六、重启防火墙</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#七、设置-VNC-自动启动"><span class="post-toc-number">3.7.</span> <span class="post-toc-text">七、设置 VNC 自动启动</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#远程桌面"><span class="post-toc-number">4.</span> <span class="post-toc-text">远程桌面</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#virtualbox"><span class="post-toc-number">5.</span> <span class="post-toc-text">virtualbox</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                centos-install
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>evatlsong</strong>
+        <span>9月 10, 2014</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=centos-install&url=http://evatlsong.com//2014/09/10/centos-install/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=centos-install&url=http://evatlsong.com//2014/09/10/centos-install/index.html&via=evatlsong" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://evatlsong.com//2014/09/10/centos-install/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://evatlsong.com//2014/09/10/centos-install/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>##安装问题<br>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
+<ol>
+<li>服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；</li>
+<li>通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围</li>
+</ol>
+<p>解决方法：</p>
+<p>选择 <code>Troubleshooting</code> -&gt; <code>Install Centos 7 in basic graphics mode</code></p>
+<h2 id="centos-下怎样从root切换到普通用户"><a href="#centos-下怎样从root切换到普通用户" class="headerlink" title="centos 下怎样从root切换到普通用户"></a>centos 下怎样从root切换到普通用户</h2><p>su 普通用户名</p>
+<h1 id="ssh设置"><a href="#ssh设置" class="headerlink" title="ssh设置"></a>ssh设置</h1><h2 id="设置ssh"><a href="#设置ssh" class="headerlink" title="设置ssh"></a>设置ssh</h2><pre><code>ssh-keygen ## 生成默认名字的公钥私钥对
+ssh-keygen -f ~/.ssh/&lt;filename&gt; ## 生成指定名字的公钥私钥对
+ssh-copy-id -i .ssh/&lt;filename&gt;.pub &lt;user&gt;@&lt;server&gt; ## 拷贝公钥到&lt;user&gt;用户 ~/.ssh/authorized_keys 文件中
+
+ssh &lt;user&gt;@&lt;server&gt; ## 直接访问
+</code></pre><h2 id="别名访问"><a href="#别名访问" class="headerlink" title="别名访问"></a>别名访问</h2><pre><code>~/.ssh/config
+host bj
+  user git
+  hostname bj.ossxp.com
+  port 22
+  identityfile ~/.ssh/&lt;filename&gt;
+</code></pre><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
+<h1 id="vnc设置"><a href="#vnc设置" class="headerlink" title="vnc设置"></a>vnc设置</h1><h2 id="一、安装-VNC"><a href="#一、安装-VNC" class="headerlink" title="一、安装 VNC"></a>一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
+<pre><code>[root@localhost ~]# rpm -q vnc vnc-server
+</code></pre><p>　　得到：</p>
+<pre><code>package vnc is not installed
+
+package vnc-server is not installed
+</code></pre><p>　　提示没有安装，那么就开始安装，输入：</p>
+<pre><code>[root@localhost ~]# yum install vnc vnc-server
+</code></pre><p>　　注：如果是 Ubuntu 则输入：</p>
+<pre><code>[root@localhost ~]# apt-get install vnc vnc-server
+</code></pre><p>　　在一串指令提示后，会让你确认一些选项，输入两次 “Y” 并确认，稍作等待，提示 “Complete!” 即完成安装。</p>
+<h2 id="二、设置-VNC-密码"><a href="#二、设置-VNC-密码" class="headerlink" title="二、设置 VNC 密码"></a>二、设置 VNC 密码</h2><p>　　启动 VNC，输入：</p>
+<pre><code>[root@localhost ~]# vncserver
+</code></pre><p>　　此时会提示你输入密码，因为是第一次配置。重复输入两次即可。</p>
+<h2 id="三、配置桌面类型-可略过"><a href="#三、配置桌面类型-可略过" class="headerlink" title="三、配置桌面类型 (可略过)"></a>三、配置桌面类型 (可略过)</h2><p>　　设置一下远程桌面使用那个类型的桌面，分辨率多少等等。输入：</p>
+<pre><code>[root@localhost ~]# vi ~/.vnc/xstartup
+</code></pre><p>　　得到：</p>
+<pre><code>#!/bin/sh
+
+vncconfig -iconic &amp;
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+OS=`uname -s`
+if
+[ $OS = 
+&apos;Linux&apos;
+]; then
+
+case
+&quot;$WINDOWMANAGER&quot;
+in
+
+*gnome*)
+
+if
+[ -e /etc/SuSE-release ]; then
+
+PATH=$PATH:/opt/gnome/bin
+
+export PATH
+
+fi
+
+;;
+
+esac
+fi
+if
+[ -x /etc/X11/xinit/xinitrc ]; then
+
+exec /etc/X11/xinit/xinitrc
+fi
+if
+[ -f /etc/X11/xinit/xinitrc ]; then
+
+exec sh /etc/X11/xinit/xinitrc
+fi
+[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources
+xsetroot -solid grey
+xterm -geometry 80x24+10+10 -ls -title 
+&quot;$VNCDESKTOP Desktop&quot;
+&amp;
+twm &amp;
+</code></pre><p>　　一般情况下，我们使用的 Linux 桌面都是 “Gnome” 桌面，故配置成这个桌面比较习惯。<br>　　按 “i” 键进入编辑状态，主要修改最后两行。改为：</p>
+<pre><code># xterm -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP Desktop&quot; &amp;
+# twm &amp;
+gnome-session &amp;
+</code></pre><p>　　一看便知，将配置文件的最后两行注释掉，并且加入了一行代码，表明使用的是 “Gnome” 桌面。</p>
+<h2 id="四、配置登录帐号、桌面分辨率、连接方式-可略过"><a href="#四、配置登录帐号、桌面分辨率、连接方式-可略过" class="headerlink" title="四、配置登录帐号、桌面分辨率、连接方式 (可略过)"></a>四、配置登录帐号、桌面分辨率、连接方式 (可略过)</h2><p>　　输入：</p>
+<pre><code>[root@localhost ~]# vi /etc/sysconfig/vncservers
+</code></pre><p>　　出现如下提示：</p>
+<pre><code># The VNCSERVERS variable is a list of display:user pairs.
+#
+# Uncomment the lines below to start a VNC server on display :2
+# as my &apos;myusername&apos; (adjust this to your own).  You will also
+# need to set a VNC password; run &apos;man vncpasswd&apos; to see how
+# to do that.
+#
+# DO NOT RUN THIS SERVICE if your local area network is
+# untrusted!  For a secure way of using VNC, see this URL:
+# http://kbase.redhat.com/faq/docs/DOC-7028
+# Use &quot;-nolisten tcp&quot; to prevent X connections to your VNC server via TCP.
+# Use &quot;-localhost&quot; to prevent remote VNC clients connecting except when
+# doing so through a secure tunnel.  See the &quot;-via&quot; option in the
+# `man vncviewer&apos; manual page.
+
+# VNCSERVERS=&quot;2:myusername&quot;
+# VNCSERVERARGS[2]=&quot;-geometry 800x600 -nolisten tcp -localhost&quot;
+</code></pre><p>　　重点编辑最后两行，将这两行注释去掉，得到：</p>
+<pre><code>VNCSERVERS=&quot;1:root&quot;
+VNCSERVERARGS[1]=&quot;-geometry 1024x768&quot;
+</code></pre><p>　　这里是只有一个帐号登录，设置分辨率为1024*768，如果你有多个帐号，则按照下面格式配置。</p>
+<pre><code>VNCSERVERS=&quot;1:user1 2:user2 3:user3&quot;
+VNCSERVERARGS[1]=&quot;-geometry 1024×768&quot;
+VNCSERVERARGS[2]=&quot;-geometry 1024×768&quot;
+VNCSERVERARGS[3]=&quot;-geometry 800×600 -depth 24 -nolisten tcp -nohttpd -localhost&quot;
+</code></pre><p>　　解释一下这个文件：</p>
+<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC server，上面的例子里运行了三个 VNC server，其中 user1 在 display :1，user2 在 display :2，user3 在 display :3。
+
+VNCSERVERARGS 这三行，分别为 VNC server 1, 2, 3 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 1024×768，对 user3 使用 800×600,24 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
+</code></pre><p>　　注释：在启动 VNCserver 时，你也可以为 server 指定一个 display 参数。你可以把 display 理解为一个桌面，每个用户都可以有自己的桌面。VNC 客户端在连接时，可以指定连接到哪个桌面上。在系统中，display 号不能重复，也就是说，如果有用户已经建立了名为 “:1” 的 display，另外一个用户就不能再使用 “:1” 了，他可以使用 “:2”。</p>
+<p>　　指定 display 号码的启动 VNC server 的命令是:</p>
+<pre><code>vncserver:1
+</code></pre><h2 id="五、配置防火墙，允许-VNC-连接"><a href="#五、配置防火墙，允许-VNC-连接" class="headerlink" title="五、配置防火墙，允许 VNC 连接"></a>五、配置防火墙，允许 VNC 连接</h2><p>　　VNC server 监听的端口从 5900 开始，display:1 的监听 5901，display:2 监听 5902，以此类推。CentOS 的防火墙缺省是不允许连接这些端口的，所以需要使用下面的步骤打开防火墙（需要 root 权限)：<br>　　输入编辑：</p>
+<pre><code>[root@localhost ~]# vi /etc/sysconfig/iptables
+</code></pre><p>　　得到：</p>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 5901 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre><p>　　即添加了上述代码的第 11 行。</p>
+<h2 id="六、重启防火墙"><a href="#六、重启防火墙" class="headerlink" title="六、重启防火墙"></a>六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
+<pre><code>[root@localhost ~]# /sbin/service iptables restart
+iptables：清除防火墙规则：[确定]
+iptables：将链设置为政策 ACCEPT：filter [确定]
+iptables：正在卸载模块：[确定]
+iptables：应用防火墙规则：[确定]
+</code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
+<pre><code>192.168.1.2:1    
+</code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
+<h2 id="七、设置-VNC-自动启动"><a href="#七、设置-VNC-自动启动" class="headerlink" title="七、设置 VNC 自动启动"></a>七、设置 VNC 自动启动</h2><p>　　虽然上面配置是可以使用了，但是你一旦重启服务器后，VNC 的服务又会停止，得手动来启，不方便，虽说服务器不能老是启动，但是重启的时候还是有的，为了方便，你需要将 VNC 服务设置为自动自动。<br>　　方法很多，你可以在图形化的界面下打开服务窗口，然后将 VNC 服务设为自动。既然这里都是在用终端下的命令行形式，就继续沿用这个方式吧。</p>
+<pre><code>[root@localhost ~]# chkconfig vncserver on
+</code></pre><p>#tomcat<br>    pscp -r -v tomcat.tar.gz root@192.168.1.217:/usr/local<br>    tar -xzf /usr/local/tomcat.tar.gz</p>
+<pre><code>svnadmin dump Repositories\goutrip &gt; svndata\goutrip.dump
+svnadmin load svndata/goutrip &lt; goutrip.dump
+
+ps -aux|grep svnserve
+kill -9 id
+svnserve -d -r /home/goutrip/svndata
+</code></pre><p>最后不要加正斜杠</p>
+<p>可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动<br>解决办法 killall svnserve</p>
+<h1 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h1><pre><code>[root@dlp ~]# yum -y install freerdp 
+[cent@dlp ~]$ xfreerdp -g 800x600 -u administrator 10.0.0.100 
+</code></pre><h1 id="virtualbox"><a href="#virtualbox" class="headerlink" title="virtualbox"></a>virtualbox</h1><blockquote>
+<p>用root用户</p>
+</blockquote>
+<pre><code>[root@dlp ~]# vboxmanage list vms
+[root@dlp ~]# vboxmanage startvm &quot;widnows 2008&quot; --type headless
+[root@dlp ~]# vboxmanage controlvm &quot;windows 2008&quot; poweroff
+</code></pre>
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+    <!-- 使用多说评论 -->
+    <link rel="stylesheet" href="/css/duoshuo.min.css">
+<style>
+    #ds-thread #ds-reset .ds-post-button{
+        background-color: #0097A7 !important;
+    }
+    #ds-wrapper #ds-reset .ds-icons-32{
+        background-color: #0097A7 !important;
+    }
+    #ds-reset .ds-highlight {
+        color: #0097A7 !important;
+    }
+</style>
+<div id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread"
+        data-thread-key="2014/09/10/centos-install/"
+        data-url="http://evatlsong.com/2014/09/10/centos-install/"
+        data-title="centos-install">
+    </div>
+    <!-- 多说评论框 end -->
+</div>
+
+
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2014/09/11/eclipse-usage/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2014/09/09/domain-config/" id="post_nav-older" class="next-content">
+            舊篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="evatlsong's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        youremail@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="#" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                首頁
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    過往
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/05/">五月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/04/">四月 2016<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/03/">三月 2016<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2016/01/">一月 2016<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/11/">十一月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/09/">九月 2015<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/08/">八月 2015<span class="sidebar_archives-count">8</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/07/">七月 2015<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2015/06/">六月 2015<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/10/">十月 2014<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/09/">九月 2014<span class="sidebar_archives-count">9</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/08/">八月 2014<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/06/">六月 2014<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2014/05/">五月 2014<span class="sidebar_archives-count">1</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主題 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;evatlsong
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+
+
+
+
+    <!-- 多说公共 js 代码 start -->
+    <script type="text/javascript">
+        queue.offer(function(){
+            var duoshuoQuery = {
+                short_name: 'null'
+            };
+            (function() {
+                var ds = document.createElement('script');
+                ds.type = 'text/javascript';
+                ds.async = true;
+                ds.src = 'https://static.duoshuo.com/embed.js';
+                ds.charset = 'UTF-8';
+                (document.getElementsByTagName('head')[0]
+                 || document.getElementsByTagName('body')[0]).appendChild(ds);
+            })();
+        });
+    </script>
+    <!-- 多说公共 js 代码 end -->
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
