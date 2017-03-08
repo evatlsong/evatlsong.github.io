@@ -599,7 +599,7 @@ private void readObject(ObjectInputStream stream) throws IOException, ClassNotFo
 
     <!-- Next Nav -->
     
-        <a href="/2015/08/15/ruby/" id="post_nav-older" class="next-content">
+        <a href="/2015/08/15/ssh/" id="post_nav-older" class="next-content">
             舊篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
@@ -929,6 +929,17 @@ It will not impact the appearance and can give developers a lot of support :)
 
 <!-- MathJax Load-->
 
+
+<script>
+  $(function () {
+    if('serviceWorker' in navigator) {
+	//注册上一步创建的js文件
+    navigator.serviceWorker
+        .register('/js/service-worker.js')
+        .then(function() { console.log('Service Worker Registered'); });
+      }
+  });
+</script>
 
                 </main>
             </div>

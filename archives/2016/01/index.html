@@ -231,18 +231,17 @@
     
 
         <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2016/01/15/h2/">h2</a></p>
+        <p class="article-headline-p"><a href="/2016/01/15/poi/">poi</a></p>
     </div>
 
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-            java -cp h2-1.4.190.jar org.h2.tools.Server -web -webPort 8090 -browser
-
+            设置背景色HSSFWorkbook wb = new HSSFWorkbook();HSSFCellStyle style = wb...
         
         &nbsp;&nbsp;&nbsp;
         <span>
-            <a href="/2016/01/15/h2/" target="_self">繼續閱讀</a>
+            <a href="/2016/01/15/poi/" target="_self">繼續閱讀</a>
         </span>
     </div>
     <!-- Post_entry Info-->
@@ -267,7 +266,7 @@
                 <!-- Comment Number -->
                 &nbsp;|&nbsp;
                 <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="2016/01/15/h2/" data-count-type="comments"></span>
+                        <span class="ds-thread-count" data-thread-key="2016/01/15/poi/" data-count-type="comments"></span>
                 </span>
             
 
@@ -359,17 +358,18 @@ se...
     
 
         <!-- Post Title -->
-        <p class="article-headline-p"><a href="/2016/01/15/poi/">poi</a></p>
+        <p class="article-headline-p"><a href="/2016/01/15/h2/">h2</a></p>
     </div>
 
     <!-- Post Excerpt -->
     <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
         
-            设置背景色HSSFWorkbook wb = new HSSFWorkbook();HSSFCellStyle style = wb...
+            java -cp h2-1.4.190.jar org.h2.tools.Server -web -webPort 8090 -browser
+
         
         &nbsp;&nbsp;&nbsp;
         <span>
-            <a href="/2016/01/15/poi/" target="_self">繼續閱讀</a>
+            <a href="/2016/01/15/h2/" target="_self">繼續閱讀</a>
         </span>
     </div>
     <!-- Post_entry Info-->
@@ -394,7 +394,7 @@ se...
                 <!-- Comment Number -->
                 &nbsp;|&nbsp;
                 <span class="post_entry-comment" >
-                        <span class="ds-thread-count" data-thread-key="2016/01/15/poi/" data-count-type="comments"></span>
+                        <span class="ds-thread-count" data-thread-key="2016/01/15/h2/" data-count-type="comments"></span>
                 </span>
             
 
@@ -746,6 +746,17 @@ It will not impact the appearance and can give developers a lot of support :)
 
 <!-- MathJax Load-->
 
+
+<script>
+  $(function () {
+    if('serviceWorker' in navigator) {
+	//注册上一步创建的js文件
+    navigator.serviceWorker
+        .register('/js/service-worker.js')
+        .then(function() { console.log('Service Worker Registered'); });
+      }
+  });
+</script>
 
                 </main>
             </div>
