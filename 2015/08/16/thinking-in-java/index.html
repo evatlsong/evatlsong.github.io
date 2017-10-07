@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="java," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="初始化与清理this关键字对当前对象的引用this(args)可以用this调用一个构造器，但却不能调用两个。此外，必须将构造器调用置于最起始处static方法就是没有this的方法static方法内部不能调用非静态方法 清理：终结处理和垃圾回收protected void finalize() 成员初始化所有变量在使用前都能得到恰当的初始化方法的局部变量，Java以编译时错误的形式来贯彻这种保证">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="thinking-in-java">
+<meta property="og:url" content="http://evatlsong.com/2015/08/16/thinking-in-java/index.html">
+<meta property="og:site_name" content="evatlsong">
+<meta property="og:description" content="初始化与清理this关键字对当前对象的引用this(args)可以用this调用一个构造器，但却不能调用两个。此外，必须将构造器调用置于最起始处static方法就是没有this的方法static方法内部不能调用非静态方法 清理：终结处理和垃圾回收protected void finalize() 成员初始化所有变量在使用前都能得到恰当的初始化方法的局部变量，Java以编译时错误的形式来贯彻这种保证">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2017-10-07T06:16:40.402Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="thinking-in-java">
+<meta name="twitter:description" content="初始化与清理this关键字对当前对象的引用this(args)可以用this调用一个构造器，但却不能调用两个。此外，必须将构造器调用置于最起始处static方法就是没有this的方法static方法内部不能调用非静态方法 清理：终结处理和垃圾回收protected void finalize() 成员初始化所有变量在使用前都能得到恰当的初始化方法的局部变量，Java以编译时错误的形式来贯彻这种保证">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://evatlsong.com/2015/08/16/thinking-in-java/"/>
+
+
+
+
+
+  <title>thinking-in-java | evatlsong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">evatlsong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2015/08/16/thinking-in-java/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">thinking-in-java</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-16T17:51:25+00:00">
+                2015-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="初始化与清理"><a href="#初始化与清理" class="headerlink" title="初始化与清理"></a>初始化与清理</h1><h2 id="this关键字"><a href="#this关键字" class="headerlink" title="this关键字"></a>this关键字</h2><p>对当前对象的引用<br><code>this(args)</code><br>可以用this调用一个构造器，但却不能调用两个。此外，必须将构造器调用置于最起始处<br><code>static</code>方法就是没有<code>this</code>的方法<br><code>static</code>方法内部不能调用非静态方法</p>
+<h2 id="清理：终结处理和垃圾回收"><a href="#清理：终结处理和垃圾回收" class="headerlink" title="清理：终结处理和垃圾回收"></a>清理：终结处理和垃圾回收</h2><p><code>protected void finalize()</code></p>
+<h2 id="成员初始化"><a href="#成员初始化" class="headerlink" title="成员初始化"></a>成员初始化</h2><p>所有变量在使用前都能得到恰当的初始化<br>方法的局部变量，Java以编译时错误的形式来贯彻这种保证<br>类的字段会有初始值</p>
+<h2 id="构造器初始化"><a href="#构造器初始化" class="headerlink" title="构造器初始化"></a>构造器初始化</h2><p>对象的创建过程</p>
+<ol>
+<li>即使没有显式地使用<code>static</code>关键字，构造器实际上也是静态方法。因此，当首次创建类型为Dog<br>的对象时（构造器可以看成静态方法）,或者Dog类的静态方法/静态域首次被访问时，Java解释器必须<br>查找类路径，以定位<code>Dog.class</code>文件。</li>
+<li>然后载入<code>Dog.class</code>（后面会学到，这将创建一个Class对象），有关静态初始化的所有动作都会执行，<br>因此，静态初始化只在Class对象首次加载的时候进行一次。</li>
+<li>当用<code>new Dog()</code>创建对象的时候，首先将在堆上为<code>Dog</code>对象分配足够的存储空间。</li>
+<li>这块存储空间会被清零，这就自动地将<code>Dog</code>对象中的所有基本类型数据都设置成了默认值<br>（对数字来说就是0，对布尔型和字符型也相同）,而引用则被设置成了<code>null</code>.</li>
+<li>执行所有出现于字段定义处的初始化动作。</li>
+<li><p>执行构造器。</p>
+<h3 id="显示的静态初始化"><a href="#显示的静态初始化" class="headerlink" title="显示的静态初始化"></a>显示的静态初始化</h3><p>Java允许将多个静态初始化动作组织成一个特殊的静态字句（有时也叫做静态块）</p>
+<p> public class Cups {</p>
+<pre><code>static Cup cup1;
+static Cup cup2;
+static {
+    cup1 = new Cup(1);
+    cup2 = new Cup(2);
+}
+</code></pre><p> }</p>
+</li>
+</ol>
+<h3 id="非静态实例初始化"><a href="#非静态实例初始化" class="headerlink" title="非静态实例初始化"></a>非静态实例初始化</h3><p>可以保证无论调用了哪个显式构造器，某些操作都会发生。</p>
+<pre><code>public class Cups {
+    Cup cup1;
+    Cup cup2;
+    {
+        cup1 = new Cup(1);
+        cup2 = new Cup(2);
+    }
+}
+</code></pre><h2 id="数组初始化"><a href="#数组初始化" class="headerlink" title="数组初始化"></a>数组初始化</h2><p><code>int[] a1 = { 1, 2, 3};</code><br><code>int[] a1 = new int[3];</code><br><code>Integer[] a1 = {new Integer(1), new Integer(2), new Integer(3)};</code><br><code>Integer[] a1 = new Integer[3];</code></p>
+<h3 id="可变参数列表"><a href="#可变参数列表" class="headerlink" title="可变参数列表"></a>可变参数列表</h3><p>应该总是只在重载方法的一个版本上使用可变参数列表，或者压根就不使用它</p>
+<p>public class OverloadingVarargs3 {<br>    static void f(float i, Character… args) {<br>        System.out.println(“first”);<br>    }</p>
+<pre><code>static void f(char c, Character... args) {
+    System.out.println(&quot;second&quot;);
+}
+
+public static void main(String[] args) {
+    f(1, &apos;a&apos;);
+    f(&apos;a&apos;, &apos;b&apos;);
+}
+</code></pre><p>}</p>
+<p>// {CompileTimeError} (Won’t compile)<br>public class OverloadingVarargs2 {<br>    static void f(float i, Character… args) {<br>        System.out.println(“first”);<br>    }</p>
+<pre><code>static void f(Character... args) {
+    System.out.print(&quot;second&quot;);
+}
+
+public static void main(String[] args) {
+    f(1, &apos;a&apos;);
+    // f(&apos;a&apos;, &apos;b&apos;);
+}
+</code></pre><p>}</p>
+<h1 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h1><h2 id="包：库单元"><a href="#包：库单元" class="headerlink" title="包：库单元"></a>包：库单元</h2><p>Java解释器的运行过程如下：首先，找出环境变量CLASSPATH。CLASSPATH包含一个或多个目录，用作查找.class文件的根目录。<br>从根目录开始，解释器获取包的名称并将每个句点替换成反斜杠，以从CLASSPATH根中产生一个路径名称。得到的路径会与<br>CLASSPATH中的各个不同的项相连接，解释器就在这些目录中查找与你所要创建的类名称相关的.class文件。（解释器还会<br>去查找某些设计Java解释器所在位置的标准目录。）</p>
+<h2 id="Java访问权限修饰词"><a href="#Java访问权限修饰词" class="headerlink" title="Java访问权限修饰词"></a>Java访问权限修饰词</h2><ol>
+<li>public</li>
+<li>protected(也提供包访问权限)</li>
+<li>默认的包访问权限</li>
+<li>private<h2 id="类的访问权限"><a href="#类的访问权限" class="headerlink" title="类的访问权限"></a>类的访问权限</h2></li>
+<li>public</li>
+<li>包访问权限</li>
+</ol>
+<h1 id="复用类"><a href="#复用类" class="headerlink" title="复用类"></a>复用类</h1><h2 id="final-关键字"><a href="#final-关键字" class="headerlink" title="final 关键字"></a>final 关键字</h2><h3 id="final数据"><a href="#final数据" class="headerlink" title="final数据"></a>final数据</h3><ol>
+<li>一个永不改变的编译时常量。</li>
+<li>一个在运行时被初始化的值，而你不希望它被改变<br>final参数<br>你无法在方法中更改参数引用所指向的对象<h3 id="final方法"><a href="#final方法" class="headerlink" title="final方法"></a>final方法</h3>只有在想要明确禁止覆盖时，才将方法设置为final的。<h3 id="final类"><a href="#final类" class="headerlink" title="final类"></a>final类</h3>不能被继承</li>
+</ol>
+<h1 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h1><p>多态也称动态绑定、后期绑定或运行时绑定</p>
+<h2 id="转机"><a href="#转机" class="headerlink" title="转机"></a>转机</h2><h3 id="方法调用绑定"><a href="#方法调用绑定" class="headerlink" title="方法调用绑定"></a>方法调用绑定</h3><p>Java中除了static方法和final方法（private方法属于final方法）之外，其他所有的方法都是后期绑定。</p>
+<h2 id="构造器和多态"><a href="#构造器和多态" class="headerlink" title="构造器和多态"></a>构造器和多态</h2><p>当覆盖被继承类的<code>dispose()</code>方法时，务必记住调用基类版本<code>dispose()</code>方法；否则，基类的清理动作就不会发生。<br>要调用构造器内部的一个动态绑定方法，就要用到那个方法的被覆盖后的定义</p>
+<h2 id="协变返回类型"><a href="#协变返回类型" class="headerlink" title="协变返回类型"></a>协变返回类型</h2><p>导出类中的被覆盖方法可以返回基类方法的返回类型的某种导出类型</p>
+<h1 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h1><h2 id="简单泛型"><a href="#简单泛型" class="headerlink" title="简单泛型"></a>简单泛型</h2><pre><code>public class Holder3&lt;T&gt; {
+    private T a;
+
+    public Holder3(T a) {
+        this.a = a;
+    }
+
+    public void set(T a) {
+        this.a = a;
+    }
+
+    public T get() {
+        return a;
+    }
+
+    public static void main(String[] args) {
+        Holder3&lt;Automobile&gt; h3 = new Holder3&lt;Automobile&gt;(new Automobile());
+        Automobile a = h3.get(); // No cast needed
+        // h3.set(&quot;Not an Automobile&quot;); // Error
+        // h3.set(1); // Error
+    }
+} // /:~
+</code></pre><h1 id="annotation"><a href="#annotation" class="headerlink" title="annotation"></a>annotation</h1><h2 id="Basic-syntax"><a href="#Basic-syntax" class="headerlink" title="Basic syntax"></a>Basic syntax</h2><p>three built-in annotations</p>
+<ul>
+<li>@Override</li>
+<li>@Deprecated</li>
+<li>@SuppressWarnings</li>
+</ul>
+<h3 id="Defining-annotations"><a href="#Defining-annotations" class="headerlink" title="Defining annotations"></a>Defining annotations</h3><pre><code>import java.lang.annotation.*;
+
+@Target(ElementType.METHOD)
+@Retection(RetentionPolicy.RUNTIME)
+public @interface UseCase {
+    public int id();
+    public String description() default &quot;no description&quot;;
+}
+
+import java.util.*;
+public class PasswordUtils {
+    @UseCase(id = 48, description = &quot;encrypt password&quot;)
+    public String encryptPassword(String password) {
+        return new StringBuilder(password).reverse().toString();
+    }
+}
+</code></pre><h3 id="Meta-annotations"><a href="#Meta-annotations" class="headerlink" title="Meta-annotations"></a>Meta-annotations</h3><ul>
+<li>@Target     Where this annotation can be applied. The possible <code>ElementType</code> arguments are:<pre><code>CONSTRUCTOR:
+FIELD:
+LOCAL_VARIABLE:
+METHOD:
+PACKAGE:
+PARAMETER:
+TYPE:
+</code></pre></li>
+<li>@Retention  How long the annotation information is kept. The possible <code>RetentionPolicy</code> arguments are:<pre><code>SOURCE:
+CLASS:
+RUNTIME:
+</code></pre></li>
+<li>@Documented Include this annotation int the Javadocs.</li>
+<li>@Inherited  Allow subclasses to inherit parent annotations.</li>
+</ul>
+<h2 id="Writing-annotation-processors"><a href="#Writing-annotation-processors" class="headerlink" title="Writing annotation processors"></a>Writing annotation processors</h2><p><strong>Class</strong>, <strong>Method</strong> and <strong>Field</strong> all implement the AnnotatedElement interface</p>
+<p>a list of the allowed types for annotation elements:<br>(you are not allowed to use any of the wrapper classes)</p>
+<ul>
+<li>All primitives(int, float, boolean etc.)</li>
+<li>String</li>
+<li>Class</li>
+<li>Enums</li>
+<li>Annotations</li>
+<li>Arrays of any of the above<h3 id="Default-value-constraints"><a href="#Default-value-constraints" class="headerlink" title="Default value constraints"></a>Default value constraints</h3>elements must either have default values or values provided by the class that uses the annotation.<br>none of the non-primitive type elements are allowed to take <code>null</code> as a value<br>you can provide specific values, like empty strings or negative values<br>This is a typical idiom in annotation definitions.</li>
+</ul>
+<h1 id="Java-I-O-系统"><a href="#Java-I-O-系统" class="headerlink" title="Java I/O 系统"></a>Java I/O 系统</h1><h2 id="对象序列化"><a href="#对象序列化" class="headerlink" title="对象序列化"></a>对象序列化</h2><pre><code>public static void serializeStaticState(ObjectOutputStream os)
+        throws IOException {
+    os.writeInt(color);
+}
+
+public static void deserializeStaticState(ObjectInputStream os)
+        throws IOException {
+    color = os.readInt();
+}
+
+private void writeObject(ObjectOutputStream stream) throws IOException {
+    stream.defaultWriteObject();
+    serializeStaticState(stream);
+}
+private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {
+    stream.defaultReadObject();
+    deserializeStaticState(stream);
+}
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/java/" rel="tag"># java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/08/15/ruby/" rel="next" title="ruby">
+                <i class="fa fa-chevron-left"></i> ruby
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/08/26/systemd-usage/" rel="prev" title="systemd-usage">
+                systemd-usage <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">evatlsong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#初始化与清理"><span class="nav-number">1.</span> <span class="nav-text">初始化与清理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#this关键字"><span class="nav-number">1.1.</span> <span class="nav-text">this关键字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清理：终结处理和垃圾回收"><span class="nav-number">1.2.</span> <span class="nav-text">清理：终结处理和垃圾回收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#成员初始化"><span class="nav-number">1.3.</span> <span class="nav-text">成员初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造器初始化"><span class="nav-number">1.4.</span> <span class="nav-text">构造器初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示的静态初始化"><span class="nav-number">1.4.1.</span> <span class="nav-text">显示的静态初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非静态实例初始化"><span class="nav-number">1.4.2.</span> <span class="nav-text">非静态实例初始化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数组初始化"><span class="nav-number">1.5.</span> <span class="nav-text">数组初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#可变参数列表"><span class="nav-number">1.5.1.</span> <span class="nav-text">可变参数列表</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#访问权限控制"><span class="nav-number">2.</span> <span class="nav-text">访问权限控制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#包：库单元"><span class="nav-number">2.1.</span> <span class="nav-text">包：库单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java访问权限修饰词"><span class="nav-number">2.2.</span> <span class="nav-text">Java访问权限修饰词</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类的访问权限"><span class="nav-number">2.3.</span> <span class="nav-text">类的访问权限</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#复用类"><span class="nav-number">3.</span> <span class="nav-text">复用类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#final-关键字"><span class="nav-number">3.1.</span> <span class="nav-text">final 关键字</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#final数据"><span class="nav-number">3.1.1.</span> <span class="nav-text">final数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final方法"><span class="nav-number">3.1.2.</span> <span class="nav-text">final方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#final类"><span class="nav-number">3.1.3.</span> <span class="nav-text">final类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#多态"><span class="nav-number">4.</span> <span class="nav-text">多态</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#转机"><span class="nav-number">4.1.</span> <span class="nav-text">转机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法调用绑定"><span class="nav-number">4.1.1.</span> <span class="nav-text">方法调用绑定</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#构造器和多态"><span class="nav-number">4.2.</span> <span class="nav-text">构造器和多态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#协变返回类型"><span class="nav-number">4.3.</span> <span class="nav-text">协变返回类型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#泛型"><span class="nav-number">5.</span> <span class="nav-text">泛型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简单泛型"><span class="nav-number">5.1.</span> <span class="nav-text">简单泛型</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#annotation"><span class="nav-number">6.</span> <span class="nav-text">annotation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-syntax"><span class="nav-number">6.1.</span> <span class="nav-text">Basic syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Defining-annotations"><span class="nav-number">6.1.1.</span> <span class="nav-text">Defining annotations</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Meta-annotations"><span class="nav-number">6.1.2.</span> <span class="nav-text">Meta-annotations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Writing-annotation-processors"><span class="nav-number">6.2.</span> <span class="nav-text">Writing annotation processors</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Default-value-constraints"><span class="nav-number">6.2.1.</span> <span class="nav-text">Default value constraints</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-I-O-系统"><span class="nav-number">7.</span> <span class="nav-text">Java I/O 系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#对象序列化"><span class="nav-number">7.1.</span> <span class="nav-text">对象序列化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">evatlsong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

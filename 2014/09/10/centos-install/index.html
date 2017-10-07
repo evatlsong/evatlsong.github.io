@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-TW">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：  服务器直接连接宽屏显示器，会出现屏幕是倾斜状态； 通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围  解决方法： 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode centos 下怎样从root切换到普通用户su 普通">
+<meta property="og:type" content="article">
+<meta property="og:title" content="centos-install">
+<meta property="og:url" content="http://evatlsong.com/2014/09/10/centos-install/index.html">
+<meta property="og:site_name" content="evatlsong">
+<meta property="og:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：  服务器直接连接宽屏显示器，会出现屏幕是倾斜状态； 通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围  解决方法： 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode centos 下怎样从root切换到普通用户su 普通">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2017-10-07T06:16:40.398Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="centos-install">
+<meta name="twitter:description" content="问题##安装问题服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：  服务器直接连接宽屏显示器，会出现屏幕是倾斜状态； 通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围  解决方法： 选择 Troubleshooting -&amp;gt; Install Centos 7 in basic graphics mode centos 下怎样从root切换到普通用户su 普通">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://evatlsong.com/2014/09/10/centos-install/"/>
+
+
+
+
+
+  <title>centos-install | evatlsong</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-TW">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">evatlsong</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/09/10/centos-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">centos-install</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-10T12:30:19+00:00">
+                2014-09-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h1><p>##安装问题<br>服务器安装最新版本centos7版本，进入光驱系统安装界面，出现一个问题：</p>
+<ol>
+<li>服务器直接连接宽屏显示器，会出现屏幕是倾斜状态；</li>
+<li>通过远控卡访问服务器安装操作系统，会出现屏幕超出显示范围</li>
+</ol>
+<p>解决方法：</p>
+<p>选择 <code>Troubleshooting</code> -&gt; <code>Install Centos 7 in basic graphics mode</code></p>
+<h2 id="centos-下怎样从root切换到普通用户"><a href="#centos-下怎样从root切换到普通用户" class="headerlink" title="centos 下怎样从root切换到普通用户"></a>centos 下怎样从root切换到普通用户</h2><p>su 普通用户名</p>
+<h1 id="ssh设置"><a href="#ssh设置" class="headerlink" title="ssh设置"></a>ssh设置</h1><h2 id="设置ssh"><a href="#设置ssh" class="headerlink" title="设置ssh"></a>设置ssh</h2><pre><code>ssh-keygen ## 生成默认名字的公钥私钥对
+ssh-keygen -f ~/.ssh/&lt;filename&gt; ## 生成指定名字的公钥私钥对
+ssh-copy-id -i .ssh/&lt;filename&gt;.pub &lt;user&gt;@&lt;server&gt; ## 拷贝公钥到&lt;user&gt;用户 ~/.ssh/authorized_keys 文件中
+
+ssh &lt;user&gt;@&lt;server&gt; ## 直接访问
+</code></pre><h2 id="别名访问"><a href="#别名访问" class="headerlink" title="别名访问"></a>别名访问</h2><pre><code>~/.ssh/config
+host bj
+  user git
+  hostname bj.ossxp.com
+  port 22
+  identityfile ~/.ssh/&lt;filename&gt;
+</code></pre><h2 id="遇到问题"><a href="#遇到问题" class="headerlink" title="遇到问题"></a>遇到问题</h2><p>公钥没有拷贝到相关用户的家目录 报错为 <code>Server refused our key</code><br><code>chmod 600 ~/.ssh/authorized_keys</code> 去掉其他用户的权限<br><code>puttygen.exe</code> 保存到文件中的公钥 有换行 不能直接用</p>
+<h1 id="vnc设置"><a href="#vnc设置" class="headerlink" title="vnc设置"></a>vnc设置</h1><h2 id="一、安装-VNC"><a href="#一、安装-VNC" class="headerlink" title="一、安装 VNC"></a>一、安装 VNC</h2><p>　　首先检查一下本机是否安装了 VNC，默认情况下，CentOS 7.0 是没有安装的。<br>　　检查是否安装，输入：</p>
+<pre><code>[root@localhost ~]# rpm -q vnc vnc-server
+</code></pre><p>　　得到：</p>
+<pre><code>package vnc is not installed
+
+package vnc-server is not installed
+</code></pre><p>　　提示没有安装，那么就开始安装，输入：</p>
+<pre><code>[root@localhost ~]# yum install vnc vnc-server
+</code></pre><p>　　注：如果是 Ubuntu 则输入：</p>
+<pre><code>[root@localhost ~]# apt-get install vnc vnc-server
+</code></pre><p>　　在一串指令提示后，会让你确认一些选项，输入两次 “Y” 并确认，稍作等待，提示 “Complete!” 即完成安装。</p>
+<h2 id="二、设置-VNC-密码"><a href="#二、设置-VNC-密码" class="headerlink" title="二、设置 VNC 密码"></a>二、设置 VNC 密码</h2><p>　　启动 VNC，输入：</p>
+<pre><code>[root@localhost ~]# vncserver
+</code></pre><p>　　此时会提示你输入密码，因为是第一次配置。重复输入两次即可。</p>
+<h2 id="三、配置桌面类型-可略过"><a href="#三、配置桌面类型-可略过" class="headerlink" title="三、配置桌面类型 (可略过)"></a>三、配置桌面类型 (可略过)</h2><p>　　设置一下远程桌面使用那个类型的桌面，分辨率多少等等。输入：</p>
+<pre><code>[root@localhost ~]# vi ~/.vnc/xstartup
+</code></pre><p>　　得到：</p>
+<pre><code>#!/bin/sh
+
+vncconfig -iconic &amp;
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+OS=`uname -s`
+if
+[ $OS = 
+&apos;Linux&apos;
+]; then
+
+case
+&quot;$WINDOWMANAGER&quot;
+in
+
+*gnome*)
+
+if
+[ -e /etc/SuSE-release ]; then
+
+PATH=$PATH:/opt/gnome/bin
+
+export PATH
+
+fi
+
+;;
+
+esac
+fi
+if
+[ -x /etc/X11/xinit/xinitrc ]; then
+
+exec /etc/X11/xinit/xinitrc
+fi
+if
+[ -f /etc/X11/xinit/xinitrc ]; then
+
+exec sh /etc/X11/xinit/xinitrc
+fi
+[ -r $HOME/.Xresources ] &amp;&amp; xrdb $HOME/.Xresources
+xsetroot -solid grey
+xterm -geometry 80x24+10+10 -ls -title 
+&quot;$VNCDESKTOP Desktop&quot;
+&amp;
+twm &amp;
+</code></pre><p>　　一般情况下，我们使用的 Linux 桌面都是 “Gnome” 桌面，故配置成这个桌面比较习惯。<br>　　按 “i” 键进入编辑状态，主要修改最后两行。改为：</p>
+<pre><code># xterm -geometry 80x24+10+10 -ls -title &quot;$VNCDESKTOP Desktop&quot; &amp;
+# twm &amp;
+gnome-session &amp;
+</code></pre><p>　　一看便知，将配置文件的最后两行注释掉，并且加入了一行代码，表明使用的是 “Gnome” 桌面。</p>
+<h2 id="四、配置登录帐号、桌面分辨率、连接方式-可略过"><a href="#四、配置登录帐号、桌面分辨率、连接方式-可略过" class="headerlink" title="四、配置登录帐号、桌面分辨率、连接方式 (可略过)"></a>四、配置登录帐号、桌面分辨率、连接方式 (可略过)</h2><p>　　输入：</p>
+<pre><code>[root@localhost ~]# vi /etc/sysconfig/vncservers
+</code></pre><p>　　出现如下提示：</p>
+<pre><code># The VNCSERVERS variable is a list of display:user pairs.
+#
+# Uncomment the lines below to start a VNC server on display :2
+# as my &apos;myusername&apos; (adjust this to your own).  You will also
+# need to set a VNC password; run &apos;man vncpasswd&apos; to see how
+# to do that.
+#
+# DO NOT RUN THIS SERVICE if your local area network is
+# untrusted!  For a secure way of using VNC, see this URL:
+# http://kbase.redhat.com/faq/docs/DOC-7028
+# Use &quot;-nolisten tcp&quot; to prevent X connections to your VNC server via TCP.
+# Use &quot;-localhost&quot; to prevent remote VNC clients connecting except when
+# doing so through a secure tunnel.  See the &quot;-via&quot; option in the
+# `man vncviewer&apos; manual page.
+
+# VNCSERVERS=&quot;2:myusername&quot;
+# VNCSERVERARGS[2]=&quot;-geometry 800x600 -nolisten tcp -localhost&quot;
+</code></pre><p>　　重点编辑最后两行，将这两行注释去掉，得到：</p>
+<pre><code>VNCSERVERS=&quot;1:root&quot;
+VNCSERVERARGS[1]=&quot;-geometry 1024x768&quot;
+</code></pre><p>　　这里是只有一个帐号登录，设置分辨率为1024*768，如果你有多个帐号，则按照下面格式配置。</p>
+<pre><code>VNCSERVERS=&quot;1:user1 2:user2 3:user3&quot;
+VNCSERVERARGS[1]=&quot;-geometry 1024×768&quot;
+VNCSERVERARGS[2]=&quot;-geometry 1024×768&quot;
+VNCSERVERARGS[3]=&quot;-geometry 800×600 -depth 24 -nolisten tcp -nohttpd -localhost&quot;
+</code></pre><p>　　解释一下这个文件：</p>
+<pre><code>VNCSERVERS 这一行是配置在系统启动时启动几个 VNC server，上面的例子里运行了三个 VNC server，其中 user1 在 display :1，user2 在 display :2，user3 在 display :3。
+
+VNCSERVERARGS 这三行，分别为 VNC server 1, 2, 3 配置启动参数，上面的例子里对 user1 和 user2 使用屏幕分辨率 1024×768，对 user3 使用 800×600,24 色，不支持 tcp，不支持 http 连接，只能在本地测试访问。
+</code></pre><p>　　注释：在启动 VNCserver 时，你也可以为 server 指定一个 display 参数。你可以把 display 理解为一个桌面，每个用户都可以有自己的桌面。VNC 客户端在连接时，可以指定连接到哪个桌面上。在系统中，display 号不能重复，也就是说，如果有用户已经建立了名为 “:1” 的 display，另外一个用户就不能再使用 “:1” 了，他可以使用 “:2”。</p>
+<p>　　指定 display 号码的启动 VNC server 的命令是:</p>
+<pre><code>vncserver:1
+</code></pre><h2 id="五、配置防火墙，允许-VNC-连接"><a href="#五、配置防火墙，允许-VNC-连接" class="headerlink" title="五、配置防火墙，允许 VNC 连接"></a>五、配置防火墙，允许 VNC 连接</h2><p>　　VNC server 监听的端口从 5900 开始，display:1 的监听 5901，display:2 监听 5902，以此类推。CentOS 的防火墙缺省是不允许连接这些端口的，所以需要使用下面的步骤打开防火墙（需要 root 权限)：<br>　　输入编辑：</p>
+<pre><code>[root@localhost ~]# vi /etc/sysconfig/iptables
+</code></pre><p>　　得到：</p>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre><p>　　上面我们只添加了一个 root 帐号和桌面 1，所以这里按照上面的规则，添加一个 “5901” 端口号即可。</p>
+<pre><code># Firewall configuration written by system-config-firewall
+# Manual customization of this file is not recommended.
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+-A INPUT -p icmp -j ACCEPT
+-A INPUT -i lo -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 5901 -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp-host-prohibited
+-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+COMMIT
+</code></pre><p>　　即添加了上述代码的第 11 行。</p>
+<h2 id="六、重启防火墙"><a href="#六、重启防火墙" class="headerlink" title="六、重启防火墙"></a>六、重启防火墙</h2><p>　　配置就算完毕了，需要重启一下防火墙才能使最后那个端口号的配置正常。</p>
+<pre><code>[root@localhost ~]# /sbin/service iptables restart
+iptables：清除防火墙规则：[确定]
+iptables：将链设置为政策 ACCEPT：filter [确定]
+iptables：正在卸载模块：[确定]
+iptables：应用防火墙规则：[确定]
+</code></pre><p>　　现在重启防火墙完毕后，你就可以使用 VNC 客户端连接了，连接时候必须注意主机 IP 地址后面必须加桌面号，例如这样连接：</p>
+<pre><code>192.168.1.2:1    
+</code></pre><p>　　跟输入端口号是一样的，但是这里是桌面号，记住。</p>
+<h2 id="七、设置-VNC-自动启动"><a href="#七、设置-VNC-自动启动" class="headerlink" title="七、设置 VNC 自动启动"></a>七、设置 VNC 自动启动</h2><p>　　虽然上面配置是可以使用了，但是你一旦重启服务器后，VNC 的服务又会停止，得手动来启，不方便，虽说服务器不能老是启动，但是重启的时候还是有的，为了方便，你需要将 VNC 服务设置为自动自动。<br>　　方法很多，你可以在图形化的界面下打开服务窗口，然后将 VNC 服务设为自动。既然这里都是在用终端下的命令行形式，就继续沿用这个方式吧。</p>
+<pre><code>[root@localhost ~]# chkconfig vncserver on
+</code></pre><p>#tomcat<br>    pscp -r -v tomcat.tar.gz root@192.168.1.217:/usr/local<br>    tar -xzf /usr/local/tomcat.tar.gz</p>
+<pre><code>svnadmin dump Repositories\goutrip &gt; svndata\goutrip.dump
+svnadmin load svndata/goutrip &lt; goutrip.dump
+
+ps -aux|grep svnserve
+kill -9 id
+svnserve -d -r /home/goutrip/svndata
+</code></pre><p>最后不要加正斜杠</p>
+<p>可能用 systemctl enable svnservice.service 开启了服务 重启后svn又无法启动<br>解决办法 killall svnserve</p>
+<h1 id="远程桌面"><a href="#远程桌面" class="headerlink" title="远程桌面"></a>远程桌面</h1><pre><code>[root@dlp ~]# yum -y install freerdp 
+[cent@dlp ~]$ xfreerdp -g 800x600 -u administrator 10.0.0.100 
+</code></pre><h1 id="virtualbox"><a href="#virtualbox" class="headerlink" title="virtualbox"></a>virtualbox</h1><blockquote>
+<p>用root用户</p>
+</blockquote>
+<pre><code>[root@dlp ~]# vboxmanage list vms
+[root@dlp ~]# vboxmanage startvm &quot;widnows 2008&quot; --type headless
+[root@dlp ~]# vboxmanage controlvm &quot;windows 2008&quot; poweroff
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2014/09/09/domain-config/" rel="next" title="domain-config">
+                <i class="fa fa-chevron-left"></i> domain-config
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2014/09/11/eclipse-usage/" rel="prev" title="eclipse-usage">
+                eclipse-usage <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">evatlsong</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#问题"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#centos-下怎样从root切换到普通用户"><span class="nav-number">1.1.</span> <span class="nav-text">centos 下怎样从root切换到普通用户</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ssh设置"><span class="nav-number">2.</span> <span class="nav-text">ssh设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#设置ssh"><span class="nav-number">2.1.</span> <span class="nav-text">设置ssh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#别名访问"><span class="nav-number">2.2.</span> <span class="nav-text">别名访问</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到问题"><span class="nav-number">2.3.</span> <span class="nav-text">遇到问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#vnc设置"><span class="nav-number">3.</span> <span class="nav-text">vnc设置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、安装-VNC"><span class="nav-number">3.1.</span> <span class="nav-text">一、安装 VNC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、设置-VNC-密码"><span class="nav-number">3.2.</span> <span class="nav-text">二、设置 VNC 密码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、配置桌面类型-可略过"><span class="nav-number">3.3.</span> <span class="nav-text">三、配置桌面类型 (可略过)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、配置登录帐号、桌面分辨率、连接方式-可略过"><span class="nav-number">3.4.</span> <span class="nav-text">四、配置登录帐号、桌面分辨率、连接方式 (可略过)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、配置防火墙，允许-VNC-连接"><span class="nav-number">3.5.</span> <span class="nav-text">五、配置防火墙，允许 VNC 连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、重启防火墙"><span class="nav-number">3.6.</span> <span class="nav-text">六、重启防火墙</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、设置-VNC-自动启动"><span class="nav-number">3.7.</span> <span class="nav-text">七、设置 VNC 自动启动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#远程桌面"><span class="nav-number">4.</span> <span class="nav-text">远程桌面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#virtualbox"><span class="nav-number">5.</span> <span class="nav-text">virtualbox</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">evatlsong</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
