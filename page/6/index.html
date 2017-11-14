@@ -229,6 +229,590 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/08/27/mysql-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/08/27/mysql-usage/" itemprop="url">mysql-usage</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-27T16:27:07+00:00">
+                2014-08-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="免安装版"><a href="#免安装版" class="headerlink" title="免安装版"></a>免安装版</h3><p>下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）</p>
+<h4 id="Securing-the-Initial-MySQL-Accounts-reference"><a href="#Securing-the-Initial-MySQL-Accounts-reference" class="headerlink" title="Securing the Initial MySQL Accounts reference"></a>Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="external">reference</a></h4><p>For Windows, do this:</p>
+<pre><code>shell&gt; mysql -u root
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;127.0.0.1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;::1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;%&apos; = PASSWORD(&apos;newpwd&apos;);
+</code></pre><p>The last statement is unnecessary if the mysql.user table has no root account with a host value of %.</p>
+<p>For Unix, do this:</p>
+<pre><code>shell&gt; mysql -u root
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;127.0.0.1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;::1&apos; = PASSWORD(&apos;newpwd&apos;);
+mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;host_name&apos; = PASSWORD(&apos;newpwd&apos;);
+</code></pre><h3 id="After-connecting-to-the-server-as-root-you-can-add-new-accounts-The-following-statements-use-GRANT-to-set-up-four-new-accounts"><a href="#After-connecting-to-the-server-as-root-you-can-add-new-accounts-The-following-statements-use-GRANT-to-set-up-four-new-accounts" class="headerlink" title="After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:"></a>After connecting to the server as root, you can add new accounts. The following statements use GRANT to set up four new accounts:</h3><pre><code>mysql&gt; CREATE USER &apos;monty&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;some_pass&apos;;
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;monty&apos;@&apos;localhost&apos;
+    -&gt;     WITH GRANT OPTION;
+mysql&gt; CREATE USER &apos;monty&apos;@&apos;%&apos; IDENTIFIED BY &apos;some_pass&apos;;
+mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;monty&apos;@&apos;%&apos;
+    -&gt;     WITH GRANT OPTION;
+mysql&gt; CREATE USER &apos;admin&apos;@&apos;localhost&apos;;
+mysql&gt; GRANT RELOAD,PROCESS ON *.* TO &apos;admin&apos;@&apos;localhost&apos;;
+mysql&gt; CREATE USER &apos;dummy&apos;@&apos;localhost&apos;;
+</code></pre><p>The accounts created by these statements have the following properties:</p>
+<p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty’@’localhost’ account can be used only when connecting from the local host. The ‘monty’@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
+<p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
+<p>The ‘admin’@’localhost’ account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.</p>
+<p>The ‘dummy’@’localhost’ account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.</p>
+<h3 id="create-database"><a href="#create-database" class="headerlink" title="create database"></a>create database</h3><pre><code>create database goods default character set utf8 collate utf8_general_ci;
+</code></pre><h3 id="import-sql-file"><a href="#import-sql-file" class="headerlink" title="import sql file"></a>import sql file</h3><pre><code>mysql -u root -p goods &lt; goods_version1.2.sql;
+</code></pre><p>加上-h参数指定主机时 sql文件要用全限定名称</p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>my.ini</p>
+<pre><code>[mysql]
+default-character-set=utf8
+# character-set-client=utf8
+# character-set-connection=utf8
+[mysqld]
+character-set-server=utf8
+
+port = 3306
+server_id = mysqld
+</code></pre><h2 id="運行"><a href="#運行" class="headerlink" title="運行"></a>運行</h2><p>/lib/systemd/system/mysql.service</p>
+<pre><code>systemctl start mysql.service
+</code></pre><h2 id="导入导出"><a href="#导入导出" class="headerlink" title="导入导出"></a>导入导出</h2><pre><code>mysqldump -u 用户名 -p 数据库名 &gt; 导出的文件名
+mysql&gt;source /wcnc_db.sql 
+</code></pre><h2 id="性能测试"><a href="#性能测试" class="headerlink" title="性能测试"></a>性能测试</h2><pre><code>shell&gt; mysqlslap --delimiter=&quot;;&quot; --create-schema=weixinhuictrip
+    --query=&quot;select * from wy_wxuser&quot;
+    --concurrency=500 --iterations=100
+    -uroot -pgoutrip314;
+</code></pre><h2 id="数据文件路径"><a href="#数据文件路径" class="headerlink" title="数据文件路径"></a>数据文件路径</h2><pre><code>centos7 mariadb
+/var/lib/mysql/
+</code></pre><h2 id="允许远程连接"><a href="#允许远程连接" class="headerlink" title="允许远程连接"></a>允许远程连接</h2><p>1：在服务端MySQL文件夹下找到my.ini文件。修改bind-address=127.0.0.1 为 bind-address=0.0.0.0<br>2：重新启动MySQL服务</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/08/26/work-in-windows/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/08/26/work-in-windows/" itemprop="url">work-in-windows</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-26T00:09:31+00:00">
+                2014-08-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>首先 git clone <a href="https://github.com/evatlsong/evatlsong.github.io.git" target="_blank" rel="external">https://github.com/evatlsong/evatlsong.github.io.git</a></p>
+<p>然后 git clone <a href="https://github.com/hexojs/hexo-theme-landscape.git" target="_blank" rel="external">https://github.com/hexojs/hexo-theme-landscape.git</a> themes/landscape</p>
+<p>如果不clone此theme 接下来的 hexo init 会报错 Error: Theme landscape does not exist.<br>然后hexo init<br>hexo install<br>git reset –hard HEAD</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/06/25/markdown-basics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/06/25/markdown-basics/" itemprop="url">markdown-basics</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-25T16:44:25+00:00">
+                2014-06-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Markdown-Basics"><a href="#Markdown-Basics" class="headerlink" title="Markdown: Basics"></a>Markdown: Basics</h1><ul id="ProjectSubmenu"><br>    <li><a href="/projects/markdown/" title="Markdown Project Page">Main</a></li><br>    <li><a class="selected" title="Markdown Basics">Basics</a></li><br>    <li><a href="/projects/markdown/syntax" title="Markdown Syntax Documentation">Syntax</a></li><br>    <li><a href="/projects/markdown/license" title="Pricing and License Information">License</a></li><br>    <li><a href="/projects/markdown/dingus" title="Online Markdown Web Form">Dingus</a></li><br></ul>
+
+
+<h2 id="Getting-the-Gist-of-Markdown’s-Formatting-Syntax"><a href="#Getting-the-Gist-of-Markdown’s-Formatting-Syntax" class="headerlink" title="Getting the Gist of Markdown’s Formatting Syntax"></a>Getting the Gist of Markdown’s Formatting Syntax</h2><p>This page offers a brief overview of what it’s like to use Markdown.<br>The <a href="/projects/markdown/syntax" title="Markdown Syntax">syntax page</a> provides complete, detailed documentation for<br>every feature, but Markdown should be very easy to pick up simply by<br>looking at a few examples of it in action. The examples on this page<br>are written in a before/after style, showing example syntax and the<br>HTML output produced by Markdown.</p>
+<p>It’s also helpful to simply try Markdown out; the <a href="/projects/markdown/dingus" title="Markdown Dingus">Dingus</a> is a<br>web application that allows you type your own Markdown-formatted text<br>and translate it to XHTML.</p>
+<p><strong>Note:</strong> This document is itself written using Markdown; you<br>can <a href="/projects/markdown/basics.text">see the source for it by adding ‘.text’ to the URL</a>.</p>
+<h2 id="Paragraphs-Headers-Blockquotes"><a href="#Paragraphs-Headers-Blockquotes" class="headerlink" title="Paragraphs, Headers, Blockquotes"></a>Paragraphs, Headers, Blockquotes</h2><p>A paragraph is simply one or more consecutive lines of text, separated<br>by one or more blank lines. (A blank line is any line that looks like<br>a blank line – a line containing nothing but spaces or tabs is<br>considered blank.) Normal paragraphs should not be indented with<br>spaces or tabs.</p>
+<p>Markdown offers two styles of headers: <em>Setext</em> and <em>atx</em>.<br>Setext-style headers for <code>&lt;h1&gt;</code> and <code>&lt;h2&gt;</code> are created by<br>“underlining” with equal signs (<code>=</code>) and hyphens (<code>-</code>), respectively.<br>To create an atx-style header, you put 1-6 hash marks (<code>#</code>) at the<br>beginning of the line – the number of hashes equals the resulting<br>HTML header level.</p>
+<p>Blockquotes are indicated using email-style ‘<code>&gt;</code>‘ angle brackets.</p>
+<p>Markdown:</p>
+<pre><code>A First Level Header
+====================
+
+A Second Level Header
+---------------------
+
+Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.
+
+The quick brown fox jumped over the lazy
+dog&apos;s back.
+
+### Header 3
+
+&gt; This is a blockquote.
+&gt; 
+&gt; This is the second paragraph in the blockquote.
+&gt;
+&gt; ## This is an H2 in a blockquote
+</code></pre><p>Output:</p>
+<pre><code>&lt;h1&gt;A First Level Header&lt;/h1&gt;
+
+&lt;h2&gt;A Second Level Header&lt;/h2&gt;
+
+&lt;p&gt;Now is the time for all good men to come to
+the aid of their country. This is just a
+regular paragraph.&lt;/p&gt;
+
+&lt;p&gt;The quick brown fox jumped over the lazy
+dog&apos;s back.&lt;/p&gt;
+
+&lt;h3&gt;Header 3&lt;/h3&gt;
+
+&lt;blockquote&gt;
+    &lt;p&gt;This is a blockquote.&lt;/p&gt;
+
+    &lt;p&gt;This is the second paragraph in the blockquote.&lt;/p&gt;
+
+    &lt;h2&gt;This is an H2 in a blockquote&lt;/h2&gt;
+&lt;/blockquote&gt;
+</code></pre><h3 id="Phrase-Emphasis"><a href="#Phrase-Emphasis" class="headerlink" title="Phrase Emphasis"></a>Phrase Emphasis</h3><p>Markdown uses asterisks and underscores to indicate spans of emphasis.</p>
+<p>Markdown:</p>
+<pre><code>Some of these words *are emphasized*.
+Some of these words _are emphasized also_.
+
+Use two asterisks for **strong emphasis**.
+Or, if you prefer, __use two underscores instead__.
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;Some of these words &lt;em&gt;are emphasized&lt;/em&gt;.
+Some of these words &lt;em&gt;are emphasized also&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Use two asterisks for &lt;strong&gt;strong emphasis&lt;/strong&gt;.
+Or, if you prefer, &lt;strong&gt;use two underscores instead&lt;/strong&gt;.&lt;/p&gt;
+</code></pre><h2 id="Lists"><a href="#Lists" class="headerlink" title="Lists"></a>Lists</h2><p>Unordered (bulleted) lists use asterisks, pluses, and hyphens (<code>*</code>,<br><code>+</code>, and <code>-</code>) as list markers. These three markers are<br>interchangable; this:</p>
+<pre><code>*   Candy.
+*   Gum.
+*   Booze.
+</code></pre><p>this:</p>
+<pre><code>+   Candy.
++   Gum.
++   Booze.
+</code></pre><p>and this:</p>
+<pre><code>-   Candy.
+-   Gum.
+-   Booze.
+</code></pre><p>all produce the same output:</p>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;Candy.&lt;/li&gt;
+&lt;li&gt;Gum.&lt;/li&gt;
+&lt;li&gt;Booze.&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><p>Ordered (numbered) lists use regular numbers, followed by periods, as<br>list markers:</p>
+<pre><code>1.  Red
+2.  Green
+3.  Blue
+</code></pre><p>Output:</p>
+<pre><code>&lt;ol&gt;
+&lt;li&gt;Red&lt;/li&gt;
+&lt;li&gt;Green&lt;/li&gt;
+&lt;li&gt;Blue&lt;/li&gt;
+&lt;/ol&gt;
+</code></pre><p>If you put blank lines between items, you’ll get <code>&lt;p&gt;</code> tags for the<br>list item text. You can create multi-paragraph list items by indenting<br>the paragraphs by 4 spaces or 1 tab:</p>
+<pre><code>*   A list item.
+
+    With multiple paragraphs.
+
+*   Another item in the list.
+</code></pre><p>Output:</p>
+<pre><code>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;A list item.&lt;/p&gt;
+&lt;p&gt;With multiple paragraphs.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Another item in the list.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre><h3 id="Links"><a href="#Links" class="headerlink" title="Links"></a>Links</h3><p>Markdown supports two styles for creating links: <em>inline</em> and<br><em>reference</em>. With both styles, you use square brackets to delimit the<br>text you want to turn into a link.</p>
+<p>Inline-style links use parentheses immediately after the link text.<br>For example:</p>
+<pre><code>This is an [example link](http://example.com/).
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;This is an &lt;a href=&quot;http://example.com/&quot;&gt;
+example link&lt;/a&gt;.&lt;/p&gt;
+</code></pre><p>Optionally, you may include a title attribute in the parentheses:</p>
+<pre><code>This is an [example link](http://example.com/ &quot;With a Title&quot;).
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;This is an &lt;a href=&quot;http://example.com/&quot; title=&quot;With a Title&quot;&gt;
+example link&lt;/a&gt;.&lt;/p&gt;
+</code></pre><p>Reference-style links allow you to refer to your links by names, which<br>you define elsewhere in your document:</p>
+<pre><code>I get 10 times more traffic from [Google][1] than from
+[Yahoo][2] or [MSN][3].
+
+[1]: http://google.com/        &quot;Google&quot;
+[2]: http://search.yahoo.com/  &quot;Yahoo Search&quot;
+[3]: http://search.msn.com/    &quot;MSN Search&quot;
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;I get 10 times more traffic from &lt;a href=&quot;http://google.com/&quot;
+title=&quot;Google&quot;&gt;Google&lt;/a&gt; than from &lt;a href=&quot;http://search.yahoo.com/&quot;
+title=&quot;Yahoo Search&quot;&gt;Yahoo&lt;/a&gt; or &lt;a href=&quot;http://search.msn.com/&quot;
+title=&quot;MSN Search&quot;&gt;MSN&lt;/a&gt;.&lt;/p&gt;
+</code></pre><p>The title attribute is optional. Link names may contain letters,<br>numbers and spaces, but are <em>not</em> case sensitive:</p>
+<pre><code>I start my morning with a cup of coffee and
+[The New York Times][NY Times].
+
+[ny times]: http://www.nytimes.com/
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;I start my morning with a cup of coffee and
+&lt;a href=&quot;http://www.nytimes.com/&quot;&gt;The New York Times&lt;/a&gt;.&lt;/p&gt;
+</code></pre><h3 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h3><p>Image syntax is very much like link syntax.</p>
+<p>Inline (titles are optional):</p>
+<pre><code>![alt text](/path/to/img.jpg &quot;Title&quot;)
+</code></pre><p>Reference-style:</p>
+<pre><code>![alt text][id]
+
+[id]: /path/to/img.jpg &quot;Title&quot;
+</code></pre><p>Both of the above examples produce the same output:</p>
+<pre><code>&lt;img src=&quot;/path/to/img.jpg&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;
+</code></pre><h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><p>In a regular paragraph, you can create code span by wrapping text in<br>backtick quotes. Any ampersands (<code>&amp;</code>) and angle brackets (<code>&lt;</code> or<br><code>&gt;</code>) will automatically be translated into HTML entities. This makes<br>it easy to use Markdown to write about HTML example code:</p>
+<pre><code>I strongly recommend against using any `&lt;blink&gt;` tags.
+
+I wish SmartyPants used named entities like `&amp;mdash;`
+instead of decimal-encoded entites like `&amp;#8212;`.
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;I strongly recommend against using any
+&lt;code&gt;&amp;lt;blink&amp;gt;&lt;/code&gt; tags.&lt;/p&gt;
+
+&lt;p&gt;I wish SmartyPants used named entities like
+&lt;code&gt;&amp;amp;mdash;&lt;/code&gt; instead of decimal-encoded
+entites like &lt;code&gt;&amp;amp;#8212;&lt;/code&gt;.&lt;/p&gt;
+</code></pre><p>To specify an entire block of pre-formatted code, indent every line of<br>the block by 4 spaces or 1 tab. Just like with code spans, <code>&amp;</code>, <code>&lt;</code>,<br>and <code>&gt;</code> characters will be escaped automatically.</p>
+<p>Markdown:</p>
+<pre><code>If you want your page to validate under XHTML 1.0 Strict,
+you&apos;ve got to put paragraph tags in your blockquotes:
+
+    &lt;blockquote&gt;
+        &lt;p&gt;For example.&lt;/p&gt;
+    &lt;/blockquote&gt;
+</code></pre><p>Output:</p>
+<pre><code>&lt;p&gt;If you want your page to validate under XHTML 1.0 Strict,
+you&apos;ve got to put paragraph tags in your blockquotes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;blockquote&amp;gt;
+    &amp;lt;p&amp;gt;For example.&amp;lt;/p&amp;gt;
+&amp;lt;/blockquote&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+</code></pre>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/06/25/markdown-syntax-tw/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1575,7 +2159,7 @@ _   underscore
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>

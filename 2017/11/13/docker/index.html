@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ubuntu," />
 
 
 
@@ -79,14 +79,18 @@
 
 
 
+<meta name="description" content="镜像(Image)容器(Container)仓库(Repository) Docker 镜像就是一个只读的模板 包含一个完整的操作系统环境容器是从镜像创建的运行实例镜像是只读的 容器在启动的时候创建一层可写层作为最上层 RUN 开头的指令会在创建中运行 比如安装一个软件包 docker build -t=”evatlsong/redis:v2” .docker save -o ubuntu.tar">
+<meta name="keywords" content="ubuntu">
 <meta property="og:type" content="article">
-<meta property="og:title" content="evatlsong">
-<meta property="og:url" content="http://evatlsong.com/2017/10/13/ssh-usage/index.html">
+<meta property="og:title" content="docker">
+<meta property="og:url" content="http://evatlsong.com/2017/11/13/docker/index.html">
 <meta property="og:site_name" content="evatlsong">
+<meta property="og:description" content="镜像(Image)容器(Container)仓库(Repository) Docker 镜像就是一个只读的模板 包含一个完整的操作系统环境容器是从镜像创建的运行实例镜像是只读的 容器在启动的时候创建一层可写层作为最上层 RUN 开头的指令会在创建中运行 比如安装一个软件包 docker build -t=”evatlsong/redis:v2” .docker save -o ubuntu.tar">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-10-13T14:40:05.761Z">
+<meta property="og:updated_time" content="2017-11-14T01:42:21.847Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="evatlsong">
+<meta name="twitter:title" content="docker">
+<meta name="twitter:description" content="镜像(Image)容器(Container)仓库(Repository) Docker 镜像就是一个只读的模板 包含一个完整的操作系统环境容器是从镜像创建的运行实例镜像是只读的 容器在启动的时候创建一层可写层作为最上层 RUN 开头的指令会在创建中运行 比如安装一个软件包 docker build -t=”evatlsong/redis:v2” .docker save -o ubuntu.tar">
 
 
 
@@ -116,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://evatlsong.com/2017/10/13/ssh-usage/"/>
+  <link rel="canonical" href="http://evatlsong.com/2017/11/13/docker/"/>
 
 
 
 
 
-  <title> | evatlsong</title>
+  <title>docker | evatlsong</title>
   
 
 
@@ -229,7 +233,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/10/13/ssh-usage/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/13/docker/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -246,7 +250,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">docker</h1>
         
 
         <div class="post-meta">
@@ -258,8 +262,8 @@
               
                 <span class="post-meta-item-text">Veröffentlicht am</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-13T14:40:05+00:00">
-                2017-10-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-13T08:55:16+00:00">
+                2017-11-13
               </time>
             
 
@@ -296,7 +300,11 @@
       
 
       
-        
+        <p>镜像(Image)<br>容器(Container)<br>仓库(Repository)</p>
+<p>Docker 镜像就是一个只读的模板 包含一个完整的操作系统环境<br>容器是从镜像创建的运行实例<br>镜像是只读的 容器在启动的时候创建一层可写层作为最上层</p>
+<p>RUN 开头的指令会在创建中运行 比如安装一个软件包</p>
+<p>docker build -t=”evatlsong/redis:v2” .<br>docker save -o ubuntu.tar ubuntu:14.04<br>docker load –input ubuntu.tar<br>docker container rm $(docker container ls -a -q)</p>
+
       
     </div>
     
@@ -311,6 +319,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag"># ubuntu</a>
+          
+        </div>
+      
 
       
       
@@ -320,8 +334,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/13/samba/" rel="next" title="">
-                <i class="fa fa-chevron-left"></i> 
+              <a href="/2017/10/19/redis/" rel="next" title="redis">
+                <i class="fa fa-chevron-left"></i> redis
               </a>
             
           </div>
@@ -329,6 +343,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/14/samba/" rel="prev" title="">
+                 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -396,7 +414,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">56</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
