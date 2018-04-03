@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="打印调试信息error_log(“userinfo”, 3, “php_sql_err.log”); $where[&amp;apos;truename&amp;apos;] = array(&amp;apos;like&amp;apos;, &amp;apos;%&amp;apos;.trim($_POST[&amp;apos;truename&amp;apos;]).&amp;apos;%&amp;apos;); $count     = $card_create_db-">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-11-14T01:42:21.847Z">
+<meta property="og:updated_time" content="2018-04-03T16:13:55.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php-note">
 <meta name="twitter:description" content="打印调试信息error_log(“userinfo”, 3, “php_sql_err.log”); $where[&amp;apos;truename&amp;apos;] = array(&amp;apos;like&amp;apos;, &amp;apos;%&amp;apos;.trim($_POST[&amp;apos;truename&amp;apos;]).&amp;apos;%&amp;apos;); $count     = $card_create_db-">
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -259,7 +259,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-04T13:43:45+00:00">
                 2014-09-04
@@ -309,7 +309,7 @@ $list      = $card_create_db-&gt;where($where)-&gt;limit($Page-&gt;firstRow . &a
 $userinfo_db = M(&apos;Userinfo&apos;);
 $userinfo_where[&apos;wecha_id&apos;] = array(&apos;in&apos;, $wecha_ids);
 $users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select();
-</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="external">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
+</code></pre><p>是因为你访问的地址大小写问题：<a href="http://127.0.0.1/index.php/index/index" target="_blank" rel="noopener">http://127.0.0.1/index.php/index/index</a><br>控制器没有大写，Index</p>
 <p>最终的解决方法是，不区分大小写把这功能开启，在配置文件下config.php中加入<br>‘URL_CASE_INSENSITIVE’  =&gt; true, //不区分大小写 问题解决</p>
 
       
@@ -415,8 +415,8 @@ $users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -428,8 +428,8 @@ $users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -467,7 +467,7 @@ $users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -477,7 +477,7 @@ $users                      = $userinfo_db-&gt;where($userinfo_where)-&gt;select
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="安装免安装版下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版） Securing the Initial MySQL Accounts referenceFor Windows, do this: shell&amp;gt; mysql -u root mysql&amp;gt; SET PASSWORD FOR &amp;apos;roo">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-11-14T01:42:21.847Z">
+<meta property="og:updated_time" content="2018-04-03T16:13:55.654Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql-usage">
 <meta name="twitter:description" content="安装免安装版下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版） Securing the Initial MySQL Accounts referenceFor Windows, do this: shell&amp;gt; mysql -u root mysql&amp;gt; SET PASSWORD FOR &amp;apos;roo">
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -259,7 +259,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-27T16:27:07+00:00">
                 2014-08-27
@@ -300,7 +300,7 @@
 
       
         <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="免安装版"><a href="#免安装版" class="headerlink" title="免安装版"></a>免安装版</h3><p>下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）</p>
-<h4 id="Securing-the-Initial-MySQL-Accounts-reference"><a href="#Securing-the-Initial-MySQL-Accounts-reference" class="headerlink" title="Securing the Initial MySQL Accounts reference"></a>Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="external">reference</a></h4><p>For Windows, do this:</p>
+<h4 id="Securing-the-Initial-MySQL-Accounts-reference"><a href="#Securing-the-Initial-MySQL-Accounts-reference" class="headerlink" title="Securing the Initial MySQL Accounts reference"></a>Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="noopener">reference</a></h4><p>For Windows, do this:</p>
 <pre><code>shell&gt; mysql -u root
 mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpwd&apos;);
 mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;127.0.0.1&apos; = PASSWORD(&apos;newpwd&apos;);
@@ -323,10 +323,10 @@ mysql&gt; CREATE USER &apos;admin&apos;@&apos;localhost&apos;;
 mysql&gt; GRANT RELOAD,PROCESS ON *.* TO &apos;admin&apos;@&apos;localhost&apos;;
 mysql&gt; CREATE USER &apos;dummy&apos;@&apos;localhost&apos;;
 </code></pre><p>The accounts created by these statements have the following properties:</p>
-<p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty’@’localhost’ account can be used only when connecting from the local host. The ‘monty’@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
-<p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
-<p>The ‘admin’@’localhost’ account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.</p>
-<p>The ‘dummy’@’localhost’ account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.</p>
+<p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty‘@’localhost’ account can be used only when connecting from the local host. The ‘monty‘@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
+<p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty‘@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
+<p>The ‘admin‘@’localhost’ account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.</p>
+<p>The ‘dummy‘@’localhost’ account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.</p>
 <h3 id="create-database"><a href="#create-database" class="headerlink" title="create database"></a>create database</h3><pre><code>create database goods default character set utf8 collate utf8_general_ci;
 </code></pre><h3 id="import-sql-file"><a href="#import-sql-file" class="headerlink" title="import sql file"></a>import sql file</h3><pre><code>mysql -u root -p goods &lt; goods_version1.2.sql;
 </code></pre><p>加上-h参数指定主机时 sql文件要用全限定名称</p>
@@ -441,10 +441,10 @@ mysql&gt;source /wcnc_db.sql
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -464,8 +464,8 @@ mysql&gt;source /wcnc_db.sql
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -477,8 +477,8 @@ mysql&gt;source /wcnc_db.sql
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -532,7 +532,7 @@ mysql&gt;source /wcnc_db.sql
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -542,7 +542,7 @@ mysql&gt;source /wcnc_db.sql
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 

@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -215,6 +215,423 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/09/02/git-svn-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/09/02/git-svn-usage/" itemprop="url">git-svn-usage</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-02T22:47:43+00:00">
+                2014-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="操作方法"><a href="#操作方法" class="headerlink" title="操作方法"></a>操作方法</h2><ul>
+<li>从svn切换到git<blockquote>
+<p><code>git svn clone --no-metadata your_svn_repository_url</code><br><code>git clone --bare git_repository_url git_server_url</code></p>
+</blockquote>
+</li>
+<li><p>检出一个已存在svn repository(类似于svn checkout)</p>
+<blockquote>
+<p>我们可以通过 <code>git-svn clone</code> 命令完成这个操作： <code>git-svn clone your_svn_repository_url</code></p>
+</blockquote>
+</li>
+<li><p>从中心服务器的svn repository获取最新更新</p>
+<blockquote>
+<p>这个操作可以通过 <code>git-svn rebase</code> 完成。注意这里用的是rebase，而不是update。update命令对于通过git-svn检出的svn repostory的git版本库是不可用的。</p>
+</blockquote>
+</li>
+<li><p>查看提交历史日志</p>
+<blockquote>
+<p>这个简单，使用 <code>git-svn log</code> ，加上-v选项，还可以提供每次commit操作涉及的相关文件的详细信息。</p>
+</blockquote>
+</li>
+<li><p>将本地代码同步到Svn服务器</p>
+<blockquote>
+<p>完成这一操作需要通过 <code>git-svn dcommit</code> 命令。这个命令会将你在本地使用 <code>git commit</code> 提交到本地代码库的所有更改逐一提交到svn库中。加上-n选项，则该命令不会真正执行commit到svn的操作，而是会显示会有哪些本地变动将被commit到svn服务器。 <code>git-svn dcommit</code> 似乎不能单独提交某个本地版本的修改，而是一次批量提交所有与svn中心版本库的差异。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="一般使用流程："><a href="#一般使用流程：" class="headerlink" title="一般使用流程："></a>一般使用流程：</h2><ol>
+<li><code>git-svn clone your_svn_repository</code>；</li>
+<li>修改本地代码，使用 <code>git add/commit</code> 将修改提交到本地git库；</li>
+<li>定期使用 <code>git-svn rebase</code> 获取中心svn repository的更新；</li>
+<li>使用 <code>git-svn dcommit</code> 命令将本地git库的修改同步到中心svn库。</li>
+</ol>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><ol>
+<li><p>处理冲突</p>
+<ul>
+<li>假设某svn中心库上的某个项目foo中只有一个源码文件foo.c：</li>
+<li>我在使用 <code>git-svn clone</code> 检出版本时，foo.c当时只有一个commit版本信息：”svn v1”；</li>
+<li>clone出来后，我在本地git库中修改foo.c，并通过 <code>git commit</code> 提交到本地git库中，版本为”git v1”；</li>
+<li>不过与此同时另外一个同事也在修改foo.c这个文件，并已经将他的修改提交到了svn库中，版本为”svn v2”；</li>
+<li><p>此时我使用 <code>git-svn dcommit</code> 尝试提交我的改动，git-svn提示我：</p>
+<pre><code>Committing to svn://10.10.1.1:80/foo ...
+M foo.c
+事务过时: 过期: ”foo/foo.c“在事务“260-1” at /usr/lib/git-core/git-svn line 570
+</code></pre></li>
+<li><p>使用 <code>git-svn rebase</code> 获取svn服务器上的最新foo.c，导致与foo.c冲突，不过此时svn版本信息已经添加到本地git库中(通过git log可以查看)，<code>git-svn rebase</code> 提示你在解决foo.c的冲突后，运行 <code>git rebase --continue</code> 完成rebase操作；</p>
+</li>
+<li>打开foo.c，修改代码，解决冲突；</li>
+<li><p>执行 <code>git rebase --continue</code> ，git提示我：</p>
+<pre><code>You must edit all merge conflicts and then
+mark them as resolved using git add
+</code></pre></li>
+<li><p>执行 <code>git add foo.c</code> ，告知git已完成冲突解决；</p>
+</li>
+<li>再次执行 <code>git rebase --continue</code> ，提示”Applying: git v1”，此时”git v1”版本又一次成功加入本地版本库，你可通过 <code>git log</code> 查看；</li>
+<li>执行 <code>git-svn dcommit</code> 将foo.c的改动同步到svn中心库，到此算是完成一次冲突解决。</li>
+</ul>
+</li>
+<li><p>分支问题</p>
+<p> git分支合并回master后要删除 因为使用 <code>git-svn rebase</code> 获取版本库更新会改变git历史</p>
+</li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2014/08/29/apache-php-tomcat-integration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2014/08/29/apache-php-tomcat-integration/" itemprop="url">apache-php-tomcat-integration</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-29T10:02:51+00:00">
+                2014-08-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>测试时可以修改hosts</p>
+<pre><code>127.0.0.1 www.goutrip.com
+127.0.0.1 goutrip.com
+</code></pre><h2 id="Table-of-Contents"><a href="#Table-of-Contents" class="headerlink" title="Table of Contents"></a><a name="TOC">Table of Contents</a></h2><ul>
+<li><a href="#windows">Windows</a><ul>
+<li><a href="#version">版本</a></li>
+<li><a href="#install-apache">安装apache</a></li>
+<li><a href="#install-tomcat">安装tomcat</a></li>
+<li><a href="#install-php">安装php</a></li>
+<li><a href="#install-mysql">安装mysql</a></li>
+<li><a href="#integrate-apache-tomcat">整合apache tomcat</a><ul>
+<li><a href="#config-apache">apache配置</a></li>
+<li><a href="#config-tomcat">tomcat配置</a></li>
+</ul>
+</li>
+<li><a href="#integrate-apache-php">整合apache php</a></li>
+<li><a href="#integrate-php-mysql">整合php mysql</a></li>
+</ul>
+</li>
+<li><a href="">Linux</a></li>
+</ul>
+<h2 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a><a id="windows">Windows</a></h2><h3 id="版本"><a href="#版本" class="headerlink" title="版本"></a><a id="version">版本</a></h3><pre><code>httpd-2.2.25-win32-x86-openssl-0.9.8y.msi
+apache-tomcat-7.0.55-windows-x64.zip
+php-5.2.13-Win32.zip
+mysql-5.5.39-winx64.zip
+</code></pre><h3 id="安装apache"><a href="#安装apache" class="headerlink" title="安装apache"></a><a id="install-apache">安装apache</a></h3><p>httpd.conf</p>
+<pre><code>&lt;Directory /&gt;
+    Options FollowSymLinks
+    AllowOverride None
+#    Order deny,allow
+#    Deny from all
+&lt;/Directory&gt;
+</code></pre><h3 id="安装tomcat"><a href="#安装tomcat" class="headerlink" title="安装tomcat"></a><a id="install-tomcat">安装tomcat</a></h3><h3 id="安装php"><a href="#安装php" class="headerlink" title="安装php"></a><a id="install-php">安装php</a></h3><p>解压到目录 设置 path 环境变量</p>
+<pre><code>D:\php5
+</code></pre><p>加载模块报错：</p>
+<p>有时启动Apache的时候会提示“找不到指定模块”的错误，是因为没有指定这些模块文件的位置，定位关键字“extension_dir”，修改Windows下为你的PHP模块的目录。</p>
+<pre><code>extession_dir = &quot;D:\PHP\ext&quot;
+</code></pre><p>或者添加 path 环境变量</p>
+<pre><code>D:\php\ext
+</code></pre><h3 id="安装mysql"><a href="#安装mysql" class="headerlink" title="安装mysql"></a><a id="install-mysql">安装mysql</a></h3><p>解压到目录<br>添加到path环境变量</p>
+<pre><code>E:\Program\mysql-5.5.39-winx64\bin
+</code></pre><p>启动服务</p>
+<pre><code>mysqld --console
+</code></pre><p>关闭服务</p>
+<pre><code>mysqladmin -u root -p shutdown
+</code></pre><p>连接到数据库</p>
+<pre><code>mysql -u root -p
+</code></pre><p>进行初始配置 详见mysql-usage.md</p>
+<h3 id="整合apache-tomcat"><a href="#整合apache-tomcat" class="headerlink" title="整合apache tomcat"></a><a id="integrate-apache-tomcat">整合apache tomcat</a></h3><p>有三种方法</p>
+<ol>
+<li>mod_jk.so</li>
+<li>ajp代理</li>
+</ol>
+<p>以下采用ajp代理方式</p>
+<h4 id="apache配置"><a href="#apache配置" class="headerlink" title="apache配置"></a><a id="config-apache">apache配置</a></h4><p>httpd.conf</p>
+<pre><code>LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
+
+# Virtual hosts
+Include conf/extra/httpd-vhosts.conf
+
+#
+# DirectoryIndex: sets the file that Apache will serve if a directory
+# is requested.
+#
+&lt;IfModule dir_module&gt;
+    DirectoryIndex index.html index.jsp index.php
+&lt;/IfModule&gt;
+</code></pre><p>extra/httpd-vhosts.conf</p>
+<pre><code>&lt;VirtualHost *:80&gt;
+    ServerName www.goutrip.com
+    ServerAlias goutrip.com
+    ProxyPreserveHost on
+    ProxyRequests Off
+    &lt;proxy balancer://goutrip&gt;
+        BalancerMember ajp://localhost:8009 loadfactor=1 route=jvm1
+        BalancerMember ajp://localhost:8010 loadfactor=1 route=jvm2
+        BalancerMember ajp://localhost:8012 loadfactor=1 route=jvm3
+    &lt;/proxy&gt;
+    ProxyPass / balancer://goutrip/ lbmethod=byrequests stickysession=JSESSIONID nofailover=on
+    ProxyPassReverse / balancer://goutrip/
+    ErrorLog &quot;logs/goutrip.com-error.log&quot;
+    CustomLog &quot;logs/goutrip.com-access.log&quot; common
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:80&gt;
+    DocumentRoot &quot;D:/website/g.goutrip.com&quot;
+    ServerName www.g.goutrip.com
+    ServerAlias g.goutrip.com
+    ErrorLog &quot;logs/g.goutrip.com-error.log&quot;
+    CustomLog &quot;logs/g.goutrip.com-access.log&quot; common
+&lt;/VirtualHost&gt;
+</code></pre><p>以上也配置了负载均衡</p>
+<h4 id="tomcat配置"><a href="#tomcat配置" class="headerlink" title="tomcat配置"></a><a id="config-tomcat">tomcat配置</a></h4><p>server.xml</p>
+<pre><code>&lt;Engine name=&quot;Standalone&quot; defaultHost=&quot;localhost&quot; jvmRoute=&quot;jvm1&quot;&gt;
+</code></pre><p>修改端口</p>
+<pre><code>&lt;Server port=&quot;8005&quot; shutdown=&quot;SHUTDOWN&quot;&gt;
+&lt;Connector port=&quot;8009&quot; protocol=&quot;AJP/1.3&quot; redirectPort=&quot;8443&quot; /&gt;
+</code></pre><h3 id="整合apache-php"><a href="#整合apache-php" class="headerlink" title="整合apache php"></a><a id="integrate-apache-php">整合apache php</a></h3><p>apache httpd.conf</p>
+<pre><code>LoadModule php5_module &quot;D:/php5/php5apache2_2.dll&quot;
+phpinidir &quot;D:/php5&quot;
+
+&lt;IfModule mime_module&gt;
+AddType application/x-httpd-php .php .html  #也可分多行写
+&lt;/IfModule&gt;
+
+#
+# DirectoryIndex: sets the file that Apache will serve if a directory
+# is requested.
+#
+&lt;IfModule dir_module&gt;
+    DirectoryIndex index.html index.jsp index.php
+&lt;/IfModule&gt;
+</code></pre><p>修改后重启apache</p>
+<h3 id="整合php-mysql"><a href="#整合php-mysql" class="headerlink" title="整合php mysql"></a><a id="integrate-php-mysql">整合php mysql</a></h3><p>php.ini</p>
+<pre><code>extension=php_mysql.dll
+</code></pre><p>修改后重启apache</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -258,7 +675,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-27T16:27:07+00:00">
                 2014-08-27
@@ -301,7 +718,7 @@
         
           
             <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h3 id="免安装版"><a href="#免安装版" class="headerlink" title="免安装版"></a>免安装版</h3><p>下载 MySQL Community Edition 此为社区版 （MySQL Enterprise Edition 为商业授权版）</p>
-<h4 id="Securing-the-Initial-MySQL-Accounts-reference"><a href="#Securing-the-Initial-MySQL-Accounts-reference" class="headerlink" title="Securing the Initial MySQL Accounts reference"></a>Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="external">reference</a></h4><p>For Windows, do this:</p>
+<h4 id="Securing-the-Initial-MySQL-Accounts-reference"><a href="#Securing-the-Initial-MySQL-Accounts-reference" class="headerlink" title="Securing the Initial MySQL Accounts reference"></a>Securing the Initial MySQL Accounts <a href="http://dev.mysql.com/doc/refman/5.5/en/default-privileges.html" target="_blank" rel="noopener">reference</a></h4><p>For Windows, do this:</p>
 <pre><code>shell&gt; mysql -u root
 mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;localhost&apos; = PASSWORD(&apos;newpwd&apos;);
 mysql&gt; SET PASSWORD FOR &apos;root&apos;@&apos;127.0.0.1&apos; = PASSWORD(&apos;newpwd&apos;);
@@ -324,10 +741,10 @@ mysql&gt; CREATE USER &apos;admin&apos;@&apos;localhost&apos;;
 mysql&gt; GRANT RELOAD,PROCESS ON *.* TO &apos;admin&apos;@&apos;localhost&apos;;
 mysql&gt; CREATE USER &apos;dummy&apos;@&apos;localhost&apos;;
 </code></pre><p>The accounts created by these statements have the following properties:</p>
-<p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty’@’localhost’ account can be used only when connecting from the local host. The ‘monty’@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
-<p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
-<p>The ‘admin’@’localhost’ account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.</p>
-<p>The ‘dummy’@’localhost’ account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.</p>
+<p>*Two of the accounts have a user name of monty and a password of some_pass. Both accounts are superuser accounts with full privileges to do anything. The ‘monty‘@’localhost’ account can be used only when connecting from the local host. The ‘monty‘@’%’ account uses the ‘%’ wildcard for the host part, so it can be used to connect from any host.</p>
+<p>*It is necessary to have both accounts for monty to be able to connect from anywhere as monty. Without the localhost account, the anonymous-user account for localhost that is created by mysql_install_db would take precedence when monty connects from the local host. As a result, monty would be treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘monty‘@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
+<p>The ‘admin‘@’localhost’ account has no password. This account can be used only by admin to connect from the local host. It is granted the RELOAD and PROCESS administrative privileges. These privileges enable the admin user to execute the mysqladmin reload, mysqladmin refresh, and mysqladmin flush-xxx commands, as well as mysqladmin processlist . No privileges are granted for accessing any databases. You could add such privileges later by issuing other GRANT statements.</p>
+<p>The ‘dummy‘@’localhost’ account has no password. This account can be used only to connect from the local host. No privileges are granted. It is assumed that you will grant specific privileges to the account later.</p>
 <h3 id="create-database"><a href="#create-database" class="headerlink" title="create database"></a>create database</h3><pre><code>create database goods default character set utf8 collate utf8_general_ci;
 </code></pre><h3 id="import-sql-file"><a href="#import-sql-file" class="headerlink" title="import sql file"></a>import sql file</h3><pre><code>mysql -u root -p goods &lt; goods_version1.2.sql;
 </code></pre><p>加上-h参数指定主机时 sql文件要用全限定名称</p>
@@ -429,7 +846,7 @@ mysql&gt;source /wcnc_db.sql
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-08-26T00:09:31+00:00">
                 2014-08-26
@@ -471,8 +888,8 @@ mysql&gt;source /wcnc_db.sql
       
         
           
-            <p>首先 git clone <a href="https://github.com/evatlsong/evatlsong.github.io.git" target="_blank" rel="external">https://github.com/evatlsong/evatlsong.github.io.git</a></p>
-<p>然后 git clone <a href="https://github.com/hexojs/hexo-theme-landscape.git" target="_blank" rel="external">https://github.com/hexojs/hexo-theme-landscape.git</a> themes/landscape</p>
+            <p>首先 git clone <a href="https://github.com/evatlsong/evatlsong.github.io.git" target="_blank" rel="noopener">https://github.com/evatlsong/evatlsong.github.io.git</a></p>
+<p>然后 git clone <a href="https://github.com/hexojs/hexo-theme-landscape.git" target="_blank" rel="noopener">https://github.com/hexojs/hexo-theme-landscape.git</a> themes/landscape</p>
 <p>如果不clone此theme 接下来的 hexo init 会报错 Error: Theme landscape does not exist.<br>然后hexo init<br>hexo install<br>git reset –hard HEAD</p>
 
           
@@ -551,7 +968,7 @@ mysql&gt;source /wcnc_db.sql
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-25T16:44:25+00:00">
                 2014-06-25
@@ -842,7 +1259,7 @@ you&apos;ve got to put paragraph tags in your blockquotes:&lt;/p&gt;
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-25T16:19:03+00:00">
                 2014-06-25
@@ -885,7 +1302,7 @@ you&apos;ve got to put paragraph tags in your blockquotes:&lt;/p&gt;
         
           
             <h1 id="Markdown-文件"><a href="#Markdown-文件" class="headerlink" title="Markdown 文件"></a>Markdown 文件</h1><p><img src="http://markdown.tw/images/208x128.png" alt="Markdown"></p>
-<p><strong>NOTE:</strong> This is Traditional Chinese Edition Document of<br>Markdown Syntax. If you are seeking for English Edition<br>Document. Please refer to <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="external">Markdown: Syntax</a>.</p>
+<p><strong>NOTE:</strong> This is Traditional Chinese Edition Document of<br>Markdown Syntax. If you are seeking for English Edition<br>Document. Please refer to <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank" rel="noopener">Markdown: Syntax</a>.</p>
 <h1 id="Markdown-Syntax"><a href="#Markdown-Syntax" class="headerlink" title="Markdown: Syntax"></a>Markdown: Syntax</h1><ul>
 <li><a href="#overview">概述</a><ul>
 <li><a href="#philosophy">哲學</a></li>
@@ -916,14 +1333,14 @@ you&apos;ve got to put paragraph tags in your blockquotes:&lt;/p&gt;
 </li>
 <li><a href="#acknowledgement">感謝</a></li>
 </ul>
-<p><strong>注意：</strong>這份文件是用 Markdown 寫的，你可以<a href="https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md" target="_blank" rel="external">看看它的原始檔</a> 。</p>
+<p><strong>注意：</strong>這份文件是用 Markdown 寫的，你可以<a href="https://github.com/othree/markdown-syntax-zhtw/blob/master/syntax.md" target="_blank" rel="noopener">看看它的原始檔</a> 。</p>
 <hr>
 <h2 id="overview">概述</h2>
 
 <h3 id="philosophy">哲學</h3>
 
 <p>Markdown 的目標是實現「易讀易寫」。</p>
-<p>不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。Markdown 語法受到一些既有 text-to-HTML 格式的影響，包括 <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a>、<a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>、<a href="http://textism.com/tools/textile/" target="_blank" rel="external">Textile</a>、<a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="external">reStructuredText</a>、<a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="external">Grutatext</a> 和 <a href="http://ettext.taint.org/doc/" target="_blank" rel="external">EtText</a>，然而最大靈感來源其實是純文字的電子郵件格式。</p>
+<p>不過最需要強調的便是它的可讀性。一份使用 Markdown 格式撰寫的文件應該可以直接以純文字發佈，並且看起來不會像是由許多標籤或是格式指令所構成。Markdown 語法受到一些既有 text-to-HTML 格式的影響，包括 <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="noopener">Setext</a>、<a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="noopener">atx</a>、<a href="http://textism.com/tools/textile/" target="_blank" rel="noopener">Textile</a>、<a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="noopener">reStructuredText</a>、<a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="noopener">Grutatext</a> 和 <a href="http://ettext.taint.org/doc/" target="_blank" rel="noopener">EtText</a>，然而最大靈感來源其實是純文字的電子郵件格式。</p>
 <p>因此 Markdown 的語法全由標點符號所組成，並經過嚴謹慎選，是為了讓它們看起來就像所要表達的意思。像是在文字兩旁加上星號，看起來就像*強調*。Markdown 的清單看起來，嗯，就是清單。假如你有使用過電子郵件，區塊引言看起來就真的像是引用一段文字。</p>
 <h3 id="html">行內 HTML</h3>
 
@@ -975,7 +1392,7 @@ This is another regular paragraph.
 <p>是的，這確實需要花比較多功夫來插入 <code>&lt;br /&gt;</code> ，但是「每個換行都轉換為 <code>&lt;br /&gt;</code>」的方法在 Markdown 中並不適合， Markdown 中 email 式的 <a href="#blockquote">區塊引言</a> 和多段落的 <a href="#list">清單</a> 在使用換行來排版的時候，不但更好用，還更好閱讀。</p>
 <h3 id="header">標題</h3>
 
-<p>Markdown 支援兩種標題的語法，<a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a> 和 <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a> 形式。</p>
+<p>Markdown 支援兩種標題的語法，<a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="noopener">Setext</a> 和 <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="noopener">atx</a> 形式。</p>
 <p>Setext 形式是用底線的形式，利用 <code>=</code> （最高階標題）和 <code>-</code> （第二階標題），例如：</p>
 <pre><code>This is an H1
 =============
@@ -1278,7 +1695,7 @@ __double underscores__
 <pre><code>\*this text is surrounded by literal asterisks\*
 </code></pre><h3 id="code">程式碼</h3>
 
-<p>如果要標記一小段行內程式碼，你可以用反引號把它包起來（<code>` </code>），例如：</p>
+<p>如果要標記一小段行內程式碼，你可以用反引號把它包起來（<code>`</code>），例如：</p>
 <pre><code>Use the `printf()` function.
 </code></pre><p>會產生：</p>
 <pre><code>&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
@@ -1338,7 +1755,7 @@ equivalent of &lt;code&gt;&amp;amp;mdash;&lt;/code&gt;.&lt;/p&gt;
 &amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
 &amp;#109;&quot;&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
 &amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
-</code></pre><p>在瀏覽器裡面，這段字串會變成一個可以點擊的「address@example.com」連結。</p>
+</code></pre><p>在瀏覽器裡面，這段字串會變成一個可以點擊的「<a href="mailto:address@example.com" target="_blank" rel="noopener">address@example.com</a>」連結。</p>
 <p>（這種作法雖然可以混淆不少的機器人，但並無法全部擋下來，不過這樣也比什麼都不做好些。無論如何，公開你的信箱終究會引來廣告信件的。）</p>
 <h3 id="backslash">跳脫字元</h3>
 
@@ -1359,7 +1776,7 @@ _   底線
 !   驚嘆號
 </code></pre><h2 id="acknowledgement">感謝</h2>
 
-<p>感謝 <a href="https://twitter.com/#!/leafy7382" target="_blank" rel="external">leafy7382</a> 協助翻譯，<a href="http://iamhlb.com/" target="_blank" rel="external">hlb</a>、<a href="http://twitter.com/randylien" target="_blank" rel="external">Randylien</a> 幫忙潤稿，<a href="https://twitter.com/#!/ethantw" target="_blank" rel="external">ethantw</a> 的<a href="http://ethantw.net/projects/han/" target="_blank" rel="external">漢字標準格式・CSS Reset</a>， <a href="http://kidwm.net/" target="_blank" rel="external">WM</a> 回報文字錯誤。</p>
+<p>感謝 <a href="https://twitter.com/#!/leafy7382" target="_blank" rel="noopener">leafy7382</a> 協助翻譯，<a href="http://iamhlb.com/" target="_blank" rel="noopener">hlb</a>、<a href="http://twitter.com/randylien" target="_blank" rel="noopener">Randylien</a> 幫忙潤稿，<a href="https://twitter.com/#!/ethantw" target="_blank" rel="noopener">ethantw</a> 的<a href="http://ethantw.net/projects/han/" target="_blank" rel="noopener">漢字標準格式・CSS Reset</a>， <a href="http://kidwm.net/" target="_blank" rel="noopener">WM</a> 回報文字錯誤。</p>
 
           
         
@@ -1437,7 +1854,7 @@ _   底線
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-25T15:36:56+00:00">
                 2014-06-25
@@ -1518,7 +1935,7 @@ _   底線
 <h3 id="philosophy">Philosophy</h3>
 
 <p>Markdown is intended to be as easy-to-read and easy-to-write as is feasible.</p>
-<p>Readability, however, is emphasized above all else. A Markdown-formatted<br>document should be publishable as-is, as plain text, without looking<br>like it’s been marked up with tags or formatting instructions. While<br>Markdown’s syntax has been influenced by several existing text-to-HTML<br>filters – including <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>, <a href="http://textism.com/tools/textile/" target="_blank" rel="external">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="external">reStructuredText</a>,<br><a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="external">Grutatext</a>, and <a href="http://ettext.taint.org/doc/" target="_blank" rel="external">EtText</a> – the single biggest source of<br>inspiration for Markdown’s syntax is the format of plain text email.</p>
+<p>Readability, however, is emphasized above all else. A Markdown-formatted<br>document should be publishable as-is, as plain text, without looking<br>like it’s been marked up with tags or formatting instructions. While<br>Markdown’s syntax has been influenced by several existing text-to-HTML<br>filters – including <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="noopener">Setext</a>, <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="noopener">atx</a>, <a href="http://textism.com/tools/textile/" target="_blank" rel="noopener">Textile</a>, <a href="http://docutils.sourceforge.net/rst.html" target="_blank" rel="noopener">reStructuredText</a>,<br><a href="http://www.triptico.com/software/grutatxt.html" target="_blank" rel="noopener">Grutatext</a>, and <a href="http://ettext.taint.org/doc/" target="_blank" rel="noopener">EtText</a> – the single biggest source of<br>inspiration for Markdown’s syntax is the format of plain text email.</p>
 <p>To this end, Markdown’s syntax is comprised entirely of punctuation<br>characters, which punctuation characters have been carefully chosen so<br>as to look like what they mean. E.g., asterisks around a word actually<br>look like *emphasis*. Markdown lists look like, well, lists. Even<br>blockquotes look like quoted passages of text, assuming you’ve ever<br>used email.</p>
 <h3 id="html">Inline HTML</h3>
 
@@ -1571,7 +1988,7 @@ This is another regular paragraph.
 <p>Yes, this takes a tad more effort to create a <code>&lt;br /&gt;</code>, but a simplistic<br>“every line break is a <code>&lt;br /&gt;</code>“ rule wouldn’t work for Markdown.<br>Markdown’s email-style <a href="#blockquote">blockquoting</a> and multi-paragraph <a href="#list">list items</a><br>work best – and look better – when you format them with hard breaks.</p>
 <h3 id="header">Headers</h3>
 
-<p>Markdown supports two styles of headers, <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="external">Setext</a> and <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="external">atx</a>.</p>
+<p>Markdown supports two styles of headers, <a href="http://docutils.sourceforge.net/mirror/setext.html" target="_blank" rel="noopener">Setext</a> and <a href="http://www.aaronsw.com/2002/atx/" target="_blank" rel="noopener">atx</a>.</p>
 <p>Setext-style headers are “underlined” using equal signs (for first-level<br>headers) and dashes (for second-level headers). For example:</p>
 <pre><code>This is an H1
 =============
@@ -1875,7 +2292,7 @@ __double underscores__
 <pre><code>\*this text is surrounded by literal asterisks\*
 </code></pre><h3 id="code">Code</h3>
 
-<p>To indicate a span of code, wrap it with backtick quotes (<code>` </code>).<br>Unlike a pre-formatted code block, a code span indicates code within a<br>normal paragraph. For example:</p>
+<p>To indicate a span of code, wrap it with backtick quotes (<code>`</code>).<br>Unlike a pre-formatted code block, a code span indicates code within a<br>normal paragraph. For example:</p>
 <pre><code>Use the `printf()` function.
 </code></pre><p>will produce:</p>
 <pre><code>&lt;p&gt;Use the &lt;code&gt;printf()&lt;/code&gt; function.&lt;/p&gt;
@@ -1935,7 +2352,7 @@ equivalent of &lt;code&gt;&amp;amp;mdash;&lt;/code&gt;.&lt;/p&gt;
 &amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
 &amp;#109;&quot;&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
 &amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;&amp;#109;&lt;/a&gt;
-</code></pre><p>which will render in a browser as a clickable link to “address@example.com”.</p>
+</code></pre><p>which will render in a browser as a clickable link to “<a href="mailto:address@example.com" target="_blank" rel="noopener">address@example.com</a>“.</p>
 <p>(This sort of entity-encoding trick will indeed fool many, if not<br>most, address-harvesting bots, but it definitely won’t fool all of<br>them. It’s better than nothing, but an address published in this way<br>will probably eventually start receiving spam.)</p>
 <h3 id="backslash">Backslash Escapes</h3>
 
@@ -2031,7 +2448,7 @@ _   underscore
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-05-30T22:27:14+00:00">
                 2014-05-30
@@ -2073,7 +2490,7 @@ _   underscore
       
         
           
-            <p>##step 1##<br>首先检出项目<br>git clone<br>然后执行hexo项目的初始化<br>hexo init<br>npm install<br>最后恢复配置文件<br>git reset –hard HEAD<br>如有需要 将以下themes项目检出到themes文件夹<br>git@github.com:xiangming/landscape-plus.git</p>
+            <p>##step 1##<br>首先检出项目<br>git clone<br>然后执行hexo项目的初始化<br>hexo init<br>npm install<br>最后恢复配置文件<br>git reset –hard HEAD<br>如有需要 将以下themes项目检出到themes文件夹<br><a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:xiangming/landscape-plus.git</p>
 
           
         
@@ -2159,8 +2576,8 @@ _   underscore
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -2172,8 +2589,8 @@ _   underscore
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -2211,7 +2628,7 @@ _   underscore
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -2221,7 +2638,7 @@ _   underscore
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 

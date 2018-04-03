@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="evatlsong">
 <meta property="og:description" content="记录类型 要将域名指向空间商提供的IP地址，请选择「A记录」，要将域名指向另一个域名，请选择「CNAME记录」。   A记录：将域名指向一个IPv4地址（例如：10.10.10.10），需要增加A记录 CNAME记录：如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录 MX记录：建立电子邮箱服务，将指向邮件服务器地址，需要设置MX记录 NS记录：域名解析服务器记录，如果">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2017-11-14T01:42:21.847Z">
+<meta property="og:updated_time" content="2018-04-03T16:13:55.650Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="domain-config">
 <meta name="twitter:description" content="记录类型 要将域名指向空间商提供的IP地址，请选择「A记录」，要将域名指向另一个域名，请选择「CNAME记录」。   A记录：将域名指向一个IPv4地址（例如：10.10.10.10），需要增加A记录 CNAME记录：如果将域名指向一个域名，实现与被指向域名相同的访问效果，需要增加CNAME记录 MX记录：建立电子邮箱服务，将指向邮件服务器地址，需要设置MX记录 NS记录：域名解析服务器记录，如果">
@@ -185,7 +185,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -195,7 +195,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -259,7 +259,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-09-09T10:25:55+00:00">
                 2014-09-09
@@ -310,15 +310,15 @@
 <li>TXT记录：可任意填写（可为空），通常用做SPF记录（反垃圾邮件）使用</li>
 <li>AAAA记录：将主机名（或域名）指向一个IPv6地址（例如：ff03:0:0:0:0:0:0:c1），需要添加AAAA记录</li>
 <li>SRV记录：记录了哪台计算机提供了哪个服务。格式为：服务的名字.协议的类型（例如：_example-server._tcp）</li>
-<li>显性URL：将域名指向一个http（s)协议地址，访问域名时，自动跳转至目标地址（例如：将www.net.cn显性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址为：www.hichina.com）。</li>
-<li>隐性URL：与显性URL类似，但隐性转发会隐藏真实的目标地址（例如：将www.net.cn隐性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址仍然为：www.net.cn）。</li>
+<li>显性URL：将域名指向一个http（s)协议地址，访问域名时，自动跳转至目标地址（例如：将<a href="http://www.net.cn显性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址为：www.hichina.com）。" target="_blank" rel="noopener">www.net.cn显性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址为：www.hichina.com）。</a></li>
+<li>隐性URL：与显性URL类似，但隐性转发会隐藏真实的目标地址（例如：将<a href="http://www.net.cn隐性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址仍然为：www.net.cn）。" target="_blank" rel="noopener">www.net.cn隐性转发到www.hichina.com后，访问www.net.cn时，地址栏显示的地址仍然为：www.net.cn）。</a></li>
 </ol>
 <h2 id="主机记录-RR"><a href="#主机记录-RR" class="headerlink" title="主机记录(RR)"></a>主机记录(RR)</h2><blockquote>
-<p>要将域名解析为www.example.com，在主机记录(RR)处填写www即可。</p>
+<p>要将域名解析为<a href="http://www.example.com，在主机记录(RR)处填写www即可。" target="_blank" rel="noopener">www.example.com，在主机记录(RR)处填写www即可。</a></p>
 </blockquote>
 <p>主机记录就是域名前缀，常见用法有：</p>
 <ol>
-<li>www ： 将域名example.com解析为www.example.com；</li>
+<li>www ： 将域名example.com解析为<a href="http://www.example.com；" target="_blank" rel="noopener">www.example.com；</a></li>
 <li>@ ： 直接解析域名，使主机记录为空，解析后的域名为 example.com（若不填写主机记录自动填充@）；</li>
 <li>mail ： 通常被用作邮箱服务器前缀，解析后的域名为 mail.example.com；</li>
 <li><ul>
@@ -438,10 +438,10 @@ MX        @        默认     mxbiz2.qq.com
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Inhaltsverzeichnis
+            Table of Contents
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Übersicht
+            Overview
           </li>
         </ul>
       
@@ -461,8 +461,8 @@ MX        @        默认     mxbiz2.qq.com
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -474,8 +474,8 @@ MX        @        默认     mxbiz2.qq.com
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -529,7 +529,7 @@ MX        @        默认     mxbiz2.qq.com
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -539,7 +539,7 @@ MX        @        默认     mxbiz2.qq.com
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 

@@ -182,7 +182,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Startseite
+            Home
           </a>
         </li>
       
@@ -192,7 +192,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archiv
+            Archives
           </a>
         </li>
       
@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/14/windows10-subsystem-linux/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/windows10-subsystem-linux/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/14/windows10-subsystem-linux/" itemprop="url">Unbenannt</a></h1>
+                <a class="post-title-link" href="/2018/04/03/windows10-subsystem-linux/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -258,10 +258,10 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T01:42:21+00:00">
-                2017-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+                2018-04-03
               </time>
             
 
@@ -354,7 +354,7 @@ fi
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/14/ssh-usage/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/samba/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -373,7 +373,7 @@ fi
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/14/ssh-usage/" itemprop="url">Unbenannt</a></h1>
+                <a class="post-title-link" href="/2018/04/03/samba/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -383,10 +383,10 @@ fi
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T01:42:21+00:00">
-                2017-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+                2018-04-03
               </time>
             
 
@@ -425,7 +425,20 @@ fi
       
         
           
-            
+            <p>sudo apt install samba<br>编辑 /etc/samba/smb.conf 配置<br>默认配置了打印机共享, 通常不需要, 可注释掉这部分内容。</p>
+<p>#[printers]</p>
+<h1 id="comment-All-Printers"><a href="#comment-All-Printers" class="headerlink" title="comment = All Printers"></a>comment = All Printers</h1><h1 id="browseable-no"><a href="#browseable-no" class="headerlink" title="browseable = no"></a>browseable = no</h1><h1 id="path-var-spool-samba"><a href="#path-var-spool-samba" class="headerlink" title="path = /var/spool/samba"></a>path = /var/spool/samba</h1><h1 id="printable-yes"><a href="#printable-yes" class="headerlink" title="printable = yes"></a>printable = yes</h1><h1 id="guest-ok-no"><a href="#guest-ok-no" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><h1 id="read-only-yes"><a href="#read-only-yes" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="create-mask-0700"><a href="#create-mask-0700" class="headerlink" title="create mask = 0700"></a>create mask = 0700</h1><p>#</p>
+<h2 id="Windows-clients-look-for-this-share-name-as-a-source-of-downloadable"><a href="#Windows-clients-look-for-this-share-name-as-a-source-of-downloadable" class="headerlink" title="Windows clients look for this share name as a source of downloadable"></a>Windows clients look for this share name as a source of downloadable</h2><h2 id="printer-drivers"><a href="#printer-drivers" class="headerlink" title="printer drivers"></a>printer drivers</h2><p>#[print$]</p>
+<h1 id="comment-Printer-Drivers"><a href="#comment-Printer-Drivers" class="headerlink" title="comment = Printer Drivers"></a>comment = Printer Drivers</h1><h1 id="path-var-lib-samba-printers"><a href="#path-var-lib-samba-printers" class="headerlink" title="path = /var/lib/samba/printers"></a>path = /var/lib/samba/printers</h1><h1 id="browseable-yes"><a href="#browseable-yes" class="headerlink" title="browseable = yes"></a>browseable = yes</h1><h1 id="read-only-yes-1"><a href="#read-only-yes-1" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="guest-ok-no-1"><a href="#guest-ok-no-1" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><p>添加自定义共享配置</p>
+<pre><code>[dongrun]                                                      
+     path = /home/evatlsong/Project/dongrun                 
+     browsable = yes                                      
+     writeable = yes                                    
+     read only = no   
+
+ sudo smbpasswd -a evatlsong
+ sudo systemctl restart smbd
+</code></pre>
           
         
       
@@ -473,7 +486,7 @@ fi
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/14/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -492,7 +505,7 @@ fi
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/14/hello-world/" itemprop="url">Hello World</a></h1>
+                <a class="post-title-link" href="/2018/04/03/hello-world/" itemprop="url">Hello World</a></h1>
         
 
         <div class="post-meta">
@@ -502,10 +515,10 @@ fi
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T01:42:21+00:00">
-                2017-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+                2018-04-03
               </time>
             
 
@@ -544,15 +557,15 @@ fi
       
         
           
-            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+            <p>Welcome to <a href="http://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
         
@@ -601,7 +614,7 @@ fi
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/14/json-problem/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/node-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -620,7 +633,7 @@ fi
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/14/json-problem/" itemprop="url">Unbenannt</a></h1>
+                <a class="post-title-link" href="/2018/04/03/node-usage/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -630,10 +643,255 @@ fi
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T01:42:21+00:00">
-                2017-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>sinopia<br>sinopia<br>bao镜像比较快。但是仍然不如在本地设个私服务器。</p>
+<p>sudo npm install -g sinopia<br>sinopia<br>修改npm的registry到<a href="http://localhost:4873" target="_blank" rel="noopener">http://localhost:4873</a></p>
+<p>创建新用户</p>
+<p>$ npm adduser –registry <a href="http://localhost:4873" target="_blank" rel="noopener">http://localhost:4873</a><br>发布npm包</p>
+<p>$ npm publish</p>
+<p>npm install -g nrm<br>nrm add local <a href="http://localhost:4873" target="_blank" rel="noopener">http://localhost:4873</a><br>nrm use local<br>想切换回来的时候:</p>
+<p>nrm use npm</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/ssh-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/03/ssh-usage/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/json-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/03/json-problem/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+                2018-04-03
               </time>
             
 
@@ -749,7 +1007,7 @@ $.ajax({
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/14/node-usage/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/26/kubernetes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -768,7 +1026,7 @@ $.ajax({
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/14/node-usage/" itemprop="url">Unbenannt</a></h1>
+                <a class="post-title-link" href="/2017/11/26/kubernetes/" itemprop="url">kubernetes</a></h1>
         
 
         <div class="post-meta">
@@ -778,10 +1036,10 @@ $.ajax({
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T01:42:21+00:00">
-                2017-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-26T03:24:55+00:00">
+                2017-11-26
               </time>
             
 
@@ -820,13 +1078,10 @@ $.ajax({
       
         
           
-            <p>sinopia<br>sinopia<br>bao镜像比较快。但是仍然不如在本地设个私服务器。</p>
-<p>sudo npm install -g sinopia<br>sinopia<br>修改npm的registry到<a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a></p>
-<p>创建新用户</p>
-<p>$ npm adduser –registry <a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a><br>发布npm包</p>
-<p>$ npm publish</p>
-<p>npm install -g nrm<br>nrm add local <a href="http://localhost:4873" target="_blank" rel="external">http://localhost:4873</a><br>nrm use local<br>想切换回来的时候:</p>
-<p>nrm use npm</p>
+            <p>根据Service的唯一名字 容器可以从环境变量中获取到Service对应的Cluster IP地址和端口 从而发起请求</p>
+<p>service 通过标签选择器 选择pod<br>node 既可以是物理机 也可以是虚拟机<br>pod 运行在node中 具有标签<br>每个pod里运行一个pause容器 pod中的其他容器共享 pause容器的网络栈与volume挂载卷</p>
+<p>节点分master节点与工作节点<br>master节点<br>kubernetes api server<br>kubernetes controller manager<br>kubernetes scheduler<br>etcd server</p>
+<p>工作节点<br>kubelet<br>kube-proxy<br>docker engine</p>
 
           
         
@@ -875,7 +1130,7 @@ $.ajax({
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/14/samba/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/11/15/ubuntu-start/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -894,7 +1149,7 @@ $.ajax({
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/14/samba/" itemprop="url">Unbenannt</a></h1>
+                <a class="post-title-link" href="/2017/11/15/ubuntu-start/" itemprop="url">ubuntu-start</a></h1>
         
 
         <div class="post-meta">
@@ -904,10 +1159,10 @@ $.ajax({
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-14T01:42:21+00:00">
-                2017-11-14
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-15T05:36:28+00:00">
+                2017-11-15
               </time>
             
 
@@ -946,20 +1201,8 @@ $.ajax({
       
         
           
-            <p>sudo apt install samba<br>编辑 /etc/samba/smb.conf 配置<br>默认配置了打印机共享, 通常不需要, 可注释掉这部分内容。</p>
-<p>#[printers]</p>
-<h1 id="comment-All-Printers"><a href="#comment-All-Printers" class="headerlink" title="comment = All Printers"></a>comment = All Printers</h1><h1 id="browseable-no"><a href="#browseable-no" class="headerlink" title="browseable = no"></a>browseable = no</h1><h1 id="path-var-spool-samba"><a href="#path-var-spool-samba" class="headerlink" title="path = /var/spool/samba"></a>path = /var/spool/samba</h1><h1 id="printable-yes"><a href="#printable-yes" class="headerlink" title="printable = yes"></a>printable = yes</h1><h1 id="guest-ok-no"><a href="#guest-ok-no" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><h1 id="read-only-yes"><a href="#read-only-yes" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="create-mask-0700"><a href="#create-mask-0700" class="headerlink" title="create mask = 0700"></a>create mask = 0700</h1><p>#</p>
-<h2 id="Windows-clients-look-for-this-share-name-as-a-source-of-downloadable"><a href="#Windows-clients-look-for-this-share-name-as-a-source-of-downloadable" class="headerlink" title="Windows clients look for this share name as a source of downloadable"></a>Windows clients look for this share name as a source of downloadable</h2><h2 id="printer-drivers"><a href="#printer-drivers" class="headerlink" title="printer drivers"></a>printer drivers</h2><p>#[print$]</p>
-<h1 id="comment-Printer-Drivers"><a href="#comment-Printer-Drivers" class="headerlink" title="comment = Printer Drivers"></a>comment = Printer Drivers</h1><h1 id="path-var-lib-samba-printers"><a href="#path-var-lib-samba-printers" class="headerlink" title="path = /var/lib/samba/printers"></a>path = /var/lib/samba/printers</h1><h1 id="browseable-yes"><a href="#browseable-yes" class="headerlink" title="browseable = yes"></a>browseable = yes</h1><h1 id="read-only-yes-1"><a href="#read-only-yes-1" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="guest-ok-no-1"><a href="#guest-ok-no-1" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><p>添加自定义共享配置</p>
-<pre><code>[dongrun]                                                      
-     path = /home/evatlsong/Project/dongrun                 
-     browsable = yes                                      
-     writeable = yes                                    
-     read only = no   
+            <p>sudo apt-get update<br>sudo apt-get upgrade<br>sudo apt-get update &amp;&amp; apt-get install openssh-server<br>sudo rm /var/cache/apt/archives/lock &amp;&amp; sudo rm /var/lib/dpkg/lock &amp;&amp; sudo apt-get update &amp;&amp; sudo apt-get upgrade</p>
 
- sudo smbpasswd -a evatlsong
- sudo systemctl restart smbd
-</code></pre>
           
         
       
@@ -1036,7 +1279,7 @@ $.ajax({
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-13T08:55:16+00:00">
                 2017-11-13
@@ -1159,7 +1402,7 @@ $.ajax({
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Veröffentlicht am</span>
+                <span class="post-meta-item-text">Posted on</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-19T02:50:03+00:00">
                 2017-10-19
@@ -1203,249 +1446,6 @@ $.ajax({
           
             <h1 id="redis简介"><a href="#redis简介" class="headerlink" title="redis简介"></a>redis简介</h1><p>使用复制特性扩展读性能<br>使用客户端分片扩展写性能<br>数据存储类型<br>字符串 列表 集合 散列表 有序集合</p>
 
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/10/10/dockerhexo2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="evatlsong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="evatlsong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/10/dockerhexo2/" itemprop="url">dockerhexo2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T14:37:35+00:00">
-                2017-10-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>test dockerhexo</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/03/16/solr/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="evatlsong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="evatlsong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/03/16/solr/" itemprop="url">solr</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Veröffentlicht am</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-16T03:47:45+00:00">
-                2017-03-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h1 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h1><pre><code>bin/solr start -force -c -z 192.168.60.74:8082 -s /soft/solr/data/node1/
-bin/solr stop -all
-bin/solr create -force -c resource  -d /soft/solr/config/nerc/ -n nercConfig
-bin/solr zk upconfig -z 192.168.60.74:8082 -n nercConfig -d /soft/solr/config/nerc/
-</code></pre><h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1>
           
         
       
@@ -1530,8 +1530,8 @@ bin/solr zk upconfig -z 192.168.60.74:8082 -n nercConfig -d /soft/solr/config/ne
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">56</span>
-                  <span class="site-state-item-name">Artikel</span>
+                  <span class="site-state-item-count">58</span>
+                  <span class="site-state-item-name">posts</span>
                 </a>
               </div>
             
@@ -1543,8 +1543,8 @@ bin/solr zk upconfig -z 192.168.60.74:8082 -n nercConfig -d /soft/solr/config/ne
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
-                  <span class="site-state-item-name">Tags</span>
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">tags</span>
                 </a>
               </div>
             
@@ -1582,7 +1582,7 @@ bin/solr zk upconfig -z 192.168.60.74:8082 -n nercConfig -d /soft/solr/config/ne
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
@@ -1592,7 +1592,7 @@ bin/solr zk upconfig -z 192.168.60.74:8082 -n nercConfig -d /soft/solr/config/ne
 </div>
 
 
-  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
