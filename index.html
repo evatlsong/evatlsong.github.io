@@ -229,7 +229,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/windows10-subsystem-linux/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/ssh-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -248,7 +248,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/03/windows10-subsystem-linux/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/04/03/ssh-usage/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -260,7 +260,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:21:14+00:00">
                 2018-04-03
               </time>
             
@@ -300,145 +300,7 @@
       
         
           
-            <p>windows 10 subsystem linux 安装后配置<br>装好oh my zsh后进入系统是不启动zsh解决方案<br>home目录 .bashrc 文件开头加入以下代码</p>
-<pre><code># Launch Zsh
-if [ -t 1 ]; then
-cd ~
-exec zsh
-fi
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/samba/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="evatlsong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="evatlsong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/samba/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>sudo apt install samba<br>编辑 /etc/samba/smb.conf 配置<br>默认配置了打印机共享, 通常不需要, 可注释掉这部分内容。</p>
-<p>#[printers]</p>
-<h1 id="comment-All-Printers"><a href="#comment-All-Printers" class="headerlink" title="comment = All Printers"></a>comment = All Printers</h1><h1 id="browseable-no"><a href="#browseable-no" class="headerlink" title="browseable = no"></a>browseable = no</h1><h1 id="path-var-spool-samba"><a href="#path-var-spool-samba" class="headerlink" title="path = /var/spool/samba"></a>path = /var/spool/samba</h1><h1 id="printable-yes"><a href="#printable-yes" class="headerlink" title="printable = yes"></a>printable = yes</h1><h1 id="guest-ok-no"><a href="#guest-ok-no" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><h1 id="read-only-yes"><a href="#read-only-yes" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="create-mask-0700"><a href="#create-mask-0700" class="headerlink" title="create mask = 0700"></a>create mask = 0700</h1><p>#</p>
-<h2 id="Windows-clients-look-for-this-share-name-as-a-source-of-downloadable"><a href="#Windows-clients-look-for-this-share-name-as-a-source-of-downloadable" class="headerlink" title="Windows clients look for this share name as a source of downloadable"></a>Windows clients look for this share name as a source of downloadable</h2><h2 id="printer-drivers"><a href="#printer-drivers" class="headerlink" title="printer drivers"></a>printer drivers</h2><p>#[print$]</p>
-<h1 id="comment-Printer-Drivers"><a href="#comment-Printer-Drivers" class="headerlink" title="comment = Printer Drivers"></a>comment = Printer Drivers</h1><h1 id="path-var-lib-samba-printers"><a href="#path-var-lib-samba-printers" class="headerlink" title="path = /var/lib/samba/printers"></a>path = /var/lib/samba/printers</h1><h1 id="browseable-yes"><a href="#browseable-yes" class="headerlink" title="browseable = yes"></a>browseable = yes</h1><h1 id="read-only-yes-1"><a href="#read-only-yes-1" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="guest-ok-no-1"><a href="#guest-ok-no-1" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><p>添加自定义共享配置</p>
-<pre><code>[dongrun]                                                      
-     path = /home/evatlsong/Project/dongrun                 
-     browsable = yes                                      
-     writeable = yes                                    
-     read only = no   
-
- sudo smbpasswd -a evatlsong
- sudo systemctl restart smbd
-</code></pre>
           
         
       
@@ -517,7 +379,7 @@ fi
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:21:14+00:00">
                 2018-04-03
               </time>
             
@@ -614,6 +476,154 @@ fi
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/json-problem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/03/json-problem/" itemprop="url">Untitled</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:21:14+00:00">
+                2018-04-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>var query = {
+    age:10
+};
+
+$.ajax({
+    url:url,
+    data:JSON.stringify(query),
+    type:&apos;post&apos;,
+    contentType:&apos;application/json;charset=utf-8&apos;,
+    dataType:&apos;json&apos;,
+    success: function (json) {
+        alert(json)
+    }
+});
+</code></pre><p>springMVC 接收时要加@ResquestBody 传输的json字符串</p>
+<pre><code>var query = {
+    age:10
+};
+
+$.ajax({
+    url:url,
+    data:query,
+    type:&apos;post&apos;,
+    dataType:&apos;json&apos;,
+    success: function (json) {
+        alert(json)
+    }
+});
+</code></pre><p>springMVC 接收时不加@ResquestBody 传输的form表单</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/node-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -645,7 +655,7 @@ fi
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:21:14+00:00">
                 2018-04-03
               </time>
             
@@ -740,7 +750,7 @@ fi
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/ssh-usage/">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/samba/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="evatlsong">
@@ -759,7 +769,7 @@ fi
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/03/ssh-usage/" itemprop="url">Untitled</a></h1>
+                <a class="post-title-link" href="/2018/04/03/samba/" itemprop="url">Untitled</a></h1>
         
 
         <div class="post-meta">
@@ -771,7 +781,7 @@ fi
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:21:14+00:00">
                 2018-04-03
               </time>
             
@@ -811,155 +821,20 @@ fi
       
         
           
-            
-          
-        
-      
-    </div>
-    
-    
-    
+            <p>sudo apt install samba<br>编辑 /etc/samba/smb.conf 配置<br>默认配置了打印机共享, 通常不需要, 可注释掉这部分内容。</p>
+<p>#[printers]</p>
+<h1 id="comment-All-Printers"><a href="#comment-All-Printers" class="headerlink" title="comment = All Printers"></a>comment = All Printers</h1><h1 id="browseable-no"><a href="#browseable-no" class="headerlink" title="browseable = no"></a>browseable = no</h1><h1 id="path-var-spool-samba"><a href="#path-var-spool-samba" class="headerlink" title="path = /var/spool/samba"></a>path = /var/spool/samba</h1><h1 id="printable-yes"><a href="#printable-yes" class="headerlink" title="printable = yes"></a>printable = yes</h1><h1 id="guest-ok-no"><a href="#guest-ok-no" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><h1 id="read-only-yes"><a href="#read-only-yes" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="create-mask-0700"><a href="#create-mask-0700" class="headerlink" title="create mask = 0700"></a>create mask = 0700</h1><p>#</p>
+<h2 id="Windows-clients-look-for-this-share-name-as-a-source-of-downloadable"><a href="#Windows-clients-look-for-this-share-name-as-a-source-of-downloadable" class="headerlink" title="Windows clients look for this share name as a source of downloadable"></a>Windows clients look for this share name as a source of downloadable</h2><h2 id="printer-drivers"><a href="#printer-drivers" class="headerlink" title="printer drivers"></a>printer drivers</h2><p>#[print$]</p>
+<h1 id="comment-Printer-Drivers"><a href="#comment-Printer-Drivers" class="headerlink" title="comment = Printer Drivers"></a>comment = Printer Drivers</h1><h1 id="path-var-lib-samba-printers"><a href="#path-var-lib-samba-printers" class="headerlink" title="path = /var/lib/samba/printers"></a>path = /var/lib/samba/printers</h1><h1 id="browseable-yes"><a href="#browseable-yes" class="headerlink" title="browseable = yes"></a>browseable = yes</h1><h1 id="read-only-yes-1"><a href="#read-only-yes-1" class="headerlink" title="read only = yes"></a>read only = yes</h1><h1 id="guest-ok-no-1"><a href="#guest-ok-no-1" class="headerlink" title="guest ok = no"></a>guest ok = no</h1><p>添加自定义共享配置</p>
+<pre><code>[dongrun]                                                      
+     path = /home/evatlsong/Project/dongrun                 
+     browsable = yes                                      
+     writeable = yes                                    
+     read only = no   
 
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2018/04/03/json-problem/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="evatlsong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="evatlsong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/04/03/json-problem/" itemprop="url">Untitled</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-04-03T16:13:55+00:00">
-                2018-04-03
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>var query = {
-    age:10
-};
-
-$.ajax({
-    url:url,
-    data:JSON.stringify(query),
-    type:&apos;post&apos;,
-    contentType:&apos;application/json;charset=utf-8&apos;,
-    dataType:&apos;json&apos;,
-    success: function (json) {
-        alert(json)
-    }
-});
-</code></pre><p>springMVC 接收时要加@ResquestBody 传输的json字符串</p>
-<pre><code>var query = {
-    age:10
-};
-
-$.ajax({
-    url:url,
-    data:query,
-    type:&apos;post&apos;,
-    dataType:&apos;json&apos;,
-    success: function (json) {
-        alert(json)
-    }
-});
-</code></pre><p>springMVC 接收时不加@ResquestBody 传输的form表单</p>
-
+ sudo smbpasswd -a evatlsong
+ sudo systemctl restart smbd
+</code></pre>
           
         
       
@@ -1480,6 +1355,126 @@ $.ajax({
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2017/10/10/dockerhexo2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/10/10/dockerhexo2/" itemprop="url">dockerhexo2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-10T14:37:35+00:00">
+                2017-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>test dockerhexo</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1543,7 +1538,7 @@ $.ajax({
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

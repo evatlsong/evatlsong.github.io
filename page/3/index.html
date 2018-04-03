@@ -229,560 +229,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2015/11/06/java-persistence-with-hibernate/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="evatlsong">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="evatlsong">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/06/java-persistence-with-hibernate/" itemprop="url">java-persistence-with-hibernate</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-11-06T11:49:34+00:00">
-                2015-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="Understand-object-relational-persistence"><a href="#Understand-object-relational-persistence" class="headerlink" title="Understand object/relational persistence"></a>Understand object/relational persistence</h1><p>the problem of granularity<br>粒度问题 4.4节描述了这个问题的解决方案<br>the problem of subtypes<br>5.1节将讨论ORM解决方案如何解决把一个类层次结构持久化到一个或者多个数据库表的问题<br>第5章介绍的继承映射解决方案中，有3种被设计为适应多态关联的表示法和多态查询的有效执行</p>
-<h2 id="ORM"><a href="#ORM" class="headerlink" title="ORM"></a>ORM</h2><h3 id="What-is-ORM"><a href="#What-is-ORM" class="headerlink" title="What is ORM?"></a>What is ORM?</h3><p>An ORM solution consists of the following four pieces:</p>
-<ul>
-<li>An API for performing basic CRUD operations on objects of persistent classes</li>
-<li>A language or API for specifying queries that refer to classes and properties of classes</li>
-<li>A facility for specifying mapping metadata</li>
-<li>A technique for the ORM implementation to interact with transactional objects to perform<br>dirty checking,lazy association fetching, and other optimization functions</li>
-</ul>
-<h3 id="Generic-ORM-problems"><a href="#Generic-ORM-problems" class="headerlink" title="Generic ORM problems"></a>Generic ORM problems</h3><ul>
-<li>What do persistent classes look like</li>
-<li>How is mapping metadata defined</li>
-<li>How do object identity and equality relate to database (primary key) identity</li>
-<li>How should we map class inheritance hierarhies</li>
-<li>How does the persistence logic interact at runtime with the objects of the business domain</li>
-<li>What is the lifecycle of a persistent object</li>
-<li>What facilities are provided for sorting,searching,and aggregating</li>
-<li>How do we efficiently retrieve data with associations</li>
-</ul>
-<h3 id="Hibernate-configuration-and-startup"><a href="#Hibernate-configuration-and-startup" class="headerlink" title="Hibernate configuration and startup"></a>Hibernate configuration and startup</h3><p><code>hibernate.generate_statistics</code> 启用统计集合</p>
-<h1 id="Mapping-persistent-classes"><a href="#Mapping-persistent-classes" class="headerlink" title="Mapping persistent classes"></a>Mapping persistent classes</h1><p>Whether field or perperty access is enabled for an entity depends on the position of mandatory <code>@Id</code> annotation.<br>If it’s present on a field, so all attributes of the class are accessed by Hibernate through fields.</p>
-<h2 id="Fine-grained-models-and-mappings"><a href="#Fine-grained-models-and-mappings" class="headerlink" title="Fine-grained models and mappings"></a>Fine-grained models and mappings</h2><h3 id="Mapping-basic-properties"><a href="#Mapping-basic-properties" class="headerlink" title="Mapping basic properties"></a>Mapping basic properties</h3><p>Using derived properties</p>
-<pre><code>@org.hibernate.annotations.Formula(&quot;TOTAL + TAX_RATE * TOTAL&quot;)
-public BigDecimal getTotalIncludingTax() {
-    return totalIncludingTax;
-}
-</code></pre><p>The given SQL formula is evaluated every time the entity is retrieved from the database<br>(and not at any other time, so the result may be outdated if other properties are modified).</p>
-<p>Generated and default property values<br>Properties marked as database-generated must additionally be nininsertable and nonupdateable,<br>which you control with the insert and update attributes. If both are set to false, the property’s<br>columns never appear in the INSERT or UPDATE statements– the property value is read-only. Alse,<br>you usually don’t add a public setter method in your class for immutable property(and switch to field access).</p>
-<pre><code>@Column(updatable = false, insertable = false)
-@org.hibernate.annotations.Generated(
-    org.hibernate.annotations.GenerationTime.ALWAYS
-)
-private Date lastModified;
-</code></pre><p>A special case of database-generated property values are default values.<br>you have to enable dynamic insertion and update statement generation, so that the column with the default<br>value isn’t included in every statement if its value is null (otherwise a NULL would be inserted instead<br>of the default value). Furthermore, an instance of Item that has been made persistent but not yet flushed<br>to the database and not refreshed again won’t have the default value set on the object property. In other<br>words, you need to execute an explicit flush;</p>
-<pre><code>Item newItem = new Item(...);
-session.save(newItem);
-
-newItem.getInitialPrice();   // is null
-
-session.flush();             // Trigger an INSERT
-// Hibernate does a SELECT automatically
-
-newItem.getInitialPrice();   // is $1
-
-@Column(name = &quot;INITIAL_PRICE&quot;,
-        columnDefinition = &quot;number(10, 2) default &apos;1&apos;&quot;)
-@org.hibernate.annotations.Generated(
-    org.hibernate.annotations.GenerationTime.INSERT
-)
-@org.hibernate.annotations.DynamicInsert
-@org.hibernate.annotations.DynamicUpdate
-private BigDecimal initalPrice;
-</code></pre><h3 id="Mapping-components"><a href="#Mapping-components" class="headerlink" title="Mapping components"></a>Mapping components</h3><pre><code>&lt;&lt;Table&gt;&gt; 
-USERS
----------------
-FIRSTNAME
-LASTNAME
-USERNAME
-PASSWORD
-EMAIL
----------------
-HOME_STREET
-HOME_ZIPCODE
-HOME_CITY
----------------
-BILLING_STREET
-BILLING_ZIPCODE
-BILLING_CITY
-
-@Entity
-@Table(name = &quot;USERS&quot;)
-public class User {
-    @Embedded
-    private Address homeAddress;
-}
-
-@Embeddable
-public class Address {
-    @Column(name = &quot;ADDRESS_STREET&quot;, nullable = false)
-    private String street;
-
-    @Column(name = &quot;ADDRESS_ZIPCODE&quot;, nullable = false)
-    private String zipcode;
-
-    @Column(name = &quot;ADDRESS_CITY&quot;, nullable = false)
-    private String city;
-}
-
-//=================================================================
-
-@Entity
-@Table(name = &quot;USERS&quot;)
-public class User {
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name = &quot;street&quot;,
-                            column = @Column(name = &quot;HOME_STREET&quot;)),
-    @AttributeOverrides({
-        @AttributeOverride(name = &quot;zipcode&quot;,
-                            column = @Column(name = &quot;HOME_ZIPCODE&quot;)),
-    @AttributeOverrides({
-        @AttributeOverride(name = &quot;city&quot;,
-                            column = @Column(name = &quot;HOME_CITY&quot;))
-    })
-    private Address homeAddress;
-}
-</code></pre><h1 id="Inheritance-and-custom-types"><a href="#Inheritance-and-custom-types" class="headerlink" title="Inheritance and custom types"></a>Inheritance and custom types</h1><h2 id="Mapping-class-inheritance"><a href="#Mapping-class-inheritance" class="headerlink" title="Mapping class inheritance"></a>Mapping class inheritance</h2><ol>
-<li>Table per concrete class with implicit polymorphism</li>
-<li>Table per concrete class with unions(与1 表结构相同)</li>
-<li>Table per class hierarchy</li>
-<li>Table per subclass</li>
-<li>Mixing inheritance strategies</li>
-</ol>
-<h3 id="Table-per-concrete-class-with-implicit-polymorphism"><a href="#Table-per-concrete-class-with-implicit-polymorphism" class="headerlink" title="Table per concrete class with implicit polymorphism"></a>Table per concrete class with implicit polymorphism</h3><pre><code>&lt;&lt;Table&gt;&gt;                   &lt;&lt;Table&gt;&gt;             
-CREDIT_CARD                 BANK_ACCOUNT
----------------             -----------------
-CREDIT_CARD_ID              BANK_ACCOUNT_ID
-OWNER                       OWNER
-NUMBER                      ACCOUNT
-EXP_MONTH                   BANKNAME
-EXP_YEAR                    SWIFT
-
-@MappedSuperclass
-public abstract class BillingDetails {
-    @Column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@AttributeOverride(name = &quot;owner&quot;, column =
-    @Column(name = &quot;CC_OWNER&quot;, nullable = false)
-)
-public class CreditCard extends BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;CREDIT_CARD_ID&quot;)
-    private Long id = null;
-
-    @Column(name = &quot;NUMBER&quot;, nullable = false)
-    private String number;
-}
-</code></pre><h3 id="Table-per-concrete-class-with-unions-与1-表结构相同"><a href="#Table-per-concrete-class-with-unions-与1-表结构相同" class="headerlink" title="Table per concrete class with unions(与1 表结构相同)"></a>Table per concrete class with unions(与1 表结构相同)</h3><pre><code>@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = null;
-
-    @column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@Table(name = &quot;CREDIT_CARD&quot;)
-public class CreditCard extends BillingDetails {
-    @Column(name = &quot;NUMBER&quot;, nullable = false)
-    private String number;
-}
-</code></pre><h3 id="Table-per-class-hierarchy"><a href="#Table-per-class-hierarchy" class="headerlink" title="Table per class hierarchy"></a>Table per class hierarchy</h3><pre><code>&lt;&lt;Table&gt;&gt;
-BILLING_DETAILS
------------------------
-BILLING_DETAILS_ID
-BILLING_DETAILS_TYPE&lt;&lt;Discriminator&gt;&gt;
-OWNER
-CC_NUMBER
-CC_EXP_MONTH
-CC_EXP_YEAR
-BA_ACCOUNT
-BA_BANKNAME
-BA_SWIFT
-
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name = &quot;BILLING_DETAILS_TYPE&quot;,
-    discriminatorType = DiscriminatorType.STRING
-)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = null;
-
-    @Column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@DiscriminatorValue(&quot;CC&quot;)
-public class CreditCard extends BillingDetails {
-    @Column(name = &quot;CC_NUMBER&quot;)
-    private String number;
-}
-</code></pre><h3 id="Table-per-subclass"><a href="#Table-per-subclass" class="headerlink" title="Table per subclass"></a>Table per subclass</h3><pre><code>&lt;&lt;Table&gt;&gt;
-BILLING_DETAILS
-------------------
-OWNER
-
-&lt;&lt;Table&gt;&gt;
-CREDIT_CARD
------------------
-CREDIT_CARD_ID&lt;&lt;PK&gt;&gt;&lt;&lt;FK&gt;&gt;
-NUMBER
-EXP_MONTH
-EXP_YEAR
-
-&lt;&lt;Table&gt;&gt;
-BANK_ACCOUNT
-----------------
-BANK_ACCOUNT_ID&lt;&lt;PK&gt;&gt;&lt;&lt;FK&gt;&gt;
-ACCOUNT
-BANKNAME
-SWIFT
-
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = nulll;
-}
-
-@Entity
-@PrimaryKeyJoinColumn(name = &quot;CREDIT_CARD_ID&quot;)
-public class CreditCard extends BillingDetails {
-}
-</code></pre><h3 id="Mixing-inheritance-strategies"><a href="#Mixing-inheritance-strategies" class="headerlink" title="Mixing inheritance strategies"></a>Mixing inheritance strategies</h3><pre><code>&lt;&lt;Table&gt;&gt;
-BILLING_DETAILS
--------------------
-BILLING_DETAILS_ID
-BILLING_DETAILS_TYPE&lt;&lt;Discriminator&gt;&gt;
-OWNER
-BA_ACCOUNT
-BA_BANKNAME
-BA_SWIFT
-
-&lt;&lt;Table&gt;&gt;
-CREDIT_CARD
--------------------
-CREDIT_CARD_ID&lt;&lt;PK&gt;&gt;
-CC_NUMBER
-CC_EXP_MONTH
-CC_EXP_YEAR
-
-@Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(
-    name = &quot;BILLING_DETAILS_TYPE&quot;,
-    discriminatorType = DiscriminatorType.STRING
-)
-public abstract class BillingDetails {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;BILLING_DETAILS_ID&quot;)
-    private Long id = null;
-
-    @Column(name = &quot;OWNER&quot;, nullable = false)
-    private String owner;
-}
-
-@Entity
-@DiscriminatorValue(&quot;CC&quot;)
-@SecondaryTable(
-    name = &quot;CREDIT_CARD&quot;
-    pkJoinColumns = @PrimaryKeyJoinColumn(name = &quot;CREDIT_CARD_ID&quot;)
-)
-public class CreditCard extends BillingDetails {
-    @Column(table = &quot;credit_card&quot;,
-            name = &quot;CC_NUMBER&quot;,
-            nullable = false)
-    private String number;
-}
-</code></pre><h1 id="Mapping-collections-and-entity-associations"><a href="#Mapping-collections-and-entity-associations" class="headerlink" title="Mapping collections and entity associations"></a>Mapping collections and entity associations</h1><h2 id="Mapping-collections-with-annotations"><a href="#Mapping-collections-with-annotations" class="headerlink" title="Mapping collections with annotations"></a>Mapping collections with annotations</h2><pre><code>@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-private Set&lt;String&gt; images = new HashSet&lt;String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@OrderColumn(name = &quot;POSITION&quot;)
-@org.hibernate.annotations.ListIndexBase(1)
-@Column(name = &quot;FILENAME&quot;)
-private List&lt;String&gt; images = new ArrayList&lt;String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@org.hibernate.annotations.MapKey(
-    columns = @Column(name = &quot;IMAGENAME&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-private Map&lt;String, String&gt; images = new HashMap&lt;String, String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-@org.hibernate.annotations.Sortnatural
-private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@Column(name = &quot;FILENAME&quot;, nullable = false)
-@org.hibernate.annotations.OrderBy(
-    clause = &quot;FILENAME asc&quot;
-)
-private SortedSet&lt;String&gt; images = new TreeSet&lt;String&gt;();
-</code></pre><h3 id="Mapping-a-collection-of-embedded-objects"><a href="#Mapping-a-collection-of-embedded-objects" class="headerlink" title="Mapping a collection of embedded objects"></a>Mapping a collection of embedded objects</h3><pre><code>@Embeddable
-public class Image {
-    @org.hibernate.annotations.Parent
-    Item item;
-
-    @Column(length = 255, nullable = false)
-    private String name;
-    @Column(length = 255, nullable = false)
-    private String filename;
-
-    @Column(nullable = false)
-    private int sizeX;
-
-    @Column(nullable = false)
-    private int sizeY;
-}
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@AttributeOverride(
-    name = &quot;element.name&quot;,
-    column = @Column(name = &quot;IMAGENAME&quot;,
-                    length = 255,
-                    nullable = false)
-)
-private Set&lt;Image&gt; images = new HashSet&lt;Image&gt;();
-
-
-@ElementCollection
-@JoinTable(
-    name = &quot;ITEM_IMAGE&quot;
-    joinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-)
-@org.hibernate.annotations.CollectionId(
-    columns = @Column(name = &quot;ITEM_IMAGE_ID&quot;),
-    type = @org.hibernate.annotations.Type(type = &quot;long&quot;),
-    generator = &quot;sequence&quot;
-)
-private Collection&lt;Image&gt; images = new ArrayList&lt;Image&gt;();
-</code></pre><h2 id="Mapping-a-parent-children-relationship"><a href="#Mapping-a-parent-children-relationship" class="headerlink" title="Mapping a parent/children relationship"></a>Mapping a parent/children relationship</h2><p>在操作两个实例之间的链接时，如果没有inverse属性，Hibernate会试图执行两个不同的SQL语句，这两者更新同一个<br>外键列。通过指定inverse=”true”，显式地告诉Hibernate链接的哪一端不应该与数据库同步。<br>JPA注解的mappedBy属性相当于XML映射中的inverse属性</p>
-<p>cascade和inverse都不出现在值类型的集合或者任何其他值类型映射中。这些规则隐含在值类型的特性中。</p>
-<pre><code>public class Bid {
-    @ManyToOne
-    @JoinColumn(name = &quot;ITEM_ID&quot;, nullable = false)
-    private Item item;
-}
-
-public class Item {
-    @OneToMany(cascade = { CascadeType.PERSIST,
-                           CascadeType.MERGE,
-                           CascadeType.REMOVE },
-               orphanRemoval = true,
-               mappedBy = &quot;item&quot;)
-    private Set&lt;Bid&gt; bids = new HashSet&lt;Bid&gt;();
-}
-</code></pre><h1 id="Advanced-entity-association-mappings"><a href="#Advanced-entity-association-mappings" class="headerlink" title="Advanced entity association mappings"></a>Advanced entity association mappings</h1><h2 id="single-valued-entity-associations"><a href="#single-valued-entity-associations" class="headerlink" title="single-valued entity associations"></a>single-valued entity associations</h2><h3 id="Shared-primary-key-associations"><a href="#Shared-primary-key-associations" class="headerlink" title="Shared primary key associations"></a>Shared primary key associations</h3><pre><code>@OneToOne
-@PrimaryKeyJoinColumn
-private Address shippingAddress;
-
-
-@Entity
-@Table(name = &quot;ADDRESS&quot;)
-public class Address {
-    @Id
-    @GeneratedValue(generator = &quot;myForeignGenerator&quot;)
-    @org.hibernate.annotations.GenericGenerator(
-        name = &quot;myForeignGenerator&quot;,
-        strategy = &quot;foreign&quot;,
-        parameters = @Parameter(name = &quot;property&quot;, value = &quot;user&quot;)
-    )
-    @Column(name = &quot;ADDRESS_ID&quot;)
-    private Long id;
-
-    private User user;
-}
-</code></pre><h3 id="One-to-one-foreign-key-asociations"><a href="#One-to-one-foreign-key-asociations" class="headerlink" title="One-to-one foreign key asociations"></a>One-to-one foreign key asociations</h3><pre><code>public class User {
-    @OneToOne
-    @JoinColumn(name = &quot;SHIPPING_ADDRESS_ID&quot;)
-    private Address shippingAddress;
-}
-
-
-public class Address {
-    @OneToOne(mappedBy = &quot;shippingAddress&quot;)
-    private User user;
-}
-</code></pre><h3 id="Mapping-with-a-join-table"><a href="#Mapping-with-a-join-table" class="headerlink" title="Mapping with a join table"></a>Mapping with a join table</h3><pre><code>public class Shipment {
-    @OneToOne
-    @JoinTable(
-        name = &quot;ITEM_SHIPMENT&quot;,
-        joinColumns = @JoinColumn(name = &quot;SHIPMENT_ID&quot;),
-        inverseJoinColumns = @JoinColumn(name = &quot;ITEM_ID&quot;)
-    )
-    private Item auction;
-}
-
-
-@Entity
-@Table(name = &quot;SHIPMENT&quot;)
-@SecondaryTable(name = &quot;ITEM_SHIPMENT&quot;)
-public class Shipment {
-    @Id
-    @GeneratedValue
-    @Column(name = &quot;SHIPMENT_ID&quot;)
-    private Long id;
-}
-</code></pre>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2015/11/04/spring-in-action/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2080,6 +1526,126 @@ gem sources -l
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://evatlsong.com/2015/08/13/windows-install/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="evatlsong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="evatlsong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2015/08/13/windows-install/" itemprop="url">windows-install</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-13T22:40:53+00:00">
+                2015-08-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>U盘安装<br>启动盘制作<br>用老毛桃uefi版生成启动盘后 将原版光盘复制到U盘上<br>U盘启动后选择安装原版windows 然后选择用windows8PE启动 最后执行iso文件中的setup.exe安装程序<br>若不选择安装原版windows 会提示安装程序无法创建新的系统分区 也无法定位系统分区</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2143,7 +1709,7 @@ gem sources -l
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
